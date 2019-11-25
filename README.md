@@ -1,2 +1,2 @@
-# 2020-Masters-Thesis
-Documentation created in support of my 2020 Master's Thesis at North Carolina State University. Contains my full thesis as well as getting started guides and breakout boards for a number of hobby-friendly MCUs.
+# Embedded for Everyone
+Documentation created in support of my 2020 Master's Thesis at North Carolina State University, for the purpose of improving accessiblity to industry-relevant embedded systems development for hobbyists, students, and educators. Contains my full thesis, getting started guides and breakout boards for a number of hobby-friendly MCUs, prototyping PCBs, and recommendations to hobbyists, students, and educators as to which MCU they should start with and how to begin prototyping and developing for that MCU.
