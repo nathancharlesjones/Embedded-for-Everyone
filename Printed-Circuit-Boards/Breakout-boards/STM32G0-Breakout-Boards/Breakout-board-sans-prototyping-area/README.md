@@ -1,0 +1,1 @@
+For information about how to order this PCB (either unassembled for full assembled), see [here](https://github.com/nathancharlesjones/Embedded-for-Everyone/wiki/3.-Building-a-circuit-on-a-PCB-and-connecting-it-to-the-rest-of-the-embedded-device#step-5-assemble-the-pcb).
