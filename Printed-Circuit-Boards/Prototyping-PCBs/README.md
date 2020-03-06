@@ -1,0 +1,1 @@
+For information about the differences between stripboard and breadboard-style protoboard, see [here](https://github.com/nathancharlesjones/Embedded-for-Everyone/wiki/3.-Building-a-circuit-on-a-PCB-and-connecting-it-to-the-rest-of-the-embedded-device#step-3-lay-out-the-pcb-or-get-a-protoboard).
