@@ -1,3 +1,6 @@
 [submodule "Printed-Circuit-Boards/Breakout-boards/STM32F030F4P6-Breakout-Boards/Breakout-board-sans-prototyping-area"]
 	path = Printed-Circuit-Boards/Breakout-boards/STM32F030F4P6-Breakout-Boards/Breakout-board-sans-prototyping-area
 	url = https://github.com/nathancharlesjones/STM32F030F4P6-breakout-board.git
+[submodule "Printed-Circuit-Boards/Breakout-boards/STM32G0-Breakout-Boards/Breakout-board-sans-prototyping-area"]
+	path = Printed-Circuit-Boards/Breakout-boards/STM32G0-Breakout-Boards/Breakout-board-sans-prototyping-area
+	url = https://github.com/nathancharlesjones/STM32G0-Breakout-Boards.git
