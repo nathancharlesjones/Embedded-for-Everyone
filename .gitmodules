@@ -4,3 +4,15 @@
 [submodule "Printed-Circuit-Boards/Breakout-boards/STM32G0-Breakout-Boards/Breakout-board-sans-prototyping-area"]
 	path = Printed-Circuit-Boards/Breakout-boards/STM32G0-Breakout-Boards/Breakout-board-sans-prototyping-area
 	url = https://github.com/nathancharlesjones/STM32G0-Breakout-Boards.git
+[submodule "Printed-Circuit-Boards/Prototyping-PCBs/Breadboard-Single"]
+	path = Printed-Circuit-Boards/Prototyping-PCBs/Breadboard-Single
+	url = https://github.com/nathancharlesjones/Breadboard-single.git
+[submodule "Printed-Circuit-Boards/Prototyping-PCBs/Breadboard-Panelized"]
+	path = Printed-Circuit-Boards/Prototyping-PCBs/Breadboard-Panelized
+	url = https://github.com/nathancharlesjones/Breadboard-panelized.git
+[submodule "Printed-Circuit-Boards/Prototyping-PCBs/Stripboard-Single"]
+	path = Printed-Circuit-Boards/Prototyping-PCBs/Stripboard-Single
+	url = https://github.com/nathancharlesjones/Stripboard-single.git
+[submodule "Printed-Circuit-Boards/Prototyping-PCBs/Stripboard-Panelized"]
+	path = Printed-Circuit-Boards/Prototyping-PCBs/Stripboard-Panelized
+	url = https://github.com/nathancharlesjones/Stripboard-panelized.git
