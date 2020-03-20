@@ -1,0 +1,2 @@
+fsl_swm.c:38:6:SWM_SetMovablePinSelect	32	static
+fsl_swm.c:97:6:SWM_SetFixedPinSelect	24	static

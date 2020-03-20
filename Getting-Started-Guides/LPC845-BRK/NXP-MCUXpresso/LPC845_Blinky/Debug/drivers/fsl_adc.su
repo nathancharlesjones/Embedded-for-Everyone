@@ -1,0 +1,12 @@
+fsl_clock.h:441:20:CLOCK_EnableClock	16	static
+fsl_clock.h:452:20:CLOCK_DisableClock	16	static
+fsl_adc.c:24:17:ADC_GetInstance	24	static
+fsl_adc.c:48:6:ADC_Init	24	static
+fsl_adc.c:148:6:ADC_GetDefaultConfig	16	static
+fsl_adc.c:181:6:ADC_Deinit	16	static
+fsl_adc.c:263:6:ADC_DoSelfCalibration	32	static
+fsl_adc.c:303:6:ADC_SetConvSeqAConfig	24	static
+fsl_adc.c:353:6:ADC_SetConvSeqBConfig	24	static
+fsl_adc.c:405:6:ADC_GetConvSeqAGlobalConversionResult	24	static
+fsl_adc.c:435:6:ADC_GetConvSeqBGlobalConversionResult	24	static
+fsl_adc.c:466:6:ADC_GetChannelConversionResult	32	static

@@ -1,0 +1,10 @@
+core_cm0plus.h:733:22:__NVIC_EnableIRQ	16	static
+core_cm0plus.h:769:22:__NVIC_DisableIRQ	16	static
+fsl_common.h:419:28:EnableIRQ	16	static
+fsl_common.h:457:28:DisableIRQ	16	static
+fsl_power.c:25:6:POWER_EnterSleep	24	static
+fsl_power.c:50:6:POWER_EnterDeepSleep	32	static
+fsl_power.c:81:6:POWER_EnterPowerDown	32	static
+fsl_power.c:111:6:POWER_EnterDeepPowerDownMode	24	static
+fsl_power.c:132:6:EnableDeepSleepIRQ	24	static
+fsl_power.c:150:6:DisableDeepSleepIRQ	24	static

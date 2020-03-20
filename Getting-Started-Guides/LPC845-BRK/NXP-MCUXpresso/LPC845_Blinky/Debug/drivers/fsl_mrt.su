@@ -1,0 +1,7 @@
+fsl_clock.h:441:20:CLOCK_EnableClock	16	static
+fsl_clock.h:452:20:CLOCK_DisableClock	16	static
+fsl_mrt.h:306:20:MRT_StopTimer	16	static
+fsl_mrt.c:52:17:MRT_GetInstance	24	static
+fsl_mrt.c:80:6:MRT_Init	16	static
+fsl_mrt.c:105:6:MRT_Deinit	16	static
+fsl_mrt.c:137:6:MRT_UpdateTimerPeriod	40	static

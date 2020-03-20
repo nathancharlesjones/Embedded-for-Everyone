@@ -1,0 +1,3 @@
+system_LPC845.c:72:6:SystemInit	8	static
+system_LPC845.c:89:6:SystemCoreClockUpdate	16	static
+system_LPC845.c:166:29:SystemInitHook	8	static

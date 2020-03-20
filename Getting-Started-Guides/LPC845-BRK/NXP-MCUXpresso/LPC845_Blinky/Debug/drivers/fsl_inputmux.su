@@ -1,0 +1,5 @@
+fsl_clock.h:441:20:CLOCK_EnableClock	16	static
+fsl_clock.h:452:20:CLOCK_DisableClock	16	static
+fsl_inputmux.c:33:6:INPUTMUX_Init	16	static
+fsl_inputmux.c:56:6:INPUTMUX_AttachSignal	32	static
+fsl_inputmux.c:111:6:INPUTMUX_Deinit	16	static

@@ -1,0 +1,2 @@
+fsl_debug_console.c:113:10:DbgConsole_Init	40	static
+fsl_debug_console.c:142:10:DbgConsole_Deinit	8	static

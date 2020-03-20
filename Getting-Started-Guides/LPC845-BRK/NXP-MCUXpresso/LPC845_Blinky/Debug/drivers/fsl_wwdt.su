@@ -1,0 +1,11 @@
+fsl_clock.h:441:20:CLOCK_EnableClock	16	static
+fsl_clock.h:452:20:CLOCK_DisableClock	16	static
+fsl_common.h:487:28:DisableGlobalIRQ	16	static
+fsl_common.h:518:24:EnableGlobalIRQ	24	static
+fsl_wwdt.h:157:20:WWDT_Disable	16	static
+fsl_wwdt.c:51:17:WWDT_GetInstance	24	static
+fsl_wwdt.c:92:6:WWDT_GetDefaultConfig	16	static
+fsl_wwdt.c:135:6:WWDT_Init	24	static
+fsl_wwdt.c:186:6:WWDT_Deinit	16	static
+fsl_wwdt.c:204:6:WWDT_Refresh	24	static
+fsl_wwdt.c:228:6:WWDT_ClearStatusFlags	24	static

@@ -1,0 +1,3 @@
+fsl_reset.c:54:13:RESET_SetPeripheralReset	32	static
+fsl_reset.c:76:13:RESET_ClearPeripheralReset	32	static
+fsl_reset.c:106:6:RESET_PeripheralReset	16	static

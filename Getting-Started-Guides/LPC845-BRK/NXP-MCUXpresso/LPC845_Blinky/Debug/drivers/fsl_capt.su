@@ -1,0 +1,8 @@
+fsl_clock.h:441:20:CLOCK_EnableClock	16	static
+fsl_clock.h:452:20:CLOCK_DisableClock	16	static
+fsl_capt.c:48:17:CAPT_GetInstance	24	static
+fsl_capt.c:71:6:CAPT_Init	24	static
+fsl_capt.c:121:6:CAPT_Deinit	16	static
+fsl_capt.c:155:6:CAPT_GetDefaultConfig	16	static
+fsl_capt.c:180:6:CAPT_SetPollMode	16	static
+fsl_capt.c:231:6:CAPT_GetTouchData	24	static

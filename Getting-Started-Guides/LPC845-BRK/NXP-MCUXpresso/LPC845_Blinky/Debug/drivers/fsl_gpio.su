@@ -1,0 +1,3 @@
+fsl_clock.h:441:20:CLOCK_EnableClock	16	static
+fsl_gpio.c:43:6:GPIO_PortInit	16	static
+fsl_gpio.c:84:6:GPIO_PinInit	24	static

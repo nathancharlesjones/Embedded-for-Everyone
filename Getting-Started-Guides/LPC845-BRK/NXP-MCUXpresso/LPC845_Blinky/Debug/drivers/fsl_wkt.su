@@ -1,0 +1,7 @@
+fsl_clock.h:441:20:CLOCK_EnableClock	16	static
+fsl_clock.h:452:20:CLOCK_DisableClock	16	static
+fsl_wkt.h:145:20:WKT_ClearStatusFlags	16	static
+fsl_wkt.h:181:20:WKT_StopTimer	16	static
+fsl_wkt.c:46:17:WKT_GetInstance	24	static
+fsl_wkt.c:73:6:WKT_Init	16	static
+fsl_wkt.c:116:6:WKT_Deinit	16	static
