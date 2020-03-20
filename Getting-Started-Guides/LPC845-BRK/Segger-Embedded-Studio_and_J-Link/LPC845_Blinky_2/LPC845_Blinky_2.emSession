@@ -64,19 +64,18 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="19" y="80" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/main.c" selected="1" top="61" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="80" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/main.c" selected="1" top="61" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/system_LPC845.h" selected="0" top="82" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="45" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/startup_lpc845.c" selected="0" top="33" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/startup_LPC845.S" selected="0" top="90" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/LPC845_flash.ld" selected="0" top="152" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="52" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/fsl_gpio.c" selected="0" top="32" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="166" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/clock_config.c" selected="0" top="143" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="139" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/LPC845.h" selected="0" top="116" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="114" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/core_cm0plus.h" selected="0" top="92" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="114" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/core_cm0plus.h" selected="0" top="92" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="47" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/cmsis_compiler.h" selected="0" top="25" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="10" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/fsl_clock.h" selected="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="21" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/fsl_common.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="5" y="27" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/fsl_device_registers.h" selected="0" top="5" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="27" useTextEdit="1" useBinaryEdit="0" left="0" path="Source/fsl_device_registers.h" selected="0" top="5" codecName="Default"/>
  </Files>
  <ARMCrossStudioWindow activeProject="LPC845_Blinky_2" fileDialogDefaultFilter="*.h" autoConnectTarget="J-Link" buildConfiguration="Debug External" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/media/nathancharlesjones/Storage/Documents/NCSU/Embedded-for-Everyone/Embedded-for-Everyone/Getting-Started-Guides/LPC845-BRK/Segger-Embedded-Studio_and_J-Link/LPC845_Blinky_2/Source" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
