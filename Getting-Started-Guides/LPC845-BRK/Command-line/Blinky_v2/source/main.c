@@ -60,7 +60,7 @@ Purpose : Generic application start
 *  Function description
 *   Application entry point.
 */
-void main(void) {
+int main(void) {
     long i;
 
   /* Define the init structure for the output LED pin*/
