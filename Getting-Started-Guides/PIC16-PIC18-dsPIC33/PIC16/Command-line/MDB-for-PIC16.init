@@ -1,0 +1,3 @@
+Device PIC16F18446
+Hwtool SNAP
+Program /media/nathancharlesjones/Storage/Documents/NCSU/Embedded-for-Everyone/Embedded-for-Everyone/Getting-Started-Guides/PIC16-PIC18-dsPIC33/PIC16/Command-line/Blinky/dist/default/debug/Blinky.debug.elf

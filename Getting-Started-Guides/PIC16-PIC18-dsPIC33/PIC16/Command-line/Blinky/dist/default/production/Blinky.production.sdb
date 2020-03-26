@@ -1,0 +1,128 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F18446 ]
+[d frameptr 6 ]
+"10 /opt/microchip/xc8/v2.10/pic/sources/c99/common/sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 /opt/microchip/xc8/v2.10/pic/sources/c99/common/Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 /opt/microchip/xc8/v2.10/pic/sources/c99/pic/__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"49 /media/nathancharlesjones/Storage/Documents/NCSU/Embedded-for-Everyone/Embedded-for-Everyone/Getting-Started-Guides/PIC16-PIC18-dsPIC33/PIC16/Command-line/Blinky/main.c
+[v _main main `(v  1 e 1 0 ]
+"50 /media/nathancharlesjones/Storage/Documents/NCSU/Embedded-for-Everyone/Embedded-for-Everyone/Getting-Started-Guides/PIC16-PIC18-dsPIC33/PIC16/Command-line/Blinky/mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+"57
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+"71
+[v _PMD_Initialize PMD_Initialize `(v  1 e 1 0 ]
+"55 /media/nathancharlesjones/Storage/Documents/NCSU/Embedded-for-Everyone/Embedded-for-Everyone/Getting-Started-Guides/PIC16-PIC18-dsPIC33/PIC16/Command-line/Blinky/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+"597 /opt/microchip/xc8/v2.10/pic/include/pic16f18446.h
+[v _TRISA TRISA `VEuc  1 e 1 @18 ]
+"647
+[v _TRISB TRISB `VEuc  1 e 1 @19 ]
+"686
+[v _TRISC TRISC `VEuc  1 e 1 @20 ]
+"748
+[v _LATA LATA `VEuc  1 e 1 @24 ]
+[s S74 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 LATA3 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
+]
+"763
+[u S81 . 1 `S74 1 . 1 0 ]
+[v _LATAbits LATAbits `VES81  1 e 1 @24 ]
+"798
+[v _LATB LATB `VEuc  1 e 1 @25 ]
+"837
+[v _LATC LATC `VEuc  1 e 1 @26 ]
+"19758
+[v _PMD0 PMD0 `VEuc  1 e 1 @1942 ]
+"19803
+[v _PMD1 PMD1 `VEuc  1 e 1 @1943 ]
+"19859
+[v _PMD2 PMD2 `VEuc  1 e 1 @1944 ]
+"19880
+[v _PMD3 PMD3 `VEuc  1 e 1 @1945 ]
+"19925
+[v _PMD4 PMD4 `VEuc  1 e 1 @1946 ]
+"19976
+[v _PMD5 PMD5 `VEuc  1 e 1 @1947 ]
+"20003
+[v _PMD6 PMD6 `VEuc  1 e 1 @1948 ]
+"20036
+[v _PMD7 PMD7 `VEuc  1 e 1 @1949 ]
+"21109
+[v _OSCCON1 OSCCON1 `VEuc  1 e 1 @2189 ]
+"21249
+[v _OSCCON3 OSCCON3 `VEuc  1 e 1 @2191 ]
+"21346
+[v _OSCEN OSCEN `VEuc  1 e 1 @2193 ]
+"21397
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @2194 ]
+"21455
+[v _OSCFRQ OSCFRQ `VEuc  1 e 1 @2195 ]
+"30649
+[v _ANSELA ANSELA `VEuc  1 e 1 @7992 ]
+"30694
+[v _WPUA WPUA `VEuc  1 e 1 @7993 ]
+"30744
+[v _ODCONA ODCONA `VEuc  1 e 1 @7994 ]
+"30789
+[v _SLRCONA SLRCONA `VEuc  1 e 1 @7995 ]
+"30834
+[v _INLVLA INLVLA `VEuc  1 e 1 @7996 ]
+"31034
+[v _ANSELB ANSELB `VEuc  1 e 1 @8003 ]
+"31073
+[v _WPUB WPUB `VEuc  1 e 1 @8004 ]
+"31112
+[v _ODCONB ODCONB `VEuc  1 e 1 @8005 ]
+"31151
+[v _SLRCONB SLRCONB `VEuc  1 e 1 @8006 ]
+"31190
+[v _INLVLB INLVLB `VEuc  1 e 1 @8007 ]
+"31346
+[v _ANSELC ANSELC `VEuc  1 e 1 @8014 ]
+"31408
+[v _WPUC WPUC `VEuc  1 e 1 @8015 ]
+"31470
+[v _ODCONC ODCONC `VEuc  1 e 1 @8016 ]
+"31532
+[v _SLRCONC SLRCONC `VEuc  1 e 1 @8017 ]
+"31594
+[v _INLVLC INLVLC `VEuc  1 e 1 @8018 ]
+"49 /media/nathancharlesjones/Storage/Documents/NCSU/Embedded-for-Everyone/Embedded-for-Everyone/Getting-Started-Guides/PIC16-PIC18-dsPIC33/PIC16/Command-line/Blinky/main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"74
+[v main@i i `l  1 a 4 0 ]
+"76
+} 0
+"50 /media/nathancharlesjones/Storage/Documents/NCSU/Embedded-for-Everyone/Embedded-for-Everyone/Getting-Started-Guides/PIC16-PIC18-dsPIC33/PIC16/Command-line/Blinky/mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+{
+"55
+} 0
+"71
+[v _PMD_Initialize PMD_Initialize `(v  1 e 1 0 ]
+{
+"89
+} 0
+"55 /media/nathancharlesjones/Storage/Documents/NCSU/Embedded-for-Everyone/Embedded-for-Everyone/Getting-Started-Guides/PIC16-PIC18-dsPIC33/PIC16/Command-line/Blinky/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+{
+"112
+} 0
+"57 /media/nathancharlesjones/Storage/Documents/NCSU/Embedded-for-Everyone/Embedded-for-Everyone/Getting-Started-Guides/PIC16-PIC18-dsPIC33/PIC16/Command-line/Blinky/mcc_generated_files/mcc.c
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+{
+"69
+} 0

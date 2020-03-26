@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <executable name="dist/default/debug/Blinky.debug.hex">
+    <memory name="program">
+      <units>words</units>
+      <length>16384</length>
+      <used>123</used>
+      <free>16261</free>
+    </memory>
+    <memory name="data">
+      <units>bytes</units>
+      <length>2048</length>
+      <used>6</used>
+      <free>2042</free>
+    </memory>
+  </executable>
+</project>

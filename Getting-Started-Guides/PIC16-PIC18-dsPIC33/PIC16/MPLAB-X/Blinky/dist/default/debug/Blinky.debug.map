@@ -1,0 +1,1106 @@
+Microchip MPLAB XC8 Compiler V2.10 ()
+
+Linker command line:
+
+-W-3 --edf=/opt/microchip/xc8/v2.10/pic/dat/en_msgs.txt -cs \
+  -h+dist/default/debug/Blinky.debug.sym \
+  --cmf=dist/default/debug/Blinky.debug.cmf -z -Q16F18446 -o/tmp/xcXyQC6fA \
+  --defsym=__MPLAB_BUILD=1 -Mdist/default/debug/Blinky.debug.map -E1 \
+  -ver=XC8 --acfsm=1493 -ASTACK=02000h-027EFh -pstack=STACK \
+  -ACODE=00h-07FFhx8 -ASTRCODE=00h-03FFFh -ASTRING=00h-0FFhx64 \
+  -ACONST=00h-0FFhx64 -AENTRY=00h-0FFhx64 -ACOMMON=070h-07Fh \
+  -ABANK0=020h-06Fh -ABANK1=0A0h-0EFh -ABANK2=0120h-016Fh \
+  -ABANK3=01A0h-01EFh -ABANK4=0220h-026Fh -ABANK5=02A0h-02EFh \
+  -ABANK6=0320h-036Fh -ABANK7=03A0h-03EFh -ABANK8=0420h-046Fh \
+  -ABANK9=04A0h-04EFh -ABANK10=0520h-056Fh -ABANK11=05A0h-05EFh \
+  -ABANK12=0620h-066Fh -ABANK13=06A0h-06EFh -ABANK14=0720h-076Fh \
+  -ABANK15=07A0h-07EFh -ABANK16=0820h-086Fh -ABANK17=08A0h-08EFh \
+  -ABANK18=0920h-096Fh -ABANK19=09A0h-09EFh -ABANK20=0A20h-0A6Fh \
+  -ABANK21=0AA0h-0AEFh -ABANK22=0B20h-0B6Fh -ABANK23=0BA0h-0BEFh \
+  -ABANK24=0C20h-0C6Fh -ABANK25=0CA0h-0CBFh -ABIGRAM=02000h-027EFh \
+  -ARAM=020h-06Fh,0A0h-0EFh,0120h-016Fh,01A0h-01EFh,0220h-026Fh,02A0h-02EFh,0320h-036Fh,03A0h-03EFh,0420h-046Fh,04A0h-04EFh,0520h-056Fh,05A0h-05EFh,0620h-066Fh,06A0h-06EFh,0720h-076Fh,07A0h-07EFh,0820h-086Fh,08A0h-08EFh,0920h-096Fh,09A0h-09EFh,0A20h-0A6Fh,0AA0h-0AEFh,0B20h-0B6Fh,0BA0h-0BEFh,0C20h-0C6Fh,0CA0h-0CBFh \
+  -AABS1=020h-07Fh,0A0h-0EFh,0120h-016Fh,01A0h-01EFh,0220h-026Fh,02A0h-02EFh,0320h-036Fh,03A0h-03EFh,0420h-046Fh,04A0h-04EFh,0520h-056Fh,05A0h-05EFh,0620h-066Fh,06A0h-06EFh,0720h-076Fh,07A0h-07EFh,0820h-086Fh,08A0h-08EFh,0920h-096Fh,09A0h-09EFh,0A20h-0A6Fh,0AA0h-0AEFh,0B20h-0B6Fh,0BA0h-0BEFh,0C20h-0C6Fh,0CA0h-0CBFh \
+  -ASFR0=00h-01Fh -ASFR1=080h-09Fh -ASFR2=0100h-011Fh -ASFR3=0180h-019Fh \
+  -ASFR4=0200h-021Fh -ASFR5=0280h-029Fh -ASFR6=0300h-031Fh \
+  -ASFR7=0380h-039Fh -ASFR8=0400h-041Fh -ASFR9=0480h-049Fh \
+  -ASFR10=0500h-051Fh -ASFR11=0580h-059Fh -ASFR12=0600h-061Fh \
+  -ASFR13=0680h-069Fh -ASFR14=0700h-071Fh -ASFR15=0780h-079Fh \
+  -ASFR16=0800h-081Fh -ASFR17=0880h-089Fh -ASFR18=0900h-091Fh \
+  -ASFR19=0980h-099Fh -ASFR20=0A00h-0A1Fh -ASFR21=0A80h-0A9Fh \
+  -ASFR22=0B00h-0B1Fh -ASFR23=0B80h-0B9Fh -ASFR24=0C00h-0C1Fh \
+  -ASFR25=0C80h-0C9Fh -ASFR26=0D00h-0D6Fh -ASFR27=0D80h-0DEFh \
+  -ASFR28=0E00h-0E6Fh -ASFR29=0E80h-0EEFh -ASFR30=0F00h-0F6Fh \
+  -ASFR31=0F80h-0FEFh -ASFR32=01000h-0106Fh -ASFR33=01080h-010EFh \
+  -ASFR34=01100h-0116Fh -ASFR35=01180h-011EFh -ASFR36=01200h-0126Fh \
+  -ASFR37=01280h-012EFh -ASFR38=01300h-0136Fh -ASFR39=01380h-013EFh \
+  -ASFR40=01400h-0146Fh -ASFR41=01480h-014EFh -ASFR42=01500h-0156Fh \
+  -ASFR43=01580h-015EFh -ASFR44=01600h-0166Fh -ASFR45=01680h-016EFh \
+  -ASFR46=01700h-0176Fh -ASFR47=01780h-017EFh -ASFR48=01800h-0186Fh \
+  -ASFR49=01880h-018EFh -ASFR50=01900h-0196Fh -ASFR51=01980h-019EFh \
+  -ASFR52=01A00h-01A6Fh -ASFR53=01A80h-01AEFh -ASFR54=01B00h-01B6Fh \
+  -ASFR55=01B80h-01BEFh -ASFR56=01C00h-01C6Fh -ASFR57=01C80h-01CEFh \
+  -ASFR58=01D00h-01D6Fh -ASFR59=01D80h-01DEFh -ASFR60=01E00h-01E6Fh \
+  -ASFR61=01E80h-01EEFh -ASFR62=01F00h-01F6Fh -ASFR63=01F80h-01FEFh \
+  -preset_vec=00h,intentry,init,end_init -ppowerup=CODE -pcinit=CODE \
+  -pfunctab=ENTRY -ACONFIG=08007h-0800Bh -pconfig=CONFIG -DCONFIG=2 \
+  -AIDLOC=08000h-08003h -pidloc=IDLOC -DIDLOC=2 -AEEDATA=00h-0FFh/0F000h \
+  -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
+  -DENTRY=2 -k /tmp/xcXM5LoQO.o dist/default/debug/Blinky.debug.o 
+
+Object code version is 3.11
+
+Machine type is 16F18446
+
+
+
+                Name                               Link     Load   Length Selector   Space Scale
+/tmp/xcXM5LoQO.o
+                end_init                              2        2        2        0       0
+                reset_vec                             0        0        2        0       0
+                config                             8007     8007        5    1000E       0
+dist/default/debug/Blinky.debug.o
+                cinit                               7FD      7FD        3      FFA       0
+                text4                               789      789        9      F12       0
+                text3                               7A6      7A6       24      F4C       0
+                text2                               792      792        A      F24       0
+                text1                               79C      79C        A      F38       0
+                maintext                            7CA      7CA       33      F94       0
+                cstackCOMMON                         70       70        4       70       1
+
+TOTAL           Name                               Link     Load   Length     Space
+        CLASS   STACK          
+
+        CLASS   CODE           
+                end_init                              2        2        2         0
+                cinit                               7FD      7FD        3         0
+                reset_vec                             0        0        2         0
+                text4                               789      789        9         0
+                text3                               7A6      7A6       24         0
+                text2                               792      792        A         0
+                text1                               79C      79C        A         0
+                maintext                            7CA      7CA       33         0
+
+        CLASS   STRCODE        
+
+        CLASS   STRING         
+
+        CLASS   CONST          
+
+        CLASS   ENTRY          
+
+        CLASS   COMMON         
+                cstackCOMMON                         70       70        4         1
+
+        CLASS   BANK0          
+
+        CLASS   BANK1          
+
+        CLASS   BANK2          
+
+        CLASS   BANK3          
+
+        CLASS   BANK4          
+
+        CLASS   BANK5          
+
+        CLASS   BANK6          
+
+        CLASS   BANK7          
+
+        CLASS   BANK8          
+
+        CLASS   BANK9          
+
+        CLASS   BANK10         
+
+        CLASS   BANK11         
+
+        CLASS   BANK12         
+
+        CLASS   BANK13         
+
+        CLASS   BANK14         
+
+        CLASS   BANK15         
+
+        CLASS   BANK16         
+
+        CLASS   BANK17         
+
+        CLASS   BANK18         
+
+        CLASS   BANK19         
+
+        CLASS   BANK20         
+
+        CLASS   BANK21         
+
+        CLASS   BANK22         
+
+        CLASS   BANK23         
+
+        CLASS   BANK24         
+
+        CLASS   BANK25         
+
+        CLASS   BIGRAM         
+
+        CLASS   RAM            
+
+        CLASS   ABS1           
+                abs_s1                               7E       7E        2         1
+
+        CLASS   SFR0           
+
+        CLASS   SFR1           
+
+        CLASS   SFR2           
+
+        CLASS   SFR3           
+
+        CLASS   SFR4           
+
+        CLASS   SFR5           
+
+        CLASS   SFR6           
+
+        CLASS   SFR7           
+
+        CLASS   SFR8           
+
+        CLASS   SFR9           
+
+        CLASS   SFR10          
+
+        CLASS   SFR11          
+
+        CLASS   SFR12          
+
+        CLASS   SFR13          
+
+        CLASS   SFR14          
+
+        CLASS   SFR15          
+
+        CLASS   SFR16          
+
+        CLASS   SFR17          
+
+        CLASS   SFR18          
+
+        CLASS   SFR19          
+
+        CLASS   SFR20          
+
+        CLASS   SFR21          
+
+        CLASS   SFR22          
+
+        CLASS   SFR23          
+
+        CLASS   SFR24          
+
+        CLASS   SFR25          
+
+        CLASS   SFR26          
+
+        CLASS   SFR27          
+
+        CLASS   SFR28          
+
+        CLASS   SFR29          
+
+        CLASS   SFR30          
+
+        CLASS   SFR31          
+
+        CLASS   SFR32          
+
+        CLASS   SFR33          
+
+        CLASS   SFR34          
+
+        CLASS   SFR35          
+
+        CLASS   SFR36          
+
+        CLASS   SFR37          
+
+        CLASS   SFR38          
+
+        CLASS   SFR39          
+
+        CLASS   SFR40          
+
+        CLASS   SFR41          
+
+        CLASS   SFR42          
+
+        CLASS   SFR43          
+
+        CLASS   SFR44          
+
+        CLASS   SFR45          
+
+        CLASS   SFR46          
+
+        CLASS   SFR47          
+
+        CLASS   SFR48          
+
+        CLASS   SFR49          
+
+        CLASS   SFR50          
+
+        CLASS   SFR51          
+
+        CLASS   SFR52          
+
+        CLASS   SFR53          
+
+        CLASS   SFR54          
+
+        CLASS   SFR55          
+
+        CLASS   SFR56          
+
+        CLASS   SFR57          
+
+        CLASS   SFR58          
+
+        CLASS   SFR59          
+
+        CLASS   SFR60          
+
+        CLASS   SFR61          
+
+        CLASS   SFR62          
+
+        CLASS   SFR63          
+
+        CLASS   CONFIG         
+                config                             8007     8007        5         0
+
+        CLASS   IDLOC          
+
+        CLASS   EEDATA         
+
+        CLASS   BANK63         
+
+        CLASS   BANK62         
+
+        CLASS   BANK61         
+
+        CLASS   BANK60         
+
+        CLASS   BANK59         
+
+        CLASS   BANK58         
+
+        CLASS   BANK57         
+
+        CLASS   BANK56         
+
+        CLASS   BANK55         
+
+        CLASS   BANK54         
+
+        CLASS   BANK53         
+
+        CLASS   BANK52         
+
+        CLASS   BANK51         
+
+        CLASS   BANK50         
+
+        CLASS   BANK49         
+
+        CLASS   BANK48         
+
+        CLASS   BANK47         
+
+        CLASS   BANK46         
+
+        CLASS   BANK45         
+
+        CLASS   BANK44         
+
+        CLASS   BANK43         
+
+        CLASS   BANK42         
+
+        CLASS   BANK41         
+
+        CLASS   BANK40         
+
+        CLASS   BANK39         
+
+        CLASS   BANK38         
+
+        CLASS   BANK37         
+
+        CLASS   BANK36         
+
+        CLASS   BANK35         
+
+        CLASS   BANK34         
+
+        CLASS   BANK33         
+
+        CLASS   BANK32         
+
+        CLASS   BANK31         
+
+        CLASS   BANK30         
+
+        CLASS   BANK29         
+
+        CLASS   BANK28         
+
+        CLASS   BANK27         
+
+        CLASS   BANK26         
+
+
+
+SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
+
+                reset_vec                      000000  000004  000004         0       0  CODE        2
+                cstackCOMMON                   000070  000004  000074        70       1  COMMON      1
+                text4                          000789  000009  000792       F12       0  CODE        2
+                text2                          000792  00000A  00079C       F24       0  CODE        2
+                text1                          00079C  00000A  0007A6       F38       0  CODE        2
+                text3                          0007A6  000024  0007CA       F4C       0  CODE        2
+                maintext                       0007CA  000033  0007FD       F94       0  CODE        2
+                cinit                          0007FD  000003  000800       FFA       0  CODE        2
+                config                         008007  000005  00800C     1000E       0  CONFIG      2
+
+
+UNUSED ADDRESS RANGES
+
+        Name                Unused          Largest block    Delta
+        BANK0            00020-0006F              50           1
+        BANK1            000A0-000EF              50           1
+        BANK10           00520-0056F              50           1
+        BANK11           005A0-005EF              50           1
+        BANK12           00620-0066F              50           1
+        BANK13           006A0-006EF              50           1
+        BANK14           00720-0076F              50           1
+        BANK15           007A0-007EF              50           1
+        BANK16           00820-0086F              50           1
+        BANK17           008A0-008EF              50           1
+        BANK18           00920-0096F              50           1
+        BANK19           009A0-009EF              50           1
+        BANK2            00120-0016F              50           1
+        BANK20           00A20-00A6F              50           1
+        BANK21           00AA0-00AEF              50           1
+        BANK22           00B20-00B6F              50           1
+        BANK23           00BA0-00BEF              50           1
+        BANK24           00C20-00C6F              50           1
+        BANK25           00CA0-00CBF              20           1
+        BANK3            001A0-001EF              50           1
+        BANK4            00220-0026F              50           1
+        BANK5            002A0-002EF              50           1
+        BANK6            00320-0036F              50           1
+        BANK7            003A0-003EF              50           1
+        BANK8            00420-0046F              50           1
+        BANK9            004A0-004EF              50           1
+        BIGRAM           02000-027EF             7F0           1
+        CODE             00004-00788             785           2
+                         00800-03FFF             800
+        COMMON           00074-0007D               A           1
+        CONST            00004-00788             100           2
+                         00800-03FFF             100
+        EEDATA           0F000-0F0FF             100           2
+        ENTRY            00004-00788             100           2
+                         00800-03FFF             100
+        IDLOC            08000-08003               4           2
+        RAM              00020-0006F              50           1
+                         000A0-000EF              50
+                         00120-0016F              50
+                         001A0-001EF              50
+                         00220-0026F              50
+                         002A0-002EF              50
+                         00320-0036F              50
+                         003A0-003EF              50
+                         00420-0046F              50
+                         004A0-004EF              50
+                         00520-0056F              50
+                         005A0-005EF              50
+                         00620-0066F              50
+                         006A0-006EF              50
+                         00720-0076F              50
+                         007A0-007EF              50
+                         00820-0086F              50
+                         008A0-008EF              50
+                         00920-0096F              50
+                         009A0-009EF              50
+                         00A20-00A6F              50
+                         00AA0-00AEF              50
+                         00B20-00B6F              50
+                         00BA0-00BEF              50
+                         00C20-00C6F              50
+                         00CA0-00CBF              20
+        SFR0             00000-0001F              20           1
+        SFR1             00080-0009F              20           1
+        SFR10            00500-0051F              20           1
+        SFR11            00580-0059F              20           1
+        SFR12            00600-0061F              20           1
+        SFR13            00680-0069F              20           1
+        SFR14            00700-0071F              20           1
+        SFR15            00780-0079F              20           1
+        SFR16            00800-0081F              20           1
+        SFR17            00880-0089F              20           1
+        SFR18            00900-0091F              20           1
+        SFR19            00980-0099F              20           1
+        SFR2             00100-0011F              20           1
+        SFR20            00A00-00A1F              20           1
+        SFR21            00A80-00A9F              20           1
+        SFR22            00B00-00B1F              20           1
+        SFR23            00B80-00B9F              20           1
+        SFR24            00C00-00C1F              20           1
+        SFR25            00C80-00C9F              20           1
+        SFR26            00D00-00D6F              70           1
+        SFR27            00D80-00DEF              70           1
+        SFR28            00E00-00E6F              70           1
+        SFR29            00E80-00EEF              70           1
+        SFR3             00180-0019F              20           1
+        SFR30            00F00-00F6F              70           1
+        SFR31            00F80-00FEF              70           1
+        SFR32            01000-0106F              70           1
+        SFR33            01080-010EF              70           1
+        SFR34            01100-0116F              70           1
+        SFR35            01180-011EF              70           1
+        SFR36            01200-0126F              70           1
+        SFR37            01280-012EF              70           1
+        SFR38            01300-0136F              70           1
+        SFR39            01380-013EF              70           1
+        SFR4             00200-0021F              20           1
+        SFR40            01400-0146F              70           1
+        SFR41            01480-014EF              70           1
+        SFR42            01500-0156F              70           1
+        SFR43            01580-015EF              70           1
+        SFR44            01600-0166F              70           1
+        SFR45            01680-016EF              70           1
+        SFR46            01700-0176F              70           1
+        SFR47            01780-017EF              70           1
+        SFR48            01800-0186F              70           1
+        SFR49            01880-018EF              70           1
+        SFR5             00280-0029F              20           1
+        SFR50            01900-0196F              70           1
+        SFR51            01980-019EF              70           1
+        SFR52            01A00-01A6F              70           1
+        SFR53            01A80-01AEF              70           1
+        SFR54            01B00-01B6F              70           1
+        SFR55            01B80-01BEF              70           1
+        SFR56            01C00-01C6F              70           1
+        SFR57            01C80-01CEF              70           1
+        SFR58            01D00-01D6F              70           1
+        SFR59            01D80-01DEF              70           1
+        SFR6             00300-0031F              20           1
+        SFR60            01E00-01E6F              70           1
+        SFR61            01E80-01EEF              70           1
+        SFR62            01F00-01F6F              70           1
+        SFR63            01F80-01FEF              70           1
+        SFR7             00380-0039F              20           1
+        SFR8             00400-0041F              20           1
+        SFR9             00480-0049F              20           1
+        STACK            02000-027EF             7F0           1
+        STRCODE          00004-00788             785           2
+                         00800-03FFF            3800
+        STRING           00004-00788             100           2
+                         00800-03FFF             100
+
+                                  Symbol Table
+
+_ANSELA                          (abs)        01F38
+_ANSELB                          (abs)        01F43
+_ANSELC                          (abs)        01F4E
+_INLVLA                          (abs)        01F3C
+_INLVLB                          (abs)        01F47
+_INLVLC                          (abs)        01F52
+_LATA                            (abs)        00018
+_LATAbits                        (abs)        00018
+_LATB                            (abs)        00019
+_LATC                            (abs)        0001A
+_ODCONA                          (abs)        01F3A
+_ODCONB                          (abs)        01F45
+_ODCONC                          (abs)        01F50
+_OSCCON1                         (abs)        0088D
+_OSCCON3                         (abs)        0088F
+_OSCEN                           (abs)        00891
+_OSCFRQ                          (abs)        00893
+_OSCILLATOR_Initialize           text4        00789
+_OSCTUNE                         (abs)        00892
+_PIN_MANAGER_Initialize          text3        007A6
+_PMD0                            (abs)        00796
+_PMD1                            (abs)        00797
+_PMD2                            (abs)        00798
+_PMD3                            (abs)        00799
+_PMD4                            (abs)        0079A
+_PMD5                            (abs)        0079B
+_PMD6                            (abs)        0079C
+_PMD7                            (abs)        0079D
+_PMD_Initialize                  text2        00792
+_SLRCONA                         (abs)        01F3B
+_SLRCONB                         (abs)        01F46
+_SLRCONC                         (abs)        01F51
+_SYSTEM_Initialize               text1        0079C
+_TRISA                           (abs)        00012
+_TRISB                           (abs)        00013
+_TRISC                           (abs)        00014
+_WPUA                            (abs)        01F39
+_WPUB                            (abs)        01F44
+_WPUC                            (abs)        01F4F
+__CFG_BBEN$OFF                   (abs)        00000
+__CFG_BBSIZE$BB512               (abs)        00000
+__CFG_BOREN$ON                   (abs)        00000
+__CFG_BORV$LO                    (abs)        00000
+__CFG_CLKOUTEN$OFF               (abs)        00000
+__CFG_CP$OFF                     (abs)        00000
+__CFG_CSWEN$ON                   (abs)        00000
+__CFG_FCMEN$ON                   (abs)        00000
+__CFG_FEXTOSC$OFF                (abs)        00000
+__CFG_LPBOREN$OFF                (abs)        00000
+__CFG_LVP$ON                     (abs)        00000
+__CFG_MCLRE$ON                   (abs)        00000
+__CFG_PPS1WAY$ON                 (abs)        00000
+__CFG_PWRTS$OFF                  (abs)        00000
+__CFG_RSTOSC$HFINT1              (abs)        00000
+__CFG_SAFEN$OFF                  (abs)        00000
+__CFG_STVREN$ON                  (abs)        00000
+__CFG_WDTCCS$SC                  (abs)        00000
+__CFG_WDTCPS$WDTCPS_31           (abs)        00000
+__CFG_WDTCWS$WDTCWS_7            (abs)        00000
+__CFG_WDTE$OFF                   (abs)        00000
+__CFG_WRTAPP$OFF                 (abs)        00000
+__CFG_WRTB$OFF                   (abs)        00000
+__CFG_WRTC$OFF                   (abs)        00000
+__CFG_WRTD$OFF                   (abs)        00000
+__CFG_WRTSAF$OFF                 (abs)        00000
+__CFG_ZCDDIS$OFF                 (abs)        00000
+__Habs1                          abs1         00000
+__Hbank0                         bank0        00000
+__Hbank1                         bank1        00000
+__Hbank10                        bank10       00000
+__Hbank11                        bank11       00000
+__Hbank12                        bank12       00000
+__Hbank13                        bank13       00000
+__Hbank14                        bank14       00000
+__Hbank15                        bank15       00000
+__Hbank16                        bank16       00000
+__Hbank17                        bank17       00000
+__Hbank18                        bank18       00000
+__Hbank19                        bank19       00000
+__Hbank2                         bank2        00000
+__Hbank20                        bank20       00000
+__Hbank21                        bank21       00000
+__Hbank22                        bank22       00000
+__Hbank23                        bank23       00000
+__Hbank24                        bank24       00000
+__Hbank25                        bank25       00000
+__Hbank26                        bank26       00000
+__Hbank27                        bank27       00000
+__Hbank28                        bank28       00000
+__Hbank29                        bank29       00000
+__Hbank3                         bank3        00000
+__Hbank30                        bank30       00000
+__Hbank31                        bank31       00000
+__Hbank32                        bank32       00000
+__Hbank33                        bank33       00000
+__Hbank34                        bank34       00000
+__Hbank35                        bank35       00000
+__Hbank36                        bank36       00000
+__Hbank37                        bank37       00000
+__Hbank38                        bank38       00000
+__Hbank39                        bank39       00000
+__Hbank4                         bank4        00000
+__Hbank40                        bank40       00000
+__Hbank41                        bank41       00000
+__Hbank42                        bank42       00000
+__Hbank43                        bank43       00000
+__Hbank44                        bank44       00000
+__Hbank45                        bank45       00000
+__Hbank46                        bank46       00000
+__Hbank47                        bank47       00000
+__Hbank48                        bank48       00000
+__Hbank49                        bank49       00000
+__Hbank5                         bank5        00000
+__Hbank50                        bank50       00000
+__Hbank51                        bank51       00000
+__Hbank52                        bank52       00000
+__Hbank53                        bank53       00000
+__Hbank54                        bank54       00000
+__Hbank55                        bank55       00000
+__Hbank56                        bank56       00000
+__Hbank57                        bank57       00000
+__Hbank58                        bank58       00000
+__Hbank59                        bank59       00000
+__Hbank6                         bank6        00000
+__Hbank60                        bank60       00000
+__Hbank61                        bank61       00000
+__Hbank62                        bank62       00000
+__Hbank63                        bank63       00000
+__Hbank7                         bank7        00000
+__Hbank8                         bank8        00000
+__Hbank9                         bank9        00000
+__Hbigram                        bigram       00000
+__Hcinit                         cinit        00800
+__Hclrtext                       clrtext      00000
+__Hcode                          code         00000
+__Hcommon                        common       00000
+__Hconfig                        config       0800C
+__HcstackCOMMON                  cstackCOMMON 00000
+__Heeprom_data                   eeprom_data  00000
+__Hend_init                      end_init     00004
+__Hfunctab                       functab      00000
+__Hidloc                         idloc        00000
+__Hinit                          init         00002
+__Hintentry                      intentry     00002
+__Hmaintext                      maintext     00000
+__Hpowerup                       powerup      00000
+__Hram                           ram          00000
+__Hreset_vec                     reset_vec    00002
+__Hsfr0                          sfr0         00000
+__Hsfr1                          sfr1         00000
+__Hsfr10                         sfr10        00000
+__Hsfr11                         sfr11        00000
+__Hsfr12                         sfr12        00000
+__Hsfr13                         sfr13        00000
+__Hsfr14                         sfr14        00000
+__Hsfr15                         sfr15        00000
+__Hsfr16                         sfr16        00000
+__Hsfr17                         sfr17        00000
+__Hsfr18                         sfr18        00000
+__Hsfr19                         sfr19        00000
+__Hsfr2                          sfr2         00000
+__Hsfr20                         sfr20        00000
+__Hsfr21                         sfr21        00000
+__Hsfr22                         sfr22        00000
+__Hsfr23                         sfr23        00000
+__Hsfr24                         sfr24        00000
+__Hsfr25                         sfr25        00000
+__Hsfr26                         sfr26        00000
+__Hsfr27                         sfr27        00000
+__Hsfr28                         sfr28        00000
+__Hsfr29                         sfr29        00000
+__Hsfr3                          sfr3         00000
+__Hsfr30                         sfr30        00000
+__Hsfr31                         sfr31        00000
+__Hsfr32                         sfr32        00000
+__Hsfr33                         sfr33        00000
+__Hsfr34                         sfr34        00000
+__Hsfr35                         sfr35        00000
+__Hsfr36                         sfr36        00000
+__Hsfr37                         sfr37        00000
+__Hsfr38                         sfr38        00000
+__Hsfr39                         sfr39        00000
+__Hsfr4                          sfr4         00000
+__Hsfr40                         sfr40        00000
+__Hsfr41                         sfr41        00000
+__Hsfr42                         sfr42        00000
+__Hsfr43                         sfr43        00000
+__Hsfr44                         sfr44        00000
+__Hsfr45                         sfr45        00000
+__Hsfr46                         sfr46        00000
+__Hsfr47                         sfr47        00000
+__Hsfr48                         sfr48        00000
+__Hsfr49                         sfr49        00000
+__Hsfr5                          sfr5         00000
+__Hsfr50                         sfr50        00000
+__Hsfr51                         sfr51        00000
+__Hsfr52                         sfr52        00000
+__Hsfr53                         sfr53        00000
+__Hsfr54                         sfr54        00000
+__Hsfr55                         sfr55        00000
+__Hsfr56                         sfr56        00000
+__Hsfr57                         sfr57        00000
+__Hsfr58                         sfr58        00000
+__Hsfr59                         sfr59        00000
+__Hsfr6                          sfr6         00000
+__Hsfr60                         sfr60        00000
+__Hsfr61                         sfr61        00000
+__Hsfr62                         sfr62        00000
+__Hsfr63                         sfr63        00000
+__Hsfr7                          sfr7         00000
+__Hsfr8                          sfr8         00000
+__Hsfr9                          sfr9         00000
+__Hspace_0                       (abs)        0800C
+__Hspace_1                       (abs)        00074
+__Hspace_2                       (abs)        00000
+__Hspace_3                       (abs)        00000
+__Hstack                         stack        00000
+__Hstrings                       strings      00000
+__Htext                          text         00000
+__Labs1                          abs1         00000
+__Lbank0                         bank0        00000
+__Lbank1                         bank1        00000
+__Lbank10                        bank10       00000
+__Lbank11                        bank11       00000
+__Lbank12                        bank12       00000
+__Lbank13                        bank13       00000
+__Lbank14                        bank14       00000
+__Lbank15                        bank15       00000
+__Lbank16                        bank16       00000
+__Lbank17                        bank17       00000
+__Lbank18                        bank18       00000
+__Lbank19                        bank19       00000
+__Lbank2                         bank2        00000
+__Lbank20                        bank20       00000
+__Lbank21                        bank21       00000
+__Lbank22                        bank22       00000
+__Lbank23                        bank23       00000
+__Lbank24                        bank24       00000
+__Lbank25                        bank25       00000
+__Lbank26                        bank26       00000
+__Lbank27                        bank27       00000
+__Lbank28                        bank28       00000
+__Lbank29                        bank29       00000
+__Lbank3                         bank3        00000
+__Lbank30                        bank30       00000
+__Lbank31                        bank31       00000
+__Lbank32                        bank32       00000
+__Lbank33                        bank33       00000
+__Lbank34                        bank34       00000
+__Lbank35                        bank35       00000
+__Lbank36                        bank36       00000
+__Lbank37                        bank37       00000
+__Lbank38                        bank38       00000
+__Lbank39                        bank39       00000
+__Lbank4                         bank4        00000
+__Lbank40                        bank40       00000
+__Lbank41                        bank41       00000
+__Lbank42                        bank42       00000
+__Lbank43                        bank43       00000
+__Lbank44                        bank44       00000
+__Lbank45                        bank45       00000
+__Lbank46                        bank46       00000
+__Lbank47                        bank47       00000
+__Lbank48                        bank48       00000
+__Lbank49                        bank49       00000
+__Lbank5                         bank5        00000
+__Lbank50                        bank50       00000
+__Lbank51                        bank51       00000
+__Lbank52                        bank52       00000
+__Lbank53                        bank53       00000
+__Lbank54                        bank54       00000
+__Lbank55                        bank55       00000
+__Lbank56                        bank56       00000
+__Lbank57                        bank57       00000
+__Lbank58                        bank58       00000
+__Lbank59                        bank59       00000
+__Lbank6                         bank6        00000
+__Lbank60                        bank60       00000
+__Lbank61                        bank61       00000
+__Lbank62                        bank62       00000
+__Lbank63                        bank63       00000
+__Lbank7                         bank7        00000
+__Lbank8                         bank8        00000
+__Lbank9                         bank9        00000
+__Lbigram                        bigram       00000
+__Lcinit                         cinit        007FD
+__Lclrtext                       clrtext      00000
+__Lcode                          code         00000
+__Lcommon                        common       00000
+__Lconfig                        config       08007
+__LcstackCOMMON                  cstackCOMMON 00000
+__Leeprom_data                   eeprom_data  00000
+__Lend_init                      end_init     00002
+__Lfunctab                       functab      00000
+__Lidloc                         idloc        00000
+__Linit                          init         00002
+__Lintentry                      intentry     00002
+__Lmaintext                      maintext     00000
+__Lpowerup                       powerup      00000
+__Lram                           ram          00000
+__Lreset_vec                     reset_vec    00000
+__Lsfr0                          sfr0         00000
+__Lsfr1                          sfr1         00000
+__Lsfr10                         sfr10        00000
+__Lsfr11                         sfr11        00000
+__Lsfr12                         sfr12        00000
+__Lsfr13                         sfr13        00000
+__Lsfr14                         sfr14        00000
+__Lsfr15                         sfr15        00000
+__Lsfr16                         sfr16        00000
+__Lsfr17                         sfr17        00000
+__Lsfr18                         sfr18        00000
+__Lsfr19                         sfr19        00000
+__Lsfr2                          sfr2         00000
+__Lsfr20                         sfr20        00000
+__Lsfr21                         sfr21        00000
+__Lsfr22                         sfr22        00000
+__Lsfr23                         sfr23        00000
+__Lsfr24                         sfr24        00000
+__Lsfr25                         sfr25        00000
+__Lsfr26                         sfr26        00000
+__Lsfr27                         sfr27        00000
+__Lsfr28                         sfr28        00000
+__Lsfr29                         sfr29        00000
+__Lsfr3                          sfr3         00000
+__Lsfr30                         sfr30        00000
+__Lsfr31                         sfr31        00000
+__Lsfr32                         sfr32        00000
+__Lsfr33                         sfr33        00000
+__Lsfr34                         sfr34        00000
+__Lsfr35                         sfr35        00000
+__Lsfr36                         sfr36        00000
+__Lsfr37                         sfr37        00000
+__Lsfr38                         sfr38        00000
+__Lsfr39                         sfr39        00000
+__Lsfr4                          sfr4         00000
+__Lsfr40                         sfr40        00000
+__Lsfr41                         sfr41        00000
+__Lsfr42                         sfr42        00000
+__Lsfr43                         sfr43        00000
+__Lsfr44                         sfr44        00000
+__Lsfr45                         sfr45        00000
+__Lsfr46                         sfr46        00000
+__Lsfr47                         sfr47        00000
+__Lsfr48                         sfr48        00000
+__Lsfr49                         sfr49        00000
+__Lsfr5                          sfr5         00000
+__Lsfr50                         sfr50        00000
+__Lsfr51                         sfr51        00000
+__Lsfr52                         sfr52        00000
+__Lsfr53                         sfr53        00000
+__Lsfr54                         sfr54        00000
+__Lsfr55                         sfr55        00000
+__Lsfr56                         sfr56        00000
+__Lsfr57                         sfr57        00000
+__Lsfr58                         sfr58        00000
+__Lsfr59                         sfr59        00000
+__Lsfr6                          sfr6         00000
+__Lsfr60                         sfr60        00000
+__Lsfr61                         sfr61        00000
+__Lsfr62                         sfr62        00000
+__Lsfr63                         sfr63        00000
+__Lsfr7                          sfr7         00000
+__Lsfr8                          sfr8         00000
+__Lsfr9                          sfr9         00000
+__Lspace_0                       (abs)        00000
+__Lspace_1                       (abs)        00000
+__Lspace_2                       (abs)        00000
+__Lspace_3                       (abs)        00000
+__Lstack                         stack        00000
+__Lstrings                       strings      00000
+__Ltext                          text         00000
+__S0                             (abs)        0800C
+__S1                             (abs)        00074
+__S2                             (abs)        00000
+__S3                             (abs)        00000
+___int_sp                        stack        00000
+___latbits                       (abs)        00003
+___sp                            stack        00000
+___stackhi                       (abs)        027EF
+___stacklo                       (abs)        02000
+__end_of_OSCILLATOR_Initialize   text4        00792
+__end_of_PIN_MANAGER_Initialize  text3        007CA
+__end_of_PMD_Initialize          text2        0079C
+__end_of_SYSTEM_Initialize       text1        007A6
+__end_of__initialization         cinit        007FD
+__end_of_main                    maintext     007FD
+__initialization                 cinit        007FD
+__pcstackCOMMON                  cstackCOMMON 00070
+__pmaintext                      maintext     007CA
+__ptext1                         text1        0079C
+__ptext2                         text2        00792
+__ptext3                         text3        007A6
+__ptext4                         text4        00789
+__size_of_OSCILLATOR_Initialize  (abs)        00000
+__size_of_PIN_MANAGER_Initialize (abs)        00000
+__size_of_PMD_Initialize         (abs)        00000
+__size_of_SYSTEM_Initialize      (abs)        00000
+__size_of_main                   (abs)        00000
+_main                            maintext     007CA
+btemp                            (abs)        0007E
+end_of_initialization            cinit        007FD
+intlevel0                        functab      00000
+intlevel1                        functab      00000
+intlevel2                        functab      00000
+intlevel3                        functab      00000
+intlevel4                        functab      00000
+intlevel5                        functab      00000
+main@i                           cstackCOMMON 00070
+reset_vec                        reset_vec    00000
+start                            init         00002
+start_initialization             cinit        007FD
+wtemp0                           (abs)        0007E
+
+
+FUNCTION INFORMATION:
+
+ *************** function _main *****************
+ Defined at:
+		line 49 in file "main.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+  i               4    0[COMMON] long 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15  BANK16  BANK17  BANK18  BANK19  BANK20  BANK21  BANK22  BANK23  BANK24  BANK25
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels required when called:    2
+ This function calls:
+		_SYSTEM_Initialize
+ This function is called by:
+		Startup code after reset
+ This function uses a non-reentrant model
+
+
+ *************** function _SYSTEM_Initialize *****************
+ Defined at:
+		line 50 in file "mcc_generated_files/mcc.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15  BANK16  BANK17  BANK18  BANK19  BANK20  BANK21  BANK22  BANK23  BANK24  BANK25
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    1
+ This function calls:
+		_OSCILLATOR_Initialize
+		_PIN_MANAGER_Initialize
+		_PMD_Initialize
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _PMD_Initialize *****************
+ Defined at:
+		line 71 in file "mcc_generated_files/mcc.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		status,2
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15  BANK16  BANK17  BANK18  BANK19  BANK20  BANK21  BANK22  BANK23  BANK24  BANK25
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_SYSTEM_Initialize
+ This function uses a non-reentrant model
+
+
+ *************** function _PIN_MANAGER_Initialize *****************
+ Defined at:
+		line 55 in file "mcc_generated_files/pin_manager.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15  BANK16  BANK17  BANK18  BANK19  BANK20  BANK21  BANK22  BANK23  BANK24  BANK25
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_SYSTEM_Initialize
+ This function uses a non-reentrant model
+
+
+ *************** function _OSCILLATOR_Initialize *****************
+ Defined at:
+		line 57 in file "mcc_generated_files/mcc.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15  BANK16  BANK17  BANK18  BANK19  BANK20  BANK21  BANK22  BANK23  BANK24  BANK25
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_SYSTEM_Initialize
+ This function uses a non-reentrant model
+
+
+
+MODULE INFORMATION
+
+Module		Function		Class		Link	Load	Size
+mcc_generated_files/pin_manager.c
+		_PIN_MANAGER_Initialize		CODE           	07A6	0000	37
+
+mcc_generated_files/pin_manager.c estimated size: 37
+
+shared
+		__initialization		CODE           	07FD	0000	1
+
+shared estimated size: 1
+
+mcc_generated_files/mcc.c
+		_PMD_Initialize		CODE           	0792	0000	11
+		_OSCILLATOR_Initialize		CODE           	0789	0000	10
+		_SYSTEM_Initialize		CODE           	079C	0000	11
+
+mcc_generated_files/mcc.c estimated size: 32
+
+main.c
+		_main          		CODE           	07CA	0000	52
+
+main.c estimated size: 52
+

@@ -1,0 +1,31 @@
+### HEXMate logfile and output summary ###
+### Memory Usage ###
+ Unused memory ranges:
+  8h - F11h
+  1000h - FFFFh
+  10000h - 1000Dh
+  10018h - 1003Fh
+  
+ dist/default/debug/Blinky.debug.hex ranges:
+  0h - 7h
+  F12h - FFFh
+  1000Eh - 10017h
+  
+### Hex Memory Map ###
+ Legend:
+  - = Unused memory
+  F = Filled ROM
+  S = Stored serial code
+  A = Stored ASCII string
+  R = Reserved for checksum
+  C = Stored checksum result
+  T = Trailing code
+  & = Find & replace opcode
+  X = Find & delete opcode
+  1 = dist/default/debug/Blinky.debug.hex
+00000000: 11111111--------------------------------------------------------
+00000F00: ------------------1111111111111111111111111111111111111111111111
+00000F40: 1111111111111111111111111111111111111111111111111111111111111111
+00000F80: 1111111111111111111111111111111111111111111111111111111111111111
+00000FC0: 1111111111111111111111111111111111111111111111111111111111111111
+00010000: --------------1111111111----------------------------------------
