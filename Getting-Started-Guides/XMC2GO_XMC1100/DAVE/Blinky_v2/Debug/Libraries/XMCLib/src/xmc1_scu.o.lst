@@ -1,0 +1,2905 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,6
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "xmc1_scu.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .bss.event_handler_list,"aw",%nobits
+  18              	 .align 2
+  21              	event_handler_list:
+  22 0000 00000000 	 .space 128
+  22      00000000 
+  22      00000000 
+  22      00000000 
+  22      00000000 
+  23              	 .section .data.event_masks,"aw",%progbits
+  24              	 .align 2
+  27              	event_masks:
+  28 0000 00001F00 	 .word 2031616
+  29 0004 8F0060FF 	 .word -10485617
+  30 0008 00000000 	 .word 0
+  31              	 .section .text.XMC_SCU_CalcTSEVAR,"ax",%progbits
+  32              	 .align 2
+  33              	 .code 16
+  34              	 .thumb_func
+  36              	XMC_SCU_CalcTSEVAR:
+  37              	.LFB59:
+  38              	 .file 1 "../Libraries/XMCLib/src/xmc1_scu.c"
+   1:../Libraries/XMCLib/src/xmc1_scu.c **** /**
+   2:../Libraries/XMCLib/src/xmc1_scu.c ****  * @file xmc1_scu.c
+   3:../Libraries/XMCLib/src/xmc1_scu.c ****  * @date 2017-10-25
+   4:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+   5:../Libraries/XMCLib/src/xmc1_scu.c ****  * @cond
+   6:../Libraries/XMCLib/src/xmc1_scu.c ****  **************************************************************************************************
+   7:../Libraries/XMCLib/src/xmc1_scu.c ****  * XMClib v2.1.18 - XMC Peripheral Driver Library 
+   8:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+   9:../Libraries/XMCLib/src/xmc1_scu.c ****  * Copyright (c) 2015-2018, Infineon Technologies AG
+  10:../Libraries/XMCLib/src/xmc1_scu.c ****  * All rights reserved.
+  11:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  12:../Libraries/XMCLib/src/xmc1_scu.c ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:../Libraries/XMCLib/src/xmc1_scu.c ****  * following conditions are met:
+  14:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  15:../Libraries/XMCLib/src/xmc1_scu.c ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:../Libraries/XMCLib/src/xmc1_scu.c ****  * disclaimer.
+  17:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  18:../Libraries/XMCLib/src/xmc1_scu.c ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:../Libraries/XMCLib/src/xmc1_scu.c ****  * disclaimer in the documentation and/or other materials provided with the distribution.
+  20:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  21:../Libraries/XMCLib/src/xmc1_scu.c ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:../Libraries/XMCLib/src/xmc1_scu.c ****  * products derived from this software without specific prior written permission.
+  23:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  24:../Libraries/XMCLib/src/xmc1_scu.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:../Libraries/XMCLib/src/xmc1_scu.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:../Libraries/XMCLib/src/xmc1_scu.c ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:../Libraries/XMCLib/src/xmc1_scu.c ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:../Libraries/XMCLib/src/xmc1_scu.c ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:../Libraries/XMCLib/src/xmc1_scu.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:../Libraries/XMCLib/src/xmc1_scu.c ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  31:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  32:../Libraries/XMCLib/src/xmc1_scu.c ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:../Libraries/XMCLib/src/xmc1_scu.c ****  * Infineon Technologies AG dave@infineon.com).
+  34:../Libraries/XMCLib/src/xmc1_scu.c ****  **************************************************************************************************
+  35:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  36:../Libraries/XMCLib/src/xmc1_scu.c ****  * Change History
+  37:../Libraries/XMCLib/src/xmc1_scu.c ****  * --------------
+  38:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  39:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2015-02-20:
+  40:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - Initial <br>
+  41:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  42:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2015-05-20:
+  43:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - XMC_SCU_StartTempMeasurement API is modified
+  44:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - XMC_ASSERT statements are added in XMC_SCU_INTERRUPT_SetEventHandler
+  45:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  46:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2015-06-20:
+  47:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - XMC_SCU_INTERRUPT_EnableEvent,XMC_SCU_INTERRUPT_DisableEvent,
+  48:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - XMC_SCU_INTERRUPT_TriggerEvent,XMC_SCU_INTERUPT_GetEventStatus,
+  49:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - XMC_SCU_INTERRUPT_ClearEventStatus APIs are added
+  50:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  51:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2015-09-23:
+  52:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - XMC1400 support added
+  53:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  54:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2015-11-30:
+  55:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - Documentation improved
+  56:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  57:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2016-02-29:
+  58:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - Fixed XMC_SCU_CLOCK_ScaleMCLKFrequency
+  59:../Libraries/XMCLib/src/xmc1_scu.c ****  *       It solves issues with down clock frequency scaling
+  60:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  61:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2016-04-15:
+  62:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - Fixed XMC_SCU_CLOCK_Init for XMC1400
+  63:../Libraries/XMCLib/src/xmc1_scu.c ****  *       It solves issues when trying to disable the OSCHP and use the XTAL pins as GPIO
+  64:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  65:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2017-02-09
+  66:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - At XMC_SCU_CLOCK_Init() fixed issue while reading oscillator watchdog status
+  67:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  68:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2017-04-11:
+  69:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - Added XMC_SCU_SetBMI()
+  70:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  71:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2017-06-24
+  72:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - Changed XMC_SCU_SetBMI() for XMC11/XMC12/XMC13 to set to 1 the bit 11 of BMI
+  73:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  74:../Libraries/XMCLib/src/xmc1_scu.c ****  * 2017-10-25
+  75:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - Move the following functions to xmc1_scu.h as STATCI_INLINE and make them available for XM
+  76:../Libraries/XMCLib/src/xmc1_scu.c ****  *            XMC_SCU_CLOCK_EnableDCO1OscillatorWatchdog(), 
+  77:../Libraries/XMCLib/src/xmc1_scu.c ****  *            XMC_SCU_CLOCK_DisableDCO1OscillatorWatchdog(), 
+  78:../Libraries/XMCLib/src/xmc1_scu.c ****  *            XMC_SCU_CLOCK_ClearDCO1OscillatorWatchdogStatus(), 
+  79:../Libraries/XMCLib/src/xmc1_scu.c ****  *            XMC_SCU_CLOCK_IsDCO1ClockFrequencyUsable()
+  80:../Libraries/XMCLib/src/xmc1_scu.c ****  *     - Changed XMC_SCU_SetBMI() for XMC11/XMC12/XMC13 to set to 1 the bits [7:6] of BMI
+  81:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  82:../Libraries/XMCLib/src/xmc1_scu.c ****  * @endcond
+  83:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  84:../Libraries/XMCLib/src/xmc1_scu.c ****  */
+  85:../Libraries/XMCLib/src/xmc1_scu.c **** 
+  86:../Libraries/XMCLib/src/xmc1_scu.c **** /**
+  87:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  88:../Libraries/XMCLib/src/xmc1_scu.c ****  * @brief SCU low level driver API prototype definition for XMC1 family of microcontrollers <br>
+  89:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  90:../Libraries/XMCLib/src/xmc1_scu.c ****  * <b>Detailed description of file</b> <br>
+  91:../Libraries/XMCLib/src/xmc1_scu.c ****  * APIs provided in this file cover the following functional blocks of SCU: <br>
+  92:../Libraries/XMCLib/src/xmc1_scu.c ****  * -- GCU (APIs prefixed with XMC_SCU_GEN_) <br>
+  93:../Libraries/XMCLib/src/xmc1_scu.c ****  * ----Temperature Monitoring, Voltage Monitoring, CCU Start etc
+  94:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  95:../Libraries/XMCLib/src/xmc1_scu.c ****  * -- CCU (APIs prefixed with XMC_SCU_CLOCK_)<br>
+  96:../Libraries/XMCLib/src/xmc1_scu.c ****  * ---- Clock initialization, Clock Gating, Sleep Management etc
+  97:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+  98:../Libraries/XMCLib/src/xmc1_scu.c ****  * -- RCU (APIs prefixed with XMC_SCU_RESET_) <br>
+  99:../Libraries/XMCLib/src/xmc1_scu.c ****  * ---- Reset Init, Cause, Manual Reset Assert/Deassert etc
+ 100:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+ 101:../Libraries/XMCLib/src/xmc1_scu.c ****  * -- INTERRUPT (APIs prefixed with XMC_SCU_INTERRUPT_)<br>
+ 102:../Libraries/XMCLib/src/xmc1_scu.c ****  * ---- Initialization, Manual Assert/Deassert, Acknowledge etc
+ 103:../Libraries/XMCLib/src/xmc1_scu.c ****  *
+ 104:../Libraries/XMCLib/src/xmc1_scu.c ****  */
+ 105:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 106:../Libraries/XMCLib/src/xmc1_scu.c **** /**************************************************************************************************
+ 107:../Libraries/XMCLib/src/xmc1_scu.c ****  * HEADER FILES
+ 108:../Libraries/XMCLib/src/xmc1_scu.c ****  **************************************************************************************************
+ 109:../Libraries/XMCLib/src/xmc1_scu.c **** #include <xmc_scu.h>
+ 110:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 111:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_FAMILY == XMC1
+ 112:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 113:../Libraries/XMCLib/src/xmc1_scu.c **** /**************************************************************************************************
+ 114:../Libraries/XMCLib/src/xmc1_scu.c ****  * MACROS
+ 115:../Libraries/XMCLib/src/xmc1_scu.c ****  **************************************************************************************************
+ 116:../Libraries/XMCLib/src/xmc1_scu.c **** #define SCU_IRQ_NUM             (3U)  /**< array index value for list of events that can generate S
+ 117:../Libraries/XMCLib/src/xmc1_scu.c **** #define SCU_GCU_PASSWD_PROT_ENABLE  (195UL) /**< Password for enabling protection */
+ 118:../Libraries/XMCLib/src/xmc1_scu.c **** #define SCU_GCU_PASSWD_PROT_DISABLE (192UL) /**< Password for disabling protection */
+ 119:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 120:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 121:../Libraries/XMCLib/src/xmc1_scu.c **** #define XMC_SCU_CHECK_RTCCLKSRC(source)       ( (source == XMC_SCU_CLOCK_RTCCLKSRC_DCO2) || \
+ 122:../Libraries/XMCLib/src/xmc1_scu.c ****                                                 (source == XMC_SCU_CLOCK_RTCCLKSRC_ERU_IOUT0) || \
+ 123:../Libraries/XMCLib/src/xmc1_scu.c ****                                                 (source == XMC_SCU_CLOCK_RTCCLKSRC_ACMP0_OUT) || \
+ 124:../Libraries/XMCLib/src/xmc1_scu.c ****                                                 (source == XMC_SCU_CLOCK_RTCCLKSRC_ACMP1_OUT) || \
+ 125:../Libraries/XMCLib/src/xmc1_scu.c ****                                                 (source == XMC_SCU_CLOCK_RTCCLKSRC_ACMP2_OUT) ) /**
+ 126:../Libraries/XMCLib/src/xmc1_scu.c ****                                                                                                 whe
+ 127:../Libraries/XMCLib/src/xmc1_scu.c ****                                                                                                 clo
+ 128:../Libraries/XMCLib/src/xmc1_scu.c ****                                                                                                 or 
+ 129:../Libraries/XMCLib/src/xmc1_scu.c **** #define SCU_GENERAL_INTCR_INTSEL_Msk SCU_GENERAL_INTCR0_INTSEL0_Msk /**< Mask value of Interrupt So
+ 130:../Libraries/XMCLib/src/xmc1_scu.c ****                                                                          for Node 0 */
+ 131:../Libraries/XMCLib/src/xmc1_scu.c **** #define SCU_GENERAL_INTCR_INTSEL_Size SCU_GENERAL_INTCR0_INTSEL1_Pos /**< Bit position value of Int
+ 132:../Libraries/XMCLib/src/xmc1_scu.c ****                                                                          for Node 1 */
+ 133:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 134:../Libraries/XMCLib/src/xmc1_scu.c **** #define ANA_TSE_T1   (0x10000F30U) /**< d is a constant data can be retrieved from Flash sector 0 t
+ 135:../Libraries/XMCLib/src/xmc1_scu.c ****                                          value for DCO calibration */
+ 136:../Libraries/XMCLib/src/xmc1_scu.c **** #define ANA_TSE_T2   (0x10000F31U) /**< e is a constant data can be retrieved from Flash sector 0 t
+ 137:../Libraries/XMCLib/src/xmc1_scu.c ****                                          value for DCO calibration */
+ 138:../Libraries/XMCLib/src/xmc1_scu.c **** #define DCO_ADJLO_T1 (0x10000F32U) /**< b is a constant data can be retrieved from Flash sector 0 t
+ 139:../Libraries/XMCLib/src/xmc1_scu.c ****                                          value for DCO calibration */
+ 140:../Libraries/XMCLib/src/xmc1_scu.c **** #define DCO_ADJLO_T2 (0x10000F33U) /**< a is a constant data can be retrieved from Flash sector 0 t
+ 141:../Libraries/XMCLib/src/xmc1_scu.c ****                                          value for DCO calibration */
+ 142:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 143:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 144:../Libraries/XMCLib/src/xmc1_scu.c **** #define XMC_SCU_INTERRUPT_EVENT_MAX (64U) /**< Maximum supported SCU events for XMC14 device. */
+ 145:../Libraries/XMCLib/src/xmc1_scu.c **** #else
+ 146:../Libraries/XMCLib/src/xmc1_scu.c **** #define XMC_SCU_INTERRUPT_EVENT_MAX (32U)  /**< Maximum supported SCU events for XMC11/12/13 device
+ 147:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 148:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 149:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 150:../Libraries/XMCLib/src/xmc1_scu.c **** #define DCO1_DIV2_FREQUENCY_KHZ_Q22_10 (48000U << 10) /**< used to configures main clock (MCLK) fre
+ 151:../Libraries/XMCLib/src/xmc1_scu.c ****                                                          frequency value during runtime for XMC14 d
+ 152:../Libraries/XMCLib/src/xmc1_scu.c **** #else
+ 153:../Libraries/XMCLib/src/xmc1_scu.c **** #define DCO1_DIV2_FREQUENCY_KHZ_Q24_8 (32000U << 8) /**< used to configures main clock (MCLK) frequ
+ 154:../Libraries/XMCLib/src/xmc1_scu.c ****                                                          frequency value during runtime for XMC11/1
+ 155:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 156:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 157:../Libraries/XMCLib/src/xmc1_scu.c **** #define ROM_BmiInstallationReq \
+ 158:../Libraries/XMCLib/src/xmc1_scu.c ****         (*((uint32_t (**)(uint32_t requestedBmiValue))0x00000108U)) /**< Pointer to Request BMI ins
+ 159:../Libraries/XMCLib/src/xmc1_scu.c ****                                                                          available inside ROM. */
+ 160:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 161:../Libraries/XMCLib/src/xmc1_scu.c **** #define ROM_CalcTemperature \
+ 162:../Libraries/XMCLib/src/xmc1_scu.c ****         (*((uint32_t (**)(void))0x0000010cU)) /**<  Pointer to Calculate chip temperature routine i
+ 163:../Libraries/XMCLib/src/xmc1_scu.c ****                                                     available inside ROM. */
+ 164:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 165:../Libraries/XMCLib/src/xmc1_scu.c **** #define ROM_CalcTSEVAR \
+ 166:../Libraries/XMCLib/src/xmc1_scu.c ****         (*((uint32_t (**)(uint32_t temperature))0x00000120U)) /**<  Pointer to Calculate target lev
+ 167:../Libraries/XMCLib/src/xmc1_scu.c ****                                                                     comparison routine is available
+ 168:../Libraries/XMCLib/src/xmc1_scu.c ****         
+ 169:../Libraries/XMCLib/src/xmc1_scu.c **** /**************************************************************************************************
+ 170:../Libraries/XMCLib/src/xmc1_scu.c ****  * LOCAL DATA
+ 171:../Libraries/XMCLib/src/xmc1_scu.c ****  **************************************************************************************************
+ 172:../Libraries/XMCLib/src/xmc1_scu.c **** static XMC_SCU_INTERRUPT_EVENT_HANDLER_t event_handler_list[XMC_SCU_INTERRUPT_EVENT_MAX]; /**< For 
+ 173:../Libraries/XMCLib/src/xmc1_scu.c ****                                                                                         functions o
+ 174:../Libraries/XMCLib/src/xmc1_scu.c ****                                                                                         occurrence.
+ 175:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 176:../Libraries/XMCLib/src/xmc1_scu.c **** static XMC_SCU_INTERRUPT_EVENT_t event_masks[SCU_IRQ_NUM] =
+ 177:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 178:../Libraries/XMCLib/src/xmc1_scu.c ****   (XMC_SCU_INTERRUPT_EVENT_FLASH_ERROR |
+ 179:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_FLASH_COMPLETED |
+ 180:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_PESRAM |
+ 181:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_PEUSIC0 |
+ 182:../Libraries/XMCLib/src/xmc1_scu.c **** #if defined(USIC1)
+ 183:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_PEUSIC1 |
+ 184:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 185:../Libraries/XMCLib/src/xmc1_scu.c **** #if defined(CAN)
+ 186:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_PEMCAN |
+ 187:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 188:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 189:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_LOSS_EXT_CLOCK |
+ 190:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 191:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_LOCI),
+ 192:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 193:../Libraries/XMCLib/src/xmc1_scu.c ****   (XMC_SCU_INTERRUPT_EVENT_STDBYCLKFAIL |
+ 194:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 195:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_DCO1_OUT_SYNC |
+ 196:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 197:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_VDDPI |
+ 198:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_VDROP |
+ 199:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_VCLIP |
+ 200:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_TSE_DONE |
+ 201:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_TSE_HIGH |
+ 202:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_TSE_LOW |
+ 203:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_WDT_WARN |
+ 204:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_RTC_PERIODIC |
+ 205:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_RTC_ALARM |
+ 206:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_RTCCTR_UPDATED |
+ 207:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_RTCATIM0_UPDATED |
+ 208:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_RTCATIM1_UPDATED |
+ 209:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_RTCTIM0_UPDATED |
+ 210:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_RTCTIM1_UPDATED),
+ 211:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 212:../Libraries/XMCLib/src/xmc1_scu.c ****   (
+ 213:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES != XMC11
+ 214:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ORC0 |
+ 215:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ORC1 |
+ 216:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ORC2 |
+ 217:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ORC3 |
+ 218:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ORC4 |
+ 219:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ORC5 |
+ 220:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ORC6 |
+ 221:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ORC7 |
+ 222:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 223:../Libraries/XMCLib/src/xmc1_scu.c **** #if defined(COMPARATOR)
+ 224:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ACMP0 |
+ 225:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ACMP1 |
+ 226:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ACMP2 |
+ 227:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 228:../Libraries/XMCLib/src/xmc1_scu.c ****    XMC_SCU_INTERRUPT_EVENT_ACMP3 |
+ 229:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 230:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 231:../Libraries/XMCLib/src/xmc1_scu.c ****    0)
+ 232:../Libraries/XMCLib/src/xmc1_scu.c **** }; /**<   Defines list of events that can generate SCU interrupt and also indicates SCU events mapp
+ 233:../Libraries/XMCLib/src/xmc1_scu.c ****          service request number. These event mask values can be used to verify which event is trigg
+ 234:../Libraries/XMCLib/src/xmc1_scu.c ****          to service request number during runtime. All the event items are tabulated as per service
+ 235:../Libraries/XMCLib/src/xmc1_scu.c ****          table of SCU. */
+ 236:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 237:../Libraries/XMCLib/src/xmc1_scu.c **** /**************************************************************************************************
+ 238:../Libraries/XMCLib/src/xmc1_scu.c ****  * LOCAL ROUTINES
+ 239:../Libraries/XMCLib/src/xmc1_scu.c ****  **************************************************************************************************
+ 240:../Libraries/XMCLib/src/xmc1_scu.c **** /* Utility routine to perform frequency up scaling */
+ 241:../Libraries/XMCLib/src/xmc1_scu.c **** static void XMC_SCU_CLOCK_lFrequencyUpScaling(uint32_t curr_idiv, uint32_t idiv);
+ 242:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 243:../Libraries/XMCLib/src/xmc1_scu.c **** /* Utility routine to perform frequency down scaling */
+ 244:../Libraries/XMCLib/src/xmc1_scu.c **** static void XMC_SCU_CLOCK_lFrequencyDownScaling(uint32_t curr_idiv, uint32_t idiv);
+ 245:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 246:../Libraries/XMCLib/src/xmc1_scu.c **** /* Calculates the value which must be installed in ANATSEIx register to get indication in
+ 247:../Libraries/XMCLib/src/xmc1_scu.c ****    SCU_INTERRUPT->SRRAW  bit when the chip temperature is above/below some target/threshold. */
+ 248:../Libraries/XMCLib/src/xmc1_scu.c **** static uint32_t XMC_SCU_CalcTSEVAR(uint32_t temperature)
+ 249:../Libraries/XMCLib/src/xmc1_scu.c **** {
+  39              	 .loc 1 249 0
+  40              	 .cfi_startproc
+  41 0000 80B5     	 push {r7,lr}
+  42              	.LCFI0:
+  43              	 .cfi_def_cfa_offset 8
+  44              	 .cfi_offset 7,-8
+  45              	 .cfi_offset 14,-4
+  46 0002 84B0     	 sub sp,sp,#16
+  47              	.LCFI1:
+  48              	 .cfi_def_cfa_offset 24
+  49 0004 00AF     	 add r7,sp,#0
+  50              	.LCFI2:
+  51              	 .cfi_def_cfa_register 7
+  52 0006 7860     	 str r0,[r7,#4]
+ 250:../Libraries/XMCLib/src/xmc1_scu.c ****   uint32_t limit;
+ 251:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 252:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_ASSERT("XMC_SCU_CalcTSEVAR: temperature out of range", (temperature >= 233U) && (temperature 
+ 253:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 254:../Libraries/XMCLib/src/xmc1_scu.c ****   limit = ROM_CalcTSEVAR(temperature);
+  53              	 .loc 1 254 0
+  54 0008 9023     	 mov r3,#144
+  55 000a 5B00     	 lsl r3,r3,#1
+  56 000c 1B68     	 ldr r3,[r3]
+  57 000e 7A68     	 ldr r2,[r7,#4]
+  58 0010 101C     	 mov r0,r2
+  59 0012 9847     	 blx r3
+  60 0014 031C     	 mov r3,r0
+  61 0016 FB60     	 str r3,[r7,#12]
+ 255:../Libraries/XMCLib/src/xmc1_scu.c ****   if (limit == 0U)
+  62              	 .loc 1 255 0
+  63 0018 FB68     	 ldr r3,[r7,#12]
+  64 001a 002B     	 cmp r3,#0
+  65 001c 14D1     	 bne .L2
+ 256:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 257:../Libraries/XMCLib/src/xmc1_scu.c ****     limit = ROM_CalcTSEVAR(temperature + 1U);
+  66              	 .loc 1 257 0
+  67 001e 9023     	 mov r3,#144
+  68 0020 5B00     	 lsl r3,r3,#1
+  69 0022 1B68     	 ldr r3,[r3]
+  70 0024 7A68     	 ldr r2,[r7,#4]
+  71 0026 0132     	 add r2,r2,#1
+  72 0028 101C     	 mov r0,r2
+  73 002a 9847     	 blx r3
+  74 002c 031C     	 mov r3,r0
+  75 002e FB60     	 str r3,[r7,#12]
+ 258:../Libraries/XMCLib/src/xmc1_scu.c ****     if (limit == 0U)
+  76              	 .loc 1 258 0
+  77 0030 FB68     	 ldr r3,[r7,#12]
+  78 0032 002B     	 cmp r3,#0
+  79 0034 08D1     	 bne .L2
+ 259:../Libraries/XMCLib/src/xmc1_scu.c ****     {
+ 260:../Libraries/XMCLib/src/xmc1_scu.c ****       limit = ROM_CalcTSEVAR(temperature - 1U);
+  80              	 .loc 1 260 0
+  81 0036 9023     	 mov r3,#144
+  82 0038 5B00     	 lsl r3,r3,#1
+  83 003a 1B68     	 ldr r3,[r3]
+  84 003c 7A68     	 ldr r2,[r7,#4]
+  85 003e 013A     	 sub r2,r2,#1
+  86 0040 101C     	 mov r0,r2
+  87 0042 9847     	 blx r3
+  88 0044 031C     	 mov r3,r0
+  89 0046 FB60     	 str r3,[r7,#12]
+  90              	.L2:
+ 261:../Libraries/XMCLib/src/xmc1_scu.c ****     }
+ 262:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 263:../Libraries/XMCLib/src/xmc1_scu.c ****   
+ 264:../Libraries/XMCLib/src/xmc1_scu.c ****   return (limit);
+  91              	 .loc 1 264 0
+  92 0048 FB68     	 ldr r3,[r7,#12]
+ 265:../Libraries/XMCLib/src/xmc1_scu.c **** }
+  93              	 .loc 1 265 0
+  94 004a 181C     	 mov r0,r3
+  95 004c BD46     	 mov sp,r7
+  96 004e 04B0     	 add sp,sp,#16
+  97              	 
+  98 0050 80BD     	 pop {r7,pc}
+  99              	 .cfi_endproc
+ 100              	.LFE59:
+ 102 0052 C046     	 .section .text.XMC_SCU_INTERRUPT_EnableEvent,"ax",%progbits
+ 103              	 .align 2
+ 104              	 .global XMC_SCU_INTERRUPT_EnableEvent
+ 105              	 .code 16
+ 106              	 .thumb_func
+ 108              	XMC_SCU_INTERRUPT_EnableEvent:
+ 109              	.LFB60:
+ 266:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 267:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 268:../Libraries/XMCLib/src/xmc1_scu.c **** /* This is a local function used to generate the delay until register get updated with new configur
+ 269:../Libraries/XMCLib/src/xmc1_scu.c **** static void delay(uint32_t cycles)
+ 270:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 271:../Libraries/XMCLib/src/xmc1_scu.c ****   while(cycles > 0U)
+ 272:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 273:../Libraries/XMCLib/src/xmc1_scu.c ****     __NOP();
+ 274:../Libraries/XMCLib/src/xmc1_scu.c ****     cycles--;
+ 275:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 276:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 277:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 278:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 279:../Libraries/XMCLib/src/xmc1_scu.c **** /**************************************************************************************************
+ 280:../Libraries/XMCLib/src/xmc1_scu.c ****  * API IMPLEMENTATION
+ 281:../Libraries/XMCLib/src/xmc1_scu.c ****  **************************************************************************************************
+ 282:../Libraries/XMCLib/src/xmc1_scu.c ****  #ifdef XMC_ASSERT_ENABLE
+ 283:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to verify SCU event weather it is valid event or not */
+ 284:../Libraries/XMCLib/src/xmc1_scu.c **** __STATIC_INLINE bool XMC_SCU_INTERRUPT_IsValidEvent(XMC_SCU_INTERRUPT_EVENT_t event)
+ 285:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 286:../Libraries/XMCLib/src/xmc1_scu.c ****   return ((event == XMC_SCU_INTERRUPT_EVENT_WDT_WARN) ||
+ 287:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_RTC_PERIODIC) ||
+ 288:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_RTC_ALARM) ||
+ 289:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_VDDPI) ||
+ 290:../Libraries/XMCLib/src/xmc1_scu.c **** #if defined(USIC1)
+ 291:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_PEUSIC1) ||
+ 292:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 293:../Libraries/XMCLib/src/xmc1_scu.c **** #if defined(CAN)
+ 294:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_PEMCAN) ||
+ 295:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 296:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 297:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_LOSS_EXT_CLOCK) ||
+ 298:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_DCO1_OUT_SYNC) ||
+ 299:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 300:../Libraries/XMCLib/src/xmc1_scu.c **** #if defined(COMPARATOR)
+ 301:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ACMP0) ||
+ 302:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ACMP1) ||
+ 303:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ACMP2) ||
+ 304:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 305:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ACMP3) ||
+ 306:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 307:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 308:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_VDROP) ||
+ 309:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES != XMC11
+ 310:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ORC0) ||
+ 311:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ORC1) ||
+ 312:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ORC2) ||
+ 313:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ORC3) ||
+ 314:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ORC4) ||
+ 315:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ORC5) ||
+ 316:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ORC6) ||
+ 317:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_ORC7) ||
+ 318:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 319:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_LOCI) ||
+ 320:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_PESRAM) ||
+ 321:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_PEUSIC0) ||
+ 322:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_FLASH_ERROR) ||
+ 323:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_FLASH_COMPLETED) ||
+ 324:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_VCLIP) ||
+ 325:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_STDBYCLKFAIL) ||
+ 326:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_RTCCTR_UPDATED) ||
+ 327:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_RTCATIM0_UPDATED) ||
+ 328:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_RTCATIM1_UPDATED) ||
+ 329:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_RTCTIM0_UPDATED) ||
+ 330:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_RTCTIM1_UPDATED) ||
+ 331:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_TSE_DONE) ||
+ 332:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_TSE_HIGH) ||
+ 333:../Libraries/XMCLib/src/xmc1_scu.c ****           (event == XMC_SCU_INTERRUPT_EVENT_TSE_LOW));
+ 334:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 335:../Libraries/XMCLib/src/xmc1_scu.c ****  #endif
+ 336:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 337:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to enable the SCU event */
+ 338:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_INTERRUPT_EnableEvent(const XMC_SCU_INTERRUPT_EVENT_t event)
+ 339:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 110              	 .loc 1 339 0
+ 111              	 .cfi_startproc
+ 112 0000 80B5     	 push {r7,lr}
+ 113              	.LCFI3:
+ 114              	 .cfi_def_cfa_offset 8
+ 115              	 .cfi_offset 7,-8
+ 116              	 .cfi_offset 14,-4
+ 117 0002 82B0     	 sub sp,sp,#8
+ 118              	.LCFI4:
+ 119              	 .cfi_def_cfa_offset 16
+ 120 0004 00AF     	 add r7,sp,#0
+ 121              	.LCFI5:
+ 122              	 .cfi_def_cfa_register 7
+ 123 0006 7860     	 str r0,[r7,#4]
+ 340:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_INTERRUPT->SRMSK |= (uint32_t)event;
+ 124              	 .loc 1 340 0
+ 125 0008 044B     	 ldr r3,.L5
+ 126 000a 044A     	 ldr r2,.L5
+ 127 000c 5168     	 ldr r1,[r2,#4]
+ 128 000e 7A68     	 ldr r2,[r7,#4]
+ 129 0010 0A43     	 orr r2,r1
+ 130 0012 5A60     	 str r2,[r3,#4]
+ 341:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 342:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_INTERRUPT->SRMSK1 |= (uint32_t)(event >> 32U);
+ 343:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 344:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 131              	 .loc 1 344 0
+ 132 0014 BD46     	 mov sp,r7
+ 133 0016 02B0     	 add sp,sp,#8
+ 134              	 
+ 135 0018 80BD     	 pop {r7,pc}
+ 136              	.L6:
+ 137 001a C046     	 .align 2
+ 138              	.L5:
+ 139 001c 38000140 	 .word 1073807416
+ 140              	 .cfi_endproc
+ 141              	.LFE60:
+ 143              	 .section .text.XMC_SCU_INTERRUPT_DisableEvent,"ax",%progbits
+ 144              	 .align 2
+ 145              	 .global XMC_SCU_INTERRUPT_DisableEvent
+ 146              	 .code 16
+ 147              	 .thumb_func
+ 149              	XMC_SCU_INTERRUPT_DisableEvent:
+ 150              	.LFB61:
+ 345:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 346:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to disable the SCU event */
+ 347:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_INTERRUPT_DisableEvent(const XMC_SCU_INTERRUPT_EVENT_t event)
+ 348:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 151              	 .loc 1 348 0
+ 152              	 .cfi_startproc
+ 153 0000 80B5     	 push {r7,lr}
+ 154              	.LCFI6:
+ 155              	 .cfi_def_cfa_offset 8
+ 156              	 .cfi_offset 7,-8
+ 157              	 .cfi_offset 14,-4
+ 158 0002 82B0     	 sub sp,sp,#8
+ 159              	.LCFI7:
+ 160              	 .cfi_def_cfa_offset 16
+ 161 0004 00AF     	 add r7,sp,#0
+ 162              	.LCFI8:
+ 163              	 .cfi_def_cfa_register 7
+ 164 0006 7860     	 str r0,[r7,#4]
+ 349:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_INTERRUPT->SRMSK &= ~(uint32_t)event;
+ 165              	 .loc 1 349 0
+ 166 0008 044B     	 ldr r3,.L8
+ 167 000a 044A     	 ldr r2,.L8
+ 168 000c 5268     	 ldr r2,[r2,#4]
+ 169 000e 7968     	 ldr r1,[r7,#4]
+ 170 0010 C943     	 mvn r1,r1
+ 171 0012 0A40     	 and r2,r1
+ 172 0014 5A60     	 str r2,[r3,#4]
+ 350:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 351:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_INTERRUPT->SRMSK1 &= (uint32_t)~(event >> 32U);
+ 352:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 353:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 173              	 .loc 1 353 0
+ 174 0016 BD46     	 mov sp,r7
+ 175 0018 02B0     	 add sp,sp,#8
+ 176              	 
+ 177 001a 80BD     	 pop {r7,pc}
+ 178              	.L9:
+ 179              	 .align 2
+ 180              	.L8:
+ 181 001c 38000140 	 .word 1073807416
+ 182              	 .cfi_endproc
+ 183              	.LFE61:
+ 185              	 .section .text.XMC_SCU_INTERRUPT_TriggerEvent,"ax",%progbits
+ 186              	 .align 2
+ 187              	 .global XMC_SCU_INTERRUPT_TriggerEvent
+ 188              	 .code 16
+ 189              	 .thumb_func
+ 191              	XMC_SCU_INTERRUPT_TriggerEvent:
+ 192              	.LFB62:
+ 354:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 355:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to trigger the SCU event */
+ 356:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_INTERRUPT_TriggerEvent(const XMC_SCU_INTERRUPT_EVENT_t event)
+ 357:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 193              	 .loc 1 357 0
+ 194              	 .cfi_startproc
+ 195 0000 80B5     	 push {r7,lr}
+ 196              	.LCFI9:
+ 197              	 .cfi_def_cfa_offset 8
+ 198              	 .cfi_offset 7,-8
+ 199              	 .cfi_offset 14,-4
+ 200 0002 82B0     	 sub sp,sp,#8
+ 201              	.LCFI10:
+ 202              	 .cfi_def_cfa_offset 16
+ 203 0004 00AF     	 add r7,sp,#0
+ 204              	.LCFI11:
+ 205              	 .cfi_def_cfa_register 7
+ 206 0006 7860     	 str r0,[r7,#4]
+ 358:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_INTERRUPT->SRSET |= (uint32_t)event;
+ 207              	 .loc 1 358 0
+ 208 0008 044B     	 ldr r3,.L11
+ 209 000a 044A     	 ldr r2,.L11
+ 210 000c D168     	 ldr r1,[r2,#12]
+ 211 000e 7A68     	 ldr r2,[r7,#4]
+ 212 0010 0A43     	 orr r2,r1
+ 213 0012 DA60     	 str r2,[r3,#12]
+ 359:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 360:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_INTERRUPT->SRSET1 |= (uint32_t)(event >> 32U);
+ 361:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 362:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 214              	 .loc 1 362 0
+ 215 0014 BD46     	 mov sp,r7
+ 216 0016 02B0     	 add sp,sp,#8
+ 217              	 
+ 218 0018 80BD     	 pop {r7,pc}
+ 219              	.L12:
+ 220 001a C046     	 .align 2
+ 221              	.L11:
+ 222 001c 38000140 	 .word 1073807416
+ 223              	 .cfi_endproc
+ 224              	.LFE62:
+ 226              	 .section .text.XMC_SCU_INTERUPT_GetEventStatus,"ax",%progbits
+ 227              	 .align 2
+ 228              	 .global XMC_SCU_INTERUPT_GetEventStatus
+ 229              	 .code 16
+ 230              	 .thumb_func
+ 232              	XMC_SCU_INTERUPT_GetEventStatus:
+ 233              	.LFB63:
+ 363:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 364:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to get the SCU event status */
+ 365:../Libraries/XMCLib/src/xmc1_scu.c **** XMC_SCU_INTERRUPT_EVENT_t XMC_SCU_INTERUPT_GetEventStatus(void)
+ 366:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 234              	 .loc 1 366 0
+ 235              	 .cfi_startproc
+ 236 0000 80B5     	 push {r7,lr}
+ 237              	.LCFI12:
+ 238              	 .cfi_def_cfa_offset 8
+ 239              	 .cfi_offset 7,-8
+ 240              	 .cfi_offset 14,-4
+ 241 0002 82B0     	 sub sp,sp,#8
+ 242              	.LCFI13:
+ 243              	 .cfi_def_cfa_offset 16
+ 244 0004 00AF     	 add r7,sp,#0
+ 245              	.LCFI14:
+ 246              	 .cfi_def_cfa_register 7
+ 367:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_INTERRUPT_EVENT_t tmp;
+ 368:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 369:../Libraries/XMCLib/src/xmc1_scu.c ****   tmp = SCU_INTERRUPT->SRRAW;
+ 247              	 .loc 1 369 0
+ 248 0006 044B     	 ldr r3,.L15
+ 249 0008 1B68     	 ldr r3,[r3]
+ 250 000a 7B60     	 str r3,[r7,#4]
+ 370:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 371:../Libraries/XMCLib/src/xmc1_scu.c ****   tmp |= ((int64_t)SCU_INTERRUPT->SRRAW1 << 32U);
+ 372:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 373:../Libraries/XMCLib/src/xmc1_scu.c ****   return (tmp);
+ 251              	 .loc 1 373 0
+ 252 000c 7B68     	 ldr r3,[r7,#4]
+ 374:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 253              	 .loc 1 374 0
+ 254 000e 181C     	 mov r0,r3
+ 255 0010 BD46     	 mov sp,r7
+ 256 0012 02B0     	 add sp,sp,#8
+ 257              	 
+ 258 0014 80BD     	 pop {r7,pc}
+ 259              	.L16:
+ 260 0016 C046     	 .align 2
+ 261              	.L15:
+ 262 0018 38000140 	 .word 1073807416
+ 263              	 .cfi_endproc
+ 264              	.LFE63:
+ 266              	 .section .text.XMC_SCU_INTERRUPT_ClearEventStatus,"ax",%progbits
+ 267              	 .align 2
+ 268              	 .global XMC_SCU_INTERRUPT_ClearEventStatus
+ 269              	 .code 16
+ 270              	 .thumb_func
+ 272              	XMC_SCU_INTERRUPT_ClearEventStatus:
+ 273              	.LFB64:
+ 375:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 376:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to clear the SCU event status */
+ 377:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_INTERRUPT_ClearEventStatus(const XMC_SCU_INTERRUPT_EVENT_t event)
+ 378:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 274              	 .loc 1 378 0
+ 275              	 .cfi_startproc
+ 276 0000 80B5     	 push {r7,lr}
+ 277              	.LCFI15:
+ 278              	 .cfi_def_cfa_offset 8
+ 279              	 .cfi_offset 7,-8
+ 280              	 .cfi_offset 14,-4
+ 281 0002 82B0     	 sub sp,sp,#8
+ 282              	.LCFI16:
+ 283              	 .cfi_def_cfa_offset 16
+ 284 0004 00AF     	 add r7,sp,#0
+ 285              	.LCFI17:
+ 286              	 .cfi_def_cfa_register 7
+ 287 0006 7860     	 str r0,[r7,#4]
+ 379:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_INTERRUPT->SRCLR |= (uint32_t)event;
+ 288              	 .loc 1 379 0
+ 289 0008 044B     	 ldr r3,.L18
+ 290 000a 044A     	 ldr r2,.L18
+ 291 000c 9168     	 ldr r1,[r2,#8]
+ 292 000e 7A68     	 ldr r2,[r7,#4]
+ 293 0010 0A43     	 orr r2,r1
+ 294 0012 9A60     	 str r2,[r3,#8]
+ 380:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 381:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_INTERRUPT->SRCLR1 |= (uint32_t)(event >> 32U);
+ 382:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 383:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 295              	 .loc 1 383 0
+ 296 0014 BD46     	 mov sp,r7
+ 297 0016 02B0     	 add sp,sp,#8
+ 298              	 
+ 299 0018 80BD     	 pop {r7,pc}
+ 300              	.L19:
+ 301 001a C046     	 .align 2
+ 302              	.L18:
+ 303 001c 38000140 	 .word 1073807416
+ 304              	 .cfi_endproc
+ 305              	.LFE64:
+ 307              	 .section .text.XMC_SCU_LockProtectedBits,"ax",%progbits
+ 308              	 .align 2
+ 309              	 .global XMC_SCU_LockProtectedBits
+ 310              	 .code 16
+ 311              	 .thumb_func
+ 313              	XMC_SCU_LockProtectedBits:
+ 314              	.LFB65:
+ 384:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 385:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to lock protected bitfields from being modified */
+ 386:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_LockProtectedBits(void)
+ 387:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 315              	 .loc 1 387 0
+ 316              	 .cfi_startproc
+ 317 0000 80B5     	 push {r7,lr}
+ 318              	.LCFI18:
+ 319              	 .cfi_def_cfa_offset 8
+ 320              	 .cfi_offset 7,-8
+ 321              	 .cfi_offset 14,-4
+ 322 0002 00AF     	 add r7,sp,#0
+ 323              	.LCFI19:
+ 324              	 .cfi_def_cfa_register 7
+ 388:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_GENERAL->PASSWD = SCU_GCU_PASSWD_PROT_ENABLE;
+ 325              	 .loc 1 388 0
+ 326 0004 024B     	 ldr r3,.L21
+ 327 0006 C322     	 mov r2,#195
+ 328 0008 5A62     	 str r2,[r3,#36]
+ 389:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 329              	 .loc 1 389 0
+ 330 000a BD46     	 mov sp,r7
+ 331              	 
+ 332 000c 80BD     	 pop {r7,pc}
+ 333              	.L22:
+ 334 000e C046     	 .align 2
+ 335              	.L21:
+ 336 0010 00000140 	 .word 1073807360
+ 337              	 .cfi_endproc
+ 338              	.LFE65:
+ 340              	 .section .text.XMC_SCU_UnlockProtectedBits,"ax",%progbits
+ 341              	 .align 2
+ 342              	 .global XMC_SCU_UnlockProtectedBits
+ 343              	 .code 16
+ 344              	 .thumb_func
+ 346              	XMC_SCU_UnlockProtectedBits:
+ 347              	.LFB66:
+ 390:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 391:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to make protected bitfields available for modification */
+ 392:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_UnlockProtectedBits(void)
+ 393:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 348              	 .loc 1 393 0
+ 349              	 .cfi_startproc
+ 350 0000 80B5     	 push {r7,lr}
+ 351              	.LCFI20:
+ 352              	 .cfi_def_cfa_offset 8
+ 353              	 .cfi_offset 7,-8
+ 354              	 .cfi_offset 14,-4
+ 355 0002 00AF     	 add r7,sp,#0
+ 356              	.LCFI21:
+ 357              	 .cfi_def_cfa_register 7
+ 394:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_GENERAL->PASSWD = SCU_GCU_PASSWD_PROT_DISABLE;
+ 358              	 .loc 1 394 0
+ 359 0004 054B     	 ldr r3,.L25
+ 360 0006 C022     	 mov r2,#192
+ 361 0008 5A62     	 str r2,[r3,#36]
+ 395:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 396:../Libraries/XMCLib/src/xmc1_scu.c ****   while(((SCU_GENERAL->PASSWD) & SCU_GENERAL_PASSWD_PROTS_Msk))
+ 362              	 .loc 1 396 0
+ 363 000a C046     	 mov r8,r8
+ 364              	.L24:
+ 365              	 .loc 1 396 0 is_stmt 0 discriminator 1
+ 366 000c 034B     	 ldr r3,.L25
+ 367 000e 5B6A     	 ldr r3,[r3,#36]
+ 368 0010 0422     	 mov r2,#4
+ 369 0012 1340     	 and r3,r2
+ 370 0014 FAD1     	 bne .L24
+ 397:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 398:../Libraries/XMCLib/src/xmc1_scu.c ****     /* Loop until the lock is removed */
+ 399:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 400:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 371              	 .loc 1 400 0 is_stmt 1
+ 372 0016 BD46     	 mov sp,r7
+ 373              	 
+ 374 0018 80BD     	 pop {r7,pc}
+ 375              	.L26:
+ 376 001a C046     	 .align 2
+ 377              	.L25:
+ 378 001c 00000140 	 .word 1073807360
+ 379              	 .cfi_endproc
+ 380              	.LFE66:
+ 382              	 .section .text.XMC_SCU_SupplyMonitorInit,"ax",%progbits
+ 383              	 .align 2
+ 384              	 .global XMC_SCU_SupplyMonitorInit
+ 385              	 .code 16
+ 386              	 .thumb_func
+ 388              	XMC_SCU_SupplyMonitorInit:
+ 389              	.LFB67:
+ 401:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 402:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to initialize power supply monitoring unit */
+ 403:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_SupplyMonitorInit(const XMC_SCU_SUPPLYMONITOR_t *obj)
+ 404:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 390              	 .loc 1 404 0
+ 391              	 .cfi_startproc
+ 392 0000 80B5     	 push {r7,lr}
+ 393              	.LCFI22:
+ 394              	 .cfi_def_cfa_offset 8
+ 395              	 .cfi_offset 7,-8
+ 396              	 .cfi_offset 14,-4
+ 397 0002 84B0     	 sub sp,sp,#16
+ 398              	.LCFI23:
+ 399              	 .cfi_def_cfa_offset 24
+ 400 0004 00AF     	 add r7,sp,#0
+ 401              	.LCFI24:
+ 402              	 .cfi_def_cfa_register 7
+ 403 0006 7860     	 str r0,[r7,#4]
+ 405:../Libraries/XMCLib/src/xmc1_scu.c ****   uint32_t anavdel;
+ 406:../Libraries/XMCLib/src/xmc1_scu.c ****   uint32_t irqmask;
+ 407:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 408:../Libraries/XMCLib/src/xmc1_scu.c ****   anavdel = 0UL;
+ 404              	 .loc 1 408 0
+ 405 0008 0023     	 mov r3,#0
+ 406 000a FB60     	 str r3,[r7,#12]
+ 409:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 410:../Libraries/XMCLib/src/xmc1_scu.c ****   anavdel |= (uint32_t)((obj-> ext_supply_threshold) << SCU_ANALOG_ANAVDEL_VDEL_SELECT_Pos);
+ 407              	 .loc 1 410 0
+ 408 000c 7B68     	 ldr r3,[r7,#4]
+ 409 000e 1B68     	 ldr r3,[r3]
+ 410 0010 FA68     	 ldr r2,[r7,#12]
+ 411 0012 1343     	 orr r3,r2
+ 412 0014 FB60     	 str r3,[r7,#12]
+ 411:../Libraries/XMCLib/src/xmc1_scu.c ****   anavdel |= (uint32_t)((obj->ext_supply_monitor_speed) << SCU_ANALOG_ANAVDEL_VDEL_TIM_ADJ_Pos);
+ 413              	 .loc 1 411 0
+ 414 0016 7B68     	 ldr r3,[r7,#4]
+ 415 0018 5B68     	 ldr r3,[r3,#4]
+ 416 001a 9B00     	 lsl r3,r3,#2
+ 417 001c FA68     	 ldr r2,[r7,#12]
+ 418 001e 1343     	 orr r3,r2
+ 419 0020 FB60     	 str r3,[r7,#12]
+ 412:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 413:../Libraries/XMCLib/src/xmc1_scu.c ****   if(true == (obj->enable_at_init))
+ 420              	 .loc 1 413 0
+ 421 0022 7B68     	 ldr r3,[r7,#4]
+ 422 0024 DB7A     	 ldrb r3,[r3,#11]
+ 423 0026 002B     	 cmp r3,#0
+ 424 0028 03D0     	 beq .L28
+ 414:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 415:../Libraries/XMCLib/src/xmc1_scu.c ****     anavdel |= (uint32_t)SCU_ANALOG_ANAVDEL_VDEL_EN_Msk;
+ 425              	 .loc 1 415 0
+ 426 002a FB68     	 ldr r3,[r7,#12]
+ 427 002c 1022     	 mov r2,#16
+ 428 002e 1343     	 orr r3,r2
+ 429 0030 FB60     	 str r3,[r7,#12]
+ 430              	.L28:
+ 416:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 417:../Libraries/XMCLib/src/xmc1_scu.c ****    SCU_ANALOG->ANAVDEL = (uint16_t) anavdel;
+ 431              	 .loc 1 417 0
+ 432 0032 144A     	 ldr r2,.L32
+ 433 0034 FB68     	 ldr r3,[r7,#12]
+ 434 0036 99B2     	 uxth r1,r3
+ 435 0038 5023     	 mov r3,#80
+ 436 003a D152     	 strh r1,[r2,r3]
+ 418:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 419:../Libraries/XMCLib/src/xmc1_scu.c ****   irqmask = 0UL;
+ 437              	 .loc 1 419 0
+ 438 003c 0023     	 mov r3,#0
+ 439 003e BB60     	 str r3,[r7,#8]
+ 420:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 421:../Libraries/XMCLib/src/xmc1_scu.c ****   if(true == (obj->enable_prewarning_int))
+ 440              	 .loc 1 421 0
+ 441 0040 7B68     	 ldr r3,[r7,#4]
+ 442 0042 1B7A     	 ldrb r3,[r3,#8]
+ 443 0044 002B     	 cmp r3,#0
+ 444 0046 03D0     	 beq .L29
+ 422:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 423:../Libraries/XMCLib/src/xmc1_scu.c ****     irqmask |= (uint32_t)SCU_INTERRUPT_SRMSK_VDDPI_Msk;
+ 445              	 .loc 1 423 0
+ 446 0048 BB68     	 ldr r3,[r7,#8]
+ 447 004a 0822     	 mov r2,#8
+ 448 004c 1343     	 orr r3,r2
+ 449 004e BB60     	 str r3,[r7,#8]
+ 450              	.L29:
+ 424:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 425:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 426:../Libraries/XMCLib/src/xmc1_scu.c ****   if(true == (obj->enable_vdrop_int))
+ 451              	 .loc 1 426 0
+ 452 0050 7B68     	 ldr r3,[r7,#4]
+ 453 0052 5B7A     	 ldrb r3,[r3,#9]
+ 454 0054 002B     	 cmp r3,#0
+ 455 0056 03D0     	 beq .L30
+ 427:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 428:../Libraries/XMCLib/src/xmc1_scu.c ****     irqmask |= (uint32_t)SCU_INTERRUPT_SRMSK_VDROPI_Msk;
+ 456              	 .loc 1 428 0
+ 457 0058 BB68     	 ldr r3,[r7,#8]
+ 458 005a 8022     	 mov r2,#128
+ 459 005c 1343     	 orr r3,r2
+ 460 005e BB60     	 str r3,[r7,#8]
+ 461              	.L30:
+ 429:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 430:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 431:../Libraries/XMCLib/src/xmc1_scu.c ****   if(true == (obj->enable_vclip_int))
+ 462              	 .loc 1 431 0
+ 463 0060 7B68     	 ldr r3,[r7,#4]
+ 464 0062 9B7A     	 ldrb r3,[r3,#10]
+ 465 0064 002B     	 cmp r3,#0
+ 466 0066 04D0     	 beq .L31
+ 432:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 433:../Libraries/XMCLib/src/xmc1_scu.c ****     irqmask |= (uint32_t)SCU_INTERRUPT_SRMSK_VCLIPI_Msk;
+ 467              	 .loc 1 433 0
+ 468 0068 BB68     	 ldr r3,[r7,#8]
+ 469 006a 8022     	 mov r2,#128
+ 470 006c 9203     	 lsl r2,r2,#14
+ 471 006e 1343     	 orr r3,r2
+ 472 0070 BB60     	 str r3,[r7,#8]
+ 473              	.L31:
+ 434:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 435:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_INTERRUPT->SRMSK |= (uint32_t)irqmask;
+ 474              	 .loc 1 435 0
+ 475 0072 054B     	 ldr r3,.L32+4
+ 476 0074 044A     	 ldr r2,.L32+4
+ 477 0076 5168     	 ldr r1,[r2,#4]
+ 478 0078 BA68     	 ldr r2,[r7,#8]
+ 479 007a 0A43     	 orr r2,r1
+ 480 007c 5A60     	 str r2,[r3,#4]
+ 436:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 481              	 .loc 1 436 0
+ 482 007e BD46     	 mov sp,r7
+ 483 0080 04B0     	 add sp,sp,#16
+ 484              	 
+ 485 0082 80BD     	 pop {r7,pc}
+ 486              	.L33:
+ 487              	 .align 2
+ 488              	.L32:
+ 489 0084 00100140 	 .word 1073811456
+ 490 0088 38000140 	 .word 1073807416
+ 491              	 .cfi_endproc
+ 492              	.LFE67:
+ 494              	 .section .text.XMC_SCU_SetTempLowLimit,"ax",%progbits
+ 495              	 .align 2
+ 496              	 .global XMC_SCU_SetTempLowLimit
+ 497              	 .code 16
+ 498              	 .thumb_func
+ 500              	XMC_SCU_SetTempLowLimit:
+ 501              	.LFB68:
+ 437:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 438:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to program lower temperature limit */
+ 439:../Libraries/XMCLib/src/xmc1_scu.c **** XMC_SCU_STATUS_t XMC_SCU_SetTempLowLimit(uint32_t limit)
+ 440:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 502              	 .loc 1 440 0
+ 503              	 .cfi_startproc
+ 504 0000 80B5     	 push {r7,lr}
+ 505              	.LCFI25:
+ 506              	 .cfi_def_cfa_offset 8
+ 507              	 .cfi_offset 7,-8
+ 508              	 .cfi_offset 14,-4
+ 509 0002 84B0     	 sub sp,sp,#16
+ 510              	.LCFI26:
+ 511              	 .cfi_def_cfa_offset 24
+ 512 0004 00AF     	 add r7,sp,#0
+ 513              	.LCFI27:
+ 514              	 .cfi_def_cfa_register 7
+ 515 0006 7860     	 str r0,[r7,#4]
+ 441:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_STATUS_t status = XMC_SCU_STATUS_OK;
+ 516              	 .loc 1 441 0
+ 517 0008 0F23     	 mov r3,#15
+ 518 000a FB18     	 add r3,r7,r3
+ 519 000c 0022     	 mov r2,#0
+ 520 000e 1A70     	 strb r2,[r3]
+ 442:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 443:../Libraries/XMCLib/src/xmc1_scu.c ****   limit = XMC_SCU_CalcTSEVAR(limit);
+ 521              	 .loc 1 443 0
+ 522 0010 7B68     	 ldr r3,[r7,#4]
+ 523 0012 181C     	 mov r0,r3
+ 524 0014 FFF7FEFF 	 bl XMC_SCU_CalcTSEVAR
+ 525 0018 031C     	 mov r3,r0
+ 526 001a 7B60     	 str r3,[r7,#4]
+ 444:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 445:../Libraries/XMCLib/src/xmc1_scu.c ****   if (limit != 0) 
+ 527              	 .loc 1 445 0
+ 528 001c 7B68     	 ldr r3,[r7,#4]
+ 529 001e 002B     	 cmp r3,#0
+ 530 0020 04D0     	 beq .L35
+ 446:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 447:../Libraries/XMCLib/src/xmc1_scu.c ****     SCU_ANALOG->ANATSEIL = (uint16_t)limit;
+ 531              	 .loc 1 447 0
+ 532 0022 084B     	 ldr r3,.L38
+ 533 0024 7A68     	 ldr r2,[r7,#4]
+ 534 0026 92B2     	 uxth r2,r2
+ 535 0028 9A86     	 strh r2,[r3,#52]
+ 536 002a 03E0     	 b .L36
+ 537              	.L35:
+ 448:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 449:../Libraries/XMCLib/src/xmc1_scu.c ****   else
+ 450:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 451:../Libraries/XMCLib/src/xmc1_scu.c ****     status = XMC_SCU_STATUS_ERROR;
+ 538              	 .loc 1 451 0
+ 539 002c 0F23     	 mov r3,#15
+ 540 002e FB18     	 add r3,r7,r3
+ 541 0030 0122     	 mov r2,#1
+ 542 0032 1A70     	 strb r2,[r3]
+ 543              	.L36:
+ 452:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 453:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 454:../Libraries/XMCLib/src/xmc1_scu.c ****   return (status);
+ 544              	 .loc 1 454 0
+ 545 0034 0F23     	 mov r3,#15
+ 546 0036 FB18     	 add r3,r7,r3
+ 547 0038 1B78     	 ldrb r3,[r3]
+ 455:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 548              	 .loc 1 455 0
+ 549 003a 181C     	 mov r0,r3
+ 550 003c BD46     	 mov sp,r7
+ 551 003e 04B0     	 add sp,sp,#16
+ 552              	 
+ 553 0040 80BD     	 pop {r7,pc}
+ 554              	.L39:
+ 555 0042 C046     	 .align 2
+ 556              	.L38:
+ 557 0044 00100140 	 .word 1073811456
+ 558              	 .cfi_endproc
+ 559              	.LFE68:
+ 561              	 .section .text.XMC_SCU_SetTempHighLimit,"ax",%progbits
+ 562              	 .align 2
+ 563              	 .global XMC_SCU_SetTempHighLimit
+ 564              	 .code 16
+ 565              	 .thumb_func
+ 567              	XMC_SCU_SetTempHighLimit:
+ 568              	.LFB69:
+ 456:../Libraries/XMCLib/src/xmc1_scu.c ****   
+ 457:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to program higher temperature limit */
+ 458:../Libraries/XMCLib/src/xmc1_scu.c **** XMC_SCU_STATUS_t XMC_SCU_SetTempHighLimit(uint32_t limit)
+ 459:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 569              	 .loc 1 459 0
+ 570              	 .cfi_startproc
+ 571 0000 80B5     	 push {r7,lr}
+ 572              	.LCFI28:
+ 573              	 .cfi_def_cfa_offset 8
+ 574              	 .cfi_offset 7,-8
+ 575              	 .cfi_offset 14,-4
+ 576 0002 84B0     	 sub sp,sp,#16
+ 577              	.LCFI29:
+ 578              	 .cfi_def_cfa_offset 24
+ 579 0004 00AF     	 add r7,sp,#0
+ 580              	.LCFI30:
+ 581              	 .cfi_def_cfa_register 7
+ 582 0006 7860     	 str r0,[r7,#4]
+ 460:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_STATUS_t status = XMC_SCU_STATUS_OK;
+ 583              	 .loc 1 460 0
+ 584 0008 0F23     	 mov r3,#15
+ 585 000a FB18     	 add r3,r7,r3
+ 586 000c 0022     	 mov r2,#0
+ 587 000e 1A70     	 strb r2,[r3]
+ 461:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 462:../Libraries/XMCLib/src/xmc1_scu.c ****   limit = XMC_SCU_CalcTSEVAR(limit);
+ 588              	 .loc 1 462 0
+ 589 0010 7B68     	 ldr r3,[r7,#4]
+ 590 0012 181C     	 mov r0,r3
+ 591 0014 FFF7FEFF 	 bl XMC_SCU_CalcTSEVAR
+ 592 0018 031C     	 mov r3,r0
+ 593 001a 7B60     	 str r3,[r7,#4]
+ 463:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 464:../Libraries/XMCLib/src/xmc1_scu.c ****   if (limit != 0) 
+ 594              	 .loc 1 464 0
+ 595 001c 7B68     	 ldr r3,[r7,#4]
+ 596 001e 002B     	 cmp r3,#0
+ 597 0020 04D0     	 beq .L41
+ 465:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 466:../Libraries/XMCLib/src/xmc1_scu.c ****     SCU_ANALOG->ANATSEIH = (uint16_t)limit;
+ 598              	 .loc 1 466 0
+ 599 0022 084B     	 ldr r3,.L44
+ 600 0024 7A68     	 ldr r2,[r7,#4]
+ 601 0026 92B2     	 uxth r2,r2
+ 602 0028 1A86     	 strh r2,[r3,#48]
+ 603 002a 03E0     	 b .L42
+ 604              	.L41:
+ 467:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 468:../Libraries/XMCLib/src/xmc1_scu.c ****   else
+ 469:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 470:../Libraries/XMCLib/src/xmc1_scu.c ****     status = XMC_SCU_STATUS_ERROR;
+ 605              	 .loc 1 470 0
+ 606 002c 0F23     	 mov r3,#15
+ 607 002e FB18     	 add r3,r7,r3
+ 608 0030 0122     	 mov r2,#1
+ 609 0032 1A70     	 strb r2,[r3]
+ 610              	.L42:
+ 471:../Libraries/XMCLib/src/xmc1_scu.c ****   } 
+ 472:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 473:../Libraries/XMCLib/src/xmc1_scu.c ****   return (status);
+ 611              	 .loc 1 473 0
+ 612 0034 0F23     	 mov r3,#15
+ 613 0036 FB18     	 add r3,r7,r3
+ 614 0038 1B78     	 ldrb r3,[r3]
+ 474:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 615              	 .loc 1 474 0
+ 616 003a 181C     	 mov r0,r3
+ 617 003c BD46     	 mov sp,r7
+ 618 003e 04B0     	 add sp,sp,#16
+ 619              	 
+ 620 0040 80BD     	 pop {r7,pc}
+ 621              	.L45:
+ 622 0042 C046     	 .align 2
+ 623              	.L44:
+ 624 0044 00100140 	 .word 1073811456
+ 625              	 .cfi_endproc
+ 626              	.LFE69:
+ 628              	 .section .text.XMC_SCU_SetRawTempLimits,"ax",%progbits
+ 629              	 .align 2
+ 630              	 .global XMC_SCU_SetRawTempLimits
+ 631              	 .code 16
+ 632              	 .thumb_func
+ 634              	XMC_SCU_SetRawTempLimits:
+ 635              	.LFB70:
+ 475:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 476:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to program temperature limits as raw digital values into temperature sensor */
+ 477:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_SetRawTempLimits(const uint32_t lower_temp, const uint32_t upper_temp)
+ 478:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 636              	 .loc 1 478 0
+ 637              	 .cfi_startproc
+ 638 0000 80B5     	 push {r7,lr}
+ 639              	.LCFI31:
+ 640              	 .cfi_def_cfa_offset 8
+ 641              	 .cfi_offset 7,-8
+ 642              	 .cfi_offset 14,-4
+ 643 0002 82B0     	 sub sp,sp,#8
+ 644              	.LCFI32:
+ 645              	 .cfi_def_cfa_offset 16
+ 646 0004 00AF     	 add r7,sp,#0
+ 647              	.LCFI33:
+ 648              	 .cfi_def_cfa_register 7
+ 649 0006 7860     	 str r0,[r7,#4]
+ 650 0008 3960     	 str r1,[r7]
+ 479:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_ANALOG->ANATSEIH = (uint16_t)(upper_temp & SCU_ANALOG_ANATSEIH_TSE_IH_Msk);
+ 651              	 .loc 1 479 0
+ 652 000a 054B     	 ldr r3,.L47
+ 653 000c 3A68     	 ldr r2,[r7]
+ 654 000e 92B2     	 uxth r2,r2
+ 655 0010 1A86     	 strh r2,[r3,#48]
+ 480:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_ANALOG->ANATSEIL = (uint16_t)(lower_temp & SCU_ANALOG_ANATSEIL_TSE_IL_Msk);
+ 656              	 .loc 1 480 0
+ 657 0012 034B     	 ldr r3,.L47
+ 658 0014 7A68     	 ldr r2,[r7,#4]
+ 659 0016 92B2     	 uxth r2,r2
+ 660 0018 9A86     	 strh r2,[r3,#52]
+ 481:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 661              	 .loc 1 481 0
+ 662 001a BD46     	 mov sp,r7
+ 663 001c 02B0     	 add sp,sp,#8
+ 664              	 
+ 665 001e 80BD     	 pop {r7,pc}
+ 666              	.L48:
+ 667              	 .align 2
+ 668              	.L47:
+ 669 0020 00100140 	 .word 1073811456
+ 670              	 .cfi_endproc
+ 671              	.LFE70:
+ 673              	 .section .text.XMC_SCU_StartTempMeasurement,"ax",%progbits
+ 674              	 .align 2
+ 675              	 .global XMC_SCU_StartTempMeasurement
+ 676              	 .code 16
+ 677              	 .thumb_func
+ 679              	XMC_SCU_StartTempMeasurement:
+ 680              	.LFB71:
+ 482:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 483:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to start temperature measurement */
+ 484:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_StartTempMeasurement(void)
+ 485:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 681              	 .loc 1 485 0
+ 682              	 .cfi_startproc
+ 683 0000 80B5     	 push {r7,lr}
+ 684              	.LCFI34:
+ 685              	 .cfi_def_cfa_offset 8
+ 686              	 .cfi_offset 7,-8
+ 687              	 .cfi_offset 14,-4
+ 688 0002 00AF     	 add r7,sp,#0
+ 689              	.LCFI35:
+ 690              	 .cfi_def_cfa_register 7
+ 486:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_ANALOG->ANATSECTRL |= (uint16_t)SCU_ANALOG_ANATSECTRL_TSE_EN_Msk;
+ 691              	 .loc 1 486 0
+ 692 0004 044A     	 ldr r2,.L50
+ 693 0006 044B     	 ldr r3,.L50
+ 694 0008 9B8C     	 ldrh r3,[r3,#36]
+ 695 000a 9BB2     	 uxth r3,r3
+ 696 000c 0121     	 mov r1,#1
+ 697 000e 0B43     	 orr r3,r1
+ 698 0010 9BB2     	 uxth r3,r3
+ 699 0012 9384     	 strh r3,[r2,#36]
+ 487:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 700              	 .loc 1 487 0
+ 701 0014 BD46     	 mov sp,r7
+ 702              	 
+ 703 0016 80BD     	 pop {r7,pc}
+ 704              	.L51:
+ 705              	 .align 2
+ 706              	.L50:
+ 707 0018 00100140 	 .word 1073811456
+ 708              	 .cfi_endproc
+ 709              	.LFE71:
+ 711              	 .section .text.XMC_SCU_StopTempMeasurement,"ax",%progbits
+ 712              	 .align 2
+ 713              	 .global XMC_SCU_StopTempMeasurement
+ 714              	 .code 16
+ 715              	 .thumb_func
+ 717              	XMC_SCU_StopTempMeasurement:
+ 718              	.LFB72:
+ 488:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 489:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to stop temperature measurement */
+ 490:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_StopTempMeasurement(void)
+ 491:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 719              	 .loc 1 491 0
+ 720              	 .cfi_startproc
+ 721 0000 80B5     	 push {r7,lr}
+ 722              	.LCFI36:
+ 723              	 .cfi_def_cfa_offset 8
+ 724              	 .cfi_offset 7,-8
+ 725              	 .cfi_offset 14,-4
+ 726 0002 00AF     	 add r7,sp,#0
+ 727              	.LCFI37:
+ 728              	 .cfi_def_cfa_register 7
+ 492:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_ANALOG->ANATSECTRL &= (uint16_t)~SCU_ANALOG_ANATSECTRL_TSE_EN_Msk;
+ 729              	 .loc 1 492 0
+ 730 0004 044A     	 ldr r2,.L53
+ 731 0006 044B     	 ldr r3,.L53
+ 732 0008 9B8C     	 ldrh r3,[r3,#36]
+ 733 000a 9BB2     	 uxth r3,r3
+ 734 000c 0121     	 mov r1,#1
+ 735 000e 8B43     	 bic r3,r1
+ 736 0010 9BB2     	 uxth r3,r3
+ 737 0012 9384     	 strh r3,[r2,#36]
+ 493:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 738              	 .loc 1 493 0
+ 739 0014 BD46     	 mov sp,r7
+ 740              	 
+ 741 0016 80BD     	 pop {r7,pc}
+ 742              	.L54:
+ 743              	 .align 2
+ 744              	.L53:
+ 745 0018 00100140 	 .word 1073811456
+ 746              	 .cfi_endproc
+ 747              	.LFE72:
+ 749              	 .section .text.XMC_SCU_HighTemperature,"ax",%progbits
+ 750              	 .align 2
+ 751              	 .global XMC_SCU_HighTemperature
+ 752              	 .code 16
+ 753              	 .thumb_func
+ 755              	XMC_SCU_HighTemperature:
+ 756              	.LFB73:
+ 494:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 495:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to check if the temperature has gone past the ceiling */
+ 496:../Libraries/XMCLib/src/xmc1_scu.c **** bool XMC_SCU_HighTemperature(void)
+ 497:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 757              	 .loc 1 497 0
+ 758              	 .cfi_startproc
+ 759 0000 80B5     	 push {r7,lr}
+ 760              	.LCFI38:
+ 761              	 .cfi_def_cfa_offset 8
+ 762              	 .cfi_offset 7,-8
+ 763              	 .cfi_offset 14,-4
+ 764 0002 00AF     	 add r7,sp,#0
+ 765              	.LCFI39:
+ 766              	 .cfi_def_cfa_register 7
+ 498:../Libraries/XMCLib/src/xmc1_scu.c ****   return ((SCU_INTERRUPT->SRRAW & SCU_INTERRUPT_SRRAW_TSE_HIGH_Msk) == SCU_INTERRUPT_SRRAW_TSE_HIGH
+ 767              	 .loc 1 498 0
+ 768 0004 054B     	 ldr r3,.L57
+ 769 0006 1A68     	 ldr r2,[r3]
+ 770 0008 8023     	 mov r3,#128
+ 771 000a DB05     	 lsl r3,r3,#23
+ 772 000c 1340     	 and r3,r2
+ 773 000e 5A1E     	 sub r2,r3,#1
+ 774 0010 9341     	 sbc r3,r3,r2
+ 775 0012 DBB2     	 uxtb r3,r3
+ 499:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 776              	 .loc 1 499 0
+ 777 0014 181C     	 mov r0,r3
+ 778 0016 BD46     	 mov sp,r7
+ 779              	 
+ 780 0018 80BD     	 pop {r7,pc}
+ 781              	.L58:
+ 782 001a C046     	 .align 2
+ 783              	.L57:
+ 784 001c 38000140 	 .word 1073807416
+ 785              	 .cfi_endproc
+ 786              	.LFE73:
+ 788              	 .section .text.XMC_SCU_LowTemperature,"ax",%progbits
+ 789              	 .align 2
+ 790              	 .global XMC_SCU_LowTemperature
+ 791              	 .code 16
+ 792              	 .thumb_func
+ 794              	XMC_SCU_LowTemperature:
+ 795              	.LFB74:
+ 500:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 501:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to check if the temperature is lower than normal */
+ 502:../Libraries/XMCLib/src/xmc1_scu.c **** bool XMC_SCU_LowTemperature(void)
+ 503:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 796              	 .loc 1 503 0
+ 797              	 .cfi_startproc
+ 798 0000 80B5     	 push {r7,lr}
+ 799              	.LCFI40:
+ 800              	 .cfi_def_cfa_offset 8
+ 801              	 .cfi_offset 7,-8
+ 802              	 .cfi_offset 14,-4
+ 803 0002 00AF     	 add r7,sp,#0
+ 804              	.LCFI41:
+ 805              	 .cfi_def_cfa_register 7
+ 504:../Libraries/XMCLib/src/xmc1_scu.c ****   return ((SCU_INTERRUPT->SRRAW & SCU_INTERRUPT_SRRAW_TSE_LOW_Msk) == SCU_INTERRUPT_SRRAW_TSE_LOW_M
+ 806              	 .loc 1 504 0
+ 807 0004 034B     	 ldr r3,.L61
+ 808 0006 1B68     	 ldr r3,[r3]
+ 809 0008 DB0F     	 lsr r3,r3,#31
+ 810 000a DBB2     	 uxtb r3,r3
+ 505:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 811              	 .loc 1 505 0
+ 812 000c 181C     	 mov r0,r3
+ 813 000e BD46     	 mov sp,r7
+ 814              	 
+ 815 0010 80BD     	 pop {r7,pc}
+ 816              	.L62:
+ 817 0012 C046     	 .align 2
+ 818              	.L61:
+ 819 0014 38000140 	 .word 1073807416
+ 820              	 .cfi_endproc
+ 821              	.LFE74:
+ 823              	 .section .text.XMC_SCU_GetTemperature,"ax",%progbits
+ 824              	 .align 2
+ 825              	 .global XMC_SCU_GetTemperature
+ 826              	 .code 16
+ 827              	 .thumb_func
+ 829              	XMC_SCU_GetTemperature:
+ 830              	.LFB75:
+ 506:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 507:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to retrieve the device temperature */
+ 508:../Libraries/XMCLib/src/xmc1_scu.c **** uint32_t XMC_SCU_GetTemperature(void)
+ 509:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 831              	 .loc 1 509 0
+ 832              	 .cfi_startproc
+ 833 0000 80B5     	 push {r7,lr}
+ 834              	.LCFI42:
+ 835              	 .cfi_def_cfa_offset 8
+ 836              	 .cfi_offset 7,-8
+ 837              	 .cfi_offset 14,-4
+ 838 0002 82B0     	 sub sp,sp,#8
+ 839              	.LCFI43:
+ 840              	 .cfi_def_cfa_offset 16
+ 841 0004 00AF     	 add r7,sp,#0
+ 842              	.LCFI44:
+ 843              	 .cfi_def_cfa_register 7
+ 510:../Libraries/XMCLib/src/xmc1_scu.c ****   uint32_t temperature;
+ 511:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 512:../Libraries/XMCLib/src/xmc1_scu.c ****   temperature = (uint32_t)(SCU_ANALOG->ANATSEMON);
+ 844              	 .loc 1 512 0
+ 845 0006 054A     	 ldr r2,.L65
+ 846 0008 4023     	 mov r3,#64
+ 847 000a D35A     	 ldrh r3,[r2,r3]
+ 848 000c 9BB2     	 uxth r3,r3
+ 849 000e 7B60     	 str r3,[r7,#4]
+ 513:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 514:../Libraries/XMCLib/src/xmc1_scu.c ****   return (temperature);
+ 850              	 .loc 1 514 0
+ 851 0010 7B68     	 ldr r3,[r7,#4]
+ 515:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 852              	 .loc 1 515 0
+ 853 0012 181C     	 mov r0,r3
+ 854 0014 BD46     	 mov sp,r7
+ 855 0016 02B0     	 add sp,sp,#8
+ 856              	 
+ 857 0018 80BD     	 pop {r7,pc}
+ 858              	.L66:
+ 859 001a C046     	 .align 2
+ 860              	.L65:
+ 861 001c 00100140 	 .word 1073811456
+ 862              	 .cfi_endproc
+ 863              	.LFE75:
+ 865              	 .section .text.XMC_SCU_CalcTemperature,"ax",%progbits
+ 866              	 .align 2
+ 867              	 .global XMC_SCU_CalcTemperature
+ 868              	 .code 16
+ 869              	 .thumb_func
+ 871              	XMC_SCU_CalcTemperature:
+ 872              	.LFB76:
+ 516:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 517:../Libraries/XMCLib/src/xmc1_scu.c **** /* Calculates the die temperature value using ROM function */
+ 518:../Libraries/XMCLib/src/xmc1_scu.c **** uint32_t XMC_SCU_CalcTemperature(void)
+ 519:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 873              	 .loc 1 519 0
+ 874              	 .cfi_startproc
+ 875 0000 80B5     	 push {r7,lr}
+ 876              	.LCFI45:
+ 877              	 .cfi_def_cfa_offset 8
+ 878              	 .cfi_offset 7,-8
+ 879              	 .cfi_offset 14,-4
+ 880 0002 00AF     	 add r7,sp,#0
+ 881              	.LCFI46:
+ 882              	 .cfi_def_cfa_register 7
+ 520:../Libraries/XMCLib/src/xmc1_scu.c ****   return (ROM_CalcTemperature());
+ 883              	 .loc 1 520 0
+ 884 0004 8623     	 mov r3,#134
+ 885 0006 5B00     	 lsl r3,r3,#1
+ 886 0008 1B68     	 ldr r3,[r3]
+ 887 000a 9847     	 blx r3
+ 888 000c 031C     	 mov r3,r0
+ 521:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 889              	 .loc 1 521 0
+ 890 000e 181C     	 mov r0,r3
+ 891 0010 BD46     	 mov sp,r7
+ 892              	 
+ 893 0012 80BD     	 pop {r7,pc}
+ 894              	 .cfi_endproc
+ 895              	.LFE76:
+ 897              	 .section .text.XMC_SCU_CLOCK_Init,"ax",%progbits
+ 898              	 .align 2
+ 899              	 .global XMC_SCU_CLOCK_Init
+ 900              	 .code 16
+ 901              	 .thumb_func
+ 903              	XMC_SCU_CLOCK_Init:
+ 904              	.LFB77:
+ 522:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 523:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 524:../Libraries/XMCLib/src/xmc1_scu.c **** /* API which initializes the clock tree ofthe device */
+ 525:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_CLOCK_Init(const XMC_SCU_CLOCK_CONFIG_t *const config)
+ 526:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 905              	 .loc 1 526 0
+ 906              	 .cfi_startproc
+ 907 0000 80B5     	 push {r7,lr}
+ 908              	.LCFI47:
+ 909              	 .cfi_def_cfa_offset 8
+ 910              	 .cfi_offset 7,-8
+ 911              	 .cfi_offset 14,-4
+ 912 0002 82B0     	 sub sp,sp,#8
+ 913              	.LCFI48:
+ 914              	 .cfi_def_cfa_offset 16
+ 915 0004 00AF     	 add r7,sp,#0
+ 916              	.LCFI49:
+ 917              	 .cfi_def_cfa_register 7
+ 918 0006 7860     	 str r0,[r7,#4]
+ 527:../Libraries/XMCLib/src/xmc1_scu.c ****   /* Remove protection */
+ 528:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_UnlockProtectedBits();
+ 919              	 .loc 1 528 0
+ 920 0008 FFF7FEFF 	 bl XMC_SCU_UnlockProtectedBits
+ 529:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 530:../Libraries/XMCLib/src/xmc1_scu.c **** #if (UC_SERIES == XMC14)
+ 531:../Libraries/XMCLib/src/xmc1_scu.c ****   /* OSCHP source selection - OSC mode */
+ 532:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 533:../Libraries/XMCLib/src/xmc1_scu.c ****   if (config->oschp_mode != XMC_SCU_CLOCK_OSCHP_MODE_DISABLED)
+ 534:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 535:../Libraries/XMCLib/src/xmc1_scu.c ****     if (OSCHP_GetFrequency() > 20000000U)
+ 536:../Libraries/XMCLib/src/xmc1_scu.c ****     {
+ 537:../Libraries/XMCLib/src/xmc1_scu.c ****       SCU_ANALOG->ANAOSCHPCTRL |= (uint16_t)SCU_ANALOG_ANAOSCHPCTRL_HYSCTRL_Msk;
+ 538:../Libraries/XMCLib/src/xmc1_scu.c ****     }
+ 539:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 540:../Libraries/XMCLib/src/xmc1_scu.c ****     SCU_ANALOG->ANAOSCHPCTRL = (uint16_t)(SCU_ANALOG->ANAOSCHPCTRL & ~(SCU_ANALOG_ANAOSCHPCTRL_SHBY
+ 541:../Libraries/XMCLib/src/xmc1_scu.c ****                                config->oschp_mode;
+ 542:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 543:../Libraries/XMCLib/src/xmc1_scu.c ****     do
+ 544:../Libraries/XMCLib/src/xmc1_scu.c ****     {
+ 545:../Libraries/XMCLib/src/xmc1_scu.c ****       /* Restart OSC_HP oscillator watchdog */
+ 546:../Libraries/XMCLib/src/xmc1_scu.c ****       SCU_INTERRUPT->SRCLR1 = SCU_INTERRUPT_SRCLR1_LOECI_Msk;
+ 547:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 548:../Libraries/XMCLib/src/xmc1_scu.c ****       /* Enable OSC_HP oscillator watchdog*/
+ 549:../Libraries/XMCLib/src/xmc1_scu.c ****       SCU_CLK->OSCCSR &= ~SCU_CLK_OSCCSR_XOWDEN_Msk;
+ 550:../Libraries/XMCLib/src/xmc1_scu.c ****       SCU_CLK->OSCCSR |= SCU_CLK_OSCCSR_XOWDEN_Msk;
+ 551:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 552:../Libraries/XMCLib/src/xmc1_scu.c ****       /* Wait a few DCO2 cycles for the update of the clock detection result */
+ 553:../Libraries/XMCLib/src/xmc1_scu.c ****       delay(2500);
+ 554:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 555:../Libraries/XMCLib/src/xmc1_scu.c ****       /* check clock is ok */
+ 556:../Libraries/XMCLib/src/xmc1_scu.c ****     }
+ 557:../Libraries/XMCLib/src/xmc1_scu.c ****     while(SCU_INTERRUPT->SRRAW1 & SCU_INTERRUPT_SRRAW1_LOECI_Msk);
+ 558:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 559:../Libraries/XMCLib/src/xmc1_scu.c ****   else /* (config->oschp_mode == XMC_SCU_CLOCK_OSCHP_MODE_DISABLED) */
+ 560:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 561:../Libraries/XMCLib/src/xmc1_scu.c ****     SCU_ANALOG->ANAOSCHPCTRL |= SCU_ANALOG_ANAOSCHPCTRL_MODE_Msk;
+ 562:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 563:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 564:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_ANALOG->ANAOSCLPCTRL = (uint16_t)config->osclp_mode;
+ 565:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 566:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_CLK->CLKCR1 = (SCU_CLK->CLKCR1 & ~SCU_CLK_CLKCR1_DCLKSEL_Msk) |
+ 567:../Libraries/XMCLib/src/xmc1_scu.c ****                     config->dclk_src;
+ 568:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 569:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 570:../Libraries/XMCLib/src/xmc1_scu.c ****   /* Update PCLK selection mux. */
+ 571:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_CLK->CLKCR = (SCU_CLK->CLKCR & (uint32_t)~(SCU_CLK_CLKCR_PCLKSEL_Msk | SCU_CLK_CLKCR_RTCCLKSE
+ 921              	 .loc 1 571 0
+ 922 000c 0C4A     	 ldr r2,.L70
+ 923 000e 0C4B     	 ldr r3,.L70
+ 924 0010 1B68     	 ldr r3,[r3]
+ 925 0012 0C49     	 ldr r1,.L70+4
+ 926 0014 1940     	 and r1,r3
+ 572:../Libraries/XMCLib/src/xmc1_scu.c ****                    config->rtc_src |
+ 927              	 .loc 1 572 0
+ 928 0016 7B68     	 ldr r3,[r7,#4]
+ 929 0018 9B68     	 ldr r3,[r3,#8]
+ 571:../Libraries/XMCLib/src/xmc1_scu.c ****                    config->rtc_src |
+ 930              	 .loc 1 571 0
+ 931 001a 1943     	 orr r1,r3
+ 573:../Libraries/XMCLib/src/xmc1_scu.c ****                    config->pclk_src;
+ 932              	 .loc 1 573 0
+ 933 001c 7B68     	 ldr r3,[r7,#4]
+ 934 001e 5B68     	 ldr r3,[r3,#4]
+ 572:../Libraries/XMCLib/src/xmc1_scu.c ****                    config->rtc_src |
+ 935              	 .loc 1 572 0
+ 936 0020 0B43     	 orr r3,r1
+ 571:../Libraries/XMCLib/src/xmc1_scu.c ****                    config->rtc_src |
+ 937              	 .loc 1 571 0
+ 938 0022 1360     	 str r3,[r2]
+ 574:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 575:../Libraries/XMCLib/src/xmc1_scu.c ****   /* Close the lock opened above. */
+ 576:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_LockProtectedBits();
+ 939              	 .loc 1 576 0
+ 940 0024 FFF7FEFF 	 bl XMC_SCU_LockProtectedBits
+ 577:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 578:../Libraries/XMCLib/src/xmc1_scu.c ****   /* Update the dividers now */
+ 579:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_CLOCK_ScaleMCLKFrequency(config->idiv, config->fdiv);
+ 941              	 .loc 1 579 0
+ 942 0028 7B68     	 ldr r3,[r7,#4]
+ 943 002a 5B78     	 ldrb r3,[r3,#1]
+ 944 002c 1A1C     	 mov r2,r3
+ 945 002e 7B68     	 ldr r3,[r7,#4]
+ 946 0030 1B78     	 ldrb r3,[r3]
+ 947 0032 101C     	 mov r0,r2
+ 948 0034 191C     	 mov r1,r3
+ 949 0036 FFF7FEFF 	 bl XMC_SCU_CLOCK_ScaleMCLKFrequency
+ 580:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 581:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 950              	 .loc 1 581 0
+ 951 003a BD46     	 mov sp,r7
+ 952 003c 02B0     	 add sp,sp,#8
+ 953              	 
+ 954 003e 80BD     	 pop {r7,pc}
+ 955              	.L71:
+ 956              	 .align 2
+ 957              	.L70:
+ 958 0040 00030140 	 .word 1073808128
+ 959 0044 FFFFF0FF 	 .word -983041
+ 960              	 .cfi_endproc
+ 961              	.LFE77:
+ 963              	 .section .text.XMC_SCU_CLOCK_SetRtcClockSource,"ax",%progbits
+ 964              	 .align 2
+ 965              	 .global XMC_SCU_CLOCK_SetRtcClockSource
+ 966              	 .code 16
+ 967              	 .thumb_func
+ 969              	XMC_SCU_CLOCK_SetRtcClockSource:
+ 970              	.LFB78:
+ 582:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 583:../Libraries/XMCLib/src/xmc1_scu.c **** /* API which selects one of the available parent clock nodes for a given child clock node */
+ 584:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_CLOCK_SetRtcClockSource(const XMC_SCU_CLOCK_RTCCLKSRC_t source)
+ 585:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 971              	 .loc 1 585 0
+ 972              	 .cfi_startproc
+ 973 0000 80B5     	 push {r7,lr}
+ 974              	.LCFI50:
+ 975              	 .cfi_def_cfa_offset 8
+ 976              	 .cfi_offset 7,-8
+ 977              	 .cfi_offset 14,-4
+ 978 0002 82B0     	 sub sp,sp,#8
+ 979              	.LCFI51:
+ 980              	 .cfi_def_cfa_offset 16
+ 981 0004 00AF     	 add r7,sp,#0
+ 982              	.LCFI52:
+ 983              	 .cfi_def_cfa_register 7
+ 984 0006 7860     	 str r0,[r7,#4]
+ 586:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_ASSERT("XMC_SCU_CLOCK_SetRtcSourceClock:Wrong Parent Clock", XMC_SCU_CHECK_RTCCLKSRC(source))
+ 587:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 588:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_UnlockProtectedBits();
+ 985              	 .loc 1 588 0
+ 986 0008 FFF7FEFF 	 bl XMC_SCU_UnlockProtectedBits
+ 589:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 590:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_CLK->CLKCR = (SCU_CLK->CLKCR & (uint32_t)~SCU_CLK_CLKCR_RTCCLKSEL_Msk) |
+ 987              	 .loc 1 590 0
+ 988 000c 064B     	 ldr r3,.L73
+ 989 000e 064A     	 ldr r2,.L73
+ 990 0010 1268     	 ldr r2,[r2]
+ 991 0012 0649     	 ldr r1,.L73+4
+ 992 0014 1140     	 and r1,r2
+ 993 0016 7A68     	 ldr r2,[r7,#4]
+ 994 0018 0A43     	 orr r2,r1
+ 995 001a 1A60     	 str r2,[r3]
+ 591:../Libraries/XMCLib/src/xmc1_scu.c ****                    source;
+ 592:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 593:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_LockProtectedBits();
+ 996              	 .loc 1 593 0
+ 997 001c FFF7FEFF 	 bl XMC_SCU_LockProtectedBits
+ 594:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 998              	 .loc 1 594 0
+ 999 0020 BD46     	 mov sp,r7
+ 1000 0022 02B0     	 add sp,sp,#8
+ 1001              	 
+ 1002 0024 80BD     	 pop {r7,pc}
+ 1003              	.L74:
+ 1004 0026 C046     	 .align 2
+ 1005              	.L73:
+ 1006 0028 00030140 	 .word 1073808128
+ 1007 002c FFFFF1FF 	 .word -917505
+ 1008              	 .cfi_endproc
+ 1009              	.LFE78:
+ 1011              	 .section .text.XMC_SCU_CLOCK_SetFastPeripheralClockSource,"ax",%progbits
+ 1012              	 .align 2
+ 1013              	 .global XMC_SCU_CLOCK_SetFastPeripheralClockSource
+ 1014              	 .code 16
+ 1015              	 .thumb_func
+ 1017              	XMC_SCU_CLOCK_SetFastPeripheralClockSource:
+ 1018              	.LFB79:
+ 595:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 596:../Libraries/XMCLib/src/xmc1_scu.c **** /* API to program the divider placed between fperiph and its parent */
+ 597:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_CLOCK_SetFastPeripheralClockSource(const XMC_SCU_CLOCK_PCLKSRC_t source)
+ 598:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1019              	 .loc 1 598 0
+ 1020              	 .cfi_startproc
+ 1021 0000 80B5     	 push {r7,lr}
+ 1022              	.LCFI53:
+ 1023              	 .cfi_def_cfa_offset 8
+ 1024              	 .cfi_offset 7,-8
+ 1025              	 .cfi_offset 14,-4
+ 1026 0002 82B0     	 sub sp,sp,#8
+ 1027              	.LCFI54:
+ 1028              	 .cfi_def_cfa_offset 16
+ 1029 0004 00AF     	 add r7,sp,#0
+ 1030              	.LCFI55:
+ 1031              	 .cfi_def_cfa_register 7
+ 1032 0006 7860     	 str r0,[r7,#4]
+ 599:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_UnlockProtectedBits();
+ 1033              	 .loc 1 599 0
+ 1034 0008 FFF7FEFF 	 bl XMC_SCU_UnlockProtectedBits
+ 600:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 601:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_CLK->CLKCR = (SCU_CLK->CLKCR & (uint32_t)~SCU_CLK_CLKCR_PCLKSEL_Msk) |
+ 1035              	 .loc 1 601 0
+ 1036 000c 064B     	 ldr r3,.L76
+ 1037 000e 064A     	 ldr r2,.L76
+ 1038 0010 1268     	 ldr r2,[r2]
+ 1039 0012 0649     	 ldr r1,.L76+4
+ 1040 0014 1140     	 and r1,r2
+ 1041 0016 7A68     	 ldr r2,[r7,#4]
+ 1042 0018 0A43     	 orr r2,r1
+ 1043 001a 1A60     	 str r2,[r3]
+ 602:../Libraries/XMCLib/src/xmc1_scu.c ****                    source;
+ 603:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 604:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_LockProtectedBits();
+ 1044              	 .loc 1 604 0
+ 1045 001c FFF7FEFF 	 bl XMC_SCU_LockProtectedBits
+ 605:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1046              	 .loc 1 605 0
+ 1047 0020 BD46     	 mov sp,r7
+ 1048 0022 02B0     	 add sp,sp,#8
+ 1049              	 
+ 1050 0024 80BD     	 pop {r7,pc}
+ 1051              	.L77:
+ 1052 0026 C046     	 .align 2
+ 1053              	.L76:
+ 1054 0028 00030140 	 .word 1073808128
+ 1055 002c FFFFFEFF 	 .word -65537
+ 1056              	 .cfi_endproc
+ 1057              	.LFE79:
+ 1059              	 .section .text.XMC_SCU_CLOCK_GatePeripheralClock,"ax",%progbits
+ 1060              	 .align 2
+ 1061              	 .global XMC_SCU_CLOCK_GatePeripheralClock
+ 1062              	 .code 16
+ 1063              	 .thumb_func
+ 1065              	XMC_SCU_CLOCK_GatePeripheralClock:
+ 1066              	.LFB80:
+ 606:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 607:../Libraries/XMCLib/src/xmc1_scu.c **** /* API which gates a clock node at its source */
+ 608:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_CLOCK_GatePeripheralClock(const XMC_SCU_PERIPHERAL_CLOCK_t peripheral)
+ 609:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1067              	 .loc 1 609 0
+ 1068              	 .cfi_startproc
+ 1069 0000 80B5     	 push {r7,lr}
+ 1070              	.LCFI56:
+ 1071              	 .cfi_def_cfa_offset 8
+ 1072              	 .cfi_offset 7,-8
+ 1073              	 .cfi_offset 14,-4
+ 1074 0002 82B0     	 sub sp,sp,#8
+ 1075              	.LCFI57:
+ 1076              	 .cfi_def_cfa_offset 16
+ 1077 0004 00AF     	 add r7,sp,#0
+ 1078              	.LCFI58:
+ 1079              	 .cfi_def_cfa_register 7
+ 1080 0006 021C     	 mov r2,r0
+ 1081 0008 BB1D     	 add r3,r7,#6
+ 1082 000a 1A80     	 strh r2,[r3]
+ 610:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_UnlockProtectedBits();
+ 1083              	 .loc 1 610 0
+ 1084 000c FFF7FEFF 	 bl XMC_SCU_UnlockProtectedBits
+ 611:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_CLK->CGATSET0 |= (uint32_t)peripheral;
+ 1085              	 .loc 1 611 0
+ 1086 0010 054B     	 ldr r3,.L79
+ 1087 0012 054A     	 ldr r2,.L79
+ 1088 0014 D168     	 ldr r1,[r2,#12]
+ 1089 0016 BA1D     	 add r2,r7,#6
+ 1090 0018 1288     	 ldrh r2,[r2]
+ 1091 001a 0A43     	 orr r2,r1
+ 1092 001c DA60     	 str r2,[r3,#12]
+ 612:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_LockProtectedBits();
+ 1093              	 .loc 1 612 0
+ 1094 001e FFF7FEFF 	 bl XMC_SCU_LockProtectedBits
+ 613:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1095              	 .loc 1 613 0
+ 1096 0022 BD46     	 mov sp,r7
+ 1097 0024 02B0     	 add sp,sp,#8
+ 1098              	 
+ 1099 0026 80BD     	 pop {r7,pc}
+ 1100              	.L80:
+ 1101              	 .align 2
+ 1102              	.L79:
+ 1103 0028 00030140 	 .word 1073808128
+ 1104              	 .cfi_endproc
+ 1105              	.LFE80:
+ 1107              	 .section .text.XMC_SCU_CLOCK_UngatePeripheralClock,"ax",%progbits
+ 1108              	 .align 2
+ 1109              	 .global XMC_SCU_CLOCK_UngatePeripheralClock
+ 1110              	 .code 16
+ 1111              	 .thumb_func
+ 1113              	XMC_SCU_CLOCK_UngatePeripheralClock:
+ 1114              	.LFB81:
+ 614:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 615:../Libraries/XMCLib/src/xmc1_scu.c **** /* API which ungates a clock note at its source */
+ 616:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_CLOCK_UngatePeripheralClock(const XMC_SCU_PERIPHERAL_CLOCK_t peripheral)
+ 617:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1115              	 .loc 1 617 0
+ 1116              	 .cfi_startproc
+ 1117 0000 80B5     	 push {r7,lr}
+ 1118              	.LCFI59:
+ 1119              	 .cfi_def_cfa_offset 8
+ 1120              	 .cfi_offset 7,-8
+ 1121              	 .cfi_offset 14,-4
+ 1122 0002 82B0     	 sub sp,sp,#8
+ 1123              	.LCFI60:
+ 1124              	 .cfi_def_cfa_offset 16
+ 1125 0004 00AF     	 add r7,sp,#0
+ 1126              	.LCFI61:
+ 1127              	 .cfi_def_cfa_register 7
+ 1128 0006 021C     	 mov r2,r0
+ 1129 0008 BB1D     	 add r3,r7,#6
+ 1130 000a 1A80     	 strh r2,[r3]
+ 618:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_UnlockProtectedBits();
+ 1131              	 .loc 1 618 0
+ 1132 000c FFF7FEFF 	 bl XMC_SCU_UnlockProtectedBits
+ 619:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_CLK->CGATCLR0 |= (uint32_t)peripheral;
+ 1133              	 .loc 1 619 0
+ 1134 0010 094B     	 ldr r3,.L83
+ 1135 0012 094A     	 ldr r2,.L83
+ 1136 0014 1169     	 ldr r1,[r2,#16]
+ 1137 0016 BA1D     	 add r2,r7,#6
+ 1138 0018 1288     	 ldrh r2,[r2]
+ 1139 001a 0A43     	 orr r2,r1
+ 1140 001c 1A61     	 str r2,[r3,#16]
+ 620:../Libraries/XMCLib/src/xmc1_scu.c ****   while ((SCU_CLK->CLKCR) & SCU_CLK_CLKCR_VDDC2LOW_Msk)
+ 1141              	 .loc 1 620 0
+ 1142 001e C046     	 mov r8,r8
+ 1143              	.L82:
+ 1144              	 .loc 1 620 0 is_stmt 0 discriminator 1
+ 1145 0020 054B     	 ldr r3,.L83
+ 1146 0022 1A68     	 ldr r2,[r3]
+ 1147 0024 8023     	 mov r3,#128
+ 1148 0026 DB05     	 lsl r3,r3,#23
+ 1149 0028 1340     	 and r3,r2
+ 1150 002a F9D1     	 bne .L82
+ 621:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 622:../Libraries/XMCLib/src/xmc1_scu.c ****     /* Wait voltage suply stabilization */
+ 623:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 624:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_LockProtectedBits();
+ 1151              	 .loc 1 624 0 is_stmt 1
+ 1152 002c FFF7FEFF 	 bl XMC_SCU_LockProtectedBits
+ 625:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1153              	 .loc 1 625 0
+ 1154 0030 BD46     	 mov sp,r7
+ 1155 0032 02B0     	 add sp,sp,#8
+ 1156              	 
+ 1157 0034 80BD     	 pop {r7,pc}
+ 1158              	.L84:
+ 1159 0036 C046     	 .align 2
+ 1160              	.L83:
+ 1161 0038 00030140 	 .word 1073808128
+ 1162              	 .cfi_endproc
+ 1163              	.LFE81:
+ 1165              	 .section .text.XMC_SCU_CLOCK_IsPeripheralClockGated,"ax",%progbits
+ 1166              	 .align 2
+ 1167              	 .global XMC_SCU_CLOCK_IsPeripheralClockGated
+ 1168              	 .code 16
+ 1169              	 .thumb_func
+ 1171              	XMC_SCU_CLOCK_IsPeripheralClockGated:
+ 1172              	.LFB82:
+ 626:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 627:../Libraries/XMCLib/src/xmc1_scu.c **** /* Checks the status of peripheral clock gating */
+ 628:../Libraries/XMCLib/src/xmc1_scu.c **** bool XMC_SCU_CLOCK_IsPeripheralClockGated(const XMC_SCU_PERIPHERAL_CLOCK_t peripheral)
+ 629:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1173              	 .loc 1 629 0
+ 1174              	 .cfi_startproc
+ 1175 0000 80B5     	 push {r7,lr}
+ 1176              	.LCFI62:
+ 1177              	 .cfi_def_cfa_offset 8
+ 1178              	 .cfi_offset 7,-8
+ 1179              	 .cfi_offset 14,-4
+ 1180 0002 82B0     	 sub sp,sp,#8
+ 1181              	.LCFI63:
+ 1182              	 .cfi_def_cfa_offset 16
+ 1183 0004 00AF     	 add r7,sp,#0
+ 1184              	.LCFI64:
+ 1185              	 .cfi_def_cfa_register 7
+ 1186 0006 021C     	 mov r2,r0
+ 1187 0008 BB1D     	 add r3,r7,#6
+ 1188 000a 1A80     	 strh r2,[r3]
+ 630:../Libraries/XMCLib/src/xmc1_scu.c ****   return (bool)((SCU_CLK->CGATSTAT0 & peripheral) != 0);
+ 1189              	 .loc 1 630 0
+ 1190 000c 054B     	 ldr r3,.L87
+ 1191 000e 9B68     	 ldr r3,[r3,#8]
+ 1192 0010 BA1D     	 add r2,r7,#6
+ 1193 0012 1288     	 ldrh r2,[r2]
+ 1194 0014 1340     	 and r3,r2
+ 1195 0016 5A1E     	 sub r2,r3,#1
+ 1196 0018 9341     	 sbc r3,r3,r2
+ 1197 001a DBB2     	 uxtb r3,r3
+ 631:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1198              	 .loc 1 631 0
+ 1199 001c 181C     	 mov r0,r3
+ 1200 001e BD46     	 mov sp,r7
+ 1201 0020 02B0     	 add sp,sp,#8
+ 1202              	 
+ 1203 0022 80BD     	 pop {r7,pc}
+ 1204              	.L88:
+ 1205              	 .align 2
+ 1206              	.L87:
+ 1207 0024 00030140 	 .word 1073808128
+ 1208              	 .cfi_endproc
+ 1209              	.LFE82:
+ 1211              	 .global __aeabi_uidiv
+ 1212              	 .section .text.XMC_SCU_CLOCK_SetMCLKFrequency,"ax",%progbits
+ 1213              	 .align 2
+ 1214              	 .global XMC_SCU_CLOCK_SetMCLKFrequency
+ 1215              	 .code 16
+ 1216              	 .thumb_func
+ 1218              	XMC_SCU_CLOCK_SetMCLKFrequency:
+ 1219              	.LFB83:
+ 632:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 633:../Libraries/XMCLib/src/xmc1_scu.c **** /* This API configures main clock (MCLK) frequency to requested frequency value. */
+ 634:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_CLOCK_SetMCLKFrequency(uint32_t freq_khz)
+ 635:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1220              	 .loc 1 635 0
+ 1221              	 .cfi_startproc
+ 1222 0000 80B5     	 push {r7,lr}
+ 1223              	.LCFI65:
+ 1224              	 .cfi_def_cfa_offset 8
+ 1225              	 .cfi_offset 7,-8
+ 1226              	 .cfi_offset 14,-4
+ 1227 0002 86B0     	 sub sp,sp,#24
+ 1228              	.LCFI66:
+ 1229              	 .cfi_def_cfa_offset 32
+ 1230 0004 00AF     	 add r7,sp,#0
+ 1231              	.LCFI67:
+ 1232              	 .cfi_def_cfa_register 7
+ 1233 0006 7860     	 str r0,[r7,#4]
+ 636:../Libraries/XMCLib/src/xmc1_scu.c ****   uint32_t ratio;
+ 637:../Libraries/XMCLib/src/xmc1_scu.c ****   uint32_t ratio_int;
+ 638:../Libraries/XMCLib/src/xmc1_scu.c ****   uint32_t ratio_frac;
+ 639:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 640:../Libraries/XMCLib/src/xmc1_scu.c **** #if UC_SERIES == XMC14
+ 641:../Libraries/XMCLib/src/xmc1_scu.c ****   if (((SCU_CLK->CLKCR1) & SCU_CLK_CLKCR1_DCLKSEL_Msk) == 0U)
+ 642:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 643:../Libraries/XMCLib/src/xmc1_scu.c ****      ratio = DCO1_DIV2_FREQUENCY_KHZ_Q22_10 / freq_khz;
+ 644:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 645:../Libraries/XMCLib/src/xmc1_scu.c ****   else
+ 646:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 647:../Libraries/XMCLib/src/xmc1_scu.c ****      ratio = ((OSCHP_GetFrequency() / 1000U) << 10U) / freq_khz;
+ 648:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 649:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 650:../Libraries/XMCLib/src/xmc1_scu.c ****   /* Manage overflow */
+ 651:../Libraries/XMCLib/src/xmc1_scu.c ****   if (ratio > 0xffffffU)
+ 652:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 653:../Libraries/XMCLib/src/xmc1_scu.c ****     ratio = 0xffffffU;
+ 654:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 655:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 656:../Libraries/XMCLib/src/xmc1_scu.c ****   ratio_int = ratio >> 10U;
+ 657:../Libraries/XMCLib/src/xmc1_scu.c ****   ratio_frac = ratio & 0x3ffU;
+ 658:../Libraries/XMCLib/src/xmc1_scu.c **** #else
+ 659:../Libraries/XMCLib/src/xmc1_scu.c ****     ratio = DCO1_DIV2_FREQUENCY_KHZ_Q24_8 / freq_khz;
+ 1234              	 .loc 1 659 0
+ 1235 0008 FA23     	 mov r3,#250
+ 1236 000a D803     	 lsl r0,r3,#15
+ 1237 000c 7968     	 ldr r1,[r7,#4]
+ 1238 000e FFF7FEFF 	 bl __aeabi_uidiv
+ 1239 0012 031C     	 mov r3,r0
+ 1240 0014 7B61     	 str r3,[r7,#20]
+ 660:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 661:../Libraries/XMCLib/src/xmc1_scu.c ****   /* Manage overflow */
+ 662:../Libraries/XMCLib/src/xmc1_scu.c ****   if (ratio > 0xffffU)
+ 1241              	 .loc 1 662 0
+ 1242 0016 7B69     	 ldr r3,[r7,#20]
+ 1243 0018 0A4A     	 ldr r2,.L91
+ 1244 001a 9342     	 cmp r3,r2
+ 1245 001c 01D9     	 bls .L90
+ 663:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 664:../Libraries/XMCLib/src/xmc1_scu.c ****     ratio = 0xffffU;
+ 1246              	 .loc 1 664 0
+ 1247 001e 094B     	 ldr r3,.L91
+ 1248 0020 7B61     	 str r3,[r7,#20]
+ 1249              	.L90:
+ 665:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 666:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 667:../Libraries/XMCLib/src/xmc1_scu.c ****   ratio_int = ratio >> 8U;
+ 1250              	 .loc 1 667 0
+ 1251 0022 7B69     	 ldr r3,[r7,#20]
+ 1252 0024 1B0A     	 lsr r3,r3,#8
+ 1253 0026 3B61     	 str r3,[r7,#16]
+ 668:../Libraries/XMCLib/src/xmc1_scu.c ****   ratio_frac = ratio & 0xffU;
+ 1254              	 .loc 1 668 0
+ 1255 0028 7B69     	 ldr r3,[r7,#20]
+ 1256 002a FF22     	 mov r2,#255
+ 1257 002c 1340     	 and r3,r2
+ 1258 002e FB60     	 str r3,[r7,#12]
+ 669:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 670:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 671:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_CLOCK_ScaleMCLKFrequency(ratio_int, ratio_frac);
+ 1259              	 .loc 1 671 0
+ 1260 0030 3A69     	 ldr r2,[r7,#16]
+ 1261 0032 FB68     	 ldr r3,[r7,#12]
+ 1262 0034 101C     	 mov r0,r2
+ 1263 0036 191C     	 mov r1,r3
+ 1264 0038 FFF7FEFF 	 bl XMC_SCU_CLOCK_ScaleMCLKFrequency
+ 672:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1265              	 .loc 1 672 0
+ 1266 003c BD46     	 mov sp,r7
+ 1267 003e 06B0     	 add sp,sp,#24
+ 1268              	 
+ 1269 0040 80BD     	 pop {r7,pc}
+ 1270              	.L92:
+ 1271 0042 C046     	 .align 2
+ 1272              	.L91:
+ 1273 0044 FFFF0000 	 .word 65535
+ 1274              	 .cfi_endproc
+ 1275              	.LFE83:
+ 1277              	 .section .text.XMC_SCU_CLOCK_ScaleMCLKFrequency,"ax",%progbits
+ 1278              	 .align 2
+ 1279              	 .global XMC_SCU_CLOCK_ScaleMCLKFrequency
+ 1280              	 .code 16
+ 1281              	 .thumb_func
+ 1283              	XMC_SCU_CLOCK_ScaleMCLKFrequency:
+ 1284              	.LFB84:
+ 673:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 674:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 675:../Libraries/XMCLib/src/xmc1_scu.c **** /* A utility routine which updates the fractional dividers in steps */
+ 676:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_CLOCK_ScaleMCLKFrequency(uint32_t idiv, uint32_t fdiv)
+ 677:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1285              	 .loc 1 677 0
+ 1286              	 .cfi_startproc
+ 1287 0000 80B5     	 push {r7,lr}
+ 1288              	.LCFI68:
+ 1289              	 .cfi_def_cfa_offset 8
+ 1290              	 .cfi_offset 7,-8
+ 1291              	 .cfi_offset 14,-4
+ 1292 0002 84B0     	 sub sp,sp,#16
+ 1293              	.LCFI69:
+ 1294              	 .cfi_def_cfa_offset 24
+ 1295 0004 00AF     	 add r7,sp,#0
+ 1296              	.LCFI70:
+ 1297              	 .cfi_def_cfa_register 7
+ 1298 0006 7860     	 str r0,[r7,#4]
+ 1299 0008 3960     	 str r1,[r7]
+ 678:../Libraries/XMCLib/src/xmc1_scu.c ****   /* Find out current and target value of idiv */
+ 679:../Libraries/XMCLib/src/xmc1_scu.c ****   uint32_t curr_idiv;
+ 680:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 681:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_UnlockProtectedBits();
+ 1300              	 .loc 1 681 0
+ 1301 000a FFF7FEFF 	 bl XMC_SCU_UnlockProtectedBits
+ 682:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 683:../Libraries/XMCLib/src/xmc1_scu.c ****   /* Take a snapshot of value already programmed into IDIV */
+ 684:../Libraries/XMCLib/src/xmc1_scu.c ****   curr_idiv = (SCU_CLK->CLKCR & SCU_CLK_CLKCR_IDIV_Msk) >> SCU_CLK_CLKCR_IDIV_Pos;
+ 1302              	 .loc 1 684 0
+ 1303 000e 214B     	 ldr r3,.L98
+ 1304 0010 1A68     	 ldr r2,[r3]
+ 1305 0012 FF23     	 mov r3,#255
+ 1306 0014 1B02     	 lsl r3,r3,#8
+ 1307 0016 1340     	 and r3,r2
+ 1308 0018 1B0A     	 lsr r3,r3,#8
+ 1309 001a FB60     	 str r3,[r7,#12]
+ 685:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 686:../Libraries/XMCLib/src/xmc1_scu.c **** #if (UC_SERIES == XMC14)
+ 687:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_CLK->CLKCR1 = (SCU_CLK->CLKCR1 & (uint32_t)~(SCU_CLK_CLKCR1_FDIV_Msk)) |
+ 688:../Libraries/XMCLib/src/xmc1_scu.c ****                    (uint32_t)((fdiv >> 8U) << SCU_CLK_CLKCR1_FDIV_Pos);
+ 689:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 690:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_CLK->CLKCR = (SCU_CLK->CLKCR & (uint32_t)~(SCU_CLK_CLKCR_FDIV_Msk | SCU_CLK_CLKCR_CNTADJ_Msk)
+ 691:../Libraries/XMCLib/src/xmc1_scu.c ****                    (uint32_t)((fdiv & 0xffU) << SCU_CLK_CLKCR_FDIV_Pos) |
+ 692:../Libraries/XMCLib/src/xmc1_scu.c ****                    (uint32_t)(1023UL << SCU_CLK_CLKCR_CNTADJ_Pos);
+ 693:../Libraries/XMCLib/src/xmc1_scu.c **** #else
+ 694:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_CLK->CLKCR = (SCU_CLK->CLKCR & (uint32_t)~(SCU_CLK_CLKCR_FDIV_Msk | SCU_CLK_CLKCR_CNTADJ_Msk)
+ 1310              	 .loc 1 694 0
+ 1311 001c 1D4B     	 ldr r3,.L98
+ 1312 001e 1D4A     	 ldr r2,.L98
+ 1313 0020 1268     	 ldr r2,[r2]
+ 1314 0022 1D49     	 ldr r1,.L98+4
+ 1315 0024 1140     	 and r1,r2
+ 1316 0026 3A68     	 ldr r2,[r7]
+ 1317 0028 0A43     	 orr r2,r1
+ 695:../Libraries/XMCLib/src/xmc1_scu.c ****                    (uint32_t)(fdiv << SCU_CLK_CLKCR_FDIV_Pos) |
+ 1318              	 .loc 1 695 0
+ 1319 002a 1C49     	 ldr r1,.L98+8
+ 1320 002c 0A43     	 orr r2,r1
+ 694:../Libraries/XMCLib/src/xmc1_scu.c ****                    (uint32_t)(fdiv << SCU_CLK_CLKCR_FDIV_Pos) |
+ 1321              	 .loc 1 694 0
+ 1322 002e 1A60     	 str r2,[r3]
+ 696:../Libraries/XMCLib/src/xmc1_scu.c ****                    (uint32_t)(1023UL << SCU_CLK_CLKCR_CNTADJ_Pos);
+ 697:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 698:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 699:../Libraries/XMCLib/src/xmc1_scu.c ****   while ((SCU_CLK->CLKCR)& SCU_CLK_CLKCR_VDDC2LOW_Msk)
+ 1323              	 .loc 1 699 0
+ 1324 0030 C046     	 mov r8,r8
+ 1325              	.L94:
+ 1326              	 .loc 1 699 0 is_stmt 0 discriminator 1
+ 1327 0032 184B     	 ldr r3,.L98
+ 1328 0034 1A68     	 ldr r2,[r3]
+ 1329 0036 8023     	 mov r3,#128
+ 1330 0038 DB05     	 lsl r3,r3,#23
+ 1331 003a 1340     	 and r3,r2
+ 1332 003c F9D1     	 bne .L94
+ 700:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 701:../Libraries/XMCLib/src/xmc1_scu.c ****     /* Spin until the core supply stabilizes */
+ 702:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 703:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 704:../Libraries/XMCLib/src/xmc1_scu.c ****   if(curr_idiv <= idiv)
+ 1333              	 .loc 1 704 0 is_stmt 1
+ 1334 003e FA68     	 ldr r2,[r7,#12]
+ 1335 0040 7B68     	 ldr r3,[r7,#4]
+ 1336 0042 9A42     	 cmp r2,r3
+ 1337 0044 06D8     	 bhi .L95
+ 705:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 706:../Libraries/XMCLib/src/xmc1_scu.c ****     /* Requested IDIV is greater than currently programmed IDIV. So downscale the frequency */
+ 707:../Libraries/XMCLib/src/xmc1_scu.c ****     XMC_SCU_CLOCK_lFrequencyDownScaling(curr_idiv, idiv);
+ 1338              	 .loc 1 707 0
+ 1339 0046 FA68     	 ldr r2,[r7,#12]
+ 1340 0048 7B68     	 ldr r3,[r7,#4]
+ 1341 004a 101C     	 mov r0,r2
+ 1342 004c 191C     	 mov r1,r3
+ 1343 004e FFF7FEFF 	 bl XMC_SCU_CLOCK_lFrequencyDownScaling
+ 1344 0052 05E0     	 b .L96
+ 1345              	.L95:
+ 708:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 709:../Libraries/XMCLib/src/xmc1_scu.c ****   else
+ 710:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 711:../Libraries/XMCLib/src/xmc1_scu.c ****     /* Requested IDIV is lower than currently programmed IDIV. So upscale the frequency */
+ 712:../Libraries/XMCLib/src/xmc1_scu.c ****     XMC_SCU_CLOCK_lFrequencyUpScaling(curr_idiv, idiv);
+ 1346              	 .loc 1 712 0
+ 1347 0054 FA68     	 ldr r2,[r7,#12]
+ 1348 0056 7B68     	 ldr r3,[r7,#4]
+ 1349 0058 101C     	 mov r0,r2
+ 1350 005a 191C     	 mov r1,r3
+ 1351 005c FFF7FEFF 	 bl XMC_SCU_CLOCK_lFrequencyUpScaling
+ 1352              	.L96:
+ 713:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 714:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 715:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_CLK->CLKCR = (SCU_CLK->CLKCR & (uint32_t)~(SCU_CLK_CLKCR_IDIV_Msk | SCU_CLK_CLKCR_CNTADJ_Msk)
+ 1353              	 .loc 1 715 0
+ 1354 0060 0C4B     	 ldr r3,.L98
+ 1355 0062 0C4A     	 ldr r2,.L98
+ 1356 0064 1268     	 ldr r2,[r2]
+ 1357 0066 0E49     	 ldr r1,.L98+12
+ 1358 0068 1140     	 and r1,r2
+ 716:../Libraries/XMCLib/src/xmc1_scu.c ****                    (uint32_t)(idiv << SCU_CLK_CLKCR_IDIV_Pos) | (uint32_t)(1023UL << SCU_CLK_CLKCR_
+ 1359              	 .loc 1 716 0
+ 1360 006a 7A68     	 ldr r2,[r7,#4]
+ 1361 006c 1202     	 lsl r2,r2,#8
+ 715:../Libraries/XMCLib/src/xmc1_scu.c ****                    (uint32_t)(idiv << SCU_CLK_CLKCR_IDIV_Pos) | (uint32_t)(1023UL << SCU_CLK_CLKCR_
+ 1362              	 .loc 1 715 0
+ 1363 006e 0A43     	 orr r2,r1
+ 1364              	 .loc 1 716 0
+ 1365 0070 0A49     	 ldr r1,.L98+8
+ 1366 0072 0A43     	 orr r2,r1
+ 715:../Libraries/XMCLib/src/xmc1_scu.c ****                    (uint32_t)(idiv << SCU_CLK_CLKCR_IDIV_Pos) | (uint32_t)(1023UL << SCU_CLK_CLKCR_
+ 1367              	 .loc 1 715 0
+ 1368 0074 1A60     	 str r2,[r3]
+ 717:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 718:../Libraries/XMCLib/src/xmc1_scu.c ****   while ((SCU_CLK->CLKCR) & SCU_CLK_CLKCR_VDDC2LOW_Msk)
+ 1369              	 .loc 1 718 0
+ 1370 0076 C046     	 mov r8,r8
+ 1371              	.L97:
+ 1372              	 .loc 1 718 0 is_stmt 0 discriminator 1
+ 1373 0078 064B     	 ldr r3,.L98
+ 1374 007a 1A68     	 ldr r2,[r3]
+ 1375 007c 8023     	 mov r3,#128
+ 1376 007e DB05     	 lsl r3,r3,#23
+ 1377 0080 1340     	 and r3,r2
+ 1378 0082 F9D1     	 bne .L97
+ 719:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 720:../Libraries/XMCLib/src/xmc1_scu.c ****     /* Wait voltage suply stabilization */
+ 721:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 722:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 723:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_LockProtectedBits();
+ 1379              	 .loc 1 723 0 is_stmt 1
+ 1380 0084 FFF7FEFF 	 bl XMC_SCU_LockProtectedBits
+ 724:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 725:../Libraries/XMCLib/src/xmc1_scu.c ****   SystemCoreClockUpdate();
+ 1381              	 .loc 1 725 0
+ 1382 0088 FFF7FEFF 	 bl SystemCoreClockUpdate
+ 726:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 727:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1383              	 .loc 1 727 0
+ 1384 008c BD46     	 mov sp,r7
+ 1385 008e 04B0     	 add sp,sp,#16
+ 1386              	 
+ 1387 0090 80BD     	 pop {r7,pc}
+ 1388              	.L99:
+ 1389 0092 C046     	 .align 2
+ 1390              	.L98:
+ 1391 0094 00030140 	 .word 1073808128
+ 1392 0098 00FF0FC0 	 .word -1072693504
+ 1393 009c 0000F03F 	 .word 1072693248
+ 1394 00a0 FF000FC0 	 .word -1072758529
+ 1395              	 .cfi_endproc
+ 1396              	.LFE84:
+ 1398              	 .section .text.XMC_SCU_CLOCK_lFrequencyUpScaling,"ax",%progbits
+ 1399              	 .align 2
+ 1400              	 .code 16
+ 1401              	 .thumb_func
+ 1403              	XMC_SCU_CLOCK_lFrequencyUpScaling:
+ 1404              	.LFB85:
+ 728:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 729:../Libraries/XMCLib/src/xmc1_scu.c **** /* Utility routine to perform frequency up scaling */
+ 730:../Libraries/XMCLib/src/xmc1_scu.c **** static void XMC_SCU_CLOCK_lFrequencyUpScaling(uint32_t curr_idiv, uint32_t target_idiv)
+ 731:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1405              	 .loc 1 731 0
+ 1406              	 .cfi_startproc
+ 1407 0000 80B5     	 push {r7,lr}
+ 1408              	.LCFI71:
+ 1409              	 .cfi_def_cfa_offset 8
+ 1410              	 .cfi_offset 7,-8
+ 1411              	 .cfi_offset 14,-4
+ 1412 0002 82B0     	 sub sp,sp,#8
+ 1413              	.LCFI72:
+ 1414              	 .cfi_def_cfa_offset 16
+ 1415 0004 00AF     	 add r7,sp,#0
+ 1416              	.LCFI73:
+ 1417              	 .cfi_def_cfa_register 7
+ 1418 0006 7860     	 str r0,[r7,#4]
+ 1419 0008 3960     	 str r1,[r7]
+ 732:../Libraries/XMCLib/src/xmc1_scu.c ****   while (curr_idiv > (target_idiv * 4UL))
+ 1420              	 .loc 1 732 0
+ 1421 000a 14E0     	 b .L101
+ 1422              	.L103:
+ 733:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 734:../Libraries/XMCLib/src/xmc1_scu.c ****     curr_idiv = (uint32_t)(curr_idiv >> 2UL);   /* Divide by 4. */
+ 1423              	 .loc 1 734 0
+ 1424 000c 7B68     	 ldr r3,[r7,#4]
+ 1425 000e 9B08     	 lsr r3,r3,#2
+ 1426 0010 7B60     	 str r3,[r7,#4]
+ 735:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 736:../Libraries/XMCLib/src/xmc1_scu.c ****     SCU_CLK->CLKCR = (SCU_CLK->CLKCR & (uint32_t)~(SCU_CLK_CLKCR_IDIV_Msk | SCU_CLK_CLKCR_CNTADJ_Ms
+ 1427              	 .loc 1 736 0
+ 1428 0012 0D4B     	 ldr r3,.L104
+ 1429 0014 0C4A     	 ldr r2,.L104
+ 1430 0016 1268     	 ldr r2,[r2]
+ 1431 0018 0C49     	 ldr r1,.L104+4
+ 1432 001a 1140     	 and r1,r2
+ 737:../Libraries/XMCLib/src/xmc1_scu.c ****                      (uint32_t)(curr_idiv << SCU_CLK_CLKCR_IDIV_Pos) | 
+ 1433              	 .loc 1 737 0
+ 1434 001c 7A68     	 ldr r2,[r7,#4]
+ 1435 001e 1202     	 lsl r2,r2,#8
+ 736:../Libraries/XMCLib/src/xmc1_scu.c ****                      (uint32_t)(curr_idiv << SCU_CLK_CLKCR_IDIV_Pos) | 
+ 1436              	 .loc 1 736 0
+ 1437 0020 0A43     	 orr r2,r1
+ 1438              	 .loc 1 737 0
+ 1439 0022 0B49     	 ldr r1,.L104+8
+ 1440 0024 0A43     	 orr r2,r1
+ 736:../Libraries/XMCLib/src/xmc1_scu.c ****                      (uint32_t)(curr_idiv << SCU_CLK_CLKCR_IDIV_Pos) | 
+ 1441              	 .loc 1 736 0
+ 1442 0026 1A60     	 str r2,[r3]
+ 738:../Libraries/XMCLib/src/xmc1_scu.c ****                      (uint32_t)(1023UL << SCU_CLK_CLKCR_CNTADJ_Pos);
+ 739:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 740:../Libraries/XMCLib/src/xmc1_scu.c ****     while (SCU_CLK->CLKCR & SCU_CLK_CLKCR_VDDC2LOW_Msk)
+ 1443              	 .loc 1 740 0
+ 1444 0028 C046     	 mov r8,r8
+ 1445              	.L102:
+ 1446              	 .loc 1 740 0 is_stmt 0 discriminator 1
+ 1447 002a 074B     	 ldr r3,.L104
+ 1448 002c 1A68     	 ldr r2,[r3]
+ 1449 002e 8023     	 mov r3,#128
+ 1450 0030 DB05     	 lsl r3,r3,#23
+ 1451 0032 1340     	 and r3,r2
+ 1452 0034 F9D1     	 bne .L102
+ 1453              	.L101:
+ 732:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 1454              	 .loc 1 732 0 is_stmt 1
+ 1455 0036 3B68     	 ldr r3,[r7]
+ 1456 0038 9A00     	 lsl r2,r3,#2
+ 1457 003a 7B68     	 ldr r3,[r7,#4]
+ 1458 003c 9A42     	 cmp r2,r3
+ 1459 003e E5D3     	 bcc .L103
+ 741:../Libraries/XMCLib/src/xmc1_scu.c ****     {
+ 742:../Libraries/XMCLib/src/xmc1_scu.c ****     /* Wait voltage suply stabilization */
+ 743:../Libraries/XMCLib/src/xmc1_scu.c ****     }
+ 744:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 745:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1460              	 .loc 1 745 0
+ 1461 0040 BD46     	 mov sp,r7
+ 1462 0042 02B0     	 add sp,sp,#8
+ 1463              	 
+ 1464 0044 80BD     	 pop {r7,pc}
+ 1465              	.L105:
+ 1466 0046 C046     	 .align 2
+ 1467              	.L104:
+ 1468 0048 00030140 	 .word 1073808128
+ 1469 004c FF000FC0 	 .word -1072758529
+ 1470 0050 0000F03F 	 .word 1072693248
+ 1471              	 .cfi_endproc
+ 1472              	.LFE85:
+ 1474              	 .section .text.XMC_SCU_CLOCK_lFrequencyDownScaling,"ax",%progbits
+ 1475              	 .align 2
+ 1476              	 .code 16
+ 1477              	 .thumb_func
+ 1479              	XMC_SCU_CLOCK_lFrequencyDownScaling:
+ 1480              	.LFB86:
+ 746:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 747:../Libraries/XMCLib/src/xmc1_scu.c **** /* Utility routine to perform frequency down scaling */
+ 748:../Libraries/XMCLib/src/xmc1_scu.c **** static void XMC_SCU_CLOCK_lFrequencyDownScaling(uint32_t curr_idiv, uint32_t target_idiv)
+ 749:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1481              	 .loc 1 749 0
+ 1482              	 .cfi_startproc
+ 1483 0000 80B5     	 push {r7,lr}
+ 1484              	.LCFI74:
+ 1485              	 .cfi_def_cfa_offset 8
+ 1486              	 .cfi_offset 7,-8
+ 1487              	 .cfi_offset 14,-4
+ 1488 0002 82B0     	 sub sp,sp,#8
+ 1489              	.LCFI75:
+ 1490              	 .cfi_def_cfa_offset 16
+ 1491 0004 00AF     	 add r7,sp,#0
+ 1492              	.LCFI76:
+ 1493              	 .cfi_def_cfa_register 7
+ 1494 0006 7860     	 str r0,[r7,#4]
+ 1495 0008 3960     	 str r1,[r7]
+ 750:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 751:../Libraries/XMCLib/src/xmc1_scu.c ****   while ((curr_idiv * 4UL) < target_idiv)
+ 1496              	 .loc 1 751 0
+ 1497 000a 19E0     	 b .L107
+ 1498              	.L110:
+ 752:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 753:../Libraries/XMCLib/src/xmc1_scu.c ****     if(0U == curr_idiv)
+ 1499              	 .loc 1 753 0
+ 1500 000c 7B68     	 ldr r3,[r7,#4]
+ 1501 000e 002B     	 cmp r3,#0
+ 1502 0010 01D1     	 bne .L108
+ 754:../Libraries/XMCLib/src/xmc1_scu.c ****     {
+ 755:../Libraries/XMCLib/src/xmc1_scu.c ****       curr_idiv = 1U;
+ 1503              	 .loc 1 755 0
+ 1504 0012 0123     	 mov r3,#1
+ 1505 0014 7B60     	 str r3,[r7,#4]
+ 1506              	.L108:
+ 756:../Libraries/XMCLib/src/xmc1_scu.c ****     }
+ 757:../Libraries/XMCLib/src/xmc1_scu.c ****     curr_idiv  = (uint32_t)(curr_idiv << 2UL);   /* Multiply by 4. */
+ 1507              	 .loc 1 757 0
+ 1508 0016 7B68     	 ldr r3,[r7,#4]
+ 1509 0018 9B00     	 lsl r3,r3,#2
+ 1510 001a 7B60     	 str r3,[r7,#4]
+ 758:../Libraries/XMCLib/src/xmc1_scu.c ****     SCU_CLK->CLKCR = (SCU_CLK->CLKCR & (uint32_t)~(SCU_CLK_CLKCR_IDIV_Msk | SCU_CLK_CLKCR_CNTADJ_Ms
+ 1511              	 .loc 1 758 0
+ 1512 001c 0C4B     	 ldr r3,.L111
+ 1513 001e 0C4A     	 ldr r2,.L111
+ 1514 0020 1268     	 ldr r2,[r2]
+ 1515 0022 0C49     	 ldr r1,.L111+4
+ 1516 0024 1140     	 and r1,r2
+ 759:../Libraries/XMCLib/src/xmc1_scu.c ****                      (uint32_t)(curr_idiv << SCU_CLK_CLKCR_IDIV_Pos) |
+ 1517              	 .loc 1 759 0
+ 1518 0026 7A68     	 ldr r2,[r7,#4]
+ 1519 0028 1202     	 lsl r2,r2,#8
+ 758:../Libraries/XMCLib/src/xmc1_scu.c ****     SCU_CLK->CLKCR = (SCU_CLK->CLKCR & (uint32_t)~(SCU_CLK_CLKCR_IDIV_Msk | SCU_CLK_CLKCR_CNTADJ_Ms
+ 1520              	 .loc 1 758 0
+ 1521 002a 0A43     	 orr r2,r1
+ 1522              	 .loc 1 759 0
+ 1523 002c 0A49     	 ldr r1,.L111+8
+ 1524 002e 0A43     	 orr r2,r1
+ 758:../Libraries/XMCLib/src/xmc1_scu.c ****     SCU_CLK->CLKCR = (SCU_CLK->CLKCR & (uint32_t)~(SCU_CLK_CLKCR_IDIV_Msk | SCU_CLK_CLKCR_CNTADJ_Ms
+ 1525              	 .loc 1 758 0
+ 1526 0030 1A60     	 str r2,[r3]
+ 760:../Libraries/XMCLib/src/xmc1_scu.c ****                      (uint32_t)(1023UL << SCU_CLK_CLKCR_CNTADJ_Pos);
+ 761:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 762:../Libraries/XMCLib/src/xmc1_scu.c ****     while (SCU_CLK->CLKCR & SCU_CLK_CLKCR_VDDC2LOW_Msk)
+ 1527              	 .loc 1 762 0
+ 1528 0032 C046     	 mov r8,r8
+ 1529              	.L109:
+ 1530              	 .loc 1 762 0 is_stmt 0 discriminator 1
+ 1531 0034 064B     	 ldr r3,.L111
+ 1532 0036 1A68     	 ldr r2,[r3]
+ 1533 0038 8023     	 mov r3,#128
+ 1534 003a DB05     	 lsl r3,r3,#23
+ 1535 003c 1340     	 and r3,r2
+ 1536 003e F9D1     	 bne .L109
+ 1537              	.L107:
+ 751:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 1538              	 .loc 1 751 0 is_stmt 1
+ 1539 0040 7B68     	 ldr r3,[r7,#4]
+ 1540 0042 9A00     	 lsl r2,r3,#2
+ 1541 0044 3B68     	 ldr r3,[r7]
+ 1542 0046 9A42     	 cmp r2,r3
+ 1543 0048 E0D3     	 bcc .L110
+ 763:../Libraries/XMCLib/src/xmc1_scu.c ****     {
+ 764:../Libraries/XMCLib/src/xmc1_scu.c ****     /* Wait voltage suply stabilization */
+ 765:../Libraries/XMCLib/src/xmc1_scu.c ****     }
+ 766:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 767:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1544              	 .loc 1 767 0
+ 1545 004a BD46     	 mov sp,r7
+ 1546 004c 02B0     	 add sp,sp,#8
+ 1547              	 
+ 1548 004e 80BD     	 pop {r7,pc}
+ 1549              	.L112:
+ 1550              	 .align 2
+ 1551              	.L111:
+ 1552 0050 00030140 	 .word 1073808128
+ 1553 0054 FF000FC0 	 .word -1072758529
+ 1554 0058 0000F03F 	 .word 1072693248
+ 1555              	 .cfi_endproc
+ 1556              	.LFE86:
+ 1558              	 .section .text.XMC_SCU_CLOCK_GetPeripheralClockFrequency,"ax",%progbits
+ 1559              	 .align 2
+ 1560              	 .global XMC_SCU_CLOCK_GetPeripheralClockFrequency
+ 1561              	 .code 16
+ 1562              	 .thumb_func
+ 1564              	XMC_SCU_CLOCK_GetPeripheralClockFrequency:
+ 1565              	.LFB87:
+ 768:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 769:../Libraries/XMCLib/src/xmc1_scu.c **** /*
+ 770:../Libraries/XMCLib/src/xmc1_scu.c ****  * API to retrieve clock frequency of peripherals on the peripheral bus using a shared functional c
+ 771:../Libraries/XMCLib/src/xmc1_scu.c ****  */
+ 772:../Libraries/XMCLib/src/xmc1_scu.c **** uint32_t XMC_SCU_CLOCK_GetPeripheralClockFrequency(void)
+ 773:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1566              	 .loc 1 773 0
+ 1567              	 .cfi_startproc
+ 1568 0000 80B5     	 push {r7,lr}
+ 1569              	.LCFI77:
+ 1570              	 .cfi_def_cfa_offset 8
+ 1571              	 .cfi_offset 7,-8
+ 1572              	 .cfi_offset 14,-4
+ 1573 0002 00AF     	 add r7,sp,#0
+ 1574              	.LCFI78:
+ 1575              	 .cfi_def_cfa_register 7
+ 774:../Libraries/XMCLib/src/xmc1_scu.c ****   return (SystemCoreClock);
+ 1576              	 .loc 1 774 0
+ 1577 0004 024B     	 ldr r3,.L115
+ 1578 0006 1B68     	 ldr r3,[r3]
+ 775:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1579              	 .loc 1 775 0
+ 1580 0008 181C     	 mov r0,r3
+ 1581 000a BD46     	 mov sp,r7
+ 1582              	 
+ 1583 000c 80BD     	 pop {r7,pc}
+ 1584              	.L116:
+ 1585 000e C046     	 .align 2
+ 1586              	.L115:
+ 1587 0010 00000000 	 .word SystemCoreClock
+ 1588              	 .cfi_endproc
+ 1589              	.LFE87:
+ 1591              	 .section .text.XMC_SCU_CLOCK_GetFastPeripheralClockFrequency,"ax",%progbits
+ 1592              	 .align 2
+ 1593              	 .global XMC_SCU_CLOCK_GetFastPeripheralClockFrequency
+ 1594              	 .code 16
+ 1595              	 .thumb_func
+ 1597              	XMC_SCU_CLOCK_GetFastPeripheralClockFrequency:
+ 1598              	.LFB88:
+ 776:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 777:../Libraries/XMCLib/src/xmc1_scu.c **** /* Provides the clock frequency of peripherals on the peripheral bus that are using a shared functi
+ 778:../Libraries/XMCLib/src/xmc1_scu.c **** uint32_t XMC_SCU_CLOCK_GetFastPeripheralClockFrequency(void)
+ 779:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1599              	 .loc 1 779 0
+ 1600              	 .cfi_startproc
+ 1601 0000 80B5     	 push {r7,lr}
+ 1602              	.LCFI79:
+ 1603              	 .cfi_def_cfa_offset 8
+ 1604              	 .cfi_offset 7,-8
+ 1605              	 .cfi_offset 14,-4
+ 1606 0002 00AF     	 add r7,sp,#0
+ 1607              	.LCFI80:
+ 1608              	 .cfi_def_cfa_register 7
+ 780:../Libraries/XMCLib/src/xmc1_scu.c ****   return (SystemCoreClock << ((SCU_CLK->CLKCR & SCU_CLK_CLKCR_PCLKSEL_Msk) >> SCU_CLK_CLKCR_PCLKSEL
+ 1609              	 .loc 1 780 0
+ 1610 0004 064B     	 ldr r3,.L119
+ 1611 0006 1A68     	 ldr r2,[r3]
+ 1612 0008 064B     	 ldr r3,.L119+4
+ 1613 000a 1968     	 ldr r1,[r3]
+ 1614 000c 8023     	 mov r3,#128
+ 1615 000e 5B02     	 lsl r3,r3,#9
+ 1616 0010 0B40     	 and r3,r1
+ 1617 0012 1B0C     	 lsr r3,r3,#16
+ 1618 0014 9A40     	 lsl r2,r2,r3
+ 1619 0016 131C     	 mov r3,r2
+ 781:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1620              	 .loc 1 781 0
+ 1621 0018 181C     	 mov r0,r3
+ 1622 001a BD46     	 mov sp,r7
+ 1623              	 
+ 1624 001c 80BD     	 pop {r7,pc}
+ 1625              	.L120:
+ 1626 001e C046     	 .align 2
+ 1627              	.L119:
+ 1628 0020 00000000 	 .word SystemCoreClock
+ 1629 0024 00030140 	 .word 1073808128
+ 1630              	 .cfi_endproc
+ 1631              	.LFE88:
+ 1633              	 .global __aeabi_idiv
+ 1634              	 .section .text.XMC_SCU_CLOCK_CalibrateOscillatorOnTemperature,"ax",%progbits
+ 1635              	 .align 2
+ 1636              	 .global XMC_SCU_CLOCK_CalibrateOscillatorOnTemperature
+ 1637              	 .code 16
+ 1638              	 .thumb_func
+ 1640              	XMC_SCU_CLOCK_CalibrateOscillatorOnTemperature:
+ 1641              	.LFB89:
+ 782:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 783:../Libraries/XMCLib/src/xmc1_scu.c **** /* DCO1 clock frequency can be calibrated during runtime to achieve a better accuracy */
+ 784:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_CLOCK_CalibrateOscillatorOnTemperature(int32_t temperature)
+ 785:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1642              	 .loc 1 785 0
+ 1643              	 .cfi_startproc
+ 1644 0000 80B5     	 push {r7,lr}
+ 1645              	.LCFI81:
+ 1646              	 .cfi_def_cfa_offset 8
+ 1647              	 .cfi_offset 7,-8
+ 1648              	 .cfi_offset 14,-4
+ 1649 0002 88B0     	 sub sp,sp,#32
+ 1650              	.LCFI82:
+ 1651              	 .cfi_def_cfa_offset 40
+ 1652 0004 00AF     	 add r7,sp,#0
+ 1653              	.LCFI83:
+ 1654              	 .cfi_def_cfa_register 7
+ 1655 0006 7860     	 str r0,[r7,#4]
+ 786:../Libraries/XMCLib/src/xmc1_scu.c ****   int32_t a;
+ 787:../Libraries/XMCLib/src/xmc1_scu.c ****   int32_t b;
+ 788:../Libraries/XMCLib/src/xmc1_scu.c ****   int32_t d;
+ 789:../Libraries/XMCLib/src/xmc1_scu.c ****   int32_t e;
+ 790:../Libraries/XMCLib/src/xmc1_scu.c ****   int32_t offset;
+ 791:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 792:../Libraries/XMCLib/src/xmc1_scu.c ****   a = *((uint8_t*)DCO_ADJLO_T2);
+ 1656              	 .loc 1 792 0
+ 1657 0008 174B     	 ldr r3,.L122
+ 1658 000a 1B78     	 ldrb r3,[r3]
+ 1659 000c FB61     	 str r3,[r7,#28]
+ 793:../Libraries/XMCLib/src/xmc1_scu.c ****   b = *((uint8_t*)DCO_ADJLO_T1);
+ 1660              	 .loc 1 793 0
+ 1661 000e 174B     	 ldr r3,.L122+4
+ 1662 0010 1B78     	 ldrb r3,[r3]
+ 1663 0012 BB61     	 str r3,[r7,#24]
+ 794:../Libraries/XMCLib/src/xmc1_scu.c ****   d = *((uint8_t*)ANA_TSE_T1);
+ 1664              	 .loc 1 794 0
+ 1665 0014 164B     	 ldr r3,.L122+8
+ 1666 0016 1B78     	 ldrb r3,[r3]
+ 1667 0018 7B61     	 str r3,[r7,#20]
+ 795:../Libraries/XMCLib/src/xmc1_scu.c ****   e = *((uint8_t*)ANA_TSE_T2);
+ 1668              	 .loc 1 795 0
+ 1669 001a 164B     	 ldr r3,.L122+12
+ 1670 001c 1B78     	 ldrb r3,[r3]
+ 1671 001e 3B61     	 str r3,[r7,#16]
+ 796:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 797:../Libraries/XMCLib/src/xmc1_scu.c ****   offset = b + (((a - b) * (temperature - d)) / (e - d));
+ 1672              	 .loc 1 797 0
+ 1673 0020 FA69     	 ldr r2,[r7,#28]
+ 1674 0022 BB69     	 ldr r3,[r7,#24]
+ 1675 0024 D31A     	 sub r3,r2,r3
+ 1676 0026 7968     	 ldr r1,[r7,#4]
+ 1677 0028 7A69     	 ldr r2,[r7,#20]
+ 1678 002a 8A1A     	 sub r2,r1,r2
+ 1679 002c 5A43     	 mul r2,r3
+ 1680 002e 111C     	 mov r1,r2
+ 1681 0030 3A69     	 ldr r2,[r7,#16]
+ 1682 0032 7B69     	 ldr r3,[r7,#20]
+ 1683 0034 D31A     	 sub r3,r2,r3
+ 1684 0036 081C     	 mov r0,r1
+ 1685 0038 191C     	 mov r1,r3
+ 1686 003a FFF7FEFF 	 bl __aeabi_idiv
+ 1687 003e 031C     	 mov r3,r0
+ 1688 0040 1A1C     	 mov r2,r3
+ 1689 0042 BB69     	 ldr r3,[r7,#24]
+ 1690 0044 D318     	 add r3,r2,r3
+ 1691 0046 FB60     	 str r3,[r7,#12]
+ 798:../Libraries/XMCLib/src/xmc1_scu.c ****   offset &= SCU_ANALOG_ANAOFFSET_ADJL_OFFSET_Msk;
+ 1692              	 .loc 1 798 0
+ 1693 0048 FB68     	 ldr r3,[r7,#12]
+ 1694 004a 0F22     	 mov r2,#15
+ 1695 004c 1340     	 and r3,r2
+ 1696 004e FB60     	 str r3,[r7,#12]
+ 799:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 800:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_UnlockProtectedBits();
+ 1697              	 .loc 1 800 0
+ 1698 0050 FFF7FEFF 	 bl XMC_SCU_UnlockProtectedBits
+ 801:../Libraries/XMCLib/src/xmc1_scu.c ****   SCU_ANALOG->ANAOFFSET = (uint16_t)offset;
+ 1699              	 .loc 1 801 0
+ 1700 0054 084A     	 ldr r2,.L122+16
+ 1701 0056 FB68     	 ldr r3,[r7,#12]
+ 1702 0058 99B2     	 uxth r1,r3
+ 1703 005a 6C23     	 mov r3,#108
+ 1704 005c D152     	 strh r1,[r2,r3]
+ 802:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_LockProtectedBits();
+ 1705              	 .loc 1 802 0
+ 1706 005e FFF7FEFF 	 bl XMC_SCU_LockProtectedBits
+ 803:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1707              	 .loc 1 803 0
+ 1708 0062 BD46     	 mov sp,r7
+ 1709 0064 08B0     	 add sp,sp,#32
+ 1710              	 
+ 1711 0066 80BD     	 pop {r7,pc}
+ 1712              	.L123:
+ 1713              	 .align 2
+ 1714              	.L122:
+ 1715 0068 330F0010 	 .word 268439347
+ 1716 006c 320F0010 	 .word 268439346
+ 1717 0070 300F0010 	 .word 268439344
+ 1718 0074 310F0010 	 .word 268439345
+ 1719 0078 00100140 	 .word 1073811456
+ 1720              	 .cfi_endproc
+ 1721              	.LFE89:
+ 1723              	 .section .text.XMC_SCU_INTERRUPT_SetEventHandler,"ax",%progbits
+ 1724              	 .align 2
+ 1725              	 .global XMC_SCU_INTERRUPT_SetEventHandler
+ 1726              	 .code 16
+ 1727              	 .thumb_func
+ 1729              	XMC_SCU_INTERRUPT_SetEventHandler:
+ 1730              	.LFB90:
+ 804:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 805:../Libraries/XMCLib/src/xmc1_scu.c **** /*
+ 806:../Libraries/XMCLib/src/xmc1_scu.c ****  * API to assign the event handler function to be executed on occurrence of the selected event
+ 807:../Libraries/XMCLib/src/xmc1_scu.c ****  */
+ 808:../Libraries/XMCLib/src/xmc1_scu.c **** XMC_SCU_STATUS_t XMC_SCU_INTERRUPT_SetEventHandler(XMC_SCU_INTERRUPT_EVENT_t event, XMC_SCU_INTERRU
+ 809:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1731              	 .loc 1 809 0
+ 1732              	 .cfi_startproc
+ 1733 0000 80B5     	 push {r7,lr}
+ 1734              	.LCFI84:
+ 1735              	 .cfi_def_cfa_offset 8
+ 1736              	 .cfi_offset 7,-8
+ 1737              	 .cfi_offset 14,-4
+ 1738 0002 84B0     	 sub sp,sp,#16
+ 1739              	.LCFI85:
+ 1740              	 .cfi_def_cfa_offset 24
+ 1741 0004 00AF     	 add r7,sp,#0
+ 1742              	.LCFI86:
+ 1743              	 .cfi_def_cfa_register 7
+ 1744 0006 7860     	 str r0,[r7,#4]
+ 1745 0008 3960     	 str r1,[r7]
+ 810:../Libraries/XMCLib/src/xmc1_scu.c ****   uint32_t index;
+ 811:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_STATUS_t status;
+ 812:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 813:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_ASSERT("XMC_SCU_INTERRUPT_SetEventHandler: Invalid event", XMC_SCU_INTERRUPT_IsValidEvent(eve
+ 814:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_ASSERT("XMC_SCU_INTERRUPT_SetEventHandler: Invalid handler", handler != NULL);
+ 815:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 816:../Libraries/XMCLib/src/xmc1_scu.c ****   index = 0U;
+ 1746              	 .loc 1 816 0
+ 1747 000a 0023     	 mov r3,#0
+ 1748 000c FB60     	 str r3,[r7,#12]
+ 817:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 818:../Libraries/XMCLib/src/xmc1_scu.c ****   while (((event & ((XMC_SCU_INTERRUPT_EVENT_t)1 << index)) == 0U) && (index < XMC_SCU_INTERRUPT_EV
+ 1749              	 .loc 1 818 0
+ 1750 000e 02E0     	 b .L125
+ 1751              	.L127:
+ 819:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 820:../Libraries/XMCLib/src/xmc1_scu.c ****     index++;
+ 1752              	 .loc 1 820 0
+ 1753 0010 FB68     	 ldr r3,[r7,#12]
+ 1754 0012 0133     	 add r3,r3,#1
+ 1755 0014 FB60     	 str r3,[r7,#12]
+ 1756              	.L125:
+ 818:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 1757              	 .loc 1 818 0
+ 1758 0016 FB68     	 ldr r3,[r7,#12]
+ 1759 0018 7A68     	 ldr r2,[r7,#4]
+ 1760 001a DA40     	 lsr r2,r2,r3
+ 1761 001c 131C     	 mov r3,r2
+ 1762 001e 0122     	 mov r2,#1
+ 1763 0020 1340     	 and r3,r2
+ 1764 0022 02D1     	 bne .L126
+ 818:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 1765              	 .loc 1 818 0 is_stmt 0 discriminator 1
+ 1766 0024 FB68     	 ldr r3,[r7,#12]
+ 1767 0026 1F2B     	 cmp r3,#31
+ 1768 0028 F2D9     	 bls .L127
+ 1769              	.L126:
+ 821:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 822:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 823:../Libraries/XMCLib/src/xmc1_scu.c ****   if (index == XMC_SCU_INTERRUPT_EVENT_MAX)
+ 1770              	 .loc 1 823 0 is_stmt 1
+ 1771 002a FB68     	 ldr r3,[r7,#12]
+ 1772 002c 202B     	 cmp r3,#32
+ 1773 002e 04D1     	 bne .L128
+ 824:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 825:../Libraries/XMCLib/src/xmc1_scu.c ****     status = XMC_SCU_STATUS_ERROR;
+ 1774              	 .loc 1 825 0
+ 1775 0030 0B23     	 mov r3,#11
+ 1776 0032 FB18     	 add r3,r7,r3
+ 1777 0034 0122     	 mov r2,#1
+ 1778 0036 1A70     	 strb r2,[r3]
+ 1779 0038 08E0     	 b .L129
+ 1780              	.L128:
+ 826:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 827:../Libraries/XMCLib/src/xmc1_scu.c ****   else
+ 828:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 829:../Libraries/XMCLib/src/xmc1_scu.c ****     event_handler_list[index] = handler;
+ 1781              	 .loc 1 829 0
+ 1782 003a 084B     	 ldr r3,.L131
+ 1783 003c FA68     	 ldr r2,[r7,#12]
+ 1784 003e 9200     	 lsl r2,r2,#2
+ 1785 0040 3968     	 ldr r1,[r7]
+ 1786 0042 D150     	 str r1,[r2,r3]
+ 830:../Libraries/XMCLib/src/xmc1_scu.c ****     status = XMC_SCU_STATUS_OK;
+ 1787              	 .loc 1 830 0
+ 1788 0044 0B23     	 mov r3,#11
+ 1789 0046 FB18     	 add r3,r7,r3
+ 1790 0048 0022     	 mov r2,#0
+ 1791 004a 1A70     	 strb r2,[r3]
+ 1792              	.L129:
+ 831:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 832:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 833:../Libraries/XMCLib/src/xmc1_scu.c ****   return (status);
+ 1793              	 .loc 1 833 0
+ 1794 004c 0B23     	 mov r3,#11
+ 1795 004e FB18     	 add r3,r7,r3
+ 1796 0050 1B78     	 ldrb r3,[r3]
+ 834:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1797              	 .loc 1 834 0
+ 1798 0052 181C     	 mov r0,r3
+ 1799 0054 BD46     	 mov sp,r7
+ 1800 0056 04B0     	 add sp,sp,#16
+ 1801              	 
+ 1802 0058 80BD     	 pop {r7,pc}
+ 1803              	.L132:
+ 1804 005a C046     	 .align 2
+ 1805              	.L131:
+ 1806 005c 00000000 	 .word event_handler_list
+ 1807              	 .cfi_endproc
+ 1808              	.LFE90:
+ 1810              	 .section .text.XMC_SCU_IRQHandler,"ax",%progbits
+ 1811              	 .align 2
+ 1812              	 .global XMC_SCU_IRQHandler
+ 1813              	 .code 16
+ 1814              	 .thumb_func
+ 1816              	XMC_SCU_IRQHandler:
+ 1817              	.LFB91:
+ 835:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 836:../Libraries/XMCLib/src/xmc1_scu.c **** /*
+ 837:../Libraries/XMCLib/src/xmc1_scu.c ****  * A common function to execute callback functions for multiple events
+ 838:../Libraries/XMCLib/src/xmc1_scu.c ****  */
+ 839:../Libraries/XMCLib/src/xmc1_scu.c **** void XMC_SCU_IRQHandler(uint32_t sr_num)
+ 840:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1818              	 .loc 1 840 0
+ 1819              	 .cfi_startproc
+ 1820 0000 80B5     	 push {r7,lr}
+ 1821              	.LCFI87:
+ 1822              	 .cfi_def_cfa_offset 8
+ 1823              	 .cfi_offset 7,-8
+ 1824              	 .cfi_offset 14,-4
+ 1825 0002 86B0     	 sub sp,sp,#24
+ 1826              	.LCFI88:
+ 1827              	 .cfi_def_cfa_offset 32
+ 1828 0004 00AF     	 add r7,sp,#0
+ 1829              	.LCFI89:
+ 1830              	 .cfi_def_cfa_register 7
+ 1831 0006 7860     	 str r0,[r7,#4]
+ 841:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_ASSERT("XMC_SCU_IRQHandler: Invalid sr_num", sr_num < SCU_IRQ_NUM);
+ 842:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 843:../Libraries/XMCLib/src/xmc1_scu.c ****   uint32_t index;
+ 844:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_INTERRUPT_EVENT_t event;
+ 845:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_INTERRUPT_EVENT_HANDLER_t event_handler;
+ 846:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 847:../Libraries/XMCLib/src/xmc1_scu.c ****   index = 0U;
+ 1832              	 .loc 1 847 0
+ 1833 0008 0023     	 mov r3,#0
+ 1834 000a 7B61     	 str r3,[r7,#20]
+ 848:../Libraries/XMCLib/src/xmc1_scu.c ****   event = XMC_SCU_INTERUPT_GetEventStatus() & event_masks[sr_num];
+ 1835              	 .loc 1 848 0
+ 1836 000c FFF7FEFF 	 bl XMC_SCU_INTERUPT_GetEventStatus
+ 1837 0010 011C     	 mov r1,r0
+ 1838 0012 184B     	 ldr r3,.L138
+ 1839 0014 7A68     	 ldr r2,[r7,#4]
+ 1840 0016 9200     	 lsl r2,r2,#2
+ 1841 0018 D358     	 ldr r3,[r2,r3]
+ 1842 001a 0B40     	 and r3,r1
+ 1843 001c 3B61     	 str r3,[r7,#16]
+ 849:../Libraries/XMCLib/src/xmc1_scu.c ****   XMC_SCU_INTERRUPT_ClearEventStatus(event);
+ 1844              	 .loc 1 849 0
+ 1845 001e 3B69     	 ldr r3,[r7,#16]
+ 1846 0020 181C     	 mov r0,r3
+ 1847 0022 FFF7FEFF 	 bl XMC_SCU_INTERRUPT_ClearEventStatus
+ 850:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 851:../Libraries/XMCLib/src/xmc1_scu.c ****   while ((event != 0) && (index < XMC_SCU_INTERRUPT_EVENT_MAX))
+ 1848              	 .loc 1 851 0
+ 1849 0026 1BE0     	 b .L134
+ 1850              	.L137:
+ 852:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 853:../Libraries/XMCLib/src/xmc1_scu.c ****     if ((event & ((XMC_SCU_INTERRUPT_EVENT_t)1 << index)) != 0U)
+ 1851              	 .loc 1 853 0
+ 1852 0028 7B69     	 ldr r3,[r7,#20]
+ 1853 002a 3A69     	 ldr r2,[r7,#16]
+ 1854 002c DA40     	 lsr r2,r2,r3
+ 1855 002e 131C     	 mov r3,r2
+ 1856 0030 0122     	 mov r2,#1
+ 1857 0032 1340     	 and r3,r2
+ 1858 0034 11D0     	 beq .L135
+ 854:../Libraries/XMCLib/src/xmc1_scu.c ****     {
+ 855:../Libraries/XMCLib/src/xmc1_scu.c ****       event &= ~((XMC_SCU_INTERRUPT_EVENT_t)1 << index);
+ 1859              	 .loc 1 855 0
+ 1860 0036 7B69     	 ldr r3,[r7,#20]
+ 1861 0038 0122     	 mov r2,#1
+ 1862 003a 9A40     	 lsl r2,r2,r3
+ 1863 003c 131C     	 mov r3,r2
+ 1864 003e DA43     	 mvn r2,r3
+ 1865 0040 3B69     	 ldr r3,[r7,#16]
+ 1866 0042 1340     	 and r3,r2
+ 1867 0044 3B61     	 str r3,[r7,#16]
+ 856:../Libraries/XMCLib/src/xmc1_scu.c ****       event_handler = event_handler_list[index];
+ 1868              	 .loc 1 856 0
+ 1869 0046 0C4B     	 ldr r3,.L138+4
+ 1870 0048 7A69     	 ldr r2,[r7,#20]
+ 1871 004a 9200     	 lsl r2,r2,#2
+ 1872 004c D358     	 ldr r3,[r2,r3]
+ 1873 004e FB60     	 str r3,[r7,#12]
+ 857:../Libraries/XMCLib/src/xmc1_scu.c ****       if (event_handler != NULL)
+ 1874              	 .loc 1 857 0
+ 1875 0050 FB68     	 ldr r3,[r7,#12]
+ 1876 0052 002B     	 cmp r3,#0
+ 1877 0054 01D0     	 beq .L135
+ 858:../Libraries/XMCLib/src/xmc1_scu.c ****       {
+ 859:../Libraries/XMCLib/src/xmc1_scu.c ****         event_handler();
+ 1878              	 .loc 1 859 0
+ 1879 0056 FB68     	 ldr r3,[r7,#12]
+ 1880 0058 9847     	 blx r3
+ 1881              	.L135:
+ 860:../Libraries/XMCLib/src/xmc1_scu.c ****       }
+ 861:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 862:../Libraries/XMCLib/src/xmc1_scu.c ****       /* break; XMC1: Only PULSE interrupts */
+ 863:../Libraries/XMCLib/src/xmc1_scu.c ****     }
+ 864:../Libraries/XMCLib/src/xmc1_scu.c ****     index++;
+ 1882              	 .loc 1 864 0
+ 1883 005a 7B69     	 ldr r3,[r7,#20]
+ 1884 005c 0133     	 add r3,r3,#1
+ 1885 005e 7B61     	 str r3,[r7,#20]
+ 1886              	.L134:
+ 851:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 1887              	 .loc 1 851 0
+ 1888 0060 3B69     	 ldr r3,[r7,#16]
+ 1889 0062 002B     	 cmp r3,#0
+ 1890 0064 02D0     	 beq .L133
+ 851:../Libraries/XMCLib/src/xmc1_scu.c ****   {
+ 1891              	 .loc 1 851 0 is_stmt 0 discriminator 1
+ 1892 0066 7B69     	 ldr r3,[r7,#20]
+ 1893 0068 1F2B     	 cmp r3,#31
+ 1894 006a DDD9     	 bls .L137
+ 1895              	.L133:
+ 865:../Libraries/XMCLib/src/xmc1_scu.c ****   }
+ 866:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1896              	 .loc 1 866 0 is_stmt 1
+ 1897 006c BD46     	 mov sp,r7
+ 1898 006e 06B0     	 add sp,sp,#24
+ 1899              	 
+ 1900 0070 80BD     	 pop {r7,pc}
+ 1901              	.L139:
+ 1902 0072 C046     	 .align 2
+ 1903              	.L138:
+ 1904 0074 00000000 	 .word event_masks
+ 1905 0078 00000000 	 .word event_handler_list
+ 1906              	 .cfi_endproc
+ 1907              	.LFE91:
+ 1909              	 .section .text.XMC_SCU_SetBMI,"ax",%progbits
+ 1910              	 .align 2
+ 1911              	 .global XMC_SCU_SetBMI
+ 1912              	 .code 16
+ 1913              	 .thumb_func
+ 1915              	XMC_SCU_SetBMI:
+ 1916              	.LFB92:
+ 867:../Libraries/XMCLib/src/xmc1_scu.c **** 
+ 868:../Libraries/XMCLib/src/xmc1_scu.c **** /* Install BMI */
+ 869:../Libraries/XMCLib/src/xmc1_scu.c **** uint32_t XMC_SCU_SetBMI(uint32_t flags, uint8_t timeout)
+ 870:../Libraries/XMCLib/src/xmc1_scu.c **** {
+ 1917              	 .loc 1 870 0
+ 1918              	 .cfi_startproc
+ 1919 0000 80B5     	 push {r7,lr}
+ 1920              	.LCFI90:
+ 1921              	 .cfi_def_cfa_offset 8
+ 1922              	 .cfi_offset 7,-8
+ 1923              	 .cfi_offset 14,-4
+ 1924 0002 82B0     	 sub sp,sp,#8
+ 1925              	.LCFI91:
+ 1926              	 .cfi_def_cfa_offset 16
+ 1927 0004 00AF     	 add r7,sp,#0
+ 1928              	.LCFI92:
+ 1929              	 .cfi_def_cfa_register 7
+ 1930 0006 7860     	 str r0,[r7,#4]
+ 1931 0008 0A1C     	 mov r2,r1
+ 1932 000a FB1C     	 add r3,r7,#3
+ 1933 000c 1A70     	 strb r2,[r3]
+ 871:../Libraries/XMCLib/src/xmc1_scu.c **** #if (UC_SERIES == XMC14)
+ 872:../Libraries/XMCLib/src/xmc1_scu.c ****   return ROM_BmiInstallationReq((flags & 0x0fffU) | ((timeout << 12) & 0xf000U));
+ 873:../Libraries/XMCLib/src/xmc1_scu.c **** #else
+ 874:../Libraries/XMCLib/src/xmc1_scu.c ****   return ROM_BmiInstallationReq((flags & 0x07ffU) | ((timeout << 12) & 0xf000U) | 0x08c0U);
+ 1934              	 .loc 1 874 0
+ 1935 000e 8423     	 mov r3,#132
+ 1936 0010 5B00     	 lsl r3,r3,#1
+ 1937 0012 1B68     	 ldr r3,[r3]
+ 1938 0014 7A68     	 ldr r2,[r7,#4]
+ 1939 0016 5205     	 lsl r2,r2,#21
+ 1940 0018 510D     	 lsr r1,r2,#21
+ 1941 001a FA1C     	 add r2,r7,#3
+ 1942 001c 1278     	 ldrb r2,[r2]
+ 1943 001e 1203     	 lsl r2,r2,#12
+ 1944 0020 1204     	 lsl r2,r2,#16
+ 1945 0022 120C     	 lsr r2,r2,#16
+ 1946 0024 0A43     	 orr r2,r1
+ 1947 0026 8C21     	 mov r1,#140
+ 1948 0028 0901     	 lsl r1,r1,#4
+ 1949 002a 0A43     	 orr r2,r1
+ 1950 002c 101C     	 mov r0,r2
+ 1951 002e 9847     	 blx r3
+ 1952 0030 031C     	 mov r3,r0
+ 875:../Libraries/XMCLib/src/xmc1_scu.c **** #endif
+ 876:../Libraries/XMCLib/src/xmc1_scu.c **** }
+ 1953              	 .loc 1 876 0
+ 1954 0032 181C     	 mov r0,r3
+ 1955 0034 BD46     	 mov sp,r7
+ 1956 0036 02B0     	 add sp,sp,#8
+ 1957              	 
+ 1958 0038 80BD     	 pop {r7,pc}
+ 1959              	 .cfi_endproc
+ 1960              	.LFE92:
+ 1962 003a C046     	 .text
+ 1963              	.Letext0:
+ 1964              	 .file 2 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1965              	 .file 3 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 1966              	 .file 4 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/CMSIS/Infineon/XMC1100_series/Include/XMC1100.h"
+ 1967              	 .file 5 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc/xmc_scu.h"
+ 1968              	 .file 6 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc/xmc1_scu.h"
+ 1969              	 .file 7 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/CMSIS/Infineon/XMC1100_series/Include/system_XMC1100.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc1_scu.c
+    {standard input}:18     .bss.event_handler_list:00000000 $d
+    {standard input}:21     .bss.event_handler_list:00000000 event_handler_list
+    {standard input}:24     .data.event_masks:00000000 $d
+    {standard input}:27     .data.event_masks:00000000 event_masks
+    {standard input}:32     .text.XMC_SCU_CalcTSEVAR:00000000 $t
+    {standard input}:36     .text.XMC_SCU_CalcTSEVAR:00000000 XMC_SCU_CalcTSEVAR
+    {standard input}:103    .text.XMC_SCU_INTERRUPT_EnableEvent:00000000 $t
+    {standard input}:108    .text.XMC_SCU_INTERRUPT_EnableEvent:00000000 XMC_SCU_INTERRUPT_EnableEvent
+    {standard input}:139    .text.XMC_SCU_INTERRUPT_EnableEvent:0000001c $d
+    {standard input}:144    .text.XMC_SCU_INTERRUPT_DisableEvent:00000000 $t
+    {standard input}:149    .text.XMC_SCU_INTERRUPT_DisableEvent:00000000 XMC_SCU_INTERRUPT_DisableEvent
+    {standard input}:181    .text.XMC_SCU_INTERRUPT_DisableEvent:0000001c $d
+    {standard input}:186    .text.XMC_SCU_INTERRUPT_TriggerEvent:00000000 $t
+    {standard input}:191    .text.XMC_SCU_INTERRUPT_TriggerEvent:00000000 XMC_SCU_INTERRUPT_TriggerEvent
+    {standard input}:222    .text.XMC_SCU_INTERRUPT_TriggerEvent:0000001c $d
+    {standard input}:227    .text.XMC_SCU_INTERUPT_GetEventStatus:00000000 $t
+    {standard input}:232    .text.XMC_SCU_INTERUPT_GetEventStatus:00000000 XMC_SCU_INTERUPT_GetEventStatus
+    {standard input}:262    .text.XMC_SCU_INTERUPT_GetEventStatus:00000018 $d
+    {standard input}:267    .text.XMC_SCU_INTERRUPT_ClearEventStatus:00000000 $t
+    {standard input}:272    .text.XMC_SCU_INTERRUPT_ClearEventStatus:00000000 XMC_SCU_INTERRUPT_ClearEventStatus
+    {standard input}:303    .text.XMC_SCU_INTERRUPT_ClearEventStatus:0000001c $d
+    {standard input}:308    .text.XMC_SCU_LockProtectedBits:00000000 $t
+    {standard input}:313    .text.XMC_SCU_LockProtectedBits:00000000 XMC_SCU_LockProtectedBits
+    {standard input}:336    .text.XMC_SCU_LockProtectedBits:00000010 $d
+    {standard input}:341    .text.XMC_SCU_UnlockProtectedBits:00000000 $t
+    {standard input}:346    .text.XMC_SCU_UnlockProtectedBits:00000000 XMC_SCU_UnlockProtectedBits
+    {standard input}:378    .text.XMC_SCU_UnlockProtectedBits:0000001c $d
+    {standard input}:383    .text.XMC_SCU_SupplyMonitorInit:00000000 $t
+    {standard input}:388    .text.XMC_SCU_SupplyMonitorInit:00000000 XMC_SCU_SupplyMonitorInit
+    {standard input}:489    .text.XMC_SCU_SupplyMonitorInit:00000084 $d
+    {standard input}:495    .text.XMC_SCU_SetTempLowLimit:00000000 $t
+    {standard input}:500    .text.XMC_SCU_SetTempLowLimit:00000000 XMC_SCU_SetTempLowLimit
+    {standard input}:557    .text.XMC_SCU_SetTempLowLimit:00000044 $d
+    {standard input}:562    .text.XMC_SCU_SetTempHighLimit:00000000 $t
+    {standard input}:567    .text.XMC_SCU_SetTempHighLimit:00000000 XMC_SCU_SetTempHighLimit
+    {standard input}:624    .text.XMC_SCU_SetTempHighLimit:00000044 $d
+    {standard input}:629    .text.XMC_SCU_SetRawTempLimits:00000000 $t
+    {standard input}:634    .text.XMC_SCU_SetRawTempLimits:00000000 XMC_SCU_SetRawTempLimits
+    {standard input}:669    .text.XMC_SCU_SetRawTempLimits:00000020 $d
+    {standard input}:674    .text.XMC_SCU_StartTempMeasurement:00000000 $t
+    {standard input}:679    .text.XMC_SCU_StartTempMeasurement:00000000 XMC_SCU_StartTempMeasurement
+    {standard input}:707    .text.XMC_SCU_StartTempMeasurement:00000018 $d
+    {standard input}:712    .text.XMC_SCU_StopTempMeasurement:00000000 $t
+    {standard input}:717    .text.XMC_SCU_StopTempMeasurement:00000000 XMC_SCU_StopTempMeasurement
+    {standard input}:745    .text.XMC_SCU_StopTempMeasurement:00000018 $d
+    {standard input}:750    .text.XMC_SCU_HighTemperature:00000000 $t
+    {standard input}:755    .text.XMC_SCU_HighTemperature:00000000 XMC_SCU_HighTemperature
+    {standard input}:784    .text.XMC_SCU_HighTemperature:0000001c $d
+    {standard input}:789    .text.XMC_SCU_LowTemperature:00000000 $t
+    {standard input}:794    .text.XMC_SCU_LowTemperature:00000000 XMC_SCU_LowTemperature
+    {standard input}:819    .text.XMC_SCU_LowTemperature:00000014 $d
+    {standard input}:824    .text.XMC_SCU_GetTemperature:00000000 $t
+    {standard input}:829    .text.XMC_SCU_GetTemperature:00000000 XMC_SCU_GetTemperature
+    {standard input}:861    .text.XMC_SCU_GetTemperature:0000001c $d
+    {standard input}:866    .text.XMC_SCU_CalcTemperature:00000000 $t
+    {standard input}:871    .text.XMC_SCU_CalcTemperature:00000000 XMC_SCU_CalcTemperature
+    {standard input}:898    .text.XMC_SCU_CLOCK_Init:00000000 $t
+    {standard input}:903    .text.XMC_SCU_CLOCK_Init:00000000 XMC_SCU_CLOCK_Init
+    {standard input}:1283   .text.XMC_SCU_CLOCK_ScaleMCLKFrequency:00000000 XMC_SCU_CLOCK_ScaleMCLKFrequency
+    {standard input}:958    .text.XMC_SCU_CLOCK_Init:00000040 $d
+    {standard input}:964    .text.XMC_SCU_CLOCK_SetRtcClockSource:00000000 $t
+    {standard input}:969    .text.XMC_SCU_CLOCK_SetRtcClockSource:00000000 XMC_SCU_CLOCK_SetRtcClockSource
+    {standard input}:1006   .text.XMC_SCU_CLOCK_SetRtcClockSource:00000028 $d
+    {standard input}:1012   .text.XMC_SCU_CLOCK_SetFastPeripheralClockSource:00000000 $t
+    {standard input}:1017   .text.XMC_SCU_CLOCK_SetFastPeripheralClockSource:00000000 XMC_SCU_CLOCK_SetFastPeripheralClockSource
+    {standard input}:1054   .text.XMC_SCU_CLOCK_SetFastPeripheralClockSource:00000028 $d
+    {standard input}:1060   .text.XMC_SCU_CLOCK_GatePeripheralClock:00000000 $t
+    {standard input}:1065   .text.XMC_SCU_CLOCK_GatePeripheralClock:00000000 XMC_SCU_CLOCK_GatePeripheralClock
+    {standard input}:1103   .text.XMC_SCU_CLOCK_GatePeripheralClock:00000028 $d
+    {standard input}:1108   .text.XMC_SCU_CLOCK_UngatePeripheralClock:00000000 $t
+    {standard input}:1113   .text.XMC_SCU_CLOCK_UngatePeripheralClock:00000000 XMC_SCU_CLOCK_UngatePeripheralClock
+    {standard input}:1161   .text.XMC_SCU_CLOCK_UngatePeripheralClock:00000038 $d
+    {standard input}:1166   .text.XMC_SCU_CLOCK_IsPeripheralClockGated:00000000 $t
+    {standard input}:1171   .text.XMC_SCU_CLOCK_IsPeripheralClockGated:00000000 XMC_SCU_CLOCK_IsPeripheralClockGated
+    {standard input}:1207   .text.XMC_SCU_CLOCK_IsPeripheralClockGated:00000024 $d
+    {standard input}:1213   .text.XMC_SCU_CLOCK_SetMCLKFrequency:00000000 $t
+    {standard input}:1218   .text.XMC_SCU_CLOCK_SetMCLKFrequency:00000000 XMC_SCU_CLOCK_SetMCLKFrequency
+    {standard input}:1273   .text.XMC_SCU_CLOCK_SetMCLKFrequency:00000044 $d
+    {standard input}:1278   .text.XMC_SCU_CLOCK_ScaleMCLKFrequency:00000000 $t
+    {standard input}:1479   .text.XMC_SCU_CLOCK_lFrequencyDownScaling:00000000 XMC_SCU_CLOCK_lFrequencyDownScaling
+    {standard input}:1403   .text.XMC_SCU_CLOCK_lFrequencyUpScaling:00000000 XMC_SCU_CLOCK_lFrequencyUpScaling
+    {standard input}:1391   .text.XMC_SCU_CLOCK_ScaleMCLKFrequency:00000094 $d
+    {standard input}:1399   .text.XMC_SCU_CLOCK_lFrequencyUpScaling:00000000 $t
+    {standard input}:1468   .text.XMC_SCU_CLOCK_lFrequencyUpScaling:00000048 $d
+    {standard input}:1475   .text.XMC_SCU_CLOCK_lFrequencyDownScaling:00000000 $t
+    {standard input}:1552   .text.XMC_SCU_CLOCK_lFrequencyDownScaling:00000050 $d
+    {standard input}:1559   .text.XMC_SCU_CLOCK_GetPeripheralClockFrequency:00000000 $t
+    {standard input}:1564   .text.XMC_SCU_CLOCK_GetPeripheralClockFrequency:00000000 XMC_SCU_CLOCK_GetPeripheralClockFrequency
+    {standard input}:1587   .text.XMC_SCU_CLOCK_GetPeripheralClockFrequency:00000010 $d
+    {standard input}:1592   .text.XMC_SCU_CLOCK_GetFastPeripheralClockFrequency:00000000 $t
+    {standard input}:1597   .text.XMC_SCU_CLOCK_GetFastPeripheralClockFrequency:00000000 XMC_SCU_CLOCK_GetFastPeripheralClockFrequency
+    {standard input}:1628   .text.XMC_SCU_CLOCK_GetFastPeripheralClockFrequency:00000020 $d
+    {standard input}:1635   .text.XMC_SCU_CLOCK_CalibrateOscillatorOnTemperature:00000000 $t
+    {standard input}:1640   .text.XMC_SCU_CLOCK_CalibrateOscillatorOnTemperature:00000000 XMC_SCU_CLOCK_CalibrateOscillatorOnTemperature
+    {standard input}:1715   .text.XMC_SCU_CLOCK_CalibrateOscillatorOnTemperature:00000068 $d
+    {standard input}:1724   .text.XMC_SCU_INTERRUPT_SetEventHandler:00000000 $t
+    {standard input}:1729   .text.XMC_SCU_INTERRUPT_SetEventHandler:00000000 XMC_SCU_INTERRUPT_SetEventHandler
+    {standard input}:1806   .text.XMC_SCU_INTERRUPT_SetEventHandler:0000005c $d
+    {standard input}:1811   .text.XMC_SCU_IRQHandler:00000000 $t
+    {standard input}:1816   .text.XMC_SCU_IRQHandler:00000000 XMC_SCU_IRQHandler
+    {standard input}:1904   .text.XMC_SCU_IRQHandler:00000074 $d
+    {standard input}:1910   .text.XMC_SCU_SetBMI:00000000 $t
+    {standard input}:1915   .text.XMC_SCU_SetBMI:00000000 XMC_SCU_SetBMI
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+__aeabi_uidiv
+SystemCoreClockUpdate
+SystemCoreClock
+__aeabi_idiv

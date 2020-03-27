@@ -1,0 +1,559 @@
+   1              	# 1 "../Startup/startup_XMC1100.S"
+   1              	/**************************************************************************************************
+   0              	
+   0              	
+   0              	
+   2              	 * @file     startup_XMC1100.S
+   3              	 * @brief    CMSIS Core Device Startup File for Infineon XMC1100 Device Series
+   4              	 * @version  V1.15
+   5              	 * @date     05 Jan 2016
+   6              	 *
+   7              	 * @cond
+   8              	 **************************************************************************************************
+   9              	 * Copyright (c) 2012-2016, Infineon Technologies AG
+  10              	 * All rights reserved.                        
+  11              	 *                                             
+  12              	 * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13              	 * following conditions are met:   
+  14              	 *                                                                              
+  15              	 * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16              	 * disclaimer.                        
+  17              	 * 
+  18              	 * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19              	 * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20              	 * 
+  21              	 * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22              	 * products derived from this software without specific prior written permission.                  
+  23              	 *                                                                              
+  24              	 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25              	 * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26              	 * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27              	 * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28              	 * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29              	 * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30              	 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31              	 *                                                                              
+  32              	 * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33              	 * Infineon Technologies AG dave@infineon.com).                                                    
+  34              	 **************************************************************************************************
+  35              	 *
+  36              	 **************************** Change history ********************************
+  37              	 * V1.0, Oct, 02, 2012 PKB:Startup file for XMC1  
+  38              	 * V1.1, Oct, 19, 2012 PKB:ERU and MATH interrupt handlers  
+  39              	 * V1.2, Nov, 02, 2012 PKB:Renamed AllowPLLInitByStartup to AllowClkInitByStartup  
+  40              	 * V1.3, Dec, 11, 2012 PKB:Attributes of .XmcVeneerCode section changed  
+  41              	 * V1.4, Dec, 13, 2012 PKB:Removed unwanted interrupts/veneers  
+  42              	 * V1.5, Jan, 26, 2013 PKB:Corrected the SSW related entries  
+  43              	 * V1.6, Feb, 13, 2013 PKB:Relative path to Device_Data.h  
+  44              	 * V1.7, Feb, 19, 2013 PKB:Included XMC1100_SCU.inc
+  45              	 * V1.8, Jan, 24, 2014 PKB:Removed AllowClkInitStartup and DAVE Extended init
+  46              	 * V1.9, Feb, 05, 2014 PKB:Removed redundant alignment code from copy+clear funcs
+  47              	 * V1.10, Feb, 14, 2014 PKB:Added software_init_hook and hardware_init_hook
+  48              	 * V1.11, May, 06, 2014 JFT:__COPY_FLASH2RAM to initialize ram 
+  49              	 *                          Added ram_code section initialization
+  50              	 * V1.12, Sep, 29, 2014 JFT:One single default handler
+  51              	 *                          Device_Data.h not included, user may use CLKVAL1_SSW
+  52              	 *                          and CLKVAL2_SSW.
+  53              	 *                          software_init_hook and hardware_init_hook removed
+  54              	 *                          Misc optimizations
+  55              	 * V1.13, Dec, 11,2014 JFT:Default clocking changed, MCLK=32MHz and PCLK=64MHz
+  56              	 * V1.14, Sep, 03,2015 JFT:SSW default clocking changed, MCLK=8MHz and PCLK=16MHz avoid problems wi
+  57              	 * V1.15, Jan, 05,2016 JFT:Fix .reset section attributes
+  58              	 *
+  59              	 * @endcond 
+  60              	 */
+  61              	
+  62              	/*****************************************************************************
+  63              	 * <h> Clock system handling by SSW
+  64              	 *   <h> CLK_VAL1 Configuration
+  65              	 *    <o0.0..7>    FDIV Fractional Divider Selection
+  66              	 *    <i> Deafult: 0. Fractional part of clock divider, MCLK = DCO1 / (2 x (IDIV + (FDIV / 256)))
+  67              	 *    <o0.8..15>   IDIV Divider Selection (limited to 1-16)
+  68              	 *                    <0=> Divider is bypassed
+  69              	 *                    <1=> MCLK = 32 MHz
+  70              	 *                    <2=> MCLK = 16 MHz
+  71              	 *                    <3=> MCLK = 10.67 MHz
+  72              	 *                    <4=> MCLK = 8 MHz
+  73              	 *                    <254=> MCLK = 126 kHz
+  74              	 *                    <255=> MCLK = 125.5 kHz
+  75              	 *    <i> Deafult: 4. Interger part of clock divider, MCLK = DCO1 / (2 x (IDIV + (FDIV / 256))) = 8
+  76              	 *    <o0.16>      PCLKSEL PCLK Clock Select
+  77              	 *                    <0=> PCLK = MCLK
+  78              	 *                    <1=> PCLK = 2 x MCLK
+  79              	 *    <i> Deafult: 2 x MCLK
+  80              	 *    <o0.17..19>  RTCCLKSEL RTC Clock Select
+  81              	 *                    <0=> 32.768kHz standby clock
+  82              	 *                    <1=> 32.768kHz external clock from ERU0.IOUT0
+  83              	 *                    <2=> 32.768kHz external clock from ACMP0.OUT
+  84              	 *                    <3=> 32.768kHz external clock from ACMP1.OUT
+  85              	 *                    <4=> 32.768kHz external clock from ACMP2.OUT
+  86              	 *                    <5=> Reserved
+  87              	 *                    <6=> Reserved
+  88              	 *                    <7=> Reserved
+  89              	 *    <i> Deafult: 32.768kHz standby clock 
+  90              	 *    <o0.31>      do not move CLK_VAL1 to SCU_CLKCR[0..19]
+  91              	 *  </h>
+  92              	 *****************************************************************************/
+  93              	#define CLKVAL1_SSW 0x00010400
+  94              	
+  95              	/*****************************************************************************
+  96              	 *  <h> CLK_VAL2 Configuration
+  97              	 *    <o0.0>    disable VADC and SHS Gating
+  98              	 *    <o0.1>    disable CCU80 Gating
+  99              	 *    <o0.2>    disable CCU40 Gating
+ 100              	 *    <o0.3>    disable USIC0 Gating
+ 101              	 *    <o0.4>    disable BCCU0 Gating
+ 102              	 *    <o0.5>    disable LEDTS0 Gating
+ 103              	 *    <o0.6>    disable LEDTS1 Gating
+ 104              	 *    <o0.7>    disable POSIF0 Gating
+ 105              	 *    <o0.8>    disable MATH Gating
+ 106              	 *    <o0.9>    disable WDT Gating
+ 107              	 *    <o0.10>   disable RTC Gating
+ 108              	 *    <o0.31>   do not move CLK_VAL2 to SCU_CGATCLR0[0..10]
+ 109              	 *  </h>
+ 110              	 *****************************************************************************/
+ 111              	#define CLKVAL2_SSW 0x80000000
+ 112              	
+ 113              	/* A macro to define vector table entries */
+ 114              	.macro Entry Handler
+ 115              	    .long \Handler
+ 116              	.endm
+ 117              	
+ 118              	/* A couple of macros to ease definition of the various handlers */
+ 119              	.macro Insert_ExceptionHandler Handler_Func 
+ 120              	    .weak \Handler_Func
+ 121              	    .thumb_set \Handler_Func, Default_handler
+ 122              	.endm    
+ 123              	
+ 124              	/* ================== START OF VECTOR TABLE DEFINITION ====================== */
+ 125              	/* Vector Table - This is indirectly branched to through the veneers */
+ 126              	    .syntax unified   
+ 127              	    .cpu cortex-m0
+ 128              	
+ 129              	    .section .reset, "a", %progbits
+ 130              	    
+ 131              	 	.align 2
+ 132              	    
+ 133              	    .globl  __Vectors
+ 135              	__Vectors:
+ 136 0000 00000000 	    .long   __initial_sp                /* Top of Stack                 */
+ 137 0004 00000000 	    .long   Reset_Handler               /* Reset Handler                */
+ 138              	/* 
+ 139              	 * All entries below are redundant for M0, but are retained because they can
+ 140              	 * in the future be directly ported to M0 Plus devices.
+ 141              	 */
+ 142 0008 00000000 	    .long   0                           /* Reserved                     */
+ 143 000c 00000000 	    Entry   HardFault_Handler           /* Hard Fault Handler           */
+ 144 0010 00040100 	    .long   CLKVAL1_SSW                 /* Reserved                     */
+ 145 0014 00000080 	    .long   CLKVAL2_SSW                 /* Reserved                     */
+ 146              	#ifdef RETAIN_VECTOR_TABLE
+ 147              	    .long   0                           /* Reserved                     */
+ 148              	    .long   0                           /* Reserved                     */
+ 149              	    .long   0                           /* Reserved                     */
+ 150              	    .long   0                           /* Reserved                     */
+ 151              	    .long   0                           /* Reserved                     */
+ 152              	    Entry   SVC_Handler                 /* SVCall Handler               */
+ 153              	    .long   0                           /* Reserved                     */
+ 154              	    .long   0                           /* Reserved                     */
+ 155              	    Entry   PendSV_Handler              /* PendSV Handler               */
+ 156              	    Entry   SysTick_Handler             /* SysTick Handler              */
+ 157              	
+ 158              	    /* Interrupt Handlers for Service Requests (SR) from XMC1100 Peripherals */
+ 159              	    Entry   SCU_0_IRQHandler            /* Handler name for SR SCU_0     */
+ 160              	    Entry   SCU_1_IRQHandler            /* Handler name for SR SCU_1     */
+ 161              	    Entry   SCU_2_IRQHandler            /* Handler name for SR SCU_2     */
+ 162              	    Entry   ERU0_0_IRQHandler           /* Handler name for SR ERU0_0    */
+ 163              	    Entry   ERU0_1_IRQHandler           /* Handler name for SR ERU0_1    */
+ 164              	    Entry   ERU0_2_IRQHandler           /* Handler name for SR ERU0_2    */
+ 165              	    Entry   ERU0_3_IRQHandler           /* Handler name for SR ERU0_3    */
+ 166              	    .long   0                           /* Not Available                 */
+ 167              	    .long   0                           /* Not Available                 */
+ 168              	    Entry   USIC0_0_IRQHandler          /* Handler name for SR USIC0_0   */
+ 169              	    Entry   USIC0_1_IRQHandler          /* Handler name for SR USIC0_1   */
+ 170              	    Entry   USIC0_2_IRQHandler          /* Handler name for SR USIC0_2   */
+ 171              	    Entry   USIC0_3_IRQHandler          /* Handler name for SR USIC0_3   */
+ 172              	    Entry   USIC0_4_IRQHandler          /* Handler name for SR USIC0_4   */
+ 173              	    Entry   USIC0_5_IRQHandler          /* Handler name for SR USIC0_5   */
+ 174              	    Entry   VADC0_C0_0_IRQHandler       /* Handler name for SR VADC0_C0_0  */
+ 175              	    Entry   VADC0_C0_1_IRQHandler       /* Handler name for SR VADC0_C0_1  */
+ 176              	    .long   0                           /* Not Available                 */
+ 177              	    .long   0                           /* Not Available                 */
+ 178              	    .long   0                           /* Not Available                 */
+ 179              	    .long   0                           /* Not Available                 */
+ 180              	    Entry   CCU40_0_IRQHandler          /* Handler name for SR CCU40_0   */
+ 181              	    Entry   CCU40_1_IRQHandler          /* Handler name for SR CCU40_1   */
+ 182              	    Entry   CCU40_2_IRQHandler          /* Handler name for SR CCU40_2   */
+ 183              	    Entry   CCU40_3_IRQHandler          /* Handler name for SR CCU40_3   */
+ 184              	    .long   0                           /* Not Available                 */
+ 185              	    .long   0                           /* Not Available                 */
+ 186              	    .long   0                           /* Not Available                 */
+ 187              	    .long   0                           /* Not Available                 */
+ 188              	    .long   0                           /* Not Available                 */
+ 189              	    .long   0                           /* Not Available                 */
+ 190              	    .long   0                           /* Not Available                 */
+ 191              	#endif
+ 192              	
+ 194              	/* ================== END OF VECTOR TABLE DEFINITION ======================= */
+ 195              	
+ 196              	/* ================== START OF VECTOR ROUTINES ============================= */
+ 197              	
+ 198              	    .thumb 
+ 199              		.align 1
+ 200              	 
+ 201              	/* Reset Handler */
+ 202              	    .thumb_func 
+ 203              	    .globl  Reset_Handler
+ 205              	Reset_Handler: 
+ 206              	/* Initialize interrupt veneer */
+ 207 0018 1149     		ldr	r1, =eROData
+ 208 001a 124A     		ldr	r2, =VeneerStart
+ 209 001c 124B     		ldr	r3, =VeneerEnd
+ 210 001e 00F018F8 		bl  __copy_data
+ 211              	
+ 212 0022 1248     	    ldr  r0, =SystemInit
+ 213 0024 8047     	    blx  r0
+ 214              		
+ 215              	/* Initialize data */
+ 216 0026 1249     		ldr	r1, =DataLoadAddr
+ 217 0028 124A     		ldr	r2, =__data_start
+ 218 002a 134B     		ldr	r3, =__data_end
+ 219 002c 00F011F8 		bl  __copy_data
+ 220              	
+ 221              	/* RAM code */
+ 222 0030 1249     		ldr	r1, =__ram_code_load
+ 223 0032 134A     		ldr	r2, =__ram_code_start
+ 224 0034 134B     		ldr	r3, =__ram_code_end
+ 225 0036 00F00CF8 		bl  __copy_data
+ 226              	
+ 227              	/*  Define __SKIP_BSS_CLEAR to disable zeroing uninitialzed data in startup.
+ 228              	 *  The BSS section is specified by following symbols
+ 229              	 *    __bss_start__: start of the BSS section.
+ 230              	 *    __bss_end__: end of the BSS section.
+ 231              	 *
+ 232              	 *  Both addresses must be aligned to 4 bytes boundary.
+ 233              	 */
+ 234              	#ifndef __SKIP_BSS_CLEAR
+ 235 003a 1349     		ldr	r1, =__bss_start
+ 236 003c 134A     		ldr	r2, =__bss_end
+ 237              	
+ 238 003e 0020     		movs	r0, 0
+ 239              	
+ 240 0040 521A     		subs	r2, r1
+ 241 0042 02DD     		ble	.L_loop3_done
+ 242              	
+ 243              	.L_loop3:
+ 244 0044 043A     		subs	r2, #4
+ 245 0046 8850     		str	r0, [r1, r2]
+ 246 0048 FCDC     		bgt	.L_loop3
+ 247              	.L_loop3_done:
+ 248              	#endif /* __SKIP_BSS_CLEAR */
+ 249              	
+ 250              	#ifndef __SKIP_LIBC_INIT_ARRAY
+ 251 004a 1148     	    ldr  r0, =__libc_init_array
+ 252 004c 8047     	    blx  r0
+ 253              	#endif
+ 254              	
+ 255 004e 1148     	    ldr  r0, =main
+ 256 0050 8047     	    blx  r0
+ 257              	
+ 258              	    .thumb_func
+ 260              	__copy_data:
+ 261              	/*  The ranges of copy from/to are specified by following symbols
+ 262              	 *    r1: start of the section to copy from.
+ 263              	 *    r2: start of the section to copy to
+ 264              	 *    r3: end of the section to copy to
+ 265              	 *
+ 266              	 *  All addresses must be aligned to 4 bytes boundary.
+ 267              	 *  Uses r0
+ 268              	 */
+ 269 0052 9B1A     		subs	r3, r2
+ 270 0054 03DD     		ble	.L_loop_done
+ 271              	
+ 272              	.L_loop:
+ 273 0056 043B     		subs	r3, #4
+ 274 0058 C858     		ldr	r0, [r1,r3]
+ 275 005a D050     		str	r0, [r2,r3]
+ 276 005c FBDC     		bgt	.L_loop
+ 277              	
+ 278              	.L_loop_done:
+ 279 005e 7047     		bx  lr
+ 280              	
+ 281 0060 00000000 		.pool
+ 281      00000000 
+ 281      00000000 
+ 281      00000000 
+ 281      00000000 
+ 283              	/* ======================================================================== */
+ 284              	/* ========== START OF EXCEPTION HANDLER DEFINITION ======================== */
+ 285              	
+ 286              		.align 1
+ 287              	    
+ 288              	    .thumb_func
+ 289              	    .weak Default_handler
+ 291              	Default_handler:
+ 292 0098 FEE7     	    b  .
+ 294              	
+ 295              	    Insert_ExceptionHandler HardFault_Handler
+ 296              	    Insert_ExceptionHandler SVC_Handler
+ 297              	    Insert_ExceptionHandler PendSV_Handler
+ 298              	    Insert_ExceptionHandler SysTick_Handler
+ 299              	
+ 300              	    Insert_ExceptionHandler SCU_0_IRQHandler
+ 301              	    Insert_ExceptionHandler SCU_1_IRQHandler
+ 302              	    Insert_ExceptionHandler SCU_2_IRQHandler
+ 303              	    Insert_ExceptionHandler ERU0_0_IRQHandler
+ 304              	    Insert_ExceptionHandler ERU0_1_IRQHandler
+ 305              	    Insert_ExceptionHandler ERU0_2_IRQHandler
+ 306              	    Insert_ExceptionHandler ERU0_3_IRQHandler
+ 307              	    Insert_ExceptionHandler VADC0_C0_0_IRQHandler
+ 308              	    Insert_ExceptionHandler VADC0_C0_1_IRQHandler
+ 309              	    Insert_ExceptionHandler CCU40_0_IRQHandler
+ 310              	    Insert_ExceptionHandler CCU40_1_IRQHandler
+ 311              	    Insert_ExceptionHandler CCU40_2_IRQHandler
+ 312              	    Insert_ExceptionHandler CCU40_3_IRQHandler
+ 313              	    Insert_ExceptionHandler USIC0_0_IRQHandler
+ 314              	    Insert_ExceptionHandler USIC0_1_IRQHandler
+ 315              	    Insert_ExceptionHandler USIC0_2_IRQHandler
+ 316              	    Insert_ExceptionHandler USIC0_3_IRQHandler
+ 317              	    Insert_ExceptionHandler USIC0_4_IRQHandler
+ 318              	    Insert_ExceptionHandler USIC0_5_IRQHandler
+ 319              	   
+ 320              	/* ======================================================================== */
+ 321              	
+ 322              	/* ==================VENEERS VENEERS VENEERS VENEERS VENEERS=============== */
+ 323 009a 0000     	    .section ".XmcVeneerCode","ax",%progbits
+ 324              	    
+ 325              	    .align 1
+ 326              	    
+ 327              	    .globl HardFault_Veneer
+ 328              	HardFault_Veneer:
+ 329 0000 2C48     	    LDR R0, =HardFault_Handler
+ 330 0002 8746     	    MOV PC,R0
+ 331 0004 00000000 	    .long 0
+ 332 0008 00000000 	    .long 0
+ 333 000c 00000000 	    .long 0
+ 334 0010 00000000 	    .long 0
+ 335 0014 00000000 	    .long 0
+ 336 0018 00000000 	    .long 0
+ 337 001c 00000000 	    .long 0
+ 338              	    
+ 339              	/* ======================================================================== */
+ 340              	    .globl SVC_Veneer
+ 341              	SVC_Veneer:
+ 342 0020 2548     	    LDR R0, =SVC_Handler
+ 343 0022 8746     	    MOV PC,R0
+ 344 0024 00000000 	    .long 0
+ 345 0028 00000000 	    .long 0
+ 346              	/* ======================================================================== */
+ 347              	    .globl PendSV_Veneer
+ 348              	PendSV_Veneer:
+ 349 002c 2348     	    LDR R0, =PendSV_Handler
+ 350 002e 8746     	    MOV PC,R0
+ 351              	/* ======================================================================== */
+ 352              	    .globl SysTick_Veneer 
+ 353              	SysTick_Veneer:
+ 354 0030 2348     	    LDR R0, =SysTick_Handler
+ 355 0032 8746     	    MOV PC,R0
+ 356              	/* ======================================================================== */
+ 357              	    .globl SCU_0_Veneer 
+ 358              	SCU_0_Veneer:
+ 359 0034 2348     	    LDR R0, =SCU_0_IRQHandler
+ 360 0036 8746     	    MOV PC,R0
+ 361              	/* ======================================================================== */
+ 362              	    .globl SCU_1_Veneer 
+ 363              	SCU_1_Veneer:
+ 364 0038 2348     	    LDR R0, =SCU_1_IRQHandler
+ 365 003a 8746     	    MOV PC,R0
+ 366              	/* ======================================================================== */
+ 367              	    .globl SCU_2_Veneer
+ 368              	SCU_2_Veneer:
+ 369 003c 2348     	    LDR R0, =SCU_2_IRQHandler
+ 370 003e 8746     	    MOV PC,R0
+ 371              	/* ======================================================================== */
+ 372              	    .globl SCU_3_Veneer 
+ 373              	SCU_3_Veneer:
+ 374 0040 2348     	    LDR R0, =ERU0_0_IRQHandler
+ 375 0042 8746     	    MOV PC,R0
+ 376              	/* ======================================================================== */
+ 377              	    .globl SCU_4_Veneer 
+ 378              	SCU_4_Veneer:
+ 379 0044 2348     	    LDR R0, =ERU0_1_IRQHandler
+ 380 0046 8746     	    MOV PC,R0
+ 381              	/* ======================================================================== */
+ 382              	    .globl SCU_5_Veneer 
+ 383              	SCU_5_Veneer:
+ 384 0048 2348     	    LDR R0, =ERU0_2_IRQHandler
+ 385 004a 8746     	    MOV PC,R0
+ 386              	/* ======================================================================== */
+ 387              	    .globl SCU_6_Veneer 
+ 388              	SCU_6_Veneer:
+ 389 004c 2348     	    LDR R0, =ERU0_3_IRQHandler
+ 390 004e 8746     	    MOV PC,R0
+ 391 0050 00000000 	    .long 0
+ 392 0054 00000000 	    .long 0
+ 393              	/* ======================================================================== */
+ 394              	    .globl USIC0_0_Veneer
+ 395              	USIC0_0_Veneer:
+ 396 0058 2148     	    LDR R0, =USIC0_0_IRQHandler
+ 397 005a 8746     	    MOV PC,R0
+ 398              	/* ======================================================================== */
+ 399              	    .globl USIC0_1_Veneer
+ 400              	USIC0_1_Veneer:
+ 401 005c 2148     	    LDR R0, =USIC0_1_IRQHandler
+ 402 005e 8746     	    MOV PC,R0
+ 403              	/* ======================================================================== */
+ 404              	    .globl USIC0_2_Veneer
+ 405              	USIC0_2_Veneer:
+ 406 0060 2148     	    LDR R0, =USIC0_2_IRQHandler
+ 407 0062 8746     	    MOV PC,R0
+ 408              	/* ======================================================================== */
+ 409              	    .globl USIC0_3_Veneer
+ 410              	USIC0_3_Veneer:
+ 411 0064 2148     	    LDR R0, =USIC0_3_IRQHandler
+ 412 0066 8746     	    MOV PC,R0
+ 413              	/* ======================================================================== */
+ 414              	    .globl USIC0_4_Veneer
+ 415              	USIC0_4_Veneer:
+ 416 0068 2148     	    LDR R0, =USIC0_4_IRQHandler
+ 417 006a 8746     	    MOV PC,R0
+ 418              	/* ======================================================================== */
+ 419              	    .globl USIC0_5_Veneer
+ 420              	USIC0_5_Veneer:
+ 421 006c 2148     	    LDR R0, =USIC0_5_IRQHandler
+ 422 006e 8746     	    MOV PC,R0
+ 423              	/* ======================================================================== */
+ 424              	    .globl VADC0_C0_0_Veneer 
+ 425              	VADC0_C0_0_Veneer:
+ 426 0070 2148     	    LDR R0, =VADC0_C0_0_IRQHandler
+ 427 0072 8746     	    MOV PC,R0
+ 428              	/* ======================================================================== */
+ 429              	    .globl VADC0_C0_1_Veneer
+ 430              	VADC0_C0_1_Veneer:
+ 431 0074 2148     	    LDR R0, =VADC0_C0_1_IRQHandler
+ 432 0076 8746     	    MOV PC,R0
+ 433 0078 00000000 	    .long 0
+ 434 007c 00000000 	    .long 0
+ 435 0080 00000000 	    .long 0
+ 436 0084 00000000 	    .long 0
+ 437              	/* ======================================================================== */
+ 438              	    .globl CCU40_0_Veneer
+ 439              	CCU40_0_Veneer:
+ 440 0088 1D48     	    LDR R0, =CCU40_0_IRQHandler
+ 441 008a 8746     	    MOV PC,R0
+ 442              	/* ======================================================================== */
+ 443              	    .globl CCU40_1_Veneer
+ 444              	CCU40_1_Veneer:
+ 445 008c 1D48     	    LDR R0, =CCU40_1_IRQHandler
+ 446 008e 8746     	    MOV PC,R0
+ 447              	/* ======================================================================== */
+ 448              	    .globl CCU40_2_Veneer
+ 449              	CCU40_2_Veneer:
+ 450 0090 1D48     	    LDR R0, =CCU40_2_IRQHandler
+ 451 0092 8746     	    MOV PC,R0
+ 452              	/* ======================================================================== */
+ 453              	    .globl CCU40_3_Veneer
+ 454              	CCU40_3_Veneer:
+ 455 0094 1D48     	    LDR R0, =CCU40_3_IRQHandler
+ 456 0096 8746     	    MOV PC,R0
+ 457 0098 00000000 	    .long 0
+ 458 009c 00000000 	    .long 0
+ 459 00a0 00000000 	    .long 0
+ 460 00a4 00000000 	    .long 0
+ 461 00a8 00000000 	    .long 0
+ 462 00ac 00000000 	    .long 0
+ 463 00b0 00000000 	    .long 0
+ 464              	
+ 465              	/* ======================================================================== */
+ 466              	/* ======================================================================== */
+ 467              	
+ 468              	/* ============= END OF INTERRUPT HANDLER DEFINITION ======================== */
+ 469              	
+ 470 00b4 00000000 	    .end
+ 470      00000000 
+ 470      00000000 
+ 470      00000000 
+ 470      00000000 
+DEFINED SYMBOLS
+../Startup/startup_XMC1100.S:131    .reset:00000000 $d
+../Startup/startup_XMC1100.S:135    .reset:00000000 __Vectors
+../Startup/startup_XMC1100.S:205    .reset:00000018 Reset_Handler
+../Startup/startup_XMC1100.S:291    .reset:00000098 HardFault_Handler
+../Startup/startup_XMC1100.S:207    .reset:00000018 $t
+../Startup/startup_XMC1100.S:260    .reset:00000052 __copy_data
+../Startup/startup_XMC1100.S:281    .reset:00000060 $d
+../Startup/startup_XMC1100.S:291    .reset:00000098 Default_handler
+../Startup/startup_XMC1100.S:292    .reset:00000098 $t
+../Startup/startup_XMC1100.S:291    .reset:00000098 SVC_Handler
+../Startup/startup_XMC1100.S:291    .reset:00000098 PendSV_Handler
+../Startup/startup_XMC1100.S:291    .reset:00000098 SysTick_Handler
+../Startup/startup_XMC1100.S:291    .reset:00000098 SCU_0_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 SCU_1_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 SCU_2_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 ERU0_0_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 ERU0_1_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 ERU0_2_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 ERU0_3_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 VADC0_C0_0_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 VADC0_C0_1_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 CCU40_0_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 CCU40_1_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 CCU40_2_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 CCU40_3_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 USIC0_0_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 USIC0_1_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 USIC0_2_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 USIC0_3_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 USIC0_4_IRQHandler
+../Startup/startup_XMC1100.S:291    .reset:00000098 USIC0_5_IRQHandler
+../Startup/startup_XMC1100.S:325    .XmcVeneerCode:00000000 $t
+../Startup/startup_XMC1100.S:328    .XmcVeneerCode:00000000 HardFault_Veneer
+../Startup/startup_XMC1100.S:331    .XmcVeneerCode:00000004 $d
+../Startup/startup_XMC1100.S:341    .XmcVeneerCode:00000020 SVC_Veneer
+../Startup/startup_XMC1100.S:342    .XmcVeneerCode:00000020 $t
+../Startup/startup_XMC1100.S:344    .XmcVeneerCode:00000024 $d
+../Startup/startup_XMC1100.S:348    .XmcVeneerCode:0000002c PendSV_Veneer
+../Startup/startup_XMC1100.S:349    .XmcVeneerCode:0000002c $t
+../Startup/startup_XMC1100.S:353    .XmcVeneerCode:00000030 SysTick_Veneer
+../Startup/startup_XMC1100.S:358    .XmcVeneerCode:00000034 SCU_0_Veneer
+../Startup/startup_XMC1100.S:363    .XmcVeneerCode:00000038 SCU_1_Veneer
+../Startup/startup_XMC1100.S:368    .XmcVeneerCode:0000003c SCU_2_Veneer
+../Startup/startup_XMC1100.S:373    .XmcVeneerCode:00000040 SCU_3_Veneer
+../Startup/startup_XMC1100.S:378    .XmcVeneerCode:00000044 SCU_4_Veneer
+../Startup/startup_XMC1100.S:383    .XmcVeneerCode:00000048 SCU_5_Veneer
+../Startup/startup_XMC1100.S:388    .XmcVeneerCode:0000004c SCU_6_Veneer
+../Startup/startup_XMC1100.S:391    .XmcVeneerCode:00000050 $d
+../Startup/startup_XMC1100.S:395    .XmcVeneerCode:00000058 USIC0_0_Veneer
+../Startup/startup_XMC1100.S:396    .XmcVeneerCode:00000058 $t
+../Startup/startup_XMC1100.S:400    .XmcVeneerCode:0000005c USIC0_1_Veneer
+../Startup/startup_XMC1100.S:405    .XmcVeneerCode:00000060 USIC0_2_Veneer
+../Startup/startup_XMC1100.S:410    .XmcVeneerCode:00000064 USIC0_3_Veneer
+../Startup/startup_XMC1100.S:415    .XmcVeneerCode:00000068 USIC0_4_Veneer
+../Startup/startup_XMC1100.S:420    .XmcVeneerCode:0000006c USIC0_5_Veneer
+../Startup/startup_XMC1100.S:425    .XmcVeneerCode:00000070 VADC0_C0_0_Veneer
+../Startup/startup_XMC1100.S:430    .XmcVeneerCode:00000074 VADC0_C0_1_Veneer
+../Startup/startup_XMC1100.S:433    .XmcVeneerCode:00000078 $d
+../Startup/startup_XMC1100.S:439    .XmcVeneerCode:00000088 CCU40_0_Veneer
+../Startup/startup_XMC1100.S:440    .XmcVeneerCode:00000088 $t
+../Startup/startup_XMC1100.S:444    .XmcVeneerCode:0000008c CCU40_1_Veneer
+../Startup/startup_XMC1100.S:449    .XmcVeneerCode:00000090 CCU40_2_Veneer
+../Startup/startup_XMC1100.S:454    .XmcVeneerCode:00000094 CCU40_3_Veneer
+../Startup/startup_XMC1100.S:457    .XmcVeneerCode:00000098 $d
+                   .debug_aranges:0000000c $d
+../Startup/startup_XMC1100.S:323    .reset:0000009a $d
+
+UNDEFINED SYMBOLS
+__initial_sp
+eROData
+VeneerStart
+VeneerEnd
+SystemInit
+DataLoadAddr
+__data_start
+__data_end
+__ram_code_load
+__ram_code_start
+__ram_code_end
+__bss_start
+__bss_end
+__libc_init_array
+main

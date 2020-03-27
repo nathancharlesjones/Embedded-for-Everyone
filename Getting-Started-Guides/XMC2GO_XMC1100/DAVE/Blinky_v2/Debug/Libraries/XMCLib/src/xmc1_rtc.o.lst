@@ -1,0 +1,1859 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,6
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "xmc1_rtc.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.XMC_RTC_IsRunning,"ax",%progbits
+  18              	 .align 2
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	XMC_RTC_IsRunning:
+  23              	.LFB42:
+  24              	 .file 1 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc/xmc_rtc.h"
+   1:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+   2:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @file xmc_rtc.h
+   3:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @date 2016-05-19
+   4:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+   5:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @cond
+   6:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+   7:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMClib v2.1.18 - XMC Peripheral Driver Library 
+   8:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+   9:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Copyright (c) 2015-2018, Infineon Technologies AG
+  10:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * All rights reserved.                        
+  11:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                                             
+  12:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * following conditions are met:   
+  14:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                                                                              
+  15:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * disclaimer.                        
+  17:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * 
+  18:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * 
+  21:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * products derived from this software without specific prior written permission.                  
+  23:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                                                                              
+  24:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                                                                              
+  32:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+  35:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+  36:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Change History
+  37:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * --------------
+  38:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+  39:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * 2015-02-20:
+  40:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *     - Initial
+  41:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *      
+  42:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * 2015-05-20:
+  43:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *     - Documentation updates <br>
+  44:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *     - In xmc1_rtc file XMC_RTC_Init function
+  45:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *       is modified by adding the RTC running condition check
+  46:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *   
+  47:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * 2015-06-20:
+  48:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *     - Removed version macros and declaration of GetDriverVersion API
+  49:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+  50:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * 2016-05-19:
+  51:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *     - Added XMC_RTC_SetTimeStdFormat() and XMC_RTC_SetAlarmStdFormat()
+  52:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+  53:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @endcond 
+  54:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+  55:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+  56:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+  57:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #ifndef XMC_RTC_H
+  58:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #define XMC_RTC_H
+  59:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+  60:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**************************************************************************************************
+  61:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * HEADER FILES
+  62:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+  63:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+  64:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #include <xmc_common.h>
+  65:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #include <time.h>
+  66:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+  67:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+  68:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+  69:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @addtogroup XMClib XMC Peripheral Library
+  70:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @{
+  71:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+  72:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+  73:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+  74:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @addtogroup RTC
+  75:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @brief RTC driver for XMC microcontroller family.
+  76:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+  77:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Real-time clock (RTC) is a clock that keeps track of the current time. Precise
+  78:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * real time keeping is with a 32.768 KHz external crystal clock or a 32.768 KHz
+  79:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * high precision internal clock. It provides a periodic time based interrupt and
+  80:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * a programmable alarm interrupt on time match. It also supports wakeup from
+  81:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * hibernate.
+  82:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+  83:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The RTC low level driver provides functions to configure and initialize the RTC
+  84:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * hardware peripheral. 
+  85:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * 
+  86:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @{
+  87:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+  88:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+  89:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**************************************************************************************************
+  90:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * MACROS
+  91:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+  92:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+  93:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**************************************************************************************************
+  94:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * ENUMS
+  95:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+  96:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+  97:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+  98:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *  Status return values for RTC low level driver
+  99:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+ 100:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** typedef enum XMC_RTC_STATUS
+ 101:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** {
+ 102:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_STATUS_OK    = 0U, /**< Operation successful */
+ 103:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_STATUS_ERROR = 1U, /**< Operation unsuccessful */
+ 104:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_STATUS_BUSY  = 2U  /**< Busy with a previous request */
+ 105:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_STATUS_t;
+ 106:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 107:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 108:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Events which enables interrupt request generation
+ 109:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+ 110:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** typedef enum XMC_RTC_EVENT
+ 111:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** {
+ 112:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_SECONDS = RTC_MSKSR_MPSE_Msk, /**< Mask value to enable an event on period
+ 113:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_MINUTES = RTC_MSKSR_MPMI_Msk, /**< Mask value to enable an event on period
+ 114:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_HOURS   = RTC_MSKSR_MPHO_Msk, /**< Mask value to enable an event on period
+ 115:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_DAYS    = RTC_MSKSR_MPDA_Msk, /**< Mask value to enable an event on period
+ 116:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_MONTHS  = RTC_MSKSR_MPMO_Msk, /**< Mask value to enable an event on period
+ 117:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_YEARS   = RTC_MSKSR_MPYE_Msk, /**< Mask value to enable an event on period
+ 118:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_ALARM            = RTC_MSKSR_MAI_Msk   /**< Mask value to enable an event on period
+ 119:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_EVENT_t;
+ 120:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 121:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 122:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *  Months used to program the date  
+ 123:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+ 124:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** typedef enum XMC_RTC_MONTH
+ 125:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** {
+ 126:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_JANUARY   = 0U, 
+ 127:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_FEBRUARY  = 1U,     
+ 128:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_MARCH     = 2U,         
+ 129:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_APRIL     = 3U,       
+ 130:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_MAY       = 4U,         
+ 131:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_JUNE      = 5U,         
+ 132:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_JULY      = 6U,           
+ 133:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_AUGUST    = 7U,         
+ 134:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_SEPTEMBER = 8U,    
+ 135:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_OCTOBER   = 9U,      
+ 136:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_NOVEMBER  = 10U,     
+ 137:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_DECEMBER  = 11U     
+ 138:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_MONTH_t;
+ 139:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 140:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 141:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *  Week days used program the date 
+ 142:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+ 143:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** typedef enum XMC_RTC_WEEKDAY
+ 144:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** {
+ 145:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_SUNDAY    = 0U, 
+ 146:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_MONDAY    = 1U,      
+ 147:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_TUESDAY   = 2U,      
+ 148:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_WEDNESDAY = 3U,    
+ 149:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_THURSDAY  = 4U,     
+ 150:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_FRIDAY    = 5U,       
+ 151:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_SATURDAY  = 6U      
+ 152:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_WEEKDAY_t;
+ 153:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 154:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**************************************************************************************************
+ 155:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * DATA STRUCTURES
+ 156:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+ 157:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /*Anonymous structure/union guard start*/
+ 158:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #if defined(__CC_ARM)
+ 159:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   #pragma push
+ 160:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   #pragma anon_unions
+ 161:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #elif defined(__TASKING__)
+ 162:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   #pragma warning 586
+ 163:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #endif
+ 164:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 165:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 166:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 167:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Alarm time values of RTC  <br>
+ 168:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 169:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The structure presents a convenient way to set/obtain the 
+ 170:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * alarm time values for seconds, minutes, hours, days, month and year of RTC. 
+ 171:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The XMC_RTC_SetAlarm() and XMC_RTC_GetAlarm() can be
+ 172:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * used to populate the structure with the alarm time value of
+ 173:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * RTC 
+ 174:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */ 
+ 175:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** typedef struct XMC_RTC_ALARM
+ 176:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** {
+ 177:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   union
+ 178:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   {
+ 179:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  uint32_t raw0;
+ 180:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  struct
+ 181:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  {
+ 182:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t seconds  : 6; /**< Alarm seconds compare value (0-59: Above this causes this bitfield
+ 183:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 2; 
+ 184:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t minutes  : 6; /**< Alarm minutes compare value (0-59: Above this causes this bitfield
+ 185:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 2;
+ 186:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t hours    : 5; /**< Alarm hours compare value   (0-23: Above this causes this bitfield
+ 187:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 3;
+ 188:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t days     : 5; /**< Alarm days compare value (0-Actual days of month: Above this cause
+ 189:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 3;
+ 190:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  };
+ 191:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   };
+ 192:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 193:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   union
+ 194:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   {
+ 195:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****     uint32_t raw1;
+ 196:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  struct
+ 197:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  {
+ 198:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 8;
+ 199:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t month    : 4; /**< Alarm month compare value (0-11: Above this causes this bitfield t
+ 200:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 4;
+ 201:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t year     : 16; /**< Alarm year compare value */ 
+ 202:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  };
+ 203:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   };
+ 204:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_ALARM_t;
+ 205:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 206:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 207:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Time values of RTC  <br>
+ 208:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 209:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The structure presents a convenient way to set/obtain the 
+ 210:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * time values for seconds, minutes, hours, days, month and year of RTC. 
+ 211:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The XMC_RTC_SetTime() and XMC_RTC_GetTime() can be
+ 212:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * used to populate the structure with the time value of
+ 213:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * RTC 
+ 214:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */ 
+ 215:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** typedef struct XMC_RTC_TIME
+ 216:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** {
+ 217:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   union
+ 218:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   {
+ 219:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****     uint32_t raw0;
+ 220:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  struct
+ 221:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  {
+ 222:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t seconds  : 6; /**< Seconds time value (0-59: Above this causes this bitfield to be se
+ 223:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 2; 
+ 224:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t minutes  : 6; /**< Minutes time value (0-59: Above this causes this bitfield to be se
+ 225:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 2;
+ 226:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t hours    : 5; /**< Hours time value   (0-23: Above this causes this bitfield to be se
+ 227:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 3;
+ 228:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t days     : 5; /**< Days time value (0-Actual days of month: Above this causes this bi
+ 229:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 3;
+ 230:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  };
+ 231:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   };
+ 232:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 233:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   union
+ 234:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   {
+ 235:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****     uint32_t raw1;
+ 236:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  struct
+ 237:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	  {
+ 238:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t daysofweek  : 3; /**< Days of week time value (0-6: Above this causes this bitfield t
+ 239:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t             : 5;
+ 240:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t month       : 4; /**< Month time value       (0-11: Above this causes this bitfield t
+ 241:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t             : 4;
+ 242:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	    uint32_t year        : 16; /**< Year time value */
+ 243:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 	 };
+ 244:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   };
+ 245:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_TIME_t;
+ 246:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /*Anonymous structure/union guard end*/
+ 247:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #if defined(__CC_ARM)
+ 248:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   #pragma pop
+ 249:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #elif defined(__TASKING__)
+ 250:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   #pragma warning restore
+ 251:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #endif
+ 252:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 253:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 254:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * RTC initialization with time, alarm and clock divider(prescaler) configurations <br>
+ 255:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 256:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The structure presents a convenient way to set/obtain the time and alarm configurations  
+ 257:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * for RTC. The XMC_RTC_Init() can be used to populate the structure with the time and alarm
+ 258:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * values of RTC.
+ 259:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */  
+ 260:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** typedef struct XMC_RTC_CONFIG
+ 261:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** {
+ 262:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_TIME_t    time;
+ 263:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_ALARM_t   alarm;
+ 264:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   uint16_t          prescaler;
+ 265:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_CONFIG_t;
+ 266:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 267:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /*******************************************************************************
+ 268:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * EXTENSIONS
+ 269:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *******************************************************************************/
+ 270:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 271:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #if UC_FAMILY == XMC1
+ 272:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #include "xmc1_rtc.h"
+ 273:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #endif
+ 274:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 275:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #if UC_FAMILY == XMC4
+ 276:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #include "xmc4_rtc.h"
+ 277:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #endif
+ 278:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 279:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /*******************************************************************************
+ 280:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * API PROTOTYPES
+ 281:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+ 282:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 283:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #ifdef __cplusplus
+ 284:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** extern "C" {
+ 285:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** #endif
+ 286:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 287:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 288:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param config Constant pointer to a constant ::XMC_RTC_CONFIG_t structure containing the
+ 289:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *               time, alarm time and clock divider(prescaler) configuration. 
+ 290:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return XMC_RTC_STATUS_t Always returns XMC_RTC_STATUS_OK (It contains only register assignment 
+ 291:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 292:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 293:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Initialize the RTC peripheral <br>
+ 294:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 295:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par \if XMC4
+ 296:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function enables the hibernate domain for accessing RTC peripheral registers, configures 
+ 297:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * internal clock divider, time and alarm values by writing to the CTR.DIV, TIM0, TIM1, ATIM0 and
+ 298:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * ATIM1 registers.
+ 299:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 300:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 301:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \if XMC1
+ 302:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function ungates the peripheral clock for RTC, configures 
+ 303:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * internal clock divider, time and alarm values by writing to the CTR.DIV, TIM0, TIM1, ATIM0 and
+ 304:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * ATIM1 registers.
+ 305:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 306:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+ 307:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** XMC_RTC_STATUS_t XMC_RTC_Init(const XMC_RTC_CONFIG_t *const config);
+ 308:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 309:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /** 
+ 310:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 311:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 312:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description</b><br>
+ 313:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Enables RTC peripheral for programming its registers <br>
+ 314:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 315:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par \if XMC4
+ 316:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Enables the hibernate domain for accessing RTC peripheral registers.
+ 317:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 318:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 319:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \if XMC1
+ 320:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Ungates the peripheral clock.
+ 321:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 322:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 323:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 324:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Disable(), XMC_SCU_RESET_DeassertPeripheralReset()
+ 325:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */ 
+ 326:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_Enable(void);
+ 327:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 328:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /** 
+ 329:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 330:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 331:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description</b><br>
+ 332:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Disables RTC peripheral for programming its registers <br>
+ 333:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 334:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par \if XMC4
+ 335:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Empty function (Hibernate domain is not disabled).
+ 336:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 337:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 338:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \if XMC1
+ 339:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Gates the peripheral clock.
+ 340:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 341:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 342:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 343:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Enable(), XMC_SCU_RESET_AssertPeripheralReset()
+ 344:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */ 
+ 345:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_Disable(void);
+ 346:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 347:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /** 
+ 348:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 349:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 350:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description</b><br>
+ 351:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Checks RTC peripheral is enabled for programming its registers <br>
+ 352:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 353:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par \if XMC4
+ 354:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Checks the hibernate domain is enabled or not.
+ 355:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 356:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 357:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \if XMC1
+ 358:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Checks peripheral clock is ungated or not.
+ 359:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 360:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 361:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 362:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Enable(), XMC_RTC_Disable(), XMC_SCU_RESET_DeassertPeripheralReset(),
+ 363:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_SCU_RESET_AssertPeripheralReset()
+ 364:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */ 
+ 365:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** bool XMC_RTC_IsEnabled(void);
+ 366:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  
+ 367:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 368:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 369:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 370:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description</b><br>
+ 371:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Enables RTC peripheral to start counting time <br>
+ 372:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 373:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 374:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function starts the RTC for counting time by setting 
+ 375:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * CTR.ENB bit. Before starting the RTC, it should not be in
+ 376:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * running mode and also hibernate domain should be enabled.
+ 377:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 378:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 379:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Enable(), XMC_RTC_Stop(), XMC_SCU_RESET_DeassertPeripheralReset()
+ 380:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */  
+ 381:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_Start(void);
+ 382:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 383:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 384:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 385:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 386:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description</b><br>
+ 387:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Disables RTC peripheral to start counting time <br>
+ 388:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 389:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 390:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function stops the RTC for counting time by resetting 
+ 391:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * CTR.ENB. Before stopping the RTC, hibernate domain should be enabled.
+ 392:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 393:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 394:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Enable(), XMC_RTC_Start(), XMC_SCU_RESET_AssertPeripheralReset()
+ 395:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */  
+ 396:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_Stop(void);
+ 397:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   
+ 398:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 399:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param prescaler Prescaler value to be set                 
+ 400:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 401:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 402:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 403:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Sets the RTC module prescaler value <br>
+ 404:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 405:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 406:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function sets the CTR.DIV bitfield to configure the prescalar value. 
+ 407:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The default value for the prescalar with the 32.768kHz crystal (or the internal clock) 
+ 408:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * is 7FFFH for a time interval of 1 sec. Before setting the prescaler value RTC should be
+ 409:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * in stop mode and hibernate domain should be enabled.
+ 410:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 411:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 412:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Stop(), XMC_RTC_Enable(), XMC_RTC_GetPrescaler()
+ 413:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */   
+ 414:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_SetPrescaler(uint16_t prescaler);
+ 415:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 416:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 417:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 418:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 419:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 420:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC module prescaler value <br>
+ 421:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 422:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 423:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function reads the CTR.DIV bitfield to get the prescalar value. The default value 
+ 424:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * for the prescalar with the 32.768kHz crystal (or the internal clock) is 7FFFH for a 
+ 425:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * time interval of 1 sec.
+ 426:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 427:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 428:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetPrescaler()
+ 429:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */   
+ 430:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** __STATIC_INLINE uint32_t XMC_RTC_GetPrescaler(void)
+ 431:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** {
+ 432:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   return (uint32_t)(((uint32_t)RTC->CTR & (uint32_t)RTC_CTR_DIV_Msk) >> (uint32_t)RTC_CTR_DIV_Pos);
+ 433:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** }
+ 434:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 435:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 436:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param timeval Contstant pointer to a constant ::XMC_RTC_TIME_t structure containing the
+ 437:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                time parameters seconds, minutes, hours, days, daysofweek, month and year.     
+ 438:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 439:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 440:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 441:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Sets the RTC module time values <br>
+ 442:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 443:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 444:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function sets the TIM0, TIM1 registers with time values.
+ 445:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The values can only be written when RTC is disabled.
+ 446:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_TIME_t for the valid range of time value parameters. <br>
+ 447:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 448:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 449:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_GetTime(), XMC_RTC_Stop() 
+ 450:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */    
+ 451:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_SetTime(const XMC_RTC_TIME_t *const timeval);
+ 452:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 453:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 454:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param time Pointer to a constant ::XMC_RTC_TIME_t structure containing the time parameters
+ 455:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *             seconds, minutes, hours, days, daysofweek, month and year. 
+ 456:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 457:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 458:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 459:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC module time value <br>
+ 460:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 461:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 462:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function gets the time values from TIM0, TIM1 registers. 
+ 463:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_TIME_t for the valid range of time value parameters. <br>
+ 464:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 465:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 466:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetTime()
+ 467:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */    
+ 468:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_GetTime(XMC_RTC_TIME_t *const time);
+ 469:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 470:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 471:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param stdtime Pointer to a ::tm structure containing the time parameters seconds,
+ 472:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                minutes, hours, days, daysofweek, month, year(since 1900) and days in a   
+ 473:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                year in standard format.           
+ 474:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 475:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 476:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 477:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Sets the RTC module time value in standard format <br>
+ 478:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 479:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 480:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function sets the time values from TIM0, TIM1 registers. 
+ 481:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 482:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 483:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetTime(), XMC_RTC_GetTime()
+ 484:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */     
+ 485:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_SetTimeStdFormat(const struct tm *const stdtime);
+ 486:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 487:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 488:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param stdtime Pointer to a constant ::tm structure containing the time parameters seconds,
+ 489:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                minutes, hours, days, daysofweek, month, year(since 1900) and days in a   
+ 490:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                year in standard format.           
+ 491:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 492:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 493:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 494:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC module time value in standard format <br>
+ 495:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 496:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 497:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function gets the time values from TIM0, TIM1 registers. 
+ 498:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_TIME_t for the valid range of time value parameters. <br>
+ 499:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * For days the valid range is (1 - Actual days of month), year (since 1900) and 
+ 500:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * daysinyear (0 -365).
+ 501:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 502:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 503:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetTime(), XMC_RTC_GetTime()
+ 504:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */     
+ 505:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_GetTimeStdFormat(struct tm *const stdtime);
+ 506:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 507:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 508:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param alarm Constant pointer to a constant ::XMC_RTC_ALARM_t structure containing the
+ 509:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                alarm time parameters alarm seconds, alarm minutes, alarm hours, alarm days, 
+ 510:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                alarm daysofweek, alarm month and alarm year.           
+ 511:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 512:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 513:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 514:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Sets the RTC module alarm time value <br>
+ 515:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 516:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 517:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function sets the ATIM0, ATIM1 registers with alarm time values. 
+ 518:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_ALARM_t for the valid range of alarm time value parameters. <br>
+ 519:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 520:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 521:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_GetAlarm()
+ 522:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */     
+ 523:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_SetAlarm(const XMC_RTC_ALARM_t *const alarm);
+ 524:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 525:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 526:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param alarm Pointer to a constant ::XMC_RTC_ALARM_t structure containing the
+ 527:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *             time parameters alarm seconds, alarm minutes, alarm hours, alarm days, 
+ 528:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *             alarm daysofweek, alarm month and alarm year.           
+ 529:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 530:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 531:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 532:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC module alarm time value <br>
+ 533:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 534:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 535:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function gets the alarm time values from ATIM0, ATIM1 registers. 
+ 536:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_ALARM_t for the valid range of alarm time value parameters. <br>
+ 537:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 538:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 539:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetAlarm()
+ 540:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */    
+ 541:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_GetAlarm(XMC_RTC_ALARM_t *const alarm);
+ 542:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 543:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 544:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param stdtime Pointer to a ::tm structure containing the time parameters alarm seconds,
+ 545:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                alarm minutes, alarm hours, alarm days, alarm daysofweek, alarm month,  
+ 546:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                alarm year(since 1900) and alarm days in a year in standard format.           
+ 547:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 548:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 549:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 550:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Sets the RTC module alarm time value in standard format <br>
+ 551:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 552:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 553:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function sets the alarm time values from ATIM0, ATIM1 registers. 
+ 554:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 555:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 556:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetAlarm(), XMC_RTC_GetAlarm()
+ 557:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */     
+ 558:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_SetAlarmStdFormat(const struct tm *const stdtime);
+ 559:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 560:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 561:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param stdtime Pointer to a constant ::tm structure containing the time parameters alarm seconds
+ 562:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                alarm minutes, alarm hours, alarm days, alarm daysofweek, alarm month,  
+ 563:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *                alarm year(since 1900) and alarm days in a year in standard format.           
+ 564:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 565:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 566:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 567:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC module alarm time value in standard format <br>
+ 568:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 569:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 570:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function gets the alarm time values from ATIM0, ATIM1 registers. 
+ 571:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_ALARM_t for the valid range of alarm time value parameters. <br>
+ 572:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * For days the valid range is (1 - Actual days of month), year (since 1900) and 
+ 573:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * daysinyear (0 -365).
+ 574:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 575:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 576:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetAlarm(), XMC_RTC_GetAlarm()
+ 577:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */     
+ 578:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_GetAlarmStdFormat(struct tm *const stdtime);
+ 579:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 580:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 581:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param event A valid RTC event (::XMC_RTC_EVENT_t) or a valid combination of
+ 582:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *              logically OR'd events
+ 583:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 584:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 585:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 586:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Enable RTC periodic and alarm event(s) <br>
+ 587:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 588:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 589:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function sets the bitfields of MSKSR register to enable interrupt generation 
+ 590:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * for requested RTC event(s). 
+ 591:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Setting the masking value for the event(s) containing in the ::XMC_RTC_EVENT_t leads 
+ 592:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * to a generation of the interrupt.
+ 593:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 594:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 595:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_DisableEvent()
+ 596:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+ 597:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_EnableEvent(const uint32_t event);
+ 598:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 599:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 600:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param event A valid RTC event (::XMC_RTC_EVENT_t) or a valid combination of
+ 601:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *              logically OR'd events
+ 602:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 603:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 604:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 605:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Disable RTC periodic and alarm event(s) <br>
+ 606:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 607:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 608:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function resets the bitfields of MSKSR register to disable interrupt generation 
+ 609:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * for requested RTC event(s). 
+ 610:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Resetting the masking value for the the event(s) containing in the ::XMC_RTC_EVENT_t blocks 
+ 611:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * the generation of the interrupt.
+ 612:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * 
+ 613:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 614:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_EnableEvent()
+ 615:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+ 616:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_DisableEvent(const uint32_t event);
+ 617:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 618:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 619:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @param event A valid RTC event (::XMC_RTC_EVENT_t) or a valid combination of
+ 620:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *              logically OR'd events
+ 621:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 622:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 623:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 624:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Clears periodic and alarm event(s) status <br>
+ 625:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 626:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 627:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function sets the bitfields of CLRSR register to clear status bits in RAWSTAT and STSSR regi
+ 628:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Setting the value for the the RTC event(s) containing in the ::XMC_RTC_EVENT_t clears the 
+ 629:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * corresponding status bits in RAWSTAT and STSSR registers.
+ 630:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * 
+ 631:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 632:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_GetEventStatus()
+ 633:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */ 
+ 634:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_ClearEvent(const uint32_t event);
+ 635:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 636:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 637:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 638:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 639:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 640:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC periodic and alarm event(s) status <br>
+ 641:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 642:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 643:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function reads the bitfields of STSSR register 
+ 644:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * to get the status of RTC events. 
+ 645:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Reading the value of the register STSSR gives the status of the event(s) containing in the ::XMC
+ 646:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * 
+ 647:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 648:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_ClearEvent()
+ 649:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */
+ 650:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** uint32_t XMC_RTC_GetEventStatus(void);
+ 651:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** 
+ 652:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** /**
+ 653:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * @return bool true if RTC is running
+ 654:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *              false if RTC is not running
+ 655:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 656:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 657:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * Checks the running status of the RTC <br>
+ 658:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 659:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par
+ 660:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * The function reads the bitfield ENB of CTR register 
+ 661:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * to get the running status of RTC. 
+ 662:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  *
+ 663:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 664:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Start(), XMC_RTC_Stop()
+ 665:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****  */ 
+ 666:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** __STATIC_INLINE bool XMC_RTC_IsRunning(void)
+ 667:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** {
+  25              	 .loc 1 667 0
+  26              	 .cfi_startproc
+  27 0000 80B5     	 push {r7,lr}
+  28              	.LCFI0:
+  29              	 .cfi_def_cfa_offset 8
+  30              	 .cfi_offset 7,-8
+  31              	 .cfi_offset 14,-4
+  32 0002 00AF     	 add r7,sp,#0
+  33              	.LCFI1:
+  34              	 .cfi_def_cfa_register 7
+ 668:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h ****   return (bool)(RTC->CTR & RTC_CTR_ENB_Msk);
+  35              	 .loc 1 668 0
+  36 0004 044B     	 ldr r3,.L3
+  37 0006 5B68     	 ldr r3,[r3,#4]
+  38 0008 0122     	 mov r2,#1
+  39 000a 1340     	 and r3,r2
+  40 000c 5A1E     	 sub r2,r3,#1
+  41 000e 9341     	 sbc r3,r3,r2
+  42 0010 DBB2     	 uxtb r3,r3
+ 669:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_rtc.h **** }
+  43              	 .loc 1 669 0
+  44 0012 181C     	 mov r0,r3
+  45 0014 BD46     	 mov sp,r7
+  46              	 
+  47 0016 80BD     	 pop {r7,pc}
+  48              	.L4:
+  49              	 .align 2
+  50              	.L3:
+  51 0018 000A0140 	 .word 1073809920
+  52              	 .cfi_endproc
+  53              	.LFE42:
+  55              	 .section .text.XMC_SCU_GetMirrorStatus,"ax",%progbits
+  56              	 .align 2
+  57              	 .code 16
+  58              	 .thumb_func
+  60              	XMC_SCU_GetMirrorStatus:
+  61              	.LFB60:
+  62              	 .file 2 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc/xmc_scu.h"
+   1:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+   2:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @file xmc_scu.h
+   3:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @date 2016-03-09
+   4:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+   5:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @cond
+   6:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+   7:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMClib v2.1.18 - XMC Peripheral Driver Library 
+   8:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+   9:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Copyright (c) 2015-2018, Infineon Technologies AG
+  10:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * All rights reserved.                        
+  11:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                                             
+  12:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * following conditions are met:   
+  14:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                                                                              
+  15:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * disclaimer.                        
+  17:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * 
+  18:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * 
+  21:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * products derived from this software without specific prior written permission.                  
+  23:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                                                                              
+  24:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                                                                              
+  32:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+  35:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+  36:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Change History
+  37:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * --------------
+  38:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+  39:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * 2015-02-20:
+  40:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *     - Initial <br>
+  41:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+  42:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * 2015-05-20:
+  43:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *     - Documentation improved <br>
+  44:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *     - XMC_ASSERT() hanging issues have fixed for XMC4 devices. <br>
+  45:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+  46:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * 2015-06-20:
+  47:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *     - Removed version macros and declaration of GetDriverVersion API
+  48:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *     - Removed STATIC_INLINE property for the below APIs and declared as void
+  49:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *       XMC_SCU_INTERRUPT_EnableEvent, XMC_SCU_INTERRUPT_DisableEvent,
+  50:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *       XMC_SCU_INTERRUPT_TriggerEvent, XMC_SCU_INTERUPT_GetEventStatus,
+  51:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *       XMC_SCU_INTERUPT_ClearEventStatus
+  52:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+  53:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * 2015-11-30:
+  54:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *     - Documentation improved <br>
+  55:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *      
+  56:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * 2016-03-09:
+  57:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *     - Optimization of write only registers
+  58:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *      
+  59:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @endcond 
+  60:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+  61:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+  62:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #ifndef XMC_SCU_H
+  63:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #define XMC_SCU_H
+  64:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  
+  65:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+  66:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * HEADER FILES
+  67:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+  68:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #include <xmc_common.h>
+  69:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+  70:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+  71:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @addtogroup XMClib XMC Peripheral Library
+  72:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @{
+  73:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+  74:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  
+  75:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+  76:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @addtogroup SCU
+  77:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @brief System Control Unit(SCU) driver for XMC microcontroller family.
+  78:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+  79:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * System control unit is the SoC power, reset and a clock manager with additional responsibility o
+  80:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * providing system stability protection and other auxiliary functions.<br>
+  81:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * SCU provides the following features,
+  82:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Power control
+  83:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \if XMC4 
+  84:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Hibernate control 
+  85:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \endif
+  86:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Reset control
+  87:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Clock control
+  88:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Miscellaneous control(boot mode, system interrupts etc.)<br><br>
+  89:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+  90:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The SCU driver is divided in to clock control logic, reset control logic, system interrupt contr
+  91:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \if XMC4
+  92:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * , hibernate control logic, trap control logic, parity control logic 
+  93:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \endif
+  94:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * and miscellaneous control logic.<br>
+  95:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+  96:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Clock driver features:
+  97:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows clock configuration using the structure XMC_SCU_CLOCK_CONFIG_t and API XMC_SCU_CLOCK_I
+  98:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \if XMC4
+  99:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Provides structure XMC_SCU_CLOCK_SYSPLL_CONFIG_t for configuring the system PLL
+ 100:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows selection of clock source for system PLL, XMC_SCU_CLOCK_GetSystemPllClockSource()
+ 101:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Provides APIs for configuring different module clock frequencies XMC_SCU_CLOCK_SetWdtClockDiv
+ 102:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows selection of clock source for external output, XMC_SCU_CLOCK_SetExternalOutputClockSou
+ 103:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Provides APIs for enabling external high power oscillator and ultra low power oscillator, XMC
+ 104:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Provides APIs for getting various clock frequencies XMC_SCU_CLOCK_GetPeripheralClockFrequency
+ 105:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  XMC_SCU_CLOCK_GetCpuClockFrequency(), XMC_SCU_CLOCK_GetSystemClockFrequency()<br>
+ 106:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \endif
+ 107:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \if XMC1
+ 108:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows selection of peripheral clock frequency, XMC_SCU_CLOCK_SetFastPeripheralClockSource()
+ 109:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Provides API to get the peripheral clock frequency, XMC_SCU_CLOCK_GetFastPeripheralClockFrequ
+ 110:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \endif
+ 111:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 112:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Reset driver features:
+ 113:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \if XMC4
+ 114:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows to handle peripheral reset XMC_SCU_RESET_AssertPeripheralReset(), XMC_SCU_RESET_Deasse
+ 115:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows configuration of NMI generation for selected events, XMC_SCU_INTERRUPT_EnableNmiReques
+ 116:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \endif
+ 117:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \if XMC1
+ 118:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows to trigger device reset XMC_SCU_RESET_AssertMasterReset()
+ 119:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows to configure multiple sources for reset, XMC_SCU_RESET_EnableResetRequest()
+ 120:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \endif <br>
+ 121:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 122:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Interrupt driver features:
+ 123:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Provides APIs for enabling/ disabling interrupt event generation XMC_SCU_INTERRUPT_EnableEven
+ 124:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  XMC_SCU_INTERRUPT_DisableEvent()
+ 125:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Provides API for registering callback function for events XMC_SCU_INTERRUPT_SetEventHandler()
+ 126:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 127:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \if XMC4
+ 128:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Hibernate driver features:
+ 129:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows configuration of hibernate domain XMC_SCU_HIB_EnableHibernateDomain(), XMC_SCU_HIB_Dis
+ 130:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows selection of standby clock source, XMC_SCU_HIB_SetStandbyClockSource()
+ 131:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows selection of RTC clock source, XMC_SCU_HIB_SetRtcClockSource()
+ 132:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Provides API for enabling slow internal clock used for backup clock, XMC_SCU_HIB_EnableIntern
+ 133:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 134:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Trap driver features:
+ 135:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows handling of trap XMC_SCU_TRAP_Enable(), XMC_SCU_TRAP_GetStatus(), XMC_SCU_TRAP_Trigger
+ 136:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 137:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Parity driver features:
+ 138:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Parity error generated by on-chip RAM can be monitored, XMC_SCU_PARITY_Enable(), XMC_SCU_PARI
+ 139:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows configuration of trap generation on detection of parity error, XMC_SCU_PARITY_EnableTr
+ 140:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 141:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Power driver features:
+ 142:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows to power the USB module XMC_SCU_POWER_EnableUsb(), XMC_SCU_POWER_DisableUsb()
+ 143:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \endif
+ 144:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 145:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Miscellaneous features:
+ 146:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows to trigger multiple capture compare unit(CCU) channels to be started together XMC_SCU_
+ 147:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \if XMC4
+ 148:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Enables configuration of out of range comparator (ORC) XMC_SCU_EnableOutOfRangeComparator()
+ 149:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Enables configuration of die temperature sensor XMC_SCU_EnableTemperatureSensor(), XMC_SCU_Ca
+ 150:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Enables configuration of device boot mode XMC_SCU_SetBootMode()<br>
+ 151:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \endif
+ 152:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \if XMC1
+ 153:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Enables configuration of die temperature sensor XMC_SCU_StartTempMeasurement(), XMC_SCU_SetRa
+ 154:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows configuring supply monitor unit using the structure XMC_SCU_SUPPLYMONITOR_t and API XM
+ 155:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * -# Allows handling of protected bits XMC_SCU_LockProtectedBits(), XMC_SCU_UnlockProtectedBits()<
+ 156:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  \endif
+ 157:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @{
+ 158:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 159:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  
+ 160:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+ 161:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * MACROS
+ 162:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+ 163:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 164:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+ 165:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * ENUMS
+ 166:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+ 167:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 168:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *  Defines the status of SCU API execution, used to verify the SCU related API calls.
+ 169:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 170:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** typedef enum XMC_SCU_STATUS 
+ 171:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** {
+ 172:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****   XMC_SCU_STATUS_OK   = 0UL, /**< SCU related operation successfully completed.*/
+ 173:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****   XMC_SCU_STATUS_ERROR,      /**< SCU related operation failed. When API cannot fulfill request, th
+ 174:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****   XMC_SCU_STATUS_BUSY,       /**< Cannot execute the SCU related operation request because
+ 175:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****                                   another operation is in progress. \a XMC_SCU_STATUS_BUSY is retur
+ 176:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****                                   processing another request. */
+ 177:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** } XMC_SCU_STATUS_t;
+ 178:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 179:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 180:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+ 181:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * DATA TYPES
+ 182:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+ 183:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 184:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 185:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Function pointer type used for registering callback functions on SCU event occurrence.
+ 186:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 187:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** typedef void (*XMC_SCU_INTERRUPT_EVENT_HANDLER_t)(void);
+ 188:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 189:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+ 190:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * DEVICE EXTENSIONS
+ 191:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+ 192:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 193:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #if (UC_FAMILY == XMC1)
+ 194:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #include <xmc1_scu.h>
+ 195:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #elif (UC_FAMILY == XMC4)
+ 196:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #include <xmc4_scu.h>
+ 197:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #else
+ 198:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #error "Unspecified chipset"
+ 199:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #endif
+ 200:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 201:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+ 202:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * API Prototypes
+ 203:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+ 204:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 205:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #ifdef __cplusplus
+ 206:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** extern "C" {
+ 207:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #endif
+ 208:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 209:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 210:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 211:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 212:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @param trigger    CCU slices to be triggered synchronously via software. The value is a bitmask 
+ 213:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    in the register CCUCON. <br>
+ 214:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    \b Range: Use type @ref XMC_SCU_CCU_TRIGGER_t for bitmask of individual CCU s
+ 215:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    combined using \a OR operation.
+ 216:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 217:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return None
+ 218:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 219:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 220:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Generates active edge(low to high) trigger for multiple CCU units at the same time.\n\n
+ 221:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Before executing this API, all the required CCU timers should configure external start.
+ 222:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The edge of the start signal should be selected as active edge.
+ 223:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The input signal for the CCU slice should be selected as SCU input.
+ 224:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The above mentioned configurations can be made using the CCU LLD API XMC_CCU4_SLICE_StartConfig(
+ 225:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * CCU timer slice should be started using XMC_CCU4_SLICE_StartTimer() before triggering 
+ 226:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * the timer using this API.<BR>
+ 227:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 228:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_CCU4_SLICE_StartConfig(), XMC_CCU4_SLICE_SetInput(), XMC_SCU_SetCcuTriggerLow()\n\n\n
+ 229:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 230:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE void XMC_SCU_SetCcuTriggerHigh(const uint32_t trigger)
+ 231:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** {
+ 232:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****   SCU_GENERAL->CCUCON |= (uint32_t)trigger;
+ 233:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** }
+ 234:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 235:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 236:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 237:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @param trigger  CCU slices to be triggered synchronously via software. The value is a bitmask of
+ 238:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    in the register CCUCON. <br>
+ 239:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    \b Range: Use type @ref XMC_SCU_CCU_TRIGGER_t for bitmask of individual CCU s
+ 240:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    combined using \a OR operation.
+ 241:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 242:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return None
+ 243:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 244:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 245:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Generates passive edge(high to low) trigger for multiple CCU units at the same time.\n\n
+ 246:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Before executing this API, all the required CCU timers should configure external start.
+ 247:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The edge of the start signal should be selected as passive edge.
+ 248:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The input signal for the CCU slice should be selected as SCU input.
+ 249:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The above mentioned configurations can be made using the CCU LLD API XMC_CCU4_SLICE_StartConfig(
+ 250:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * CCU timer slice should be started using XMC_CCU4_SLICE_StartTimer() before triggering 
+ 251:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * the timer using this API.<BR>
+ 252:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 253:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_CCU4_SLICE_StartConfig(), XMC_CCU4_SLICE_SetInput(), XMC_SCU_SetCcuTriggerHigh()\n\n\n
+ 254:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 255:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE void XMC_SCU_SetCcuTriggerLow(const uint32_t trigger)
+ 256:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** {
+ 257:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****   SCU_GENERAL->CCUCON &= (uint32_t)~trigger;
+ 258:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** }
+ 259:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 260:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 261:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 262:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @param config Pointer to structure holding the clock prescaler values and divider values for 
+ 263:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                configuring clock generators and clock tree.\n
+ 264:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                \b Range: Configure the members of structure @ref XMC_SCU_CLOCK_CONFIG_t for vari
+ 265:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                parameters of clock setup.
+ 266:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 267:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return None
+ 268:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 269:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 270:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Initializes clock generators and clock tree.\n\n
+ 271:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \if XMC1
+ 272:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Peripheral clock and system clock are configured based on the input configuration \a config.
+ 273:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The system clock frequency is tuned by configuring the FDIV and IDIV values of CLKCR register.
+ 274:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The values of FDIV and IDIV can be provided as part of input configuration.
+ 275:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The PCLK divider determines the ratio of peripheral clock to the system clock. 
+ 276:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The source of RTC clock is set based on the input configuration. 
+ 277:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \a SystemCoreClock variable will be updated with the value of
+ 278:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * system clock frequency. Access to protected bit fields are handled internally.
+ 279:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \endif
+ 280:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \if XMC4
+ 281:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Enables the high precision oscillator(fOHP) input and configures the system and peripheral clock
+ 282:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Based on the system clock source selected in \a config, either fPLL or fOFI will be chosen as sy
+ 283:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Based on PLL mode(normal or prescaler mode) used, PLL ramps up in steps to achieve target freque
+ 284:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The clock dividers for CPU, CCU and peripheral clocks will be set based on the input configurati
+ 285:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The \a SystemCoreClock variable is set with the value of system clock frequency.
+ 286:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \endif
+ 287:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 288:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_GetPeripheralClockFrequency(), XMC_SCU_CLOCK_GetCpuClockFrequency() \n\n\n
+ 289:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 290:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** void XMC_SCU_CLOCK_Init(const XMC_SCU_CLOCK_CONFIG_t *const config);
+ 291:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 292:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 293:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 294:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @param event  Bit mask of the event to enable. \b Range: Use type @ref XMC_SCU_INTERRUPT_EVENT_t
+ 295:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                for providing the input value. Multiple events can be combined using the \a OR op
+ 296:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 297:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return None
+ 298:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 299:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 300:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Enables the generation of interrupt for the input events.\n\n
+ 301:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The events are enabled by setting the respective bit fields in the SRMSK register. \n
+ 302:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Note: User should separately enable the NVIC node responsible for handling the SCU interrupt.
+ 303:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The interrupt will be generated when the respective event occurs.
+ 304:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 305:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * NVIC_EnableIRQ(), XMC_SCU_INTERRUPT_DisableEvent()\n\n\n
+ 306:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 307:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** void XMC_SCU_INTERRUPT_EnableEvent(const XMC_SCU_INTERRUPT_EVENT_t event);
+ 308:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 309:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 310:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 311:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 312:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @param event  Bit mask of the event to disable. \b Range: Use type @ref XMC_SCU_INTERRUPT_EVENT_
+ 313:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                for providing the input value. Multiple events can be combined using the \a OR op
+ 314:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 315:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return None
+ 316:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 317:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 318:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Disables generation of interrupt on occurrence of the input event.\n\n
+ 319:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The events are disabled by resetting the respective bit fields in the SRMSK register. \n
+ 320:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 321:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * NVIC_DisableIRQ(), XMC_SCU_INTERRUPT_EnableEvent()\n\n\n
+ 322:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 323:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** void XMC_SCU_INTERRUPT_DisableEvent(const XMC_SCU_INTERRUPT_EVENT_t event);
+ 324:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 325:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 326:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 327:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @param event Bit mask of the event to be triggered. \b Range: Use type @ref XMC_SCU_INTERRUPT_EV
+ 328:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                for providing the input value. Multiple events can be combined using the \a OR op
+ 329:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 330:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return None
+ 331:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 332:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 333:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Triggers the event as if the hardware raised it.\n\n
+ 334:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Event will be triggered by setting the respective bitfield in the SRSET register.\n
+ 335:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Note: User should enable the NVIC node that handles the respective event for interrupt generatio
+ 336:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 337:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * NVIC_EnableIRQ(), XMC_SCU_INTERUPT_GetEventStatus(), XMC_SCU_INTERRUPT_ClearEventStatus() \n\n\n
+ 338:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 339:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** void XMC_SCU_INTERRUPT_TriggerEvent(const XMC_SCU_INTERRUPT_EVENT_t  event);
+ 340:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 341:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 342:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return uint32_t  Status of the SCU events.
+ 343:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 344:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 345:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Provides the status of all SCU events.\n\n
+ 346:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The status is read from the SRRAW register. To check the status of a particular 
+ 347:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * event, the returned value should be masked with the bit mask of the event. The bitmask
+ 348:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * of events can be obtained using the type @ref XMC_SCU_INTERRUPT_EVENT_t. Multiple events'
+ 349:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * status can be checked by combining the bit masks using \a OR operation. 
+ 350:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * After detecting the event, the event status should be cleared using software to detect the event
+ 351:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 352:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_INTERRUPT_ClearEventStatus(), XMC_SCU_INTERRUPT_TriggerEvent(), XMC_SCU_INTERRUPT_SetEve
+ 353:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 354:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** XMC_SCU_INTERRUPT_EVENT_t XMC_SCU_INTERUPT_GetEventStatus(void);
+ 355:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 356:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 357:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 358:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @param event  Bit mask of the events to clear. \b Range: Use type @ref XMC_SCU_INTERRUPT_EVENT_t
+ 359:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                for providing the input value. Multiple events can be combined using the \a OR op
+ 360:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 361:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return None
+ 362:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 363:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 364:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Clears the event status bit in SRRAW register.\n\n
+ 365:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The events are cleared by writing value 1 to their bit positions in the SRCLR register.
+ 366:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The API can be used when polling method is used. After detecting the event, the event status
+ 367:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * should be cleared using software to detect the event again.
+ 368:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 369:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 370:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_INTERUPT_GetEventStatus(), XMC_SCU_INTERRUPT_TriggerEvent() \n\n\n
+ 371:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 372:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** void XMC_SCU_INTERRUPT_ClearEventStatus(const XMC_SCU_INTERRUPT_EVENT_t event);
+ 373:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 374:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 375:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 376:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return uint32_t  Status representing the reason for device reset.
+ 377:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 378:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 379:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Provides the value representing the reason for device reset.\n\n
+ 380:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The return value is an encoded word, which can indicate multiple reasons for the last reset. Eac
+ 381:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * returned word is representative of a last reset cause. The returned value should be appropriatel
+ 382:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * the cause of reset. 
+ 383:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The cause of the last reset gets automatically stored in 
+ 384:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * the \a SCU_RSTSTAT register. The reset status shall be reset after each
+ 385:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * startup in order to ensure consistent source indication after the next reset.
+ 386:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \b Range: The type @ref XMC_SCU_RESET_REASON_t can be used to get the bit masks of the reset cau
+ 387:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 388:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 389:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_RESET_ClearDeviceResetReason() \n\n\n
+ 390:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 391:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE uint32_t XMC_SCU_RESET_GetDeviceResetReason(void)
+ 392:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** {
+ 393:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****   return ((SCU_RESET->RSTSTAT) & SCU_RESET_RSTSTAT_RSTSTAT_Msk);
+ 394:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** }
+ 395:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 396:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return None 
+ 397:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 398:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 399:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Clears the reset reason bits in the reset status register. \n\n
+ 400:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Clearing of the reset status information in the \a SCU_RSTSTAT register via register bit \a RSTC
+ 401:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * recommended to ensure a clear indication of the cause of next reset.
+ 402:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 403:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 404:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_RESET_GetDeviceResetReason() \n\n\n
+ 405:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 406:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE void XMC_SCU_RESET_ClearDeviceResetReason(void)
+ 407:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** {
+ 408:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****   /* Clear RSTSTAT.RSTSTAT bitfield */
+ 409:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****   SCU_RESET->RSTCLR = (uint32_t)SCU_RESET_RSTCLR_RSCLR_Msk;
+ 410:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** }
+ 411:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  
+ 412:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 413:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return uint32_t  Value of CPU clock frequency.
+ 414:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 415:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 416:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Provides the vlaue of CPU clock frequency.\n\n
+ 417:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The value is stored in a global variable \a \b SystemCoreClock.
+ 418:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * It is updated when the clock configuration is done using the SCU LLD APIs.
+ 419:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The value represents the frequency of clock used for CPU operation.
+ 420:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \b Range: Value is of type uint32_t, and gives the value of frequency in Hertz.
+ 421:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 422:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 423:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_GetPeripheralClockFrequency(), XMC_SCU_CLOCK_GatePeripheralClock() \n\n\n
+ 424:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 425:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE uint32_t XMC_SCU_CLOCK_GetCpuClockFrequency(void)
+ 426:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** {
+ 427:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****   return SystemCoreClock;
+ 428:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** }
+ 429:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 430:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 431:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return uint32_t  Value of peripheral clock frequency in Hertz.
+ 432:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 433:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 434:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Provides the vlaue of clock frequency at which the peripherals are working.\n\n
+ 435:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The value is derived from the CPU frequency. \b Range: Value is of type uint32_t. It is represen
+ 436:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 437:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_GetCpuClockFrequency(),XMC_SCU_CLOCK_GatePeripheralClock() \n\n\n
+ 438:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 439:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** uint32_t XMC_SCU_CLOCK_GetPeripheralClockFrequency(void); 
+ 440:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 441:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #if(UC_SERIES != XMC45)
+ 442:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  
+ 443:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 444:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 445:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @param  peripheral The peripheral for which the clock has to be gated. \b Range: Use type @ref X
+ 446:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    to identify the peripheral clock to be gated.
+ 447:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 448:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return None
+ 449:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 450:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 451:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Blocks the supply of clock to the selected peripheral.\n\n
+ 452:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Clock gating helps in reducing the power consumption. User can selectively gate the clocks of un
+ 453:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \if XMC1
+ 454:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * fPCLK is the source of clock to various peripherals. Some peripherals support clock gate. Such a
+ 455:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * the clock supply for the selected peripheral.
+ 456:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Software can request for individual gating of such peripheral clocks by enabling the \a SCU_CGAT
+ 457:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * register bit field. Every bit in \a SCU_CGATSET0 register is protected by the bit protection sch
+ 458:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * bit fields are handled internally.
+ 459:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \endif
+ 460:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \if XMC4
+ 461:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * fPERI is the source of clock to various peripherals. Some peripherals support clock gate. Such a
+ 462:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * the clock supply for the selected peripheral.
+ 463:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Software can request for individual gating of such peripheral clocks by enabling one of the \a
+ 464:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * SCU_CGATSET0, \a SCU_CGATSET1 or \a SCU_CGATSET2 register bitfields.
+ 465:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * 
+ 466:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \endif
+ 467:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Note: Clock gating shall not be activated unless the module is in reset state. So use \a
+ 468:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_IsPeripheralClockGated() API before enabling the gating of any peripheral.
+ 469:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 470:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_IsPeripheralClockGated(), XMC_SCU_CLOCK_UngatePeripheralClock() \n\n\n
+ 471:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 472:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** void XMC_SCU_CLOCK_GatePeripheralClock(const XMC_SCU_PERIPHERAL_CLOCK_t peripheral);
+ 473:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  
+ 474:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 475:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 476:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @param  peripheral  The peripheral for which the clock has to be ungated. \b Range: Use type @re
+ 477:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    to identify the peripheral.
+ 478:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 479:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return None
+ 480:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 481:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 482:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Enables the supply of clock to the selected peripheral.\n\n
+ 483:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * By default when the device powers on, the peripheral clock will be gated for the 
+ 484:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * peripherals that support clock gating.
+ 485:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The peripheral clock should be enabled before using it for any functionality.
+ 486:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \if XMC1
+ 487:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * fPCLK is the source of clock to various peripherals. Some peripherals support clock gate.
+ 488:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Software can request for individual ungating of such peripheral clocks by setting respective bit
+ 489:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * in the \a SCU_CGATCLR0 register.
+ 490:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \endif
+ 491:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \if XMC4
+ 492:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * fPERI is the source of clock to various peripherals. Some peripherals support clock gate.
+ 493:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Software can request for individual ungating of such peripheral clocks by setting the respective
+ 494:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * SCU_CGATCLR0, \a SCU_CGATCLR1 or \a SCU_CGATCLR2 registers.
+ 495:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \endif
+ 496:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 497:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 498:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_IsPeripheralClockGated(), XMC_SCU_CLOCK_GatePeripheralClock() \n\n\n
+ 499:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 500:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** void XMC_SCU_CLOCK_UngatePeripheralClock(const XMC_SCU_PERIPHERAL_CLOCK_t peripheral);
+ 501:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 502:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 503:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 504:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @param  peripheral  The peripheral for which the check for clock gating has to be done. 
+ 505:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    \b Range: Use type @ref XMC_SCU_PERIPHERAL_CLOCK_t to identify the peripheral
+ 506:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 507:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return bool Status of the peripheral clock gating. \b Range: true if the peripheral clock is ga
+ 508:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *              false if the peripheral clock ungated(gate de-asserted).
+ 509:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 510:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 511:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Gives the status of peripheral clock gating.\n\n
+ 512:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \if XMC1
+ 513:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Checks the status of peripheral clock gating using the register CGATSTAT0.
+ 514:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \endif
+ 515:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \if XMC4
+ 516:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Checks the status of peripheral clock gating using one of CGATSTAT0, CGATSTAT1 or CGATSTAT2 regi
+ 517:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \endif
+ 518:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * It is recommended to use this API before
+ 519:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * enabling the gating of any peripherals through \a XMC_SCU_CLOCK_GatePeripheralClock() API.
+ 520:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 521:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 522:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_UngatePeripheralClock(), XMC_SCU_CLOCK_GatePeripheralClock() \n\n\n
+ 523:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 524:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** bool XMC_SCU_CLOCK_IsPeripheralClockGated(const XMC_SCU_PERIPHERAL_CLOCK_t peripheral);
+ 525:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** #endif
+ 526:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 527:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** 
+ 528:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** /**
+ 529:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * @return  uint32_t  Status of the register mirror update.\n
+ 530:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    \b Range: Use the bit mask of the SCU_GENERAL_MIRRSTS register for the mirror
+ 531:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    interest. e.g.: SCU_GENERAL_MIRRSTS_RTC_CTR_Msk. Multiple update events can b
+ 532:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *                    using \a OR operation.
+ 533:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  *
+ 534:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 535:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Provides the status of hibernate domain register update, when the respective mirror registers ar
+ 536:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * The hibernate domain is connected to the core domain via SPI serial communication. MIRRSTS is a 
+ 537:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * representing the communication of changed value of a mirror register to its corresponding regist
+ 538:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * hibernate domain. The bit fields of the register indicate
+ 539:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * that a corresponding register of the hibernate domain is ready to accept a write or that the com
+ 540:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * is busy with executing the previous operation.\n
+ 541:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  * Note: There is no hibernate domain in XMC1x devices. This register is retained for legacy purpos
+ 542:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****  */
+ 543:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE uint32_t XMC_SCU_GetMirrorStatus(void)
+ 544:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** {
+  63              	 .loc 2 544 0
+  64              	 .cfi_startproc
+  65 0000 80B5     	 push {r7,lr}
+  66              	.LCFI2:
+  67              	 .cfi_def_cfa_offset 8
+  68              	 .cfi_offset 7,-8
+  69              	 .cfi_offset 14,-4
+  70 0002 00AF     	 add r7,sp,#0
+  71              	.LCFI3:
+  72              	 .cfi_def_cfa_register 7
+ 545:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h ****   return(SCU_GENERAL->MIRRSTS);
+  73              	 .loc 2 545 0
+  74 0004 024B     	 ldr r3,.L7
+  75 0006 9B6C     	 ldr r3,[r3,#72]
+ 546:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_scu.h **** }
+  76              	 .loc 2 546 0
+  77 0008 181C     	 mov r0,r3
+  78 000a BD46     	 mov sp,r7
+  79              	 
+  80 000c 80BD     	 pop {r7,pc}
+  81              	.L8:
+  82 000e C046     	 .align 2
+  83              	.L7:
+  84 0010 00000140 	 .word 1073807360
+  85              	 .cfi_endproc
+  86              	.LFE60:
+  88              	 .section .text.XMC_RTC_Init,"ax",%progbits
+  89              	 .align 2
+  90              	 .global XMC_RTC_Init
+  91              	 .code 16
+  92              	 .thumb_func
+  94              	XMC_RTC_Init:
+  95              	.LFB61:
+  96              	 .file 3 "../Libraries/XMCLib/src/xmc1_rtc.c"
+   1:../Libraries/XMCLib/src/xmc1_rtc.c **** /**
+   2:../Libraries/XMCLib/src/xmc1_rtc.c ****  * @file xmc1_rtc.c
+   3:../Libraries/XMCLib/src/xmc1_rtc.c ****  * @date 2016-03-09
+   4:../Libraries/XMCLib/src/xmc1_rtc.c ****  *
+   5:../Libraries/XMCLib/src/xmc1_rtc.c ****  * @cond
+   6:../Libraries/XMCLib/src/xmc1_rtc.c ****  **************************************************************************************************
+   7:../Libraries/XMCLib/src/xmc1_rtc.c ****  * XMClib v2.1.18 - XMC Peripheral Driver Library 
+   8:../Libraries/XMCLib/src/xmc1_rtc.c ****  *
+   9:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Copyright (c) 2015-2018, Infineon Technologies AG
+  10:../Libraries/XMCLib/src/xmc1_rtc.c ****  * All rights reserved.                        
+  11:../Libraries/XMCLib/src/xmc1_rtc.c ****  *                                             
+  12:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:../Libraries/XMCLib/src/xmc1_rtc.c ****  * following conditions are met:   
+  14:../Libraries/XMCLib/src/xmc1_rtc.c ****  *                                                                              
+  15:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:../Libraries/XMCLib/src/xmc1_rtc.c ****  * disclaimer.                        
+  17:../Libraries/XMCLib/src/xmc1_rtc.c ****  * 
+  18:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:../Libraries/XMCLib/src/xmc1_rtc.c ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:../Libraries/XMCLib/src/xmc1_rtc.c ****  * 
+  21:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:../Libraries/XMCLib/src/xmc1_rtc.c ****  * products derived from this software without specific prior written permission.                  
+  23:../Libraries/XMCLib/src/xmc1_rtc.c ****  *                                                                              
+  24:../Libraries/XMCLib/src/xmc1_rtc.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:../Libraries/XMCLib/src/xmc1_rtc.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:../Libraries/XMCLib/src/xmc1_rtc.c ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:../Libraries/XMCLib/src/xmc1_rtc.c ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:../Libraries/XMCLib/src/xmc1_rtc.c ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:../Libraries/XMCLib/src/xmc1_rtc.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:../Libraries/XMCLib/src/xmc1_rtc.c ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:../Libraries/XMCLib/src/xmc1_rtc.c ****  *                                                                              
+  32:../Libraries/XMCLib/src/xmc1_rtc.c ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:../Libraries/XMCLib/src/xmc1_rtc.c ****  **************************************************************************************************
+  35:../Libraries/XMCLib/src/xmc1_rtc.c ****  *
+  36:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Change History
+  37:../Libraries/XMCLib/src/xmc1_rtc.c ****  * --------------
+  38:../Libraries/XMCLib/src/xmc1_rtc.c ****  *
+  39:../Libraries/XMCLib/src/xmc1_rtc.c ****  * 2015-02-20:
+  40:../Libraries/XMCLib/src/xmc1_rtc.c ****  *     - Initial <br>
+  41:../Libraries/XMCLib/src/xmc1_rtc.c ****  *      
+  42:../Libraries/XMCLib/src/xmc1_rtc.c ****  * 2015-05-20:
+  43:../Libraries/XMCLib/src/xmc1_rtc.c ****  *     - XMC_RTC_Init() function is modified
+  44:../Libraries/XMCLib/src/xmc1_rtc.c ****  *       by adding RTC running condition check
+  45:../Libraries/XMCLib/src/xmc1_rtc.c ****  *
+  46:../Libraries/XMCLib/src/xmc1_rtc.c ****  * 2016-03-09:
+  47:../Libraries/XMCLib/src/xmc1_rtc.c ****  *     - Optimize write only registers
+  48:../Libraries/XMCLib/src/xmc1_rtc.c ****  *
+  49:../Libraries/XMCLib/src/xmc1_rtc.c ****  * @endcond 
+  50:../Libraries/XMCLib/src/xmc1_rtc.c ****  *
+  51:../Libraries/XMCLib/src/xmc1_rtc.c ****  */
+  52:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+  53:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+  54:../Libraries/XMCLib/src/xmc1_rtc.c **** /**
+  55:../Libraries/XMCLib/src/xmc1_rtc.c ****  *
+  56:../Libraries/XMCLib/src/xmc1_rtc.c ****  * @brief RTC driver for XMC microcontroller family.
+  57:../Libraries/XMCLib/src/xmc1_rtc.c ****  *
+  58:../Libraries/XMCLib/src/xmc1_rtc.c ****  */
+  59:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+  60:../Libraries/XMCLib/src/xmc1_rtc.c **** /**************************************************************************************************
+  61:../Libraries/XMCLib/src/xmc1_rtc.c ****  * HEADER FILES
+  62:../Libraries/XMCLib/src/xmc1_rtc.c ****  **************************************************************************************************
+  63:../Libraries/XMCLib/src/xmc1_rtc.c **** #include <xmc_rtc.h>
+  64:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+  65:../Libraries/XMCLib/src/xmc1_rtc.c **** #if UC_FAMILY == XMC1
+  66:../Libraries/XMCLib/src/xmc1_rtc.c **** #include <xmc_scu.h>
+  67:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+  68:../Libraries/XMCLib/src/xmc1_rtc.c **** /**************************************************************************************************
+  69:../Libraries/XMCLib/src/xmc1_rtc.c ****  * API IMPLEMENTATION
+  70:../Libraries/XMCLib/src/xmc1_rtc.c ****  **************************************************************************************************
+  71:../Libraries/XMCLib/src/xmc1_rtc.c **** /*
+  72:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Initialize the RTC peripheral
+  73:../Libraries/XMCLib/src/xmc1_rtc.c ****  */
+  74:../Libraries/XMCLib/src/xmc1_rtc.c **** XMC_RTC_STATUS_t XMC_RTC_Init(const XMC_RTC_CONFIG_t *const config)
+  75:../Libraries/XMCLib/src/xmc1_rtc.c **** {
+  97              	 .loc 3 75 0
+  98              	 .cfi_startproc
+  99 0000 80B5     	 push {r7,lr}
+ 100              	.LCFI4:
+ 101              	 .cfi_def_cfa_offset 8
+ 102              	 .cfi_offset 7,-8
+ 103              	 .cfi_offset 14,-4
+ 104 0002 82B0     	 sub sp,sp,#8
+ 105              	.LCFI5:
+ 106              	 .cfi_def_cfa_offset 16
+ 107 0004 00AF     	 add r7,sp,#0
+ 108              	.LCFI6:
+ 109              	 .cfi_def_cfa_register 7
+ 110 0006 7860     	 str r0,[r7,#4]
+  76:../Libraries/XMCLib/src/xmc1_rtc.c ****   if (XMC_RTC_IsRunning() == false)
+ 111              	 .loc 3 76 0
+ 112 0008 FFF7FEFF 	 bl XMC_RTC_IsRunning
+ 113 000c 031C     	 mov r3,r0
+ 114 000e 1A1C     	 mov r2,r3
+ 115 0010 0123     	 mov r3,#1
+ 116 0012 5340     	 eor r3,r2
+ 117 0014 DBB2     	 uxtb r3,r3
+ 118 0016 002B     	 cmp r3,#0
+ 119 0018 2DD0     	 beq .L10
+  77:../Libraries/XMCLib/src/xmc1_rtc.c ****   {
+  78:../Libraries/XMCLib/src/xmc1_rtc.c ****     if (XMC_RTC_IsEnabled() == false)
+ 120              	 .loc 3 78 0
+ 121 001a FFF7FEFF 	 bl XMC_RTC_IsEnabled
+ 122 001e 031C     	 mov r3,r0
+ 123 0020 1A1C     	 mov r2,r3
+ 124 0022 0123     	 mov r3,#1
+ 125 0024 5340     	 eor r3,r2
+ 126 0026 DBB2     	 uxtb r3,r3
+ 127 0028 002B     	 cmp r3,#0
+ 128 002a 01D0     	 beq .L11
+  79:../Libraries/XMCLib/src/xmc1_rtc.c ****     {
+  80:../Libraries/XMCLib/src/xmc1_rtc.c ****       XMC_RTC_Enable();
+ 129              	 .loc 3 80 0
+ 130 002c FFF7FEFF 	 bl XMC_RTC_Enable
+ 131              	.L11:
+  81:../Libraries/XMCLib/src/xmc1_rtc.c **** 	}
+  82:../Libraries/XMCLib/src/xmc1_rtc.c **** 	
+  83:../Libraries/XMCLib/src/xmc1_rtc.c ****     XMC_RTC_SetPrescaler(config->prescaler);
+ 132              	 .loc 3 83 0
+ 133 0030 7B68     	 ldr r3,[r7,#4]
+ 134 0032 1B8A     	 ldrh r3,[r3,#16]
+ 135 0034 181C     	 mov r0,r3
+ 136 0036 FFF7FEFF 	 bl XMC_RTC_SetPrescaler
+  84:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+  85:../Libraries/XMCLib/src/xmc1_rtc.c **** 	while ((XMC_SCU_GetMirrorStatus() & (SCU_GENERAL_MIRRSTS_RTC_TIM0_Msk | SCU_GENERAL_MIRRSTS_RTC_TI
+ 137              	 .loc 3 85 0
+ 138 003a C046     	 mov r8,r8
+ 139              	.L12:
+ 140              	 .loc 3 85 0 is_stmt 0 discriminator 1
+ 141 003c FFF7FEFF 	 bl XMC_SCU_GetMirrorStatus
+ 142 0040 021C     	 mov r2,r0
+ 143 0042 1823     	 mov r3,#24
+ 144 0044 1340     	 and r3,r2
+ 145 0046 F9D1     	 bne .L12
+  86:../Libraries/XMCLib/src/xmc1_rtc.c **** 	{
+  87:../Libraries/XMCLib/src/xmc1_rtc.c ****       /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+  88:../Libraries/XMCLib/src/xmc1_rtc.c ****     }
+  89:../Libraries/XMCLib/src/xmc1_rtc.c ****     RTC->TIM0 = config->time.raw0;
+ 146              	 .loc 3 89 0 is_stmt 1
+ 147 0048 0D4A     	 ldr r2,.L15
+ 148 004a 7B68     	 ldr r3,[r7,#4]
+ 149 004c 1B68     	 ldr r3,[r3]
+ 150 004e 1362     	 str r3,[r2,#32]
+  90:../Libraries/XMCLib/src/xmc1_rtc.c ****     RTC->TIM1 = config->time.raw1;
+ 151              	 .loc 3 90 0
+ 152 0050 0B4A     	 ldr r2,.L15
+ 153 0052 7B68     	 ldr r3,[r7,#4]
+ 154 0054 5B68     	 ldr r3,[r3,#4]
+ 155 0056 5362     	 str r3,[r2,#36]
+  91:../Libraries/XMCLib/src/xmc1_rtc.c **** 	
+  92:../Libraries/XMCLib/src/xmc1_rtc.c ****     while ((XMC_SCU_GetMirrorStatus() & (SCU_GENERAL_MIRRSTS_RTC_ATIM0_Msk | SCU_GENERAL_MIRRSTS_RT
+ 156              	 .loc 3 92 0
+ 157 0058 C046     	 mov r8,r8
+ 158              	.L13:
+ 159              	 .loc 3 92 0 is_stmt 0 discriminator 1
+ 160 005a FFF7FEFF 	 bl XMC_SCU_GetMirrorStatus
+ 161 005e 021C     	 mov r2,r0
+ 162 0060 0623     	 mov r3,#6
+ 163 0062 1340     	 and r3,r2
+ 164 0064 F9D1     	 bne .L13
+  93:../Libraries/XMCLib/src/xmc1_rtc.c ****     {
+  94:../Libraries/XMCLib/src/xmc1_rtc.c ****       /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+  95:../Libraries/XMCLib/src/xmc1_rtc.c ****     }
+  96:../Libraries/XMCLib/src/xmc1_rtc.c ****     RTC->ATIM0 = config->alarm.raw0;	
+ 165              	 .loc 3 96 0 is_stmt 1
+ 166 0066 064A     	 ldr r2,.L15
+ 167 0068 7B68     	 ldr r3,[r7,#4]
+ 168 006a 9B68     	 ldr r3,[r3,#8]
+ 169 006c 9361     	 str r3,[r2,#24]
+  97:../Libraries/XMCLib/src/xmc1_rtc.c ****     RTC->ATIM1 = config->alarm.raw1;    
+ 170              	 .loc 3 97 0
+ 171 006e 044A     	 ldr r2,.L15
+ 172 0070 7B68     	 ldr r3,[r7,#4]
+ 173 0072 DB68     	 ldr r3,[r3,#12]
+ 174 0074 D361     	 str r3,[r2,#28]
+ 175              	.L10:
+  98:../Libraries/XMCLib/src/xmc1_rtc.c ****   }
+  99:../Libraries/XMCLib/src/xmc1_rtc.c ****   return XMC_RTC_STATUS_OK;
+ 176              	 .loc 3 99 0
+ 177 0076 0023     	 mov r3,#0
+ 100:../Libraries/XMCLib/src/xmc1_rtc.c **** }
+ 178              	 .loc 3 100 0
+ 179 0078 181C     	 mov r0,r3
+ 180 007a BD46     	 mov sp,r7
+ 181 007c 02B0     	 add sp,sp,#8
+ 182              	 
+ 183 007e 80BD     	 pop {r7,pc}
+ 184              	.L16:
+ 185              	 .align 2
+ 186              	.L15:
+ 187 0080 000A0140 	 .word 1073809920
+ 188              	 .cfi_endproc
+ 189              	.LFE61:
+ 191              	 .section .text.XMC_RTC_Enable,"ax",%progbits
+ 192              	 .align 2
+ 193              	 .global XMC_RTC_Enable
+ 194              	 .code 16
+ 195              	 .thumb_func
+ 197              	XMC_RTC_Enable:
+ 198              	.LFB62:
+ 101:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+ 102:../Libraries/XMCLib/src/xmc1_rtc.c **** /*
+ 103:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Ungates a clock node for RTC
+ 104:../Libraries/XMCLib/src/xmc1_rtc.c ****  */ 
+ 105:../Libraries/XMCLib/src/xmc1_rtc.c **** void XMC_RTC_Enable(void)
+ 106:../Libraries/XMCLib/src/xmc1_rtc.c **** {
+ 199              	 .loc 3 106 0
+ 200              	 .cfi_startproc
+ 201 0000 80B5     	 push {r7,lr}
+ 202              	.LCFI7:
+ 203              	 .cfi_def_cfa_offset 8
+ 204              	 .cfi_offset 7,-8
+ 205              	 .cfi_offset 14,-4
+ 206 0002 00AF     	 add r7,sp,#0
+ 207              	.LCFI8:
+ 208              	 .cfi_def_cfa_register 7
+ 107:../Libraries/XMCLib/src/xmc1_rtc.c ****   XMC_SCU_CLOCK_UngatePeripheralClock(XMC_SCU_PERIPHERAL_CLOCK_RTC);
+ 209              	 .loc 3 107 0
+ 210 0004 8023     	 mov r3,#128
+ 211 0006 DB00     	 lsl r3,r3,#3
+ 212 0008 181C     	 mov r0,r3
+ 213 000a FFF7FEFF 	 bl XMC_SCU_CLOCK_UngatePeripheralClock
+ 108:../Libraries/XMCLib/src/xmc1_rtc.c **** }
+ 214              	 .loc 3 108 0
+ 215 000e BD46     	 mov sp,r7
+ 216              	 
+ 217 0010 80BD     	 pop {r7,pc}
+ 218              	 .cfi_endproc
+ 219              	.LFE62:
+ 221 0012 C046     	 .section .text.XMC_RTC_Disable,"ax",%progbits
+ 222              	 .align 2
+ 223              	 .global XMC_RTC_Disable
+ 224              	 .code 16
+ 225              	 .thumb_func
+ 227              	XMC_RTC_Disable:
+ 228              	.LFB63:
+ 109:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+ 110:../Libraries/XMCLib/src/xmc1_rtc.c **** /*
+ 111:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Gates a clock node for RTC
+ 112:../Libraries/XMCLib/src/xmc1_rtc.c ****  */ 
+ 113:../Libraries/XMCLib/src/xmc1_rtc.c **** void XMC_RTC_Disable(void)
+ 114:../Libraries/XMCLib/src/xmc1_rtc.c **** {
+ 229              	 .loc 3 114 0
+ 230              	 .cfi_startproc
+ 231 0000 80B5     	 push {r7,lr}
+ 232              	.LCFI9:
+ 233              	 .cfi_def_cfa_offset 8
+ 234              	 .cfi_offset 7,-8
+ 235              	 .cfi_offset 14,-4
+ 236 0002 00AF     	 add r7,sp,#0
+ 237              	.LCFI10:
+ 238              	 .cfi_def_cfa_register 7
+ 115:../Libraries/XMCLib/src/xmc1_rtc.c ****   XMC_SCU_CLOCK_GatePeripheralClock(XMC_SCU_PERIPHERAL_CLOCK_RTC);
+ 239              	 .loc 3 115 0
+ 240 0004 8023     	 mov r3,#128
+ 241 0006 DB00     	 lsl r3,r3,#3
+ 242 0008 181C     	 mov r0,r3
+ 243 000a FFF7FEFF 	 bl XMC_SCU_CLOCK_GatePeripheralClock
+ 116:../Libraries/XMCLib/src/xmc1_rtc.c **** }
+ 244              	 .loc 3 116 0
+ 245 000e BD46     	 mov sp,r7
+ 246              	 
+ 247 0010 80BD     	 pop {r7,pc}
+ 248              	 .cfi_endproc
+ 249              	.LFE63:
+ 251 0012 C046     	 .section .text.XMC_RTC_SetDebugMode,"ax",%progbits
+ 252              	 .align 2
+ 253              	 .global XMC_RTC_SetDebugMode
+ 254              	 .code 16
+ 255              	 .thumb_func
+ 257              	XMC_RTC_SetDebugMode:
+ 258              	.LFB64:
+ 117:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+ 118:../Libraries/XMCLib/src/xmc1_rtc.c **** /*
+ 119:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Suspends RTC function during CPU HALT mode
+ 120:../Libraries/XMCLib/src/xmc1_rtc.c ****  */ 
+ 121:../Libraries/XMCLib/src/xmc1_rtc.c **** void XMC_RTC_SetDebugMode(const XMC_RTC_DEBUG_MODE_t debug_mode)
+ 122:../Libraries/XMCLib/src/xmc1_rtc.c **** {
+ 259              	 .loc 3 122 0
+ 260              	 .cfi_startproc
+ 261 0000 80B5     	 push {r7,lr}
+ 262              	.LCFI11:
+ 263              	 .cfi_def_cfa_offset 8
+ 264              	 .cfi_offset 7,-8
+ 265              	 .cfi_offset 14,-4
+ 266 0002 84B0     	 sub sp,sp,#16
+ 267              	.LCFI12:
+ 268              	 .cfi_def_cfa_offset 24
+ 269 0004 00AF     	 add r7,sp,#0
+ 270              	.LCFI13:
+ 271              	 .cfi_def_cfa_register 7
+ 272 0006 021C     	 mov r2,r0
+ 273 0008 FB1D     	 add r3,r7,#7
+ 274 000a 1A70     	 strb r2,[r3]
+ 123:../Libraries/XMCLib/src/xmc1_rtc.c ****   uint32_t regval;
+ 124:../Libraries/XMCLib/src/xmc1_rtc.c ****   regval = (RTC->CTR & (uint32_t)~RTC_CTR_SUS_Msk);
+ 275              	 .loc 3 124 0
+ 276 000c 064B     	 ldr r3,.L20
+ 277 000e 5B68     	 ldr r3,[r3,#4]
+ 278 0010 0222     	 mov r2,#2
+ 279 0012 9343     	 bic r3,r2
+ 280 0014 FB60     	 str r3,[r7,#12]
+ 125:../Libraries/XMCLib/src/xmc1_rtc.c ****   RTC->CTR = (regval | (uint32_t)debug_mode);
+ 281              	 .loc 3 125 0
+ 282 0016 044B     	 ldr r3,.L20
+ 283 0018 FA1D     	 add r2,r7,#7
+ 284 001a 1178     	 ldrb r1,[r2]
+ 285 001c FA68     	 ldr r2,[r7,#12]
+ 286 001e 0A43     	 orr r2,r1
+ 287 0020 5A60     	 str r2,[r3,#4]
+ 126:../Libraries/XMCLib/src/xmc1_rtc.c **** }
+ 288              	 .loc 3 126 0
+ 289 0022 BD46     	 mov sp,r7
+ 290 0024 04B0     	 add sp,sp,#16
+ 291              	 
+ 292 0026 80BD     	 pop {r7,pc}
+ 293              	.L21:
+ 294              	 .align 2
+ 295              	.L20:
+ 296 0028 000A0140 	 .word 1073809920
+ 297              	 .cfi_endproc
+ 298              	.LFE64:
+ 300              	 .section .text.XMC_RTC_EnableEvent,"ax",%progbits
+ 301              	 .align 2
+ 302              	 .global XMC_RTC_EnableEvent
+ 303              	 .code 16
+ 304              	 .thumb_func
+ 306              	XMC_RTC_EnableEvent:
+ 307              	.LFB65:
+ 127:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+ 128:../Libraries/XMCLib/src/xmc1_rtc.c **** /*
+ 129:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Enable RTC periodic and alarm event(s)
+ 130:../Libraries/XMCLib/src/xmc1_rtc.c ****  */ 
+ 131:../Libraries/XMCLib/src/xmc1_rtc.c **** void XMC_RTC_EnableEvent(const uint32_t event)
+ 132:../Libraries/XMCLib/src/xmc1_rtc.c **** {
+ 308              	 .loc 3 132 0
+ 309              	 .cfi_startproc
+ 310 0000 80B5     	 push {r7,lr}
+ 311              	.LCFI14:
+ 312              	 .cfi_def_cfa_offset 8
+ 313              	 .cfi_offset 7,-8
+ 314              	 .cfi_offset 14,-4
+ 315 0002 82B0     	 sub sp,sp,#8
+ 316              	.LCFI15:
+ 317              	 .cfi_def_cfa_offset 16
+ 318 0004 00AF     	 add r7,sp,#0
+ 319              	.LCFI16:
+ 320              	 .cfi_def_cfa_register 7
+ 321 0006 7860     	 str r0,[r7,#4]
+ 133:../Libraries/XMCLib/src/xmc1_rtc.c ****   RTC->MSKSR |= event;
+ 322              	 .loc 3 133 0
+ 323 0008 044B     	 ldr r3,.L23
+ 324 000a 044A     	 ldr r2,.L23
+ 325 000c 1169     	 ldr r1,[r2,#16]
+ 326 000e 7A68     	 ldr r2,[r7,#4]
+ 327 0010 0A43     	 orr r2,r1
+ 328 0012 1A61     	 str r2,[r3,#16]
+ 134:../Libraries/XMCLib/src/xmc1_rtc.c **** }
+ 329              	 .loc 3 134 0
+ 330 0014 BD46     	 mov sp,r7
+ 331 0016 02B0     	 add sp,sp,#8
+ 332              	 
+ 333 0018 80BD     	 pop {r7,pc}
+ 334              	.L24:
+ 335 001a C046     	 .align 2
+ 336              	.L23:
+ 337 001c 000A0140 	 .word 1073809920
+ 338              	 .cfi_endproc
+ 339              	.LFE65:
+ 341              	 .section .text.XMC_RTC_DisableEvent,"ax",%progbits
+ 342              	 .align 2
+ 343              	 .global XMC_RTC_DisableEvent
+ 344              	 .code 16
+ 345              	 .thumb_func
+ 347              	XMC_RTC_DisableEvent:
+ 348              	.LFB66:
+ 135:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+ 136:../Libraries/XMCLib/src/xmc1_rtc.c **** /*
+ 137:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Disable RTC periodic and alarm event(s)
+ 138:../Libraries/XMCLib/src/xmc1_rtc.c ****  */
+ 139:../Libraries/XMCLib/src/xmc1_rtc.c **** void XMC_RTC_DisableEvent(const uint32_t event)
+ 140:../Libraries/XMCLib/src/xmc1_rtc.c **** {
+ 349              	 .loc 3 140 0
+ 350              	 .cfi_startproc
+ 351 0000 80B5     	 push {r7,lr}
+ 352              	.LCFI17:
+ 353              	 .cfi_def_cfa_offset 8
+ 354              	 .cfi_offset 7,-8
+ 355              	 .cfi_offset 14,-4
+ 356 0002 82B0     	 sub sp,sp,#8
+ 357              	.LCFI18:
+ 358              	 .cfi_def_cfa_offset 16
+ 359 0004 00AF     	 add r7,sp,#0
+ 360              	.LCFI19:
+ 361              	 .cfi_def_cfa_register 7
+ 362 0006 7860     	 str r0,[r7,#4]
+ 141:../Libraries/XMCLib/src/xmc1_rtc.c ****   RTC->MSKSR &= ~event;
+ 363              	 .loc 3 141 0
+ 364 0008 044B     	 ldr r3,.L26
+ 365 000a 044A     	 ldr r2,.L26
+ 366 000c 1269     	 ldr r2,[r2,#16]
+ 367 000e 7968     	 ldr r1,[r7,#4]
+ 368 0010 C943     	 mvn r1,r1
+ 369 0012 0A40     	 and r2,r1
+ 370 0014 1A61     	 str r2,[r3,#16]
+ 142:../Libraries/XMCLib/src/xmc1_rtc.c **** }
+ 371              	 .loc 3 142 0
+ 372 0016 BD46     	 mov sp,r7
+ 373 0018 02B0     	 add sp,sp,#8
+ 374              	 
+ 375 001a 80BD     	 pop {r7,pc}
+ 376              	.L27:
+ 377              	 .align 2
+ 378              	.L26:
+ 379 001c 000A0140 	 .word 1073809920
+ 380              	 .cfi_endproc
+ 381              	.LFE66:
+ 383              	 .section .text.XMC_RTC_ClearEvent,"ax",%progbits
+ 384              	 .align 2
+ 385              	 .global XMC_RTC_ClearEvent
+ 386              	 .code 16
+ 387              	 .thumb_func
+ 389              	XMC_RTC_ClearEvent:
+ 390              	.LFB67:
+ 143:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+ 144:../Libraries/XMCLib/src/xmc1_rtc.c **** /*
+ 145:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Clear RTC periodic and alarm event(s)
+ 146:../Libraries/XMCLib/src/xmc1_rtc.c ****  */
+ 147:../Libraries/XMCLib/src/xmc1_rtc.c **** void XMC_RTC_ClearEvent(const uint32_t event)
+ 148:../Libraries/XMCLib/src/xmc1_rtc.c **** {
+ 391              	 .loc 3 148 0
+ 392              	 .cfi_startproc
+ 393 0000 80B5     	 push {r7,lr}
+ 394              	.LCFI20:
+ 395              	 .cfi_def_cfa_offset 8
+ 396              	 .cfi_offset 7,-8
+ 397              	 .cfi_offset 14,-4
+ 398 0002 82B0     	 sub sp,sp,#8
+ 399              	.LCFI21:
+ 400              	 .cfi_def_cfa_offset 16
+ 401 0004 00AF     	 add r7,sp,#0
+ 402              	.LCFI22:
+ 403              	 .cfi_def_cfa_register 7
+ 404 0006 7860     	 str r0,[r7,#4]
+ 149:../Libraries/XMCLib/src/xmc1_rtc.c ****   RTC->CLRSR = event;
+ 405              	 .loc 3 149 0
+ 406 0008 024B     	 ldr r3,.L29
+ 407 000a 7A68     	 ldr r2,[r7,#4]
+ 408 000c 5A61     	 str r2,[r3,#20]
+ 150:../Libraries/XMCLib/src/xmc1_rtc.c **** }
+ 409              	 .loc 3 150 0
+ 410 000e BD46     	 mov sp,r7
+ 411 0010 02B0     	 add sp,sp,#8
+ 412              	 
+ 413 0012 80BD     	 pop {r7,pc}
+ 414              	.L30:
+ 415              	 .align 2
+ 416              	.L29:
+ 417 0014 000A0140 	 .word 1073809920
+ 418              	 .cfi_endproc
+ 419              	.LFE67:
+ 421              	 .section .text.XMC_RTC_IsEnabled,"ax",%progbits
+ 422              	 .align 2
+ 423              	 .global XMC_RTC_IsEnabled
+ 424              	 .code 16
+ 425              	 .thumb_func
+ 427              	XMC_RTC_IsEnabled:
+ 428              	.LFB68:
+ 151:../Libraries/XMCLib/src/xmc1_rtc.c **** 
+ 152:../Libraries/XMCLib/src/xmc1_rtc.c **** /*
+ 153:../Libraries/XMCLib/src/xmc1_rtc.c ****  * Checks RTC peripheral is enabled for programming to its registers
+ 154:../Libraries/XMCLib/src/xmc1_rtc.c ****  */
+ 155:../Libraries/XMCLib/src/xmc1_rtc.c **** bool XMC_RTC_IsEnabled(void)
+ 156:../Libraries/XMCLib/src/xmc1_rtc.c **** {
+ 429              	 .loc 3 156 0
+ 430              	 .cfi_startproc
+ 431 0000 80B5     	 push {r7,lr}
+ 432              	.LCFI23:
+ 433              	 .cfi_def_cfa_offset 8
+ 434              	 .cfi_offset 7,-8
+ 435              	 .cfi_offset 14,-4
+ 436 0002 00AF     	 add r7,sp,#0
+ 437              	.LCFI24:
+ 438              	 .cfi_def_cfa_register 7
+ 157:../Libraries/XMCLib/src/xmc1_rtc.c ****   return !XMC_SCU_CLOCK_IsPeripheralClockGated(XMC_SCU_PERIPHERAL_CLOCK_RTC);
+ 439              	 .loc 3 157 0
+ 440 0004 8023     	 mov r3,#128
+ 441 0006 DB00     	 lsl r3,r3,#3
+ 442 0008 181C     	 mov r0,r3
+ 443 000a FFF7FEFF 	 bl XMC_SCU_CLOCK_IsPeripheralClockGated
+ 444 000e 031C     	 mov r3,r0
+ 445 0010 5A1E     	 sub r2,r3,#1
+ 446 0012 9341     	 sbc r3,r3,r2
+ 447 0014 DBB2     	 uxtb r3,r3
+ 448 0016 0122     	 mov r2,#1
+ 449 0018 5340     	 eor r3,r2
+ 450 001a DBB2     	 uxtb r3,r3
+ 451 001c 1A1C     	 add r2,r3,#0
+ 452 001e 0123     	 mov r3,#1
+ 453 0020 1340     	 and r3,r2
+ 454 0022 DBB2     	 uxtb r3,r3
+ 158:../Libraries/XMCLib/src/xmc1_rtc.c **** }
+ 455              	 .loc 3 158 0
+ 456 0024 181C     	 mov r0,r3
+ 457 0026 BD46     	 mov sp,r7
+ 458              	 
+ 459 0028 80BD     	 pop {r7,pc}
+ 460              	 .cfi_endproc
+ 461              	.LFE68:
+ 463 002a C046     	 .text
+ 464              	.Letext0:
+ 465              	 .file 4 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 466              	 .file 5 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 467              	 .file 6 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/CMSIS/Infineon/XMC1100_series/Include/XMC1100.h"
+ 468              	 .file 7 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc/xmc1_rtc.h"
+ 469              	 .file 8 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc/xmc1_scu.h"
+ 470              	 .file 9 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/CMSIS/Infineon/XMC1100_series/Include/system_XMC1100.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc1_rtc.c
+    {standard input}:18     .text.XMC_RTC_IsRunning:00000000 $t
+    {standard input}:22     .text.XMC_RTC_IsRunning:00000000 XMC_RTC_IsRunning
+    {standard input}:51     .text.XMC_RTC_IsRunning:00000018 $d
+    {standard input}:56     .text.XMC_SCU_GetMirrorStatus:00000000 $t
+    {standard input}:60     .text.XMC_SCU_GetMirrorStatus:00000000 XMC_SCU_GetMirrorStatus
+    {standard input}:84     .text.XMC_SCU_GetMirrorStatus:00000010 $d
+    {standard input}:89     .text.XMC_RTC_Init:00000000 $t
+    {standard input}:94     .text.XMC_RTC_Init:00000000 XMC_RTC_Init
+    {standard input}:427    .text.XMC_RTC_IsEnabled:00000000 XMC_RTC_IsEnabled
+    {standard input}:197    .text.XMC_RTC_Enable:00000000 XMC_RTC_Enable
+    {standard input}:187    .text.XMC_RTC_Init:00000080 $d
+    {standard input}:192    .text.XMC_RTC_Enable:00000000 $t
+    {standard input}:222    .text.XMC_RTC_Disable:00000000 $t
+    {standard input}:227    .text.XMC_RTC_Disable:00000000 XMC_RTC_Disable
+    {standard input}:252    .text.XMC_RTC_SetDebugMode:00000000 $t
+    {standard input}:257    .text.XMC_RTC_SetDebugMode:00000000 XMC_RTC_SetDebugMode
+    {standard input}:296    .text.XMC_RTC_SetDebugMode:00000028 $d
+    {standard input}:301    .text.XMC_RTC_EnableEvent:00000000 $t
+    {standard input}:306    .text.XMC_RTC_EnableEvent:00000000 XMC_RTC_EnableEvent
+    {standard input}:337    .text.XMC_RTC_EnableEvent:0000001c $d
+    {standard input}:342    .text.XMC_RTC_DisableEvent:00000000 $t
+    {standard input}:347    .text.XMC_RTC_DisableEvent:00000000 XMC_RTC_DisableEvent
+    {standard input}:379    .text.XMC_RTC_DisableEvent:0000001c $d
+    {standard input}:384    .text.XMC_RTC_ClearEvent:00000000 $t
+    {standard input}:389    .text.XMC_RTC_ClearEvent:00000000 XMC_RTC_ClearEvent
+    {standard input}:417    .text.XMC_RTC_ClearEvent:00000014 $d
+    {standard input}:422    .text.XMC_RTC_IsEnabled:00000000 $t
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+XMC_RTC_SetPrescaler
+XMC_SCU_CLOCK_UngatePeripheralClock
+XMC_SCU_CLOCK_GatePeripheralClock
+XMC_SCU_CLOCK_IsPeripheralClockGated

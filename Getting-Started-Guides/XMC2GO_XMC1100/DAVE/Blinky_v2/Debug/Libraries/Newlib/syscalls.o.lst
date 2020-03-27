@@ -1,0 +1,250 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,6
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "syscalls.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .weak __dso_handle
+  18              	 .section .bss.__dso_handle,"aw",%nobits
+  19              	 .align 2
+  22              	__dso_handle:
+  23 0000 00000000 	 .space 4
+  24              	 .section .text._sbrk,"ax",%progbits
+  25              	 .align 2
+  26              	 .global _sbrk
+  27              	 .code 16
+  28              	 .thumb_func
+  30              	_sbrk:
+  31              	.LFB0:
+  32              	 .file 1 "../Libraries/Newlib/syscalls.c"
+   1:../Libraries/Newlib/syscalls.c **** /**************************************************************************************************
+   2:../Libraries/Newlib/syscalls.c ****  * @file     syscalls.c
+   3:../Libraries/Newlib/syscalls.c ****  * @brief    Newlib stubs
+   4:../Libraries/Newlib/syscalls.c ****  * @version  V1.6
+   5:../Libraries/Newlib/syscalls.c ****  * @date     20 Apr 2017
+   6:../Libraries/Newlib/syscalls.c ****  *
+   7:../Libraries/Newlib/syscalls.c ****  * @cond
+   8:../Libraries/Newlib/syscalls.c ****  **************************************************************************************************
+   9:../Libraries/Newlib/syscalls.c ****  * Copyright (c) 2015-2017, Infineon Technologies AG
+  10:../Libraries/Newlib/syscalls.c ****  * All rights reserved.
+  11:../Libraries/Newlib/syscalls.c ****  *
+  12:../Libraries/Newlib/syscalls.c ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:../Libraries/Newlib/syscalls.c ****  * following conditions are met:
+  14:../Libraries/Newlib/syscalls.c ****  *
+  15:../Libraries/Newlib/syscalls.c ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:../Libraries/Newlib/syscalls.c ****  * disclaimer.
+  17:../Libraries/Newlib/syscalls.c ****  *
+  18:../Libraries/Newlib/syscalls.c ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:../Libraries/Newlib/syscalls.c ****  * disclaimer in the documentation and/or other materials provided with the distribution.
+  20:../Libraries/Newlib/syscalls.c ****  *
+  21:../Libraries/Newlib/syscalls.c ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:../Libraries/Newlib/syscalls.c ****  * products derived from this software without specific prior written permission.
+  23:../Libraries/Newlib/syscalls.c ****  *
+  24:../Libraries/Newlib/syscalls.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:../Libraries/Newlib/syscalls.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:../Libraries/Newlib/syscalls.c ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:../Libraries/Newlib/syscalls.c ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:../Libraries/Newlib/syscalls.c ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:../Libraries/Newlib/syscalls.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:../Libraries/Newlib/syscalls.c ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  31:../Libraries/Newlib/syscalls.c ****  *
+  32:../Libraries/Newlib/syscalls.c ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:../Libraries/Newlib/syscalls.c ****  * Infineon Technologies AG dave@infineon.com).
+  34:../Libraries/Newlib/syscalls.c ****  **************************************************************************************************
+  35:../Libraries/Newlib/syscalls.c ****  *
+  36:../Libraries/Newlib/syscalls.c ****  * *************************** Change history ********************************
+  37:../Libraries/Newlib/syscalls.c ****  * V0.1                  : Initial version
+  38:../Libraries/Newlib/syscalls.c ****  * V0.2                  : Label updates
+  39:../Libraries/Newlib/syscalls.c ****  * V1.0                  : Made _sbrk device agnostic
+  40:../Libraries/Newlib/syscalls.c ****  * V1.1                  : C++ support
+  41:../Libraries/Newlib/syscalls.c ****  * V1.2                  : Restored compatibility with old project files
+  42:../Libraries/Newlib/syscalls.c ****  * V1.3    Jan 2014, PKB : Encapsulating everything in this file for use only with GCC
+  43:../Libraries/Newlib/syscalls.c ****  * V1.4 11 Dec 2015, JFT : Fix heap overflow
+  44:../Libraries/Newlib/syscalls.c ****  * V1.5 09 Mar 2016, JFT : Add dso_handle to support destructors call at exit 
+  45:../Libraries/Newlib/syscalls.c ****  * V1.6 20 Apr 2017, JFT : Foward declaration of __sbrk to fix link time optimization (-flto) compi
+  46:../Libraries/Newlib/syscalls.c ****  * @endcond
+  47:../Libraries/Newlib/syscalls.c ****  */
+  48:../Libraries/Newlib/syscalls.c **** 
+  49:../Libraries/Newlib/syscalls.c **** /*
+  50:../Libraries/Newlib/syscalls.c ****  * This file contains stubs for standard C library functionality that must
+  51:../Libraries/Newlib/syscalls.c ****  * typically be provided for the underlying platform.
+  52:../Libraries/Newlib/syscalls.c ****  *
+  53:../Libraries/Newlib/syscalls.c ****  */
+  54:../Libraries/Newlib/syscalls.c **** #if defined ( __GNUC__ )
+  55:../Libraries/Newlib/syscalls.c **** 
+  56:../Libraries/Newlib/syscalls.c **** #include <stdint.h>
+  57:../Libraries/Newlib/syscalls.c **** #include <errno.h>
+  58:../Libraries/Newlib/syscalls.c **** #include <sys/types.h>
+  59:../Libraries/Newlib/syscalls.c **** 
+  60:../Libraries/Newlib/syscalls.c **** /* Forward prototypes.  */
+  61:../Libraries/Newlib/syscalls.c **** caddr_t _sbrk(int nbytes) __attribute__((externally_visible));
+  62:../Libraries/Newlib/syscalls.c **** void _init(void) __attribute__((externally_visible));
+  63:../Libraries/Newlib/syscalls.c **** 
+  64:../Libraries/Newlib/syscalls.c **** /* c++ destructor dynamic shared object needed if -fuse-cxa-atexit is used*/
+  65:../Libraries/Newlib/syscalls.c **** void *__dso_handle __attribute__ ((weak));
+  66:../Libraries/Newlib/syscalls.c **** 
+  67:../Libraries/Newlib/syscalls.c **** // defined in linker script
+  68:../Libraries/Newlib/syscalls.c **** extern caddr_t Heap_Bank1_Start;
+  69:../Libraries/Newlib/syscalls.c **** extern caddr_t Heap_Bank1_End;
+  70:../Libraries/Newlib/syscalls.c **** caddr_t _sbrk(int nbytes)
+  71:../Libraries/Newlib/syscalls.c **** {
+  33              	 .loc 1 71 0
+  34              	 .cfi_startproc
+  35 0000 80B5     	 push {r7,lr}
+  36              	.LCFI0:
+  37              	 .cfi_def_cfa_offset 8
+  38              	 .cfi_offset 7,-8
+  39              	 .cfi_offset 14,-4
+  40 0002 84B0     	 sub sp,sp,#16
+  41              	.LCFI1:
+  42              	 .cfi_def_cfa_offset 24
+  43 0004 00AF     	 add r7,sp,#0
+  44              	.LCFI2:
+  45              	 .cfi_def_cfa_register 7
+  46 0006 7860     	 str r0,[r7,#4]
+  72:../Libraries/Newlib/syscalls.c ****   static caddr_t heap_ptr = NULL;
+  73:../Libraries/Newlib/syscalls.c ****   caddr_t base;
+  74:../Libraries/Newlib/syscalls.c **** 
+  75:../Libraries/Newlib/syscalls.c ****   if (heap_ptr == NULL) {
+  47              	 .loc 1 75 0
+  48 0008 144B     	 ldr r3,.L5
+  49 000a 1B68     	 ldr r3,[r3]
+  50 000c 002B     	 cmp r3,#0
+  51 000e 02D1     	 bne .L2
+  76:../Libraries/Newlib/syscalls.c ****     heap_ptr = (caddr_t)&Heap_Bank1_Start;
+  52              	 .loc 1 76 0
+  53 0010 124B     	 ldr r3,.L5
+  54 0012 134A     	 ldr r2,.L5+4
+  55 0014 1A60     	 str r2,[r3]
+  56              	.L2:
+  77:../Libraries/Newlib/syscalls.c ****   }
+  78:../Libraries/Newlib/syscalls.c **** 
+  79:../Libraries/Newlib/syscalls.c ****   base = heap_ptr;
+  57              	 .loc 1 79 0
+  58 0016 114B     	 ldr r3,.L5
+  59 0018 1B68     	 ldr r3,[r3]
+  60 001a FB60     	 str r3,[r7,#12]
+  80:../Libraries/Newlib/syscalls.c **** 
+  81:../Libraries/Newlib/syscalls.c ****   /* heap word alignment */
+  82:../Libraries/Newlib/syscalls.c ****   nbytes = (nbytes + 3) & ~0x3U;
+  61              	 .loc 1 82 0
+  62 001c 7B68     	 ldr r3,[r7,#4]
+  63 001e 0333     	 add r3,r3,#3
+  64 0020 0322     	 mov r2,#3
+  65 0022 9343     	 bic r3,r2
+  66 0024 7B60     	 str r3,[r7,#4]
+  83:../Libraries/Newlib/syscalls.c ****   if ((caddr_t)&Heap_Bank1_End > (heap_ptr + nbytes))
+  67              	 .loc 1 83 0
+  68 0026 0D4B     	 ldr r3,.L5
+  69 0028 1A68     	 ldr r2,[r3]
+  70 002a 7B68     	 ldr r3,[r7,#4]
+  71 002c D218     	 add r2,r2,r3
+  72 002e 0D4B     	 ldr r3,.L5+8
+  73 0030 9A42     	 cmp r2,r3
+  74 0032 07D2     	 bcs .L3
+  84:../Libraries/Newlib/syscalls.c ****   {
+  85:../Libraries/Newlib/syscalls.c ****     heap_ptr += nbytes;
+  75              	 .loc 1 85 0
+  76 0034 094B     	 ldr r3,.L5
+  77 0036 1A68     	 ldr r2,[r3]
+  78 0038 7B68     	 ldr r3,[r7,#4]
+  79 003a D218     	 add r2,r2,r3
+  80 003c 074B     	 ldr r3,.L5
+  81 003e 1A60     	 str r2,[r3]
+  86:../Libraries/Newlib/syscalls.c ****     return (base);
+  82              	 .loc 1 86 0
+  83 0040 FB68     	 ldr r3,[r7,#12]
+  84 0042 06E0     	 b .L4
+  85              	.L3:
+  87:../Libraries/Newlib/syscalls.c ****   }
+  88:../Libraries/Newlib/syscalls.c ****   else
+  89:../Libraries/Newlib/syscalls.c ****   {
+  90:../Libraries/Newlib/syscalls.c ****     /* Heap overflow */
+  91:../Libraries/Newlib/syscalls.c ****     errno = ENOMEM;
+  86              	 .loc 1 91 0
+  87 0044 FFF7FEFF 	 bl __errno
+  88 0048 031C     	 mov r3,r0
+  89 004a 0C22     	 mov r2,#12
+  90 004c 1A60     	 str r2,[r3]
+  92:../Libraries/Newlib/syscalls.c ****     return ((caddr_t)-1);
+  91              	 .loc 1 92 0
+  92 004e 0123     	 mov r3,#1
+  93 0050 5B42     	 neg r3,r3
+  94              	.L4:
+  93:../Libraries/Newlib/syscalls.c ****   }
+  94:../Libraries/Newlib/syscalls.c **** }
+  95              	 .loc 1 94 0
+  96 0052 181C     	 mov r0,r3
+  97 0054 BD46     	 mov sp,r7
+  98 0056 04B0     	 add sp,sp,#16
+  99              	 
+ 100 0058 80BD     	 pop {r7,pc}
+ 101              	.L6:
+ 102 005a C046     	 .align 2
+ 103              	.L5:
+ 104 005c 00000000 	 .word heap_ptr.4331
+ 105 0060 00000000 	 .word Heap_Bank1_Start
+ 106 0064 00000000 	 .word Heap_Bank1_End
+ 107              	 .cfi_endproc
+ 108              	.LFE0:
+ 110              	 .section .text._init,"ax",%progbits
+ 111              	 .align 2
+ 112              	 .global _init
+ 113              	 .code 16
+ 114              	 .thumb_func
+ 116              	_init:
+ 117              	.LFB1:
+  95:../Libraries/Newlib/syscalls.c **** 
+  96:../Libraries/Newlib/syscalls.c **** /* Init */
+  97:../Libraries/Newlib/syscalls.c **** void _init(void)
+  98:../Libraries/Newlib/syscalls.c **** {}
+ 118              	 .loc 1 98 0
+ 119              	 .cfi_startproc
+ 120 0000 80B5     	 push {r7,lr}
+ 121              	.LCFI3:
+ 122              	 .cfi_def_cfa_offset 8
+ 123              	 .cfi_offset 7,-8
+ 124              	 .cfi_offset 14,-4
+ 125 0002 00AF     	 add r7,sp,#0
+ 126              	.LCFI4:
+ 127              	 .cfi_def_cfa_register 7
+ 128              	 .loc 1 98 0
+ 129 0004 BD46     	 mov sp,r7
+ 130              	 
+ 131 0006 80BD     	 pop {r7,pc}
+ 132              	 .cfi_endproc
+ 133              	.LFE1:
+ 135              	 .section .bss.heap_ptr.4331,"aw",%nobits
+ 136              	 .align 2
+ 139              	heap_ptr.4331:
+ 140 0000 00000000 	 .space 4
+ 141              	 .text
+ 142              	.Letext0:
+ 143              	 .file 2 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\sys\\types.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 syscalls.c
+    {standard input}:22     .bss.__dso_handle:00000000 __dso_handle
+    {standard input}:19     .bss.__dso_handle:00000000 $d
+    {standard input}:25     .text._sbrk:00000000 $t
+    {standard input}:30     .text._sbrk:00000000 _sbrk
+    {standard input}:104    .text._sbrk:0000005c $d
+    {standard input}:139    .bss.heap_ptr.4331:00000000 heap_ptr.4331
+    {standard input}:111    .text._init:00000000 $t
+    {standard input}:116    .text._init:00000000 _init
+    {standard input}:136    .bss.heap_ptr.4331:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+__errno
+Heap_Bank1_Start
+Heap_Bank1_End

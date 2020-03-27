@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:DevicePackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" URI="http://resources/VQFN24.0.0/devicepackage/0">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="14" URI="http://resources/vqfn24.0.0/devicepackage/0/14">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_0.app#//@hwResources.1"/>
+    <resourcesList name="pin" requiredResourceUri="http://resources/VQFN24.0.0/devicepackage/0/pin14"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="13" URI="http://resources/vqfn24.0.0/devicepackage/0/13">
+    <resourcesList name="pin" requiredResourceUri="http://resources/VQFN24.0.0/devicepackage/0/pin13"/>
+  </provided>
+</ResourceModel:DevicePackage>

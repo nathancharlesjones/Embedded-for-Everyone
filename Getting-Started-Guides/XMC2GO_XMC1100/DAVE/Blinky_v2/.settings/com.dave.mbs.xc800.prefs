@@ -1,0 +1,15 @@
+ACTIVE_CONFIG_NAME=Debug
+AppCompatibilitySet=1
+DEVICE_DESC=Package\= VQFN24  \nROM\= 16 KB Flash  \nRAM\= 16 KB RAM  \nInOut\= 22 digital I/O  \nADC\= 8 ADC Channels, 12-bit,  Analog-to-Digital Converter  \nTimed_InOut\= 6 Timer, 4 CAPCOM channels  \nSerial\= 2 USIC channels  \n
+DEVICE_NAME=XMC1100-Q024x0016
+DEVICE_PACKAGE=VQFN24
+DEVICE_PACK_VERSION=2.2.2
+DEVICE_PATH=/DeviceRoot/Microcontrollers/XMC1000/XMC1100 Series/XMC1100-Q024x0016
+FLASH_SIZE=16
+MBS_PROVIDER_ID_KEY=com.dave.mbs.xmc4000.xmc4000MbsFactory
+SOFTWARE_ID=XMC1.1.00.Q024.ALL
+TEMPLATE_CODEGEN_DEBUG=disable
+TEMPLATE_KEY=com.ifx.xmc4000.appDaveProjectTemplate
+USED_DAVE_VERSIONS=4.4.2
+eclipse.preferences.version=1
+minDaveVersion=4.4.2

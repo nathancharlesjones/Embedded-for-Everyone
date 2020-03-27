@@ -1,0 +1,910 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,6
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "main.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.XMC_GPIO_ToggleOutput,"ax",%progbits
+  18              	 .align 2
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	XMC_GPIO_ToggleOutput:
+  23              	.LFB45:
+  24              	 .file 1 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc/xmc_gpio.h"
+   1:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+   2:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @file xmc_gpio.h
+   3:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @date 2015-06-20
+   4:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+   5:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @cond
+   6:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  **************************************************************************************************
+   7:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * XMClib v2.1.18 - XMC Peripheral Driver Library 
+   8:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+   9:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Copyright (c) 2015-2018, Infineon Technologies AG
+  10:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * All rights reserved.                        
+  11:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *                                             
+  12:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * following conditions are met:   
+  14:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *                                                                              
+  15:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * disclaimer.                        
+  17:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * 
+  18:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * 
+  21:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * products derived from this software without specific prior written permission.                  
+  23:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *                                                                              
+  24:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *                                                                              
+  32:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  **************************************************************************************************
+  35:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+  36:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Change History
+  37:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * --------------
+  38:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+  39:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * 2015-02-20:
+  40:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *     - Initial draft<br>
+  41:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *     - Documentation improved <br>
+  42:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *      
+  43:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * 2015-06-20:
+  44:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *     - Removed version macros and declaration of GetDriverVersion API
+  45:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+  46:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @endcond
+  47:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+  48:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+  49:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+  50:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #ifndef XMC_GPIO_H
+  51:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #define XMC_GPIO_H
+  52:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+  53:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**************************************************************************************************
+  54:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * HEADER FILES
+  55:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  **************************************************************************************************
+  56:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+  57:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #include "xmc_common.h"
+  58:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+  59:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+  60:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @addtogroup XMClib XMC Peripheral Library
+  61:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @{
+  62:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+  63:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+  64:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+  65:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @addtogroup GPIO
+  66:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @brief General Purpose Input Output (GPIO) driver for the XMC microcontroller family.
+  67:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+  68:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * GPIO driver provide a generic and very flexible software interface for all standard digital I/O 
+  69:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Each port slice has individual interfaces for the operation as General Purpose I/O and it furthe
+  70:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * connectivity to the on-chip periphery and the control for the pad characteristics. 
+  71:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+  72:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * The driver is divided into Input and Output mode.
+  73:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+  74:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Input mode features:
+  75:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * -# Configuration structure XMC_GPIO_CONFIG_t and initialization function XMC_GPIO_Init()
+  76:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * -# Allows the selection of weak pull-up or pull-down device. Configuration structure XMC_GPIO_MO
+  77:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \if XMC1
+  78:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * -# Allows the selection of input hysteresis. XMC_GPIO_SetInputHysteresis()
+  79:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \endif
+  80:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+  81:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * 
+  82:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Output mode features:
+  83:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * -# Allows the selection of push pull/open drain and Alternate output. Configuration structure XM
+  84:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \if XMC4
+  85:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * -# Allows the selection of pad driver strength. Configuration structure XMC_GPIO_OUTPUT_STRENGTH
+  86:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \endif
+  87:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+  88:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * -# Allows the selection of initial output level. Configuration structure XMC_GPIO_OUTPUT_LEVEL_t
+  89:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+  90:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *@{
+  91:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+  92:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  
+  93:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**************************************************************************************************
+  94:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * MACROS
+  95:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  **************************************************************************************************
+  96:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+  97:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #define PORT_IOCR_PC_Pos PORT0_IOCR0_PC0_Pos
+  98:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #define PORT_IOCR_PC_Msk PORT0_IOCR0_PC0_Msk
+  99:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 100:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #define PORT_IOCR_PC_Size 				(8U)
+ 101:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 											
+ 102:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 103:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #define XMC_GPIO_CHECK_OUTPUT_LEVEL(level) ((level == XMC_GPIO_OUTPUT_LEVEL_LOW) || \
+ 104:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****                                             (level == XMC_GPIO_OUTPUT_LEVEL_HIGH))
+ 105:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****                                             
+ 106:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #define XMC_GPIO_CHECK_HWCTRL(hwctrl) ((hwctrl == XMC_GPIO_HWCTRL_DISABLED) || \
+ 107:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****                                        (hwctrl == XMC_GPIO_HWCTRL_PERIPHERAL1) || \
+ 108:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****                                        (hwctrl == XMC_GPIO_HWCTRL_PERIPHERAL2))                    
+ 109:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****                                             
+ 110:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**************************************************************************************************
+ 111:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * ENUMS
+ 112:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  **************************************************************************************************
+ 113:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 114:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 115:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+ 116:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Defines output level of a pin. Use type \a XMC_GPIO_OUTPUT_LEVEL_t for this enum.
+ 117:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+ 118:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** typedef enum XMC_GPIO_OUTPUT_LEVEL
+ 119:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** {
+ 120:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   XMC_GPIO_OUTPUT_LEVEL_LOW  = 0x10000U, /**<  Reset bit */
+ 121:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   XMC_GPIO_OUTPUT_LEVEL_HIGH = 0x1U, 	/**< Set bit  */
+ 122:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** } XMC_GPIO_OUTPUT_LEVEL_t;
+ 123:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 124:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+ 125:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Defines direct hardware control characteristics of the pin . Use type \a XMC_GPIO_HWCTRL_t for t
+ 126:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+ 127:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** typedef enum XMC_GPIO_HWCTRL
+ 128:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** {
+ 129:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   XMC_GPIO_HWCTRL_DISABLED     = 0x0U, /**<  Software control only */
+ 130:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   XMC_GPIO_HWCTRL_PERIPHERAL1  = 0x1U, /**<  HWI0/HWO0 control path can override the software confi
+ 131:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   XMC_GPIO_HWCTRL_PERIPHERAL2  = 0x2U  /**<  HWI1/HWO1 control path can override the software confi
+ 132:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** } XMC_GPIO_HWCTRL_t;
+ 133:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 134:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**************************************************************************************************
+ 135:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * DEVICE FAMILY EXTENSIONS
+ 136:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  **************************************************************************************************
+ 137:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 138:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  #if UC_FAMILY == XMC1
+ 139:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #include "xmc1_gpio.h"
+ 140:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #elif UC_FAMILY == XMC4
+ 141:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #include "xmc4_gpio.h"
+ 142:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #else
+ 143:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #error "xmc_gpio.h: family device not supported"
+ 144:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #endif
+ 145:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 146:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**************************************************************************************************
+ 147:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * API PROTOTYPES
+ 148:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  **************************************************************************************************
+ 149:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 150:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #ifdef __cplusplus
+ 151:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** extern "C" {
+ 152:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** #endif
+ 153:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 154:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 155:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+ 156:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  port	  Constant pointer pointing to GPIO port, to access port registers like Pn_OUT,Pn_O
+ 157:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  pin	  Port pin number.
+ 158:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  config GPIO configuration data structure. Refer data structure @ref XMC_GPIO_CONFIG_t fo
+ 159:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 160:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @return None
+ 161:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 162:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Description:</b><br>
+ 163:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \if XMC1
+ 164:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Initializes input / output mode settings like, pull up / pull down devices,hysteresis, push pull
+ 165:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Also configures alternate function outputs and clears hardware port control for a selected \a po
+ 166:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \a config provides selected I/O settings. It configures hardware registers Pn_IOCR,Pn_OUT, Pn_OM
+ 167:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \endif
+ 168:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \if XMC4
+ 169:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Initializes input / output mode settings like, pull up / pull down devices,push pull /open drain
+ 170:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Also configures alternate function outputs and clears hardware port control for selected \a port
+ 171:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * It configures hardware registers Pn_IOCR,Pn_OUT,Pn_OMR,Pn_PDISC and Pn_PDR.\n
+ 172:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \endif
+ 173:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 174:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Related APIs:</b><BR>
+ 175:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *  None
+ 176:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 177:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Note:</b><br>
+ 178:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * This API is called in definition of DAVE_init by code generation and therefore should not be exp
+ 179:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * for the normal operation. Use other APIs only after DAVE_init is called successfully (returns DA
+ 180:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 181:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 182:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+ 183:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 184:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  
+ 185:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** void XMC_GPIO_Init(XMC_GPIO_PORT_t *const port, const uint8_t pin, const XMC_GPIO_CONFIG_t *const c
+ 186:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  
+ 187:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+ 188:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 189:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  port	Constant pointer pointing to GPIO port, to access hardware register Pn_IOCR.
+ 190:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  pin	Port pin number.
+ 191:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  mode input / output functionality selection. Refer @ref XMC_GPIO_MODE_t for valid values
+ 192:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 193:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @return None
+ 194:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 195:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Description:</b><br>
+ 196:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Sets digital input and output driver functionality and characteristics of a GPIO port pin. It co
+ 197:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * registers Pn_IOCR. \a mode is initially configured during initialization in XMC_GPIO_Init(). Cal
+ 198:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * the port direction functionality as needed later in the program.
+ 199:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 200:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Related APIs:</b><BR>
+ 201:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *  None
+ 202:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 203:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+ 204:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 205:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** void XMC_GPIO_SetMode(XMC_GPIO_PORT_t *const port, const uint8_t pin, const XMC_GPIO_MODE_t mode);
+ 206:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 207:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 208:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+ 209:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 210:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  port	 Constant pointer pointing to GPIO port, to access hardware register Pn_OMR.
+ 211:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  pin	 Port pin number.
+ 212:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  level output level selection. Refer @ref XMC_GPIO_OUTPUT_LEVEL_t for valid values.
+ 213:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 214:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @return None
+ 215:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 216:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Description:</b><br>
+ 217:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Set port pin output level to high or low.It configures hardware registers Pn_OMR.\a level is ini
+ 218:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * configured during initialization in XMC_GPIO_Init(). Call this API to alter output level as need
+ 219:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 220:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Related APIs:</b><BR>
+ 221:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *  XMC_GPIO_SetOutputHigh(), XMC_GPIO_SetOutputLow().
+ 222:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 223:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Note:</b><br>
+ 224:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Prior to this api, user has to configure port pin to output mode using XMC_GPIO_SetMode().
+ 225:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 226:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+ 227:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 228:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 229:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** __STATIC_INLINE void XMC_GPIO_SetOutputLevel(XMC_GPIO_PORT_t *const port, const uint8_t pin, const 
+ 230:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** {
+ 231:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   XMC_ASSERT("XMC_GPIO_SetOutputLevel: Invalid port", XMC_GPIO_CHECK_OUTPUT_PORT(port));
+ 232:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   XMC_ASSERT("XMC_GPIO_SetOutputLevel: Invalid output level", XMC_GPIO_CHECK_OUTPUT_LEVEL(level));
+ 233:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   
+ 234:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   port->OMR = (uint32_t)level << pin;
+ 235:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** }
+ 236:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 237:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 238:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+ 239:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  port constant pointer pointing to GPIO port, to access hardware register Pn_OMR.
+ 240:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  pin	Port pin number.
+ 241:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 242:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @return None
+ 243:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 244:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Description:</b><br>
+ 245:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *  Sets port pin output to high. It configures hardware registers Pn_OMR.
+ 246:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 247:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *  \par<b>Related APIs:</b><BR>
+ 248:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *  XMC_GPIO_SetOutputLow()
+ 249:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 250:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Note:</b><br>
+ 251:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Prior to this api, user has to configure port pin to output mode using XMC_GPIO_SetMode().\n
+ 252:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Register Pn_OMR is virtual and does not contain any flip-flop. A read action delivers the value 
+ 253:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 254:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+ 255:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 256:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** __STATIC_INLINE void XMC_GPIO_SetOutputHigh(XMC_GPIO_PORT_t *const port, const uint8_t pin)
+ 257:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** {
+ 258:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   XMC_ASSERT("XMC_GPIO_SetOutputHigh: Invalid port", XMC_GPIO_CHECK_OUTPUT_PORT(port));
+ 259:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 260:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   port->OMR = (uint32_t)0x1U << pin;
+ 261:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** }
+ 262:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 263:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+ 264:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 265:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  port	constant pointer pointing to GPIO port, to access hardware register Pn_OMR.
+ 266:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param  pin	port pin number.
+ 267:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 268:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @return  None
+ 269:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 270:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *\par<b>Description:</b><br>
+ 271:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Sets port pin output to low. It configures hardware registers Pn_OMR.\n
+ 272:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 273:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Related APIs:</b><BR>>
+ 274:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * XMC_GPIO_SetOutputHigh()
+ 275:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 276:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *\par<b>Note:</b><br>
+ 277:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Prior to this api, user has to configure port pin to output mode using XMC_GPIO_SetMode().
+ 278:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Register Pn_OMR is virtual and does not contain any flip-flop. A read action delivers the value 
+ 279:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 280:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+ 281:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 282:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** __STATIC_INLINE void XMC_GPIO_SetOutputLow(XMC_GPIO_PORT_t *const port, const uint8_t pin)
+ 283:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** {
+ 284:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   XMC_ASSERT("XMC_GPIO_SetOutputLow: Invalid port", XMC_GPIO_CHECK_OUTPUT_PORT(port));
+ 285:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 286:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   port->OMR = 0x10000U << pin;
+ 287:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** }
+ 288:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 289:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** /**
+ 290:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 291:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param port constant pointer pointing to GPIO port, to access hardware register Pn_OMR.
+ 292:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @param pin  port pin number.
+ 293:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 294:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * @return None
+ 295:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 296:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Description:</b><br>
+ 297:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Configures port pin output to Toggle. It configures hardware registers Pn_OMR.
+ 298:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 299:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Related APIs:</b><BR>
+ 300:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * XMC_GPIO_SetOutputHigh(), XMC_GPIO_SetOutputLow().
+ 301:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 302:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * \par<b>Note:</b><br>
+ 303:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * Prior to this api, user has to configure port pin to output mode using XMC_GPIO_SetMode(). Regis
+ 304:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  * and does not contain any flip-flop. A read action delivers the value of 0.
+ 305:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  *
+ 306:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****  */
+ 307:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 308:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** __STATIC_INLINE void XMC_GPIO_ToggleOutput(XMC_GPIO_PORT_t *const port, const uint8_t pin)
+ 309:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** {
+  25              	 .loc 1 309 0
+  26              	 .cfi_startproc
+  27 0000 80B5     	 push {r7,lr}
+  28              	.LCFI0:
+  29              	 .cfi_def_cfa_offset 8
+  30              	 .cfi_offset 7,-8
+  31              	 .cfi_offset 14,-4
+  32 0002 82B0     	 sub sp,sp,#8
+  33              	.LCFI1:
+  34              	 .cfi_def_cfa_offset 16
+  35 0004 00AF     	 add r7,sp,#0
+  36              	.LCFI2:
+  37              	 .cfi_def_cfa_register 7
+  38 0006 7860     	 str r0,[r7,#4]
+  39 0008 0A1C     	 mov r2,r1
+  40 000a FB1C     	 add r3,r7,#3
+  41 000c 1A70     	 strb r2,[r3]
+ 310:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   XMC_ASSERT("XMC_GPIO_ToggleOutput: Invalid port", XMC_GPIO_CHECK_OUTPUT_PORT(port));
+ 311:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** 
+ 312:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h ****   port->OMR = 0x10001U << pin;
+  42              	 .loc 1 312 0
+  43 000e FB1C     	 add r3,r7,#3
+  44 0010 1B78     	 ldrb r3,[r3]
+  45 0012 034A     	 ldr r2,.L2
+  46 0014 9A40     	 lsl r2,r2,r3
+  47 0016 7B68     	 ldr r3,[r7,#4]
+  48 0018 5A60     	 str r2,[r3,#4]
+ 313:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_gpio.h **** }
+  49              	 .loc 1 313 0
+  50 001a BD46     	 mov sp,r7
+  51 001c 02B0     	 add sp,sp,#8
+  52              	 
+  53 001e 80BD     	 pop {r7,pc}
+  54              	.L3:
+  55              	 .align 2
+  56              	.L2:
+  57 0020 01000100 	 .word 65537
+  58              	 .cfi_endproc
+  59              	.LFE45:
+  61              	 .section .text.DIGITAL_IO_ToggleOutput,"ax",%progbits
+  62              	 .align 2
+  63              	 .code 16
+  64              	 .thumb_func
+  66              	DIGITAL_IO_ToggleOutput:
+  67              	.LFB53:
+  68              	 .file 2 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO/digital_io.h"
+   1:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /*
+   2:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+   3:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * @file digital_io.h
+   4:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * @date 2016-07-08
+   5:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+   6:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * NOTE:
+   7:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * This file is generated by DAVE. Any manual modification done to this file will be lost when the 
+   8:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+   9:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * @cond
+  10:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  **************************************************************************************************
+  11:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * DIGITAL_IO v4.0.16 - The DIGITAL_IO APP is used to configure a port pin as digital Input/Output.
+  12:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  13:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * Copyright (c) 2015-2016, Infineon Technologies AG
+  14:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * All rights reserved.
+  15:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  16:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  17:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * following conditions are met:
+  18:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  19:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *   Redistributions of source code must retain the above copyright notice, this list of conditions
+  20:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *   disclaimer.
+  21:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  22:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *   Redistributions in binary form must reproduce the above copyright notice, this list of conditi
+  23:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *   following disclaimer in the documentation and/or other materials provided with the distributio
+  24:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  25:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *   Neither the name of the copyright holders nor the names of its contributors may be used to end
+  26:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *   products derived from this software without specific prior written permission.
+  27:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  28:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  29:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  30:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  31:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  32:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  33:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  34:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  35:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  36:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  37:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * with Infineon Technologies AG (dave@infineon.com).
+  38:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  **************************************************************************************************
+  39:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  40:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * Change History
+  41:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * --------------
+  42:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  43:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * 2015-02-16
+  44:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *     - Initial version
+  45:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  46:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * 2015-04-22
+  47:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *     - XMC_ASSERT is added in static inline functions.<br>
+  48:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  49:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * 2015-06-20
+  50:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *     - Version check added for XMCLib dependency.<br>
+  51:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  52:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * 2015-12-22
+  53:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *     - Added hardware controlled IO feature.
+  54:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * 2016-07-08:
+  55:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *     - Fixed incorrect case for an included header.<br>
+  56:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  57:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * @endcond
+  58:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  *
+  59:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  */
+  60:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+  61:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**************************************************************************************************
+  62:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * HEADER FILES
+  63:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  **************************************************************************************************
+  64:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+  65:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** #ifndef DIGITAL_IO_H
+  66:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** #define DIGITAL_IO_H
+  67:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+  68:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** #include <xmc_gpio.h>
+  69:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** #include <DAVE_Common.h>
+  70:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** #include "digital_io_conf.h"
+  71:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+  72:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**************************************************************************************************
+  73:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * MACROS
+  74:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  **************************************************************************************************
+  75:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** #if (!((XMC_LIB_MAJOR_VERSION == 2U) && \
+  76:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****        (XMC_LIB_MINOR_VERSION >= 0U) && \
+  77:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****        (XMC_LIB_PATCH_VERSION >= 0U)))
+  78:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** #error "DIGITAL_IO requires XMC Peripheral Library v2.0.0 or higher"
+  79:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** #endif
+  80:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+  81:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  /*************************************************************************************************
+  82:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * ENUMS
+  83:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  **************************************************************************************************
+  84:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+  85:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+  86:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @ingroup DIGITAL_IO_enumerations
+  87:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @{
+  88:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+  89:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+  90:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+  91:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @brief Initialization status of DIGITAL_IO APP.
+  92:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+  93:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** typedef enum DIGITAL_IO_STATUS
+  94:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** {
+  95:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   DIGITAL_IO_STATUS_OK = 0U,/**< 0=Status OK */
+  96:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   DIGITAL_IO_STATUS_FAILURE = 1U/**< 1=Status Failed */
+  97:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** } DIGITAL_IO_STATUS_t;
+  98:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+  99:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+ 100:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @}
+ 101:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+ 102:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 103:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**************************************************************************************************
+ 104:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * DATA STRUCTURES
+ 105:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  **************************************************************************************************
+ 106:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+ 107:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @ingroup DIGITAL_IO_datastructures
+ 108:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @{
+ 109:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+ 110:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 111:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+ 112:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @brief Initialization data structure of DIGITAL_IO APP
+ 113:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+ 114:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** typedef struct DIGITAL_IO
+ 115:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** {
+ 116:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   XMC_GPIO_PORT_t *const gpio_port;             /**< port number */
+ 117:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   const XMC_GPIO_CONFIG_t gpio_config;          /**< mode, initial output level and pad driver stre
+ 118:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   const uint8_t gpio_pin;                       /**< pin number */
+ 119:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   const XMC_GPIO_HWCTRL_t hwctrl;               /**< Hardware port control */
+ 120:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** } DIGITAL_IO_t;
+ 121:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 122:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 123:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+ 124:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @}
+ 125:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+ 126:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 127:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 128:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**************************************************************************************************
+ 129:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  * API Prototypes
+ 130:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****  **************************************************************************************************
+ 131:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 132:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 133:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** #ifdef __cplusplus
+ 134:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** extern "C" {
+ 135:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** #endif
+ 136:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 137:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+ 138:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @ingroup DIGITAL_IO_apidoc
+ 139:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @{
+ 140:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+ 141:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 142:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 143:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 144:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+ 145:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @brief Get DIGITAL_IO APP version
+ 146:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @return DAVE_APP_VERSION_t APP version information (major, minor and patch number)
+ 147:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 148:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * \par<b>Description: </b><br>
+ 149:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * The function can be used to check application software compatibility with a
+ 150:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * specific version of the APP.
+ 151:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 152:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * Example Usage:
+ 153:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 154:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @code
+ 155:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * #include <DAVE.h>
+ 156:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 157:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * int main(void)
+ 158:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * {
+ 159:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   DAVE_STATUS_t init_status;
+ 160:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   DAVE_APP_VERSION_t version;
+ 161:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 162:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   // Initialize DIGITAL_IO APP:
+ 163:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   // DIGITAL_IO_Init() is called from within DAVE_Init().
+ 164:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   init_status = DAVE_Init();
+ 165:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   if(init_status == DAVE_STATUS_SUCCESS)
+ 166:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   {
+ 167:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     version = DIGITAL_IO_GetAppVersion();
+ 168:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     if (version.major != 4U) {
+ 169:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     // Probably, not the right version.
+ 170:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     }
+ 171:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   }
+ 172:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 173:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     // More code here
+ 174:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     while(1) {
+ 175:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 176:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     }
+ 177:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     return (1);
+ 178:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *  }
+ 179:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @endcode<BR>
+ 180:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+ 181:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 182:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** DAVE_APP_VERSION_t DIGITAL_IO_GetAppVersion(void);
+ 183:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 184:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+ 185:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 186:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @brief Function to initialize the port pin as per UI settings.
+ 187:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @param handler Pointer pointing to APP data structure. Refer @ref DIGITAL_IO_t for details.
+ 188:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @return DIGITAL_IO_STATUS_t DIGITAL_IO APP status. Refer @ref DIGITAL_IO_STATUS_t structure for d
+ 189:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 190:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * \par<b>Description:</b><br>
+ 191:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * This function initializes GPIO port registers IOCR,PDISC,OMR,PDR/PHCR to configure pin direction,
+ 192:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * and pad driver strength/hysteresis.
+ 193:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 194:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * \par<b>Related APIs:</b><BR>
+ 195:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * None
+ 196:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 197:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * Example Usage:
+ 198:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @code
+ 199:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * #include <DAVE.h>//Declarations from DAVE Code Generation (includes SFR declaration)
+ 200:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * int main(void)
+ 201:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * {
+ 202:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   DAVE_STATUS_t status;
+ 203:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   status = DAVE_Init();  //(DAVE_STATUS_t)DIGITAL_IO_Init(&DIGITAL_IO_0) is called within DAVE_In
+ 204:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   if(status == DAVE_STATUS_SUCCESS)
+ 205:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   {
+ 206:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     XMC_DEBUG("DAVE Apps initialization success\n");
+ 207:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   }
+ 208:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   else
+ 209:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   {
+ 210:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     XMC_DEBUG(("DAVE Apps initialization failed with status %d\n", status));
+ 211:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     while(1U)
+ 212:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     {
+ 213:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     }
+ 214:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   }
+ 215:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   //Placeholder for user application code. The while loop below can be replaced with user applica
+ 216:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   while(1U)
+ 217:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   {
+ 218:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   }
+ 219:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   return 1U;
+ 220:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *  }
+ 221:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *  @endcode
+ 222:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+ 223:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 224:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** DIGITAL_IO_STATUS_t DIGITAL_IO_Init(const DIGITAL_IO_t *const handler);
+ 225:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 226:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+ 227:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 228:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @brief Function to set port pin high.
+ 229:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @param handler Pointer pointing to APP data structure. Refer @ref DIGITAL_IO_t for details.
+ 230:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @return None
+ 231:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 232:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * \par<b>Description:</b><br>
+ 233:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * This function configures port output modification register Pn_OMR, to make port pin to high level
+ 234:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 235:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * \par<b>Related APIs:</b><BR>
+ 236:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *  DIGITAL_IO_SetOutputLow()
+ 237:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 238:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * Example Usage:
+ 239:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @code
+ 240:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * #include <DAVE.h>//Declarations from DAVE Code Generation (includes SFR declaration)
+ 241:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * int main(void)
+ 242:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * {
+ 243:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   DAVE_STATUS_t status;
+ 244:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   status = DAVE_Init();  //(DAVE_STATUS_t)DIGITAL_IO_Init(&DIGITAL_IO_0) is called within DAVE_In
+ 245:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   if(status == DAVE_STATUS_SUCCESS)
+ 246:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   {
+ 247:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     XMC_DEBUG("DAVE Apps initialization success\n");
+ 248:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   }
+ 249:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   else
+ 250:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   {
+ 251:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     XMC_DEBUG(("DAVE Apps initialization failed with status %d\n", status));
+ 252:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     while(1U)
+ 253:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     {
+ 254:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     }
+ 255:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   }
+ 256:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   //Placeholder for user application code. The while loop below can be replaced with user applica
+ 257:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_0);
+ 258:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   while(1U)
+ 259:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   {
+ 260:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     // Add application code here
+ 261:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   }
+ 262:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 263:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   return (1);
+ 264:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * }
+ 265:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *  @endcode
+ 266:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+ 267:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 268:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** __STATIC_INLINE void DIGITAL_IO_SetOutputHigh(const DIGITAL_IO_t *const handler)
+ 269:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** {
+ 270:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   XMC_ASSERT("DIGITAL_IO_SetOutputHigh: handler null pointer", handler != NULL);
+ 271:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   XMC_GPIO_SetOutputHigh(handler->gpio_port, handler->gpio_pin);
+ 272:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** }
+ 273:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 274:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+ 275:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @brief Function to reset port pin.
+ 276:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @param handler Pointer pointing to APP data structure. Refer @ref DIGITAL_IO_t for details.
+ 277:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @return None
+ 278:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 279:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * \par<b>Description:</b><br>
+ 280:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * This function configures port output modification register Pn_OMR, to make port pin to low level.
+ 281:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 282:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * \par<b>Related APIs:</b><BR>
+ 283:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * DIGITAL_IO_SetOutputHigh()
+ 284:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 285:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * Example Usage:
+ 286:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @code
+ 287:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *  #include <DAVE.h>//Declarations from DAVE Code Generation (includes SFR declaration)
+ 288:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *  int main(void)
+ 289:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *  {
+ 290:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    DAVE_STATUS_t status;
+ 291:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    status = DAVE_Init();  //(DAVE_STATUS_t)DIGITAL_IO_Init(&DIGITAL_IO_0) is called within DAVE_I
+ 292:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    if(status == DAVE_STATUS_SUCCESS)
+ 293:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    {
+ 294:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      XMC_DEBUG("DAVE Apps initialization success\n");
+ 295:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    }
+ 296:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    else
+ 297:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    {
+ 298:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      XMC_DEBUG(("DAVE Apps initialization failed with status %d\n", status));
+ 299:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      while(1U)
+ 300:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      {
+ 301:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      }
+ 302:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    }
+ 303:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    //Placeholder for user application code. The while loop below can be replaced with user applic
+ 304:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    DIGITAL_IO_SetOutputLow(&DIGITAL_IO_0);
+ 305:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    while(1U)
+ 306:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    {
+ 307:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      // Add application code here
+ 308:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *    }
+ 309:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 310:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   return (1);
+ 311:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * }
+ 312:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *  @endcode
+ 313:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+ 314:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 315:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** __STATIC_INLINE void DIGITAL_IO_SetOutputLow(const DIGITAL_IO_t *const handler)
+ 316:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** {
+ 317:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   XMC_ASSERT("DIGITAL_IO_SetOutputLow: handler null pointer", handler != NULL);
+ 318:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   XMC_GPIO_SetOutputLow(handler->gpio_port,handler->gpio_pin);
+ 319:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** }
+ 320:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 321:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** /**
+ 322:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @brief Function to Toggle port pin.
+ 323:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @param handler Pointer pointing to APP data structure. Refer @ref DIGITAL_IO_t for details.
+ 324:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @return None
+ 325:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 326:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * \par<b>Description:</b><br>
+ 327:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * This function configures port output modification register Pn_OMR, to toggle port pin.
+ 328:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 329:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * \par<b>Related APIs:</b><BR>
+ 330:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * DIGITAL_IO_SetOutputLow(), DIGITAL_IO_SetOutputHigh()
+ 331:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 332:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * Example Usage:
+ 333:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *
+ 334:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * @code
+ 335:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * #include <DAVE.h>//Declarations from DAVE Code Generation (includes SFR declaration)
+ 336:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * int main(void)
+ 337:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * {
+ 338:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   DAVE_STATUS_t status;
+ 339:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   uint32_t delay_count;;
+ 340:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   status = DAVE_Init();  //(DAVE_STATUS_t)DIGITAL_IO_Init(&DIGITAL_IO_0) is called within DAVE_In
+ 341:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   if(status == DAVE_STATUS_SUCCESS)
+ 342:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   {
+ 343:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *     XMC_DEBUG("DAVE Apps initialization success\n");
+ 344:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   }
+ 345:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   else
+ 346:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   {
+ 347:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      XMC_DEBUG(("DAVE Apps initialization failed with status %d\n", status));
+ 348:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      while(1U)
+ 349:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      {
+ 350:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      }
+ 351:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   }
+ 352:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   //Placeholder for user application code. The while loop below can be replaced with user applica
+ 353:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   while(1U)
+ 354:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   {
+ 355:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      DIGITAL_IO_ToggleOutput(&DIGITAL_IO_0); //toggles : 1 -> 0 (if initial output level is logic
+ 356:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      //Add application code here
+ 357:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      for(delay_count = 0;delay_count<0xfffff;delay_count++);
+ 358:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      DIGITAL_IO_ToggleOutput(&DIGITAL_IO_0); //toggles : 0 -> 1
+ 359:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      //Add application code here
+ 360:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *      for(delay_count = 0;delay_count<0xfffff;delay_count++);
+ 361:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   }
+ 362:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *   return (1);
+ 363:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** * }
+ 364:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** *  @endcode
+ 365:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** */
+ 366:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** 
+ 367:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** __STATIC_INLINE void DIGITAL_IO_ToggleOutput(const DIGITAL_IO_t *const handler)
+ 368:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** {
+  69              	 .loc 2 368 0
+  70              	 .cfi_startproc
+  71 0000 80B5     	 push {r7,lr}
+  72              	.LCFI3:
+  73              	 .cfi_def_cfa_offset 8
+  74              	 .cfi_offset 7,-8
+  75              	 .cfi_offset 14,-4
+  76 0002 82B0     	 sub sp,sp,#8
+  77              	.LCFI4:
+  78              	 .cfi_def_cfa_offset 16
+  79 0004 00AF     	 add r7,sp,#0
+  80              	.LCFI5:
+  81              	 .cfi_def_cfa_register 7
+  82 0006 7860     	 str r0,[r7,#4]
+ 369:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   XMC_ASSERT("DIGITAL_IO_ToggleOutput: handler null pointer", handler != NULL);
+ 370:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h ****   XMC_GPIO_ToggleOutput(handler->gpio_port, handler->gpio_pin);
+  83              	 .loc 2 370 0
+  84 0008 7B68     	 ldr r3,[r7,#4]
+  85 000a 1A68     	 ldr r2,[r3]
+  86 000c 7B68     	 ldr r3,[r7,#4]
+  87 000e 1B7B     	 ldrb r3,[r3,#12]
+  88 0010 101C     	 mov r0,r2
+  89 0012 191C     	 mov r1,r3
+  90 0014 FFF7FEFF 	 bl XMC_GPIO_ToggleOutput
+ 371:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO\digital_io.h **** }
+  91              	 .loc 2 371 0
+  92 0018 BD46     	 mov sp,r7
+  93 001a 02B0     	 add sp,sp,#8
+  94              	 
+  95 001c 80BD     	 pop {r7,pc}
+  96              	 .cfi_endproc
+  97              	.LFE53:
+  99 001e C046     	 .section .text.main,"ax",%progbits
+ 100              	 .align 2
+ 101              	 .global main
+ 102              	 .code 16
+ 103              	 .thumb_func
+ 105              	main:
+ 106              	.LFB55:
+ 107              	 .file 3 "../main.c"
+   1:../main.c     **** /*
+   2:../main.c     ****  * main.c
+   3:../main.c     ****  *
+   4:../main.c     ****  *  Created on: 2019 Nov 13 18:45:19
+   5:../main.c     ****  *  Author: Nathan
+   6:../main.c     ****  */
+   7:../main.c     **** 
+   8:../main.c     **** 
+   9:../main.c     **** 
+  10:../main.c     **** 
+  11:../main.c     **** #include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaratio
+  12:../main.c     **** 
+  13:../main.c     **** /**
+  14:../main.c     **** 
+  15:../main.c     ****  * @brief main() - Application entry point
+  16:../main.c     ****  *
+  17:../main.c     ****  * <b>Details of function</b><br>
+  18:../main.c     ****  * This routine is the application entry point. It is invoked by the device startup code. It is res
+  19:../main.c     ****  * invoking the APP initialization dispatcher routine - DAVE_Init() and hosting the place-holder fo
+  20:../main.c     ****  * code.
+  21:../main.c     ****  */
+  22:../main.c     **** 
+  23:../main.c     **** int main(void)
+  24:../main.c     **** {
+ 108              	 .loc 3 24 0
+ 109              	 .cfi_startproc
+ 110 0000 90B5     	 push {r4,r7,lr}
+ 111              	.LCFI6:
+ 112              	 .cfi_def_cfa_offset 12
+ 113              	 .cfi_offset 4,-12
+ 114              	 .cfi_offset 7,-8
+ 115              	 .cfi_offset 14,-4
+ 116 0002 83B0     	 sub sp,sp,#12
+ 117              	.LCFI7:
+ 118              	 .cfi_def_cfa_offset 24
+ 119 0004 00AF     	 add r7,sp,#0
+ 120              	.LCFI8:
+ 121              	 .cfi_def_cfa_register 7
+  25:../main.c     ****   DAVE_STATUS_t status;
+  26:../main.c     **** 
+  27:../main.c     ****   status = DAVE_Init();           /* Initialization of DAVE APPs  */
+ 122              	 .loc 3 27 0
+ 123 0006 FC1C     	 add r4,r7,#3
+ 124 0008 FFF7FEFF 	 bl DAVE_Init
+ 125 000c 031C     	 mov r3,r0
+ 126 000e 2370     	 strb r3,[r4]
+  28:../main.c     **** 
+  29:../main.c     ****   if(status != DAVE_STATUS_SUCCESS)
+ 127              	 .loc 3 29 0
+ 128 0010 FB1C     	 add r3,r7,#3
+ 129 0012 1B78     	 ldrb r3,[r3]
+ 130 0014 002B     	 cmp r3,#0
+ 131 0016 00D0     	 beq .L6
+ 132              	.L7:
+  30:../main.c     ****   {
+  31:../main.c     ****     /* Placeholder for error handler code. The while loop below can be replaced with an user error 
+  32:../main.c     ****     XMC_DEBUG("DAVE APPs initialization failed\n");
+  33:../main.c     **** 
+  34:../main.c     ****     while(1U)
+  35:../main.c     ****     {
+  36:../main.c     **** 
+  37:../main.c     ****     }
+ 133              	 .loc 3 37 0 discriminator 1
+ 134 0018 FEE7     	 b .L7
+ 135              	.L6:
+  38:../main.c     ****   }
+  39:../main.c     **** 
+  40:../main.c     ****   /* Placeholder for user application code. The while loop below can be replaced with user applicat
+  41:../main.c     ****   while(1U)
+  42:../main.c     ****   {
+  43:../main.c     ****     DIGITAL_IO_ToggleOutput(&LED1);
+ 136              	 .loc 3 43 0
+ 137 001a 074B     	 ldr r3,.L10
+ 138 001c 181C     	 mov r0,r3
+ 139 001e FFF7FEFF 	 bl DIGITAL_IO_ToggleOutput
+ 140              	.LBB2:
+  44:../main.c     ****     for (long i = 128000; i > 0; i--);
+ 141              	 .loc 3 44 0
+ 142 0022 FA23     	 mov r3,#250
+ 143 0024 5B02     	 lsl r3,r3,#9
+ 144 0026 7B60     	 str r3,[r7,#4]
+ 145 0028 02E0     	 b .L8
+ 146              	.L9:
+ 147              	 .loc 3 44 0 is_stmt 0 discriminator 3
+ 148 002a 7B68     	 ldr r3,[r7,#4]
+ 149 002c 013B     	 sub r3,r3,#1
+ 150 002e 7B60     	 str r3,[r7,#4]
+ 151              	.L8:
+ 152              	 .loc 3 44 0 discriminator 1
+ 153 0030 7B68     	 ldr r3,[r7,#4]
+ 154 0032 002B     	 cmp r3,#0
+ 155 0034 F9DC     	 bgt .L9
+ 156              	.LBE2:
+  45:../main.c     ****   }
+ 157              	 .loc 3 45 0 is_stmt 1
+ 158 0036 F0E7     	 b .L6
+ 159              	.L11:
+ 160              	 .align 2
+ 161              	.L10:
+ 162 0038 00000000 	 .word LED1
+ 163              	 .cfi_endproc
+ 164              	.LFE55:
+ 166              	 .text
+ 167              	.Letext0:
+ 168              	 .file 4 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 169              	 .file 5 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 170              	 .file 6 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc/xmc1_gpio.h"
+ 171              	 .file 7 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DAVE.h"
+ 172              	 .file 8 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Dave/Generated/DIGITAL_IO/digital_io_extern.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+    {standard input}:18     .text.XMC_GPIO_ToggleOutput:00000000 $t
+    {standard input}:22     .text.XMC_GPIO_ToggleOutput:00000000 XMC_GPIO_ToggleOutput
+    {standard input}:57     .text.XMC_GPIO_ToggleOutput:00000020 $d
+    {standard input}:62     .text.DIGITAL_IO_ToggleOutput:00000000 $t
+    {standard input}:66     .text.DIGITAL_IO_ToggleOutput:00000000 DIGITAL_IO_ToggleOutput
+    {standard input}:100    .text.main:00000000 $t
+    {standard input}:105    .text.main:00000000 main
+    {standard input}:162    .text.main:00000038 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+DAVE_Init
+LED1

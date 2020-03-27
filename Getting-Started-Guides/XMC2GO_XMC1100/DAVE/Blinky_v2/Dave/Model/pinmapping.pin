@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="com.ifx.davex.graphiti.pin.mapping" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms">
+  <pi:Diagram visible="true" gridUnit="10" diagramTypeId="com.ifx.davex.pin.allocator.diagramType" name="PinAllocator" version="0.13.0">
+    <graphicsAlgorithm xsi:type="al:Rectangle" background="/0/@colors.1" foreground="/0/@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
+    <colors red="227" green="238" blue="249"/>
+    <colors red="255" green="255" blue="255"/>
+  </pi:Diagram>
+  <PackageDetail height="412" width="420">
+    <Pads pinNo="19" xCoordinate="400" yCoordinate="480" type="rect" width="1" height="1"/>
+    <Pads pinNo="20" xCoordinate="400" yCoordinate="540" type="rect" width="1" height="1"/>
+    <Pads pinNo="21" xCoordinate="400" yCoordinate="600" type="rect" width="1" height="1"/>
+    <Pads pinNo="22" xCoordinate="400" yCoordinate="660" type="rect" width="1" height="1"/>
+    <Pads pinNo="23" xCoordinate="400" yCoordinate="720" type="rect" width="1" height="1"/>
+    <Pads pinNo="24" xCoordinate="400" yCoordinate="780" type="rect" width="1" height="1"/>
+    <Pads pinNo="1" xCoordinate="480" yCoordinate="860" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="2" xCoordinate="540" yCoordinate="860" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="3" xCoordinate="600" yCoordinate="860" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="4" xCoordinate="660" yCoordinate="860" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="5" xCoordinate="720" yCoordinate="860" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="6" xCoordinate="780" yCoordinate="860" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="7" xCoordinate="860" yCoordinate="780" type="rect" width="1" height="1"/>
+    <Pads pinNo="8" xCoordinate="860" yCoordinate="720" type="rect" width="1" angle="180" height="1"/>
+    <Pads pinNo="9" xCoordinate="860" yCoordinate="660" type="rect" width="1" angle="180" height="1"/>
+    <Pads pinNo="10" xCoordinate="860" yCoordinate="600" type="rect" width="1" height="1"/>
+    <Pads pinNo="11" xCoordinate="860" yCoordinate="540" type="rect" width="1" height="1"/>
+    <Pads pinNo="12" xCoordinate="860" yCoordinate="480" type="rect" width="1" height="1"/>
+    <Pads pinNo="13" xCoordinate="780" yCoordinate="402" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="14" xCoordinate="720" yCoordinate="402" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="15" xCoordinate="660" yCoordinate="402" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="16" xCoordinate="600" yCoordinate="402" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="17" xCoordinate="540" yCoordinate="402" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="18" xCoordinate="480" yCoordinate="402" type="rect" width="1" angle="270" height="1"/>
+    <deviceName name="XMC1100" xCoordinate="620" yCoordinate="560"/>
+    <packageName name="VQFN24" xCoordinate="620" yCoordinate="640"/>
+    <lines startX="420.0" startY="421.64" endX="840.0" endY="421.64"/>
+    <lines startX="840.0" startY="840.0" endX="840.0" endY="428.6"/>
+    <lines startX="420.0" startY="846.0" endX="840.0" endY="846.0"/>
+    <lines startX="420.0" startY="428.6" endX="420.0" endY="840.0"/>
+  </PackageDetail>
+</xmi:XMI>

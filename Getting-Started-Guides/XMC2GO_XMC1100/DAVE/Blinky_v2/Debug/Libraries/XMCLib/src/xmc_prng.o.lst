@@ -1,0 +1,738 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,6
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "xmc_prng.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.XMC_PRNG_SetRandomDataBlockSize,"ax",%progbits
+  18              	 .align 2
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	XMC_PRNG_SetRandomDataBlockSize:
+  23              	.LFB41:
+  24              	 .file 1 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc/xmc_prng.h"
+   1:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+   2:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+   3:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @file xmc_prng.h
+   4:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @date 2015-06-20
+   5:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+   6:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @cond
+   7:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  **************************************************************************************************
+   8:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * XMClib v2.1.18 - XMC Peripheral Driver Library 
+   9:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+  10:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Copyright (c) 2015-2018, Infineon Technologies AG
+  11:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * All rights reserved.                        
+  12:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *                                             
+  13:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  14:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * following conditions are met:   
+  15:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *                                                                              
+  16:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  17:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * disclaimer.                        
+  18:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * 
+  19:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  20:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  21:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * 
+  22:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  23:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * products derived from this software without specific prior written permission.                  
+  24:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *                                                                              
+  25:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  26:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  27:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  28:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  29:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  30:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  31:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  32:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *                                                                              
+  33:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  34:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  35:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  **************************************************************************************************
+  36:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+  37:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Change History
+  38:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * --------------
+  39:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+  40:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * 2015-02-20:
+  41:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *     - Initial <br>
+  42:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *     - Documentation updates <br>
+  43:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+  44:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * 2015-06-20:
+  45:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *     - Removed version macros and declaration of GetDriverVersion API <br>
+  46:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+  47:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @endcond
+  48:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+  49:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  
+  50:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** #ifndef XMC_PRNG_H
+  51:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** #define XMC_PRNG_H
+  52:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+  53:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**************************************************************************************************
+  54:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * HEADER FILES
+  55:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  **************************************************************************************************
+  56:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+  57:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** #include "xmc_common.h"
+  58:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+  59:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** #if defined (PRNG) 
+  60:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+  61:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+  62:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @addtogroup XMClib XMC Peripheral Library
+  63:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @{
+  64:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+  65:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+  66:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+  67:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @addtogroup PRNG
+  68:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @brief Pseudo Random Number Generator (PRNG) driver for XMC1000 microcontroller family
+  69:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+  70:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * The pseudo random bit generator (PRNG) provides random data with fast generation times.
+  71:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * PRNG has to be initialized by the user software before use. The initialization consists
+  72:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * of two basic phases: key-loading and warm-up.
+  73:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *  
+  74:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * The PRNG low level driver provides functions to configure and initialize the PRNG hardware
+  75:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * peripheral.
+  76:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @{
+  77:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */  
+  78:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+  79:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**************************************************************************************************
+  80:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * MACROS
+  81:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  **************************************************************************************************
+  82:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  
+  83:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+  84:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Byte mask value for random data block size
+  85:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */ 
+  86:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** #define XMC_PRNG_RDBS_BYTE_READ_MASK (0x00FFU)
+  87:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+  88:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**************************************************************************************************
+  89:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * ENUMS
+  90:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  **************************************************************************************************
+  91:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+  92:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+  93:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * PRNG key load operation modes
+  94:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+  95:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** typedef enum XMC_PRNG_KEY_LOAD_OP_MODE {
+  96:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   XMC_PRNG_STRM_MODE = 0U, /**< Streaming mode (default) */
+  97:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   XMC_PRNG_KLD_MODE  = 1U  /**< Loading mode */
+  98:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** } XMC_PRNG_KEY_LOAD_OP_MODE_t;
+  99:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 100:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+ 101:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * PRNG data block size
+ 102:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+ 103:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** typedef enum XMC_PRNG_DATA_BLOCK_SIZE {
+ 104:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   XMC_PRNG_RDBS_RESET = 0U, /**< Reset state (no random data block size defined) */
+ 105:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   XMC_PRNG_RDBS_BYTE  = 1U, /**< BYTE (8-bit) */
+ 106:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   XMC_PRNG_RDBS_WORD  = 2U  /**< WORD (16-bit) */
+ 107:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** } XMC_PRNG_DATA_BLOCK_SIZE_t;
+ 108:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 109:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+ 110:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * PRNG driver initialization status
+ 111:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+ 112:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** typedef enum XMC_PRNG_INIT_STATUS {
+ 113:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   XMC_PRNG_NOT_INITIALIZED = 0U, /**< Reset state or Non-initialized state (Same as XMC_PRNG_RDBS_R
+ 114:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   XMC_PRNG_INITIALIZED     = 1U  /**< Initialized state */
+ 115:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** } XMC_PRNG_INIT_STATUS_t;
+ 116:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 117:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**************************************************************************************************
+ 118:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * DATA STRUCTURES
+ 119:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  **************************************************************************************************
+ 120:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 121:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+ 122:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Key words and data block size configuration values of PRNG <br>
+ 123:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 124:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * The structure presents a convenient way to set/obtain the key word and data block configuration
+ 125:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * values of PRNG.
+ 126:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * The XMC_PRNG_Init() can be used to populate the structure with the key word and data block
+ 127:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * configuration values of the PRNG module.
+ 128:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */ 
+ 129:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** typedef struct XMC_PRNG_INIT
+ 130:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** {
+ 131:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   uint16_t key_words[5];                 /**< Keywords */
+ 132:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   XMC_PRNG_DATA_BLOCK_SIZE_t block_size; /**< Block size */
+ 133:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** } XMC_PRNG_INIT_t;
+ 134:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 135:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**************************************************************************************************
+ 136:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * API PROTOTYPES
+ 137:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  **************************************************************************************************
+ 138:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 139:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** #ifdef __cplusplus
+ 140:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** extern "C" {
+ 141:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** #endif
+ 142:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 143:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+ 144:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @param prng Pointer to a constant instance of ::XMC_PRNG_INIT_t, pointing to
+ 145:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *             the initialization configuration.
+ 146:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @return XMC_PRNG_INIT_STATUS_t XMC_PRNG_INITIALIZED if initialized,
+ 147:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *                                XMC_PRNG_NOT_INITIALIZED otherwise.
+ 148:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 149:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par<b>Description: </b><br>
+ 150:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Initialize the PRNG peripheral with the configured key words and block size <br>
+ 151:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 152:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par
+ 153:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * The function configures block size for key loading mode, enables key loading mode,
+ 154:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * loads key words (80 bits) and wait till RDV is set, enables the streaming mode and
+ 155:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * waits for warmup phase. This function programmes the CTRL and WORD registers. 
+ 156:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+ 157:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** XMC_PRNG_INIT_STATUS_t XMC_PRNG_Init(const XMC_PRNG_INIT_t *prng);
+ 158:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 159:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 160:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 161:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+ 162:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @param block_size Block size of type ::XMC_PRNG_DATA_BLOCK_SIZE_t for read access
+ 163:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @return None
+ 164:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 165:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par<b>Description: </b><br>
+ 166:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Programming Random Block Size <br>
+ 167:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 168:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par
+ 169:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * The function sets the random data block size as byte or word by programming CTRL.RDBS bitfield.
+ 170:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * block_size = 0 for Reset state, block_size = 1 for 'byte' and block_size = 2 for 'word'.
+ 171:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+ 172:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** __STATIC_INLINE void XMC_PRNG_SetRandomDataBlockSize(XMC_PRNG_DATA_BLOCK_SIZE_t block_size)
+ 173:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** {
+  25              	 .loc 1 173 0
+  26              	 .cfi_startproc
+  27 0000 80B5     	 push {r7,lr}
+  28              	.LCFI0:
+  29              	 .cfi_def_cfa_offset 8
+  30              	 .cfi_offset 7,-8
+  31              	 .cfi_offset 14,-4
+  32 0002 82B0     	 sub sp,sp,#8
+  33              	.LCFI1:
+  34              	 .cfi_def_cfa_offset 16
+  35 0004 00AF     	 add r7,sp,#0
+  36              	.LCFI2:
+  37              	 .cfi_def_cfa_register 7
+  38 0006 021C     	 mov r2,r0
+  39 0008 FB1D     	 add r3,r7,#7
+  40 000a 1A70     	 strb r2,[r3]
+ 174:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   PRNG->CTRL = (uint16_t)((PRNG->CTRL & (uint32_t)~PRNG_CTRL_RDBS_Msk) |
+  41              	 .loc 1 174 0
+  42 000c 0849     	 ldr r1,.L2
+  43 000e 084B     	 ldr r3,.L2
+  44 0010 9B89     	 ldrh r3,[r3,#12]
+  45 0012 9BB2     	 uxth r3,r3
+  46 0014 0622     	 mov r2,#6
+  47 0016 9343     	 bic r3,r2
+  48 0018 9AB2     	 uxth r2,r3
+  49 001a FB1D     	 add r3,r7,#7
+  50 001c 1B78     	 ldrb r3,[r3]
+  51 001e 9BB2     	 uxth r3,r3
+  52 0020 DB18     	 add r3,r3,r3
+  53 0022 9BB2     	 uxth r3,r3
+  54 0024 1343     	 orr r3,r2
+  55 0026 9BB2     	 uxth r3,r3
+  56 0028 8B81     	 strh r3,[r1,#12]
+ 175:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****                           ((uint32_t)block_size << (uint32_t)PRNG_CTRL_RDBS_Pos));
+ 176:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** }
+  57              	 .loc 1 176 0
+  58 002a BD46     	 mov sp,r7
+  59 002c 02B0     	 add sp,sp,#8
+  60              	 
+  61 002e 80BD     	 pop {r7,pc}
+  62              	.L3:
+  63              	 .align 2
+  64              	.L2:
+  65 0030 00000248 	 .word 1208090624
+  66              	 .cfi_endproc
+  67              	.LFE41:
+  69              	 .section .text.XMC_PRNG_CheckValidStatus,"ax",%progbits
+  70              	 .align 2
+  71              	 .code 16
+  72              	 .thumb_func
+  74              	XMC_PRNG_CheckValidStatus:
+  75              	.LFB42:
+ 177:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 178:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+ 179:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @return None
+ 180:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 181:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par<b>Description: </b><br>
+ 182:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Checks the validity (CHK.RDV bit) of the generated random data <br>
+ 183:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 184:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par
+ 185:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * The function checks the validity (CHK.RDV bit) of the generated random data.
+ 186:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * In key loading mode, this value indicates if the next partial key word can be written
+ 187:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * to PRNG_WORD or not.
+ 188:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+ 189:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** __STATIC_INLINE uint16_t XMC_PRNG_CheckValidStatus(void)
+ 190:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** {
+  76              	 .loc 1 190 0
+  77              	 .cfi_startproc
+  78 0000 80B5     	 push {r7,lr}
+  79              	.LCFI3:
+  80              	 .cfi_def_cfa_offset 8
+  81              	 .cfi_offset 7,-8
+  82              	 .cfi_offset 14,-4
+  83 0002 00AF     	 add r7,sp,#0
+  84              	.LCFI4:
+  85              	 .cfi_def_cfa_register 7
+ 191:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   return (PRNG->CHK & PRNG_CHK_RDV_Msk);
+  86              	 .loc 1 191 0
+  87 0004 044B     	 ldr r3,.L6
+  88 0006 9B88     	 ldrh r3,[r3,#4]
+  89 0008 9BB2     	 uxth r3,r3
+  90 000a 0122     	 mov r2,#1
+  91 000c 1340     	 and r3,r2
+  92 000e 9BB2     	 uxth r3,r3
+ 192:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** }
+  93              	 .loc 1 192 0
+  94 0010 181C     	 mov r0,r3
+  95 0012 BD46     	 mov sp,r7
+  96              	 
+  97 0014 80BD     	 pop {r7,pc}
+  98              	.L7:
+  99 0016 C046     	 .align 2
+ 100              	.L6:
+ 101 0018 00000248 	 .word 1208090624
+ 102              	 .cfi_endproc
+ 103              	.LFE42:
+ 105              	 .section .text.XMC_PRNG_EnableKeyLoadingMode,"ax",%progbits
+ 106              	 .align 2
+ 107              	 .code 16
+ 108              	 .thumb_func
+ 110              	XMC_PRNG_EnableKeyLoadingMode:
+ 111              	.LFB43:
+ 193:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 194:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+ 195:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @return None
+ 196:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 197:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par<b>Description: </b><br>
+ 198:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Enables the PRNG key loading mode <br>
+ 199:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 200:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par
+ 201:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * The function initializes the key loading by setting the bit CTRL.KLD. In this mode, Register WOR
+ 202:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * acts as always as a 16 bit destination register. After the complete key has been loaded, the CTR
+ 203:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * must be set to '0' to prepare the following warmup phase.
+ 204:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 205:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par<b>Related APIs:</b><br>
+ 206:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * XMC_PRNG_EnableStreamingMode()
+ 207:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+ 208:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** __STATIC_INLINE void XMC_PRNG_EnableKeyLoadingMode(void)
+ 209:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** {
+ 112              	 .loc 1 209 0
+ 113              	 .cfi_startproc
+ 114 0000 80B5     	 push {r7,lr}
+ 115              	.LCFI5:
+ 116              	 .cfi_def_cfa_offset 8
+ 117              	 .cfi_offset 7,-8
+ 118              	 .cfi_offset 14,-4
+ 119 0002 00AF     	 add r7,sp,#0
+ 120              	.LCFI6:
+ 121              	 .cfi_def_cfa_register 7
+ 210:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   PRNG->CTRL |= (uint16_t)PRNG_CTRL_KLD_Msk;
+ 122              	 .loc 1 210 0
+ 123 0004 044A     	 ldr r2,.L9
+ 124 0006 044B     	 ldr r3,.L9
+ 125 0008 9B89     	 ldrh r3,[r3,#12]
+ 126 000a 9BB2     	 uxth r3,r3
+ 127 000c 0821     	 mov r1,#8
+ 128 000e 0B43     	 orr r3,r1
+ 129 0010 9BB2     	 uxth r3,r3
+ 130 0012 9381     	 strh r3,[r2,#12]
+ 211:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** }
+ 131              	 .loc 1 211 0
+ 132 0014 BD46     	 mov sp,r7
+ 133              	 
+ 134 0016 80BD     	 pop {r7,pc}
+ 135              	.L10:
+ 136              	 .align 2
+ 137              	.L9:
+ 138 0018 00000248 	 .word 1208090624
+ 139              	 .cfi_endproc
+ 140              	.LFE43:
+ 142              	 .section .text.XMC_PRNG_EnableStreamingMode,"ax",%progbits
+ 143              	 .align 2
+ 144              	 .code 16
+ 145              	 .thumb_func
+ 147              	XMC_PRNG_EnableStreamingMode:
+ 148              	.LFB44:
+ 212:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 213:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+ 214:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @return None
+ 215:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 216:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par<b>Description: </b><br>
+ 217:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Enables the Streaming mode <br>
+ 218:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 219:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par
+ 220:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * The function enables the streaming mode and disables the PRNG key loading mode by resetting the
+ 221:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * CTRL.KLD bit. 
+ 222:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 223:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par<b>Related APIs:</b><br>
+ 224:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * XMC_PRNG_EnableKeyLoadingMode()
+ 225:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+ 226:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** __STATIC_INLINE void XMC_PRNG_EnableStreamingMode(void)
+ 227:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** {
+ 149              	 .loc 1 227 0
+ 150              	 .cfi_startproc
+ 151 0000 80B5     	 push {r7,lr}
+ 152              	.LCFI7:
+ 153              	 .cfi_def_cfa_offset 8
+ 154              	 .cfi_offset 7,-8
+ 155              	 .cfi_offset 14,-4
+ 156 0002 00AF     	 add r7,sp,#0
+ 157              	.LCFI8:
+ 158              	 .cfi_def_cfa_register 7
+ 228:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   PRNG->CTRL &= (uint16_t)~PRNG_CTRL_KLD_Msk;
+ 159              	 .loc 1 228 0
+ 160 0004 044A     	 ldr r2,.L12
+ 161 0006 044B     	 ldr r3,.L12
+ 162 0008 9B89     	 ldrh r3,[r3,#12]
+ 163 000a 9BB2     	 uxth r3,r3
+ 164 000c 0821     	 mov r1,#8
+ 165 000e 8B43     	 bic r3,r1
+ 166 0010 9BB2     	 uxth r3,r3
+ 167 0012 9381     	 strh r3,[r2,#12]
+ 229:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** }
+ 168              	 .loc 1 229 0
+ 169 0014 BD46     	 mov sp,r7
+ 170              	 
+ 171 0016 80BD     	 pop {r7,pc}
+ 172              	.L13:
+ 173              	 .align 2
+ 174              	.L12:
+ 175 0018 00000248 	 .word 1208090624
+ 176              	 .cfi_endproc
+ 177              	.LFE44:
+ 179              	 .section .text.XMC_PRNG_LoadKeyWords,"ax",%progbits
+ 180              	 .align 2
+ 181              	 .code 16
+ 182              	 .thumb_func
+ 184              	XMC_PRNG_LoadKeyWords:
+ 185              	.LFB45:
+ 230:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** 
+ 231:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** /**
+ 232:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @param key Key word to load into PRNG WORD register
+ 233:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * @return None
+ 234:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 235:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par<b>Description: </b><br>
+ 236:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * Loads a partial key word to the PRNG WORD register <br>
+ 237:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  *
+ 238:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * \par
+ 239:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * The function loads partial key word to WORD registr. These partial
+ 240:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * words are sequentially written and loading a key word will take 16 clock
+ 241:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * cycles. The CHK.RDV bit is set to '0' while loading is in progress. '1' indicates
+ 242:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  * that the next partial key word can be written to WORD register. 
+ 243:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****  */
+ 244:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** __STATIC_INLINE void XMC_PRNG_LoadKeyWords(uint16_t key)
+ 245:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** {
+ 186              	 .loc 1 245 0
+ 187              	 .cfi_startproc
+ 188 0000 80B5     	 push {r7,lr}
+ 189              	.LCFI9:
+ 190              	 .cfi_def_cfa_offset 8
+ 191              	 .cfi_offset 7,-8
+ 192              	 .cfi_offset 14,-4
+ 193 0002 82B0     	 sub sp,sp,#8
+ 194              	.LCFI10:
+ 195              	 .cfi_def_cfa_offset 16
+ 196 0004 00AF     	 add r7,sp,#0
+ 197              	.LCFI11:
+ 198              	 .cfi_def_cfa_register 7
+ 199 0006 021C     	 mov r2,r0
+ 200 0008 BB1D     	 add r3,r7,#6
+ 201 000a 1A80     	 strh r2,[r3]
+ 246:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h ****   PRNG->WORD = key;
+ 202              	 .loc 1 246 0
+ 203 000c 034A     	 ldr r2,.L15
+ 204 000e BB1D     	 add r3,r7,#6
+ 205 0010 1B88     	 ldrh r3,[r3]
+ 206 0012 1380     	 strh r3,[r2]
+ 247:C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/XMCLib/inc\xmc_prng.h **** }
+ 207              	 .loc 1 247 0
+ 208 0014 BD46     	 mov sp,r7
+ 209 0016 02B0     	 add sp,sp,#8
+ 210              	 
+ 211 0018 80BD     	 pop {r7,pc}
+ 212              	.L16:
+ 213 001a C046     	 .align 2
+ 214              	.L15:
+ 215 001c 00000248 	 .word 1208090624
+ 216              	 .cfi_endproc
+ 217              	.LFE45:
+ 219              	 .section .text.XMC_PRNG_Init,"ax",%progbits
+ 220              	 .align 2
+ 221              	 .global XMC_PRNG_Init
+ 222              	 .code 16
+ 223              	 .thumb_func
+ 225              	XMC_PRNG_Init:
+ 226              	.LFB47:
+ 227              	 .file 2 "../Libraries/XMCLib/src/xmc_prng.c"
+   1:../Libraries/XMCLib/src/xmc_prng.c **** 
+   2:../Libraries/XMCLib/src/xmc_prng.c **** /**
+   3:../Libraries/XMCLib/src/xmc_prng.c ****  * @file xmc_prng.c
+   4:../Libraries/XMCLib/src/xmc_prng.c ****  * @date 2015-06-20
+   5:../Libraries/XMCLib/src/xmc_prng.c ****  *
+   6:../Libraries/XMCLib/src/xmc_prng.c ****  * @cond
+   7:../Libraries/XMCLib/src/xmc_prng.c ****  **************************************************************************************************
+   8:../Libraries/XMCLib/src/xmc_prng.c ****  * XMClib v2.1.18 - XMC Peripheral Driver Library 
+   9:../Libraries/XMCLib/src/xmc_prng.c ****  *
+  10:../Libraries/XMCLib/src/xmc_prng.c ****  * Copyright (c) 2015-2018, Infineon Technologies AG
+  11:../Libraries/XMCLib/src/xmc_prng.c ****  * All rights reserved.                        
+  12:../Libraries/XMCLib/src/xmc_prng.c ****  *                                             
+  13:../Libraries/XMCLib/src/xmc_prng.c ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  14:../Libraries/XMCLib/src/xmc_prng.c ****  * following conditions are met:   
+  15:../Libraries/XMCLib/src/xmc_prng.c ****  *                                                                              
+  16:../Libraries/XMCLib/src/xmc_prng.c ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  17:../Libraries/XMCLib/src/xmc_prng.c ****  * disclaimer.                        
+  18:../Libraries/XMCLib/src/xmc_prng.c ****  * 
+  19:../Libraries/XMCLib/src/xmc_prng.c ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  20:../Libraries/XMCLib/src/xmc_prng.c ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  21:../Libraries/XMCLib/src/xmc_prng.c ****  * 
+  22:../Libraries/XMCLib/src/xmc_prng.c ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  23:../Libraries/XMCLib/src/xmc_prng.c ****  * products derived from this software without specific prior written permission.                  
+  24:../Libraries/XMCLib/src/xmc_prng.c ****  *                                                                              
+  25:../Libraries/XMCLib/src/xmc_prng.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  26:../Libraries/XMCLib/src/xmc_prng.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  27:../Libraries/XMCLib/src/xmc_prng.c ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  28:../Libraries/XMCLib/src/xmc_prng.c ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  29:../Libraries/XMCLib/src/xmc_prng.c ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  30:../Libraries/XMCLib/src/xmc_prng.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  31:../Libraries/XMCLib/src/xmc_prng.c ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  32:../Libraries/XMCLib/src/xmc_prng.c ****  *                                                                              
+  33:../Libraries/XMCLib/src/xmc_prng.c ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  34:../Libraries/XMCLib/src/xmc_prng.c ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  35:../Libraries/XMCLib/src/xmc_prng.c ****  **************************************************************************************************
+  36:../Libraries/XMCLib/src/xmc_prng.c ****  *
+  37:../Libraries/XMCLib/src/xmc_prng.c ****  * Change History
+  38:../Libraries/XMCLib/src/xmc_prng.c ****  * --------------
+  39:../Libraries/XMCLib/src/xmc_prng.c ****  *
+  40:../Libraries/XMCLib/src/xmc_prng.c ****  * 2015-02-20:
+  41:../Libraries/XMCLib/src/xmc_prng.c ****  *     - Initial <br>
+  42:../Libraries/XMCLib/src/xmc_prng.c ****  *     - Removed GetDriverVersion API <br>
+  43:../Libraries/XMCLib/src/xmc_prng.c ****  *
+  44:../Libraries/XMCLib/src/xmc_prng.c ****  * 2015-06-20
+  45:../Libraries/XMCLib/src/xmc_prng.c ****  *     - Removed definition of GetDriverVersion API <br>
+  46:../Libraries/XMCLib/src/xmc_prng.c ****  *
+  47:../Libraries/XMCLib/src/xmc_prng.c ****  * @endcond
+  48:../Libraries/XMCLib/src/xmc_prng.c ****  */
+  49:../Libraries/XMCLib/src/xmc_prng.c ****  
+  50:../Libraries/XMCLib/src/xmc_prng.c **** #include "xmc_prng.h"
+  51:../Libraries/XMCLib/src/xmc_prng.c **** 
+  52:../Libraries/XMCLib/src/xmc_prng.c **** #if defined (PRNG)
+  53:../Libraries/XMCLib/src/xmc_prng.c **** 
+  54:../Libraries/XMCLib/src/xmc_prng.c **** /**************************************************************************************************
+  55:../Libraries/XMCLib/src/xmc_prng.c ****  * API IMPLEMENTATION
+  56:../Libraries/XMCLib/src/xmc_prng.c ****  **************************************************************************************************
+  57:../Libraries/XMCLib/src/xmc_prng.c ****  
+  58:../Libraries/XMCLib/src/xmc_prng.c **** /*
+  59:../Libraries/XMCLib/src/xmc_prng.c ****  * Initializes the PRNG peripheral with the settings in the
+  60:../Libraries/XMCLib/src/xmc_prng.c ****  * initialization structure XMC_PRNG_INIT_t
+  61:../Libraries/XMCLib/src/xmc_prng.c ****  */
+  62:../Libraries/XMCLib/src/xmc_prng.c **** XMC_PRNG_INIT_STATUS_t XMC_PRNG_Init(const XMC_PRNG_INIT_t *prng)
+  63:../Libraries/XMCLib/src/xmc_prng.c **** {
+ 228              	 .loc 2 63 0
+ 229              	 .cfi_startproc
+ 230 0000 80B5     	 push {r7,lr}
+ 231              	.LCFI12:
+ 232              	 .cfi_def_cfa_offset 8
+ 233              	 .cfi_offset 7,-8
+ 234              	 .cfi_offset 14,-4
+ 235 0002 84B0     	 sub sp,sp,#16
+ 236              	.LCFI13:
+ 237              	 .cfi_def_cfa_offset 24
+ 238 0004 00AF     	 add r7,sp,#0
+ 239              	.LCFI14:
+ 240              	 .cfi_def_cfa_register 7
+ 241 0006 7860     	 str r0,[r7,#4]
+  64:../Libraries/XMCLib/src/xmc_prng.c ****   volatile uint16_t read_warm_up;
+  65:../Libraries/XMCLib/src/xmc_prng.c ****   uint16_t reg_val, iter;
+  66:../Libraries/XMCLib/src/xmc_prng.c ****   XMC_PRNG_INIT_STATUS_t status = XMC_PRNG_INITIALIZED;
+ 242              	 .loc 2 66 0
+ 243 0008 0D23     	 mov r3,#13
+ 244 000a FB18     	 add r3,r7,r3
+ 245 000c 0122     	 mov r2,#1
+ 246 000e 1A70     	 strb r2,[r3]
+  67:../Libraries/XMCLib/src/xmc_prng.c ****   
+  68:../Libraries/XMCLib/src/xmc_prng.c ****   XMC_ASSERT("XMC_PRNG_Init:Null Pointer", (prng != (XMC_PRNG_INIT_t *)NULL));
+  69:../Libraries/XMCLib/src/xmc_prng.c **** 
+  70:../Libraries/XMCLib/src/xmc_prng.c ****   /* Configure block size for key loading mode */
+  71:../Libraries/XMCLib/src/xmc_prng.c ****   XMC_PRNG_SetRandomDataBlockSize(XMC_PRNG_RDBS_WORD);
+ 247              	 .loc 2 71 0
+ 248 0010 0220     	 mov r0,#2
+ 249 0012 FFF7FEFF 	 bl XMC_PRNG_SetRandomDataBlockSize
+  72:../Libraries/XMCLib/src/xmc_prng.c **** 
+  73:../Libraries/XMCLib/src/xmc_prng.c ****   /* Enable key loading mode */
+  74:../Libraries/XMCLib/src/xmc_prng.c ****   XMC_PRNG_EnableKeyLoadingMode();
+ 250              	 .loc 2 74 0
+ 251 0016 FFF7FEFF 	 bl XMC_PRNG_EnableKeyLoadingMode
+  75:../Libraries/XMCLib/src/xmc_prng.c **** 
+  76:../Libraries/XMCLib/src/xmc_prng.c ****   /* Load key words (80 bits) and wait till RDV is set */
+  77:../Libraries/XMCLib/src/xmc_prng.c ****   for (iter = (uint16_t)0UL; iter < (uint16_t)5UL; iter++)
+ 252              	 .loc 2 77 0
+ 253 001a 0E23     	 mov r3,#14
+ 254 001c FB18     	 add r3,r7,r3
+ 255 001e 0022     	 mov r2,#0
+ 256 0020 1A80     	 strh r2,[r3]
+ 257 0022 15E0     	 b .L18
+ 258              	.L20:
+  78:../Libraries/XMCLib/src/xmc_prng.c ****   {
+  79:../Libraries/XMCLib/src/xmc_prng.c ****     XMC_PRNG_LoadKeyWords(prng->key_words[iter]);
+ 259              	 .loc 2 79 0
+ 260 0024 0E23     	 mov r3,#14
+ 261 0026 FB18     	 add r3,r7,r3
+ 262 0028 1A88     	 ldrh r2,[r3]
+ 263 002a 7B68     	 ldr r3,[r7,#4]
+ 264 002c 5200     	 lsl r2,r2,#1
+ 265 002e D35A     	 ldrh r3,[r2,r3]
+ 266 0030 181C     	 mov r0,r3
+ 267 0032 FFF7FEFF 	 bl XMC_PRNG_LoadKeyWords
+  80:../Libraries/XMCLib/src/xmc_prng.c ****     while (PRNG_CHK_RDV_Msk != XMC_PRNG_CheckValidStatus());
+ 268              	 .loc 2 80 0
+ 269 0036 C046     	 mov r8,r8
+ 270              	.L19:
+ 271              	 .loc 2 80 0 is_stmt 0 discriminator 1
+ 272 0038 FFF7FEFF 	 bl XMC_PRNG_CheckValidStatus
+ 273 003c 031E     	 sub r3,r0,#0
+ 274 003e 012B     	 cmp r3,#1
+ 275 0040 FAD1     	 bne .L19
+  77:../Libraries/XMCLib/src/xmc_prng.c ****   {
+ 276              	 .loc 2 77 0 is_stmt 1 discriminator 2
+ 277 0042 0E23     	 mov r3,#14
+ 278 0044 FB18     	 add r3,r7,r3
+ 279 0046 1A88     	 ldrh r2,[r3]
+ 280 0048 0E23     	 mov r3,#14
+ 281 004a FB18     	 add r3,r7,r3
+ 282 004c 0132     	 add r2,r2,#1
+ 283 004e 1A80     	 strh r2,[r3]
+ 284              	.L18:
+  77:../Libraries/XMCLib/src/xmc_prng.c ****   {
+ 285              	 .loc 2 77 0 is_stmt 0 discriminator 1
+ 286 0050 0E23     	 mov r3,#14
+ 287 0052 FB18     	 add r3,r7,r3
+ 288 0054 1B88     	 ldrh r3,[r3]
+ 289 0056 042B     	 cmp r3,#4
+ 290 0058 E4D9     	 bls .L20
+  81:../Libraries/XMCLib/src/xmc_prng.c ****   }
+  82:../Libraries/XMCLib/src/xmc_prng.c ****   
+  83:../Libraries/XMCLib/src/xmc_prng.c ****   XMC_PRNG_EnableStreamingMode();
+ 291              	 .loc 2 83 0 is_stmt 1
+ 292 005a FFF7FEFF 	 bl XMC_PRNG_EnableStreamingMode
+  84:../Libraries/XMCLib/src/xmc_prng.c **** 
+  85:../Libraries/XMCLib/src/xmc_prng.c ****   /* Warm up phase: Read and discard 64 bits */
+  86:../Libraries/XMCLib/src/xmc_prng.c ****   read_warm_up = PRNG->WORD;
+ 293              	 .loc 2 86 0
+ 294 005e 1D4B     	 ldr r3,.L23
+ 295 0060 1B88     	 ldrh r3,[r3]
+ 296 0062 9AB2     	 uxth r2,r3
+ 297 0064 0823     	 mov r3,#8
+ 298 0066 FB18     	 add r3,r7,r3
+ 299 0068 1A80     	 strh r2,[r3]
+  87:../Libraries/XMCLib/src/xmc_prng.c ****   read_warm_up = PRNG->WORD;
+ 300              	 .loc 2 87 0
+ 301 006a 1A4B     	 ldr r3,.L23
+ 302 006c 1B88     	 ldrh r3,[r3]
+ 303 006e 9AB2     	 uxth r2,r3
+ 304 0070 0823     	 mov r3,#8
+ 305 0072 FB18     	 add r3,r7,r3
+ 306 0074 1A80     	 strh r2,[r3]
+  88:../Libraries/XMCLib/src/xmc_prng.c ****   read_warm_up = PRNG->WORD;
+ 307              	 .loc 2 88 0
+ 308 0076 174B     	 ldr r3,.L23
+ 309 0078 1B88     	 ldrh r3,[r3]
+ 310 007a 9AB2     	 uxth r2,r3
+ 311 007c 0823     	 mov r3,#8
+ 312 007e FB18     	 add r3,r7,r3
+ 313 0080 1A80     	 strh r2,[r3]
+  89:../Libraries/XMCLib/src/xmc_prng.c ****   reg_val      = PRNG->WORD;
+ 314              	 .loc 2 89 0
+ 315 0082 144A     	 ldr r2,.L23
+ 316 0084 0A23     	 mov r3,#10
+ 317 0086 FB18     	 add r3,r7,r3
+ 318 0088 1288     	 ldrh r2,[r2]
+ 319 008a 1A80     	 strh r2,[r3]
+  90:../Libraries/XMCLib/src/xmc_prng.c ****   read_warm_up &= reg_val;
+ 320              	 .loc 2 90 0
+ 321 008c 0823     	 mov r3,#8
+ 322 008e FB18     	 add r3,r7,r3
+ 323 0090 1B88     	 ldrh r3,[r3]
+ 324 0092 9BB2     	 uxth r3,r3
+ 325 0094 0A22     	 mov r2,#10
+ 326 0096 BA18     	 add r2,r7,r2
+ 327 0098 1288     	 ldrh r2,[r2]
+ 328 009a 1340     	 and r3,r2
+ 329 009c 9AB2     	 uxth r2,r3
+ 330 009e 0823     	 mov r3,#8
+ 331 00a0 FB18     	 add r3,r7,r3
+ 332 00a2 1A80     	 strh r2,[r3]
+  91:../Libraries/XMCLib/src/xmc_prng.c **** 
+  92:../Libraries/XMCLib/src/xmc_prng.c ****   /* Configure block size either byte (8 bit) or word (16 bit) */
+  93:../Libraries/XMCLib/src/xmc_prng.c ****   XMC_PRNG_SetRandomDataBlockSize(prng->block_size);
+ 333              	 .loc 2 93 0
+ 334 00a4 7B68     	 ldr r3,[r7,#4]
+ 335 00a6 9B7A     	 ldrb r3,[r3,#10]
+ 336 00a8 181C     	 mov r0,r3
+ 337 00aa FFF7FEFF 	 bl XMC_PRNG_SetRandomDataBlockSize
+  94:../Libraries/XMCLib/src/xmc_prng.c **** 
+  95:../Libraries/XMCLib/src/xmc_prng.c ****   /*
+  96:../Libraries/XMCLib/src/xmc_prng.c ****    * Checks for reset value for "random data block size". If reset,
+  97:../Libraries/XMCLib/src/xmc_prng.c ****    * PRNG is not initialized
+  98:../Libraries/XMCLib/src/xmc_prng.c ****    */
+  99:../Libraries/XMCLib/src/xmc_prng.c ****   if ((uint16_t)XMC_PRNG_RDBS_RESET == (PRNG->CTRL & (uint16_t)PRNG_CTRL_RDBS_Msk))
+ 338              	 .loc 2 99 0
+ 339 00ae 094B     	 ldr r3,.L23
+ 340 00b0 9B89     	 ldrh r3,[r3,#12]
+ 341 00b2 9BB2     	 uxth r3,r3
+ 342 00b4 1A1C     	 mov r2,r3
+ 343 00b6 0623     	 mov r3,#6
+ 344 00b8 1340     	 and r3,r2
+ 345 00ba 03D1     	 bne .L21
+ 100:../Libraries/XMCLib/src/xmc_prng.c ****   {
+ 101:../Libraries/XMCLib/src/xmc_prng.c ****     status = XMC_PRNG_NOT_INITIALIZED;
+ 346              	 .loc 2 101 0
+ 347 00bc 0D23     	 mov r3,#13
+ 348 00be FB18     	 add r3,r7,r3
+ 349 00c0 0022     	 mov r2,#0
+ 350 00c2 1A70     	 strb r2,[r3]
+ 351              	.L21:
+ 102:../Libraries/XMCLib/src/xmc_prng.c ****   }
+ 103:../Libraries/XMCLib/src/xmc_prng.c **** 
+ 104:../Libraries/XMCLib/src/xmc_prng.c ****   return status;
+ 352              	 .loc 2 104 0
+ 353 00c4 0D23     	 mov r3,#13
+ 354 00c6 FB18     	 add r3,r7,r3
+ 355 00c8 1B78     	 ldrb r3,[r3]
+ 105:../Libraries/XMCLib/src/xmc_prng.c **** }
+ 356              	 .loc 2 105 0
+ 357 00ca 181C     	 mov r0,r3
+ 358 00cc BD46     	 mov sp,r7
+ 359 00ce 04B0     	 add sp,sp,#16
+ 360              	 
+ 361 00d0 80BD     	 pop {r7,pc}
+ 362              	.L24:
+ 363 00d2 C046     	 .align 2
+ 364              	.L23:
+ 365 00d4 00000248 	 .word 1208090624
+ 366              	 .cfi_endproc
+ 367              	.LFE47:
+ 369              	 .text
+ 370              	.Letext0:
+ 371              	 .file 3 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 372              	 .file 4 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 373              	 .file 5 "C:/Workspaces/DAVE-4.4.2-64Bit/Blinky_v2/Libraries/CMSIS/Infineon/XMC1100_series/Include/XMC1100.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc_prng.c
+    {standard input}:18     .text.XMC_PRNG_SetRandomDataBlockSize:00000000 $t
+    {standard input}:22     .text.XMC_PRNG_SetRandomDataBlockSize:00000000 XMC_PRNG_SetRandomDataBlockSize
+    {standard input}:65     .text.XMC_PRNG_SetRandomDataBlockSize:00000030 $d
+    {standard input}:70     .text.XMC_PRNG_CheckValidStatus:00000000 $t
+    {standard input}:74     .text.XMC_PRNG_CheckValidStatus:00000000 XMC_PRNG_CheckValidStatus
+    {standard input}:101    .text.XMC_PRNG_CheckValidStatus:00000018 $d
+    {standard input}:106    .text.XMC_PRNG_EnableKeyLoadingMode:00000000 $t
+    {standard input}:110    .text.XMC_PRNG_EnableKeyLoadingMode:00000000 XMC_PRNG_EnableKeyLoadingMode
+    {standard input}:138    .text.XMC_PRNG_EnableKeyLoadingMode:00000018 $d
+    {standard input}:143    .text.XMC_PRNG_EnableStreamingMode:00000000 $t
+    {standard input}:147    .text.XMC_PRNG_EnableStreamingMode:00000000 XMC_PRNG_EnableStreamingMode
+    {standard input}:175    .text.XMC_PRNG_EnableStreamingMode:00000018 $d
+    {standard input}:180    .text.XMC_PRNG_LoadKeyWords:00000000 $t
+    {standard input}:184    .text.XMC_PRNG_LoadKeyWords:00000000 XMC_PRNG_LoadKeyWords
+    {standard input}:215    .text.XMC_PRNG_LoadKeyWords:0000001c $d
+    {standard input}:220    .text.XMC_PRNG_Init:00000000 $t
+    {standard input}:225    .text.XMC_PRNG_Init:00000000 XMC_PRNG_Init
+    {standard input}:365    .text.XMC_PRNG_Init:000000d4 $d
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS
