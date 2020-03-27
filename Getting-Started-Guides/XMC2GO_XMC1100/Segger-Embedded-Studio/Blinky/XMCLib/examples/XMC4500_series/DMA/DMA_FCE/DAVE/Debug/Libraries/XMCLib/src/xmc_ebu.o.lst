@@ -1,0 +1,1436 @@
+   1              	 .syntax unified
+   2              	 .cpu cortex-m4
+   3              	 .eabi_attribute 27,3
+   4              	 .fpu fpv4-sp-d16
+   5              	 .eabi_attribute 20,1
+   6              	 .eabi_attribute 21,1
+   7              	 .eabi_attribute 23,3
+   8              	 .eabi_attribute 24,1
+   9              	 .eabi_attribute 25,1
+  10              	 .eabi_attribute 26,1
+  11              	 .eabi_attribute 30,1
+  12              	 .eabi_attribute 34,1
+  13              	 .eabi_attribute 18,4
+  14              	 .thumb
+  15              	 .file "xmc_ebu.c"
+  16              	 .text
+  17              	.Ltext0:
+  18              	 .cfi_sections .debug_frame
+  19              	 .section .text.XMC_EBU_Init,"ax",%progbits
+  20              	 .align 2
+  21              	 .global XMC_EBU_Init
+  22              	 .thumb
+  23              	 .thumb_func
+  25              	XMC_EBU_Init:
+  26              	.LFB193:
+  27              	 .file 1 "C:/Files/Projects/Git/XMCLib/src/xmc_ebu.c"
+   1:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** /**
+   2:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * @file xmc_ebu.c
+   3:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * @date 2017-06-24
+   4:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *
+   5:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * @cond
+   6:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  **************************************************************************************************
+   7:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *
+   9:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * All rights reserved.                        
+  11:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *                                             
+  12:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * following conditions are met:   
+  14:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *                                                                              
+  15:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * disclaimer.                        
+  17:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * 
+  18:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * 
+  21:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * products derived from this software without specific prior written permission.                  
+  23:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *                                                                              
+  24:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *                                                                              
+  32:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  **************************************************************************************************
+  35:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *
+  36:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * Change History
+  37:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * --------------
+  38:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *
+  39:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * 2015-02-20:
+  40:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *     - Initial <br>
+  41:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *      
+  42:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * 2015-06-20:
+  43:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *     - Removed GetDriverVersion API
+  44:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *
+  45:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * 2017-06-24:
+  46:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *     - Changed XMC_EBU_Init() adding checks for the clock acknoledgment. 
+  47:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *
+  48:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * @endcond 
+  49:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  *
+  50:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  */
+  51:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  
+  52:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** /**************************************************************************************************
+  53:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * HEADER FILES
+  54:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  **************************************************************************************************
+  55:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  
+  56:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** #include <xmc_ebu.h>
+  57:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+  58:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** #if defined(EBU)
+  59:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+  60:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** /**************************************************************************************************
+  61:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * API IMPLEMENTATION
+  62:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  **************************************************************************************************
+  63:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+  64:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** /*
+  65:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * Initialize the EBU peripheral
+  66:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  */
+  67:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** XMC_EBU_STATUS_t XMC_EBU_Init(XMC_EBU_t *const ebu,const XMC_EBU_CONFIG_t *const config)
+  68:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** {
+  28              	 .loc 1 68 0
+  29              	 .cfi_startproc
+  30              	 
+  31              	 
+  32              	.LVL0:
+  33 0000 38B5     	 push {r3,r4,r5,lr}
+  34              	.LCFI0:
+  35              	 .cfi_def_cfa_offset 16
+  36              	 .cfi_offset 3,-16
+  37              	 .cfi_offset 4,-12
+  38              	 .cfi_offset 5,-8
+  39              	 .cfi_offset 14,-4
+  40 0002 0446     	 mov r4,r0
+  41 0004 0D46     	 mov r5,r1
+  42              	.LVL1:
+  43              	.LBB4:
+  44              	.LBB5:
+  45              	 .file 2 "C:/Files/Projects/Git/XMCLib/inc/xmc_ebu.h"
+   1:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+   2:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @file xmc_ebu.h
+   3:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @date 2017-06-24
+   4:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+   5:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @cond
+   6:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  **************************************************************************************************
+   7:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+   9:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * All rights reserved.                        
+  11:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *                                             
+  12:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * following conditions are met:   
+  14:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *                                                                              
+  15:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * disclaimer.                        
+  17:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * 
+  18:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * 
+  21:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * products derived from this software without specific prior written permission.                  
+  23:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *                                                                              
+  24:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *                                                                              
+  32:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  **************************************************************************************************
+  35:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+  36:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Change History
+  37:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * --------------
+  38:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+  39:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * 2015-06-20:
+  40:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *     - Initial
+  41:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+  42:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * 2016-03-30:
+  43:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *     - Added ebu_data_hold_cycles_for_read_accesses to XMC_EBU_BUS_READ_CONFIG_t
+  44:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *     - Added ebu_device_addressing_mode and ebu_data_hold_cycles_for_write_accesses to XMC_EBU_BU
+  45:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *      
+  46:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * 2017-06-24:
+  47:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *     - Changed XMC_EBU_AddressSelectEnable() to make sure arbitartion mode is active
+  48:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+  49:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @endcond 
+  50:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+  51:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+  52:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  
+  53:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #ifndef XMC_EBU_H
+  54:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #define XMC_EBU_H
+  55:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+  56:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**************************************************************************************************
+  57:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * HEADER FILES
+  58:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  **************************************************************************************************
+  59:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  
+  60:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #include <xmc_common.h>
+  61:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #if defined (EBU)
+  62:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #include <xmc_scu.h>
+  63:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+  64:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+  65:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @addtogroup XMClib XMC Peripheral Library
+  66:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @{
+  67:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+  68:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+  69:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+  70:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @addtogroup EBU
+  71:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @brief External Bus Unit (EBU) driver for the XMC45/XMC47/XMC48 microcontroller
+  72:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+  73:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The External Bus Unit (EBU) controls the transactions between external memories or 
+  74:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * peripheral units, and the internal memories and peripheral units. Several external 
+  75:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * device configurations are supported; e.g. Asynchronous static memories, SDRAM 
+  76:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * and various flash memory types. It supports multiple programmable address regions. 
+  77:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+  78:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The EBU low level driver provides functions to configure and initialize the EBU
+  79:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * hardware peripheral. 
+  80:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @{
+  81:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+  82:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  
+  83:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**************************************************************************************************
+  84:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * MACROS
+  85:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** ***************************************************************************************************
+  86:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+  87:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+  88:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * A convenient symbol for the EBU peripheral base address
+  89:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+  90:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #if defined (EBU)
+  91:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** # define XMC_EBU ((XMC_EBU_t *)EBU_BASE)
+  92:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #else
+  93:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** # error 'EBU' base peripheral pointer not defined
+  94:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #endif
+  95:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+  96:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+  97:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /*
+  98:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * This macro is used in the LLD for assertion checks (XMC_ASSERT).
+  99:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 100:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #define XMC_EBU_CHECK_MODULE_PTR(p) ((p) == XMC_EBU)
+ 101:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 102:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**************************************************************************************************
+ 103:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * ENUMS
+ 104:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** ***************************************************************************************************
+ 105:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  
+ 106:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 107:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Status return values for EBU low level driver
+ 108:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */ 
+ 109:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_STATUS
+ 110:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 111:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_STATUS_OK    = 0U, /**< Operation successful */
+ 112:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_STATUS_BUSY  = 1U, /**< Busy with a previous request */
+ 113:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_STATUS_ERROR = 3U  /**< Operation unsuccessful */
+ 114:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_STATUS_t;
+ 115:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 116:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 117:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU clock divide ratio
+ 118:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 119:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum  XMC_EBU_CLOCK_DIVIDE_RATIO
+ 120:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 121:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLOCK_DIVIDED_BY_1 = 0U, /**< Clock divided by 1 */
+ 122:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLOCK_DIVIDED_BY_2 = 1U, /**< Clock divided by 2 */
+ 123:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLOCK_DIVIDED_BY_3 = 2U, /**< Clock divided by 3 */
+ 124:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLOCK_DIVIDED_BY_4 = 3U  /**< Clock divided by 4 */
+ 125:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_CLOCK_DIVIDE_RATIO_t;
+ 126:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 127:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 128:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU DIV2 clocking mode
+ 129:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 130:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum  XMC_EBU_DIV2_CLK_MODE
+ 131:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 132:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DIV2_CLK_MODE_OFF = 0U, /**< Divider 2 clock mode OFF */
+ 133:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DIV2_CLK_MODE_ON = 1U   /**< Divider 2 clock mode ON */
+ 134:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_DIV2_CLK_MODE_t;
+ 135:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 136:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 137:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU clocking mode
+ 138:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 139:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum  XMC_EBU_CLK_MODE
+ 140:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 141:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLK_MODE_ASYNCHRONOUS_TO_AHB = 0U, /**< EBU is using standard clocking mode */
+ 142:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLK_MODE_SYNCHRONOUS_TO_CPU = 1U   /**< EBU is running at AHB bus clock divided by 2 */
+ 143:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_CLK_MODE_t;
+ 144:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 145:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 146:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU arbitration mode
+ 147:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 148:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum  XMC_EBU_ARB_MODE
+ 149:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 150:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ARB_MODE_NOT_SELECTED     = 0U, /**< No Bus arbitration mode selected */
+ 151:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ARB_MODE_ARBITER_MODE     = 1U, /**< Arbiter Mode arbitration mode selected */
+ 152:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ARB_MODE_PARTICIPANT_MODE = 2U, /**< Participant arbitration mode selected */
+ 153:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ARB_MODE_SOLE_MASTER_MODE = 3U  /**< Sole Master arbitration mode selected */
+ 154:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_ARB_MODE_t;
+ 155:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 156:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 157:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU ALE mode
+ 158:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 159:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum  XMC_EBU_ALE_MODE
+ 160:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 161:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ALE_OUTPUT_IS_INV_ADV = 0U, /**< Output is ADV */
+ 162:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ALE_OUTPUT_IS_ALE     = 1U  /**< Output is ALE */
+ 163:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_ALE_MODE_t;
+ 164:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 165:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 166:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU clock status
+ 167:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 168:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_CLK_STATUS
+ 169:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 170:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLK_STATUS_DISABLE_BIT = EBU_CLC_DISS_Msk,     /**< EBU Disable Status Bit */
+ 171:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLK_STATUS_MODE        = EBU_CLC_SYNCACK_Msk,  /**< EBU Clocking Mode Status */
+ 172:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLK_STATUS_DIV2_MODE   = EBU_CLC_DIV2ACK_Msk,  /**< DIV2 Clocking Mode Status */
+ 173:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLK_STATUS_DIV_RATIO   = EBU_CLC_EBUDIVACK_Msk /**< EBU Clock Divide Ratio Status */
+ 174:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_CLK_STATUS_t;
+ 175:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 176:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 177:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU address selection
+ 178:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 179:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_ADDRESS_SELECT
+ 180:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 181:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ADDRESS_SELECT_MEMORY_REGION_ENABLE        = EBU_ADDRSEL0_REGENAB_Msk, /**< Memory Region
+ 182:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ADDRESS_SELECT_ALTERNATE_REGION_ENABLE     = EBU_ADDRSEL0_ALTENAB_Msk, /**< Alternate Reg
+ 183:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ADDRESS_SELECT_MEMORY_REGION_WRITE_PROTECT = EBU_ADDRSEL0_WPROT_Msk    /**< Memory Region
+ 184:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_ADDRESS_SELECT_t;
+ 185:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 186:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 187:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU bus write configuration status
+ 188:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 189:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_BUSWCON_SELECT
+ 190:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 191:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BUSWCON_SELECT_NAN_WORKAROUND = EBU_BUSWCON0_NAA_Msk, /**< Enable flash non-array access 
+ 192:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BUSWCON_SELECT_DEVICE_ADDRESSING_MODE = EBU_BUSWCON0_PORTW_Msk, /**< Device Addressing Mo
+ 193:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_BUSWCON_SELECT_t;
+ 194:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 195:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 196:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU burst length for synchronous burst
+ 197:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 198:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_BURST_LENGTH_SYNC
+ 199:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 200:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_LENGTH_SYNC_1_DATA_ACCESS   = 0U, /**< 1 data access (default after reset) */
+ 201:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_LENGTH_SYNC_2_DATA_ACCESSES = 1U, /**< 2 data access */
+ 202:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_LENGTH_SYNC_4_DATA_ACCESSES = 2U, /**< 3 data access */
+ 203:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_LENGTH_SYNC_8_DATA_ACCESSES = 3U, /**< 4 data access */
+ 204:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_BURST_LENGTH_SYNC_t;
+ 205:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 206:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 207:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU burst buffer mode
+ 208:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 209:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_BURST_BUFFER_SYNC_MODE
+ 210:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 211:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_BUFFER_SYNC_LENGTH_SYNC_ENABLE = 0U, /**< Burst buffer length defined by value in F
+ 212:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_BUFFER_SYNC_SINGLE_MODE        = 1U  /**< All data required for transaction (single
+ 213:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_BURST_BUFFER_SYNC_MODE_t;
+ 214:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 215:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 216:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Read single stage synchronization
+ 217:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 218:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_READ_STAGES_SYNC
+ 219:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 220:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_READ_STAGES_SYNC_TWO = 0U, /**< Two stages of synchronization used (maximum margin) */
+ 221:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_READ_STAGES_SYNC_ONE = 1U  /**< One stage of synchronization used (minimum latency) */
+ 222:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_READ_STAGES_SYNC_t;
+ 223:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 224:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 225:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU burst flash clock feedback enable/disable
+ 226:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 227:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_BURST_FLASH_CLOCK_FEEDBACK
+ 228:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 229:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_FLASH_CLOCK_FEEDBACK_DISABLE = 0U, /**< BFCLK feedback not used */
+ 230:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_FLASH_CLOCK_FEEDBACK_ENABLE  = 1U  /**< BFCLK feedback used */
+ 231:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_BURST_FLASH_CLOCK_FEEDBACK_t;
+ 232:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 233:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 234:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU burst flash clock mode select
+ 235:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 236:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_BURST_FLASH_CLOCK_MODE
+ 237:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 238:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_FLASH_CLOCK_MODE_RUN_CONTINUOSLY = 0U, /**< Burst flash clock runs continuously */
+ 239:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_FLASH_CLOCK_MODE_DISABLED_BETWEEN_ACCESSES = 1U /**< Burst flash clock disabled */
+ 240:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_BURST_FLASH_CLOCK_MODE_t;
+ 241:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 242:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 243:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU flash non-array access
+ 244:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 245:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_FLASH_NON_ARRAY_ACCESS
+ 246:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 247:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_FLASH_NON_ARRAY_ACCESS_DISNABLE = 0U, /**< Disable non-array access */
+ 248:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_FLASH_NON_ARRAY_ACCESS_ENABLE   = 1U  /**< Enable non-array access */
+ 249:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_FLASH_NON_ARRAY_ACCESS_t;
+ 250:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 251:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 252:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU early chip select for synchronous burst
+ 253:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 254:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_EARLY_CHIP_SELECT_SYNC_BURST
+ 255:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 256:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_EARLY_CHIP_SELECT_DELAYED     = 0U, /**< Chip select delayed */
+ 257:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_EARLY_CHIP_SELECT_NOT_DELAYED = 1U  /**< Chip select not delayed */
+ 258:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_EARLY_CHIP_SELECT_SYNC_BURST_t;
+ 259:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 260:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 261:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU early burst signal enable for synchronous burst
+ 262:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 263:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_BURST_SIGNAL_SYNC_BURST
+ 264:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 265:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_SIGNAL_SYNC_BURST_ADV_DELAYED     = 0U, /**< Chip select delayed */
+ 266:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_SIGNAL_SYNC_BURST_ADV_NOT_DELAYED = 1U  /**< Chip select not delayed */
+ 267:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_BURST_SIGNAL_SYNC_BURST_t;
+ 268:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 269:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 270:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU burst address wrapping
+ 271:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 272:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_BURST_ADDRESS_WRAPPING
+ 273:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 274:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_ADDRESS_WRAPPING_DISABLED = 0U, /**< Automatically re-aligns any non-aligned synchr
+ 275:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BURST_ADDRESS_WRAPPING_ENABLED  = 1U  /**< Starts any burst access at address specified b
+ 276:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_BURST_ADDRESS_WRAPPING_t;
+ 277:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 278:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 279:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU reversed polarity at WAIT
+ 280:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 281:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_WAIT_SIGNAL_POLARITY
+ 282:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 283:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_WAIT_SIGNAL_POLARITY_PIN_ACTIVE_LOW  = 0U, /**< OFF, input at WAIT pin is active low */
+ 284:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_WAIT_SIGNAL_POLARITY_PIN_ACTIVE_HIGH = 1U  /**< Polarity reversed, input at WAIT pin is a
+ 285:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_WAIT_SIGNAL_POLARITY_t;
+ 286:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 287:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 288:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU byte control signal control
+ 289:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 290:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_BYTE_CONTROL
+ 291:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 292:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BYTE_CONTROL_FOLLOWS_CHIP_SELECT_TIMMING         = 0U, /**< Control signals follow chip s
+ 293:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BYTE_CONTROL_FOLLOWS_CONTROL_SIGNAL_TIMMING      = 1U, /**< Control signals follow contro
+ 294:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BYTE_CONTROL_FOLLOWS_WRITE_ENABLE_SIGNAL_TIMMING = 2U  /**< Control signals follow write 
+ 295:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_BYTE_CONTROL_t;
+ 296:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 297:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 298:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU device addressing mode
+ 299:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 300:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_DEVICE_ADDRESSING_MODE
+ 301:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 302:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_ADDRESSING_MODE_16_BITS                  = 1U, /**< Address will only be driven on
+ 303:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_ADDRESSING_MODE_TWIN_16_BITS_MULTIPLEXED = 2U, /**< Lower 16b will be driven onto 
+ 304:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_ADDRESSING_MODE_32_BITS_MULTIPLEXED      = 3U  /**< Full address driven onto A[15:
+ 305:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_DEVICE_ADDRESSING_MODE_t;
+ 306:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 307:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 308:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU external wait control
+ 309:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 310:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_WAIT_CONTROL
+ 311:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 312:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_WAIT_CONTROL_OFF = 0U, /**< Default after reset; Wait control off */  
+ 313:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_WAIT_CONTROL_SYNC_EARLY_WAIT_ASYNC_ASYNC_INPUT_AT_WAIT = 1U,    /**< SYNC: Wait for page 
+ 314:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****                                                                                ASYNC: Asynchronous 
+ 315:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_WAIT_CONTROL_SYNC_WAIT_WITH_DATA_ASYNC_SYNC_INPUT_AT_WAIT = 2U, /**< SYNC: Wait for page 
+ 316:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****                                                                                ASYNC: Synchronous i
+ 317:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_WAIT_CONTROL_SYNC_ABORT_AND_RETRY_ACCESS = 3U                   /**< SYNC: Abort and retr
+ 318:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_WAIT_CONTROL_t;
+ 319:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 320:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 321:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU asynchronous address phase
+ 322:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 323:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_ASYNCHRONOUS_ADDRESS_PHASE
+ 324:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 325:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ASYNCHRONOUS_ADDRESS_PHASE_CLOCK_ENABLED_AT_BEGINNING_OF_ACCESS = 0U, /**< Enabled at beg
+ 326:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_ASYNCHRONOUS_ADDRESS_PHASE_CLOCK_ENABLED_AFTER_ADDRESS_PHASE    = 1U  /**< Enabled after 
+ 327:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_ASYNCHRONOUS_ADDRESS_PHASE_t;
+ 328:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 329:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 330:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU device type for region
+ 331:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 332:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_DEVICE_TYPE
+ 333:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 334:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_TYPE_MUXED_ASYNCHRONOUS_TYPE   = 0U, /**< Device type muxed asynchronous */
+ 335:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_TYPE_MUXED_BURST_TYPE          = 1U, /**< Device type muxed burst */
+ 336:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_TYPE_NAND_FLASH                = 2U, /**< Device type NAND flash */
+ 337:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_TYPE_MUXED_CELLULAR_RAM        = 3U, /**< Device type muxed cellular RAM  */
+ 338:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_TYPE_DEMUXED_ASYNCHRONOUS_TYPE = 4U, /**< Device type de-muxed asynchronous */
+ 339:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_TYPE_DEMUXED_BURST_TYPE        = 5U, /**< Device type de-muxed burst */
+ 340:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_TYPE_DEMUXED_PAGE_MODE         = 6U, /**< Device type de-muxed page mode */
+ 341:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_TYPE_DEMUXED_CELLULAR_RAM      = 7U, /**< Device type de-muxed cellular RAM  */
+ 342:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_DEVICE_TYPE_SDRAM                     = 8U  /**< Device type SDRAM  */
+ 343:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_DEVICE_TYPE_t;
+ 344:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 345:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 346:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU lock chip select
+ 347:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 348:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_LOCK_CHIP_SELECT
+ 349:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 350:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_LOCK_CHIP_SELECT_DISABLED = 0U, /**< Chip select cannot be locked */
+ 351:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_LOCK_CHIP_SELECT_ENABLED  = 1U  /**< Chip select automatically locked after a write opera
+ 352:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_LOCK_CHIP_SELECT_t;
+ 353:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 354:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 355:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU Frequency of external clock at pin BFCLKO
+ 356:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 357:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_FREQUENCY_EXT_CLK_PIN
+ 358:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 359:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_FREQ_EXT_CLK_PIN_EQUAL_TO_INT_CLK   = 0U, /**< Equal to INT_CLK frequency */
+ 360:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_FREQ_EXT_CLK_PIN_HALF_OF_INT_CLK    = 1U, /**< 1/2 of INT_CLK frequency */
+ 361:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_FREQ_EXT_CLK_PIN_THIRD_OF_INT_CLK   = 2U, /**< 1/3 of INT_CLK frequency */
+ 362:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_FREQ_EXT_CLK_PIN_QUARTER_OF_INT_CLK = 3U  /**< 1/4 of INT_CLK frequency */
+ 363:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_FREQ_EXT_CLK_PIN_t;
+ 364:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 365:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 366:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU extended data
+ 367:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 368:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_EXT_DATA
+ 369:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 370:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_EXT_DATA_OUTPUT_EVERY_1_BFCLK_CYCLES = 0U, /**< External memory outputs data every BFCLK 
+ 371:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_EXT_DATA_OUTPUT_EVERY_2_BFCLK_CYCLES = 1U, /**< External memory outputs data every two BF
+ 372:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_EXT_DATA_OUTPUT_EVERY_4_BFCLK_CYCLES = 2U, /**< External memory outputs data every four B
+ 373:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_EXT_DATA_OUTPUT_EVERY_8_BFCLK_CYCLES = 3U  /**< External memory outputs data every eight 
+ 374:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_EXT_DATA_t;
+ 375:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 376:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 377:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU SDRAM clock mode select
+ 378:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 379:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_SDRAM_CLK_MODE
+ 380:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 381:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_CLK_MODE_CONTINUOUSLY_RUNS         = 0U, /**< Clock continuously running */
+ 382:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_CLK_MODE_DISABLED_BETWEEN_ACCESSES = 1U  /**< Clock disabled between accesses */
+ 383:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_CLK_MODE_t;
+ 384:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 385:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 386:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU power save mode used for gated clock mode
+ 387:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 388:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_SDRAM_PWR_MODE
+ 389:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 390:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_PWR_MODE_PRECHARGE_BEFORE_CLK_STOP      = 0U, /**< Precharge before clock stop */
+ 391:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_PWR_MODE_AUTO_PRECHARGE_BEFORE_CLK_STOP = 1U, /**< Auto-precharge before clock stop
+ 392:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_PWR_MODE_ACTIVE_PWR_DOWN                = 2U, /**< Active power down (stop clock wi
+ 393:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_PWR_MODE_CLK_STOP_PWR_DOWN              = 3U  /**< Clock stop power down */
+ 394:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_PWR_MODE_t;
+ 395:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 396:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 397:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU disable SDRAM clock output
+ 398:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 399:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_SDRAM_CLK_OUTPUT
+ 400:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 401:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_CLK_OUTPUT_ENABLED  = 0U, /**< Clock output enabled */
+ 402:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_CLK_OUTPUT_DISABLED = 1U  /**< Clock output disabled */
+ 403:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_CLK_OUTPUT_t;
+ 404:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 405:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 406:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *  EBU mask for bank tag
+ 407:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 408:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_SDRAM_MASK_FOR_BANKM_TAG
+ 409:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 410:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_BANK_TAG_ADDRESS_21_to_20 = 1U, /**< Mask for bank tag addresses 21 to 20 
+ 411:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_BANK_TAG_ADDRESS_22_to_21 = 2U, /**< Mask for bank tag addresses 22 to 21 
+ 412:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_BANK_TAG_ADDRESS_23_to_22 = 3U, /**< Mask for bank tag addresses 23 to 22 
+ 413:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_BANK_TAG_ADDRESS_24_to_23 = 4U, /**< Mask for bank tag addresses 24 to 23 
+ 414:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_BANK_TAG_ADDRESS_25_to_24 = 5U, /**< Mask for bank tag addresses 25 to 24 
+ 415:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_BANK_TAG_ADDRESS_26_to_25 = 6U, /**< Mask for bank tag addresses 26 to 25 
+ 416:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_BANK_TAG_ADDRESS_26       = 7U  /**< Mask for bank tag addresses 26 */
+ 417:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_MASK_FOR_BANK_TAG_t;
+ 418:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 419:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 420:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU Mask for row tag
+ 421:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 422:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_SDRAM_MASK_FOR_ROW_TAG
+ 423:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 424:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_ROW_TAG_ADDRESS_26_to_9  = 1U, /**< Mask for row tag addresses 26 to 9 */
+ 425:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_ROW_TAG_ADDRESS_26_to_10 = 2U, /**< Mask for row tag addresses 26 to 10 */
+ 426:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_ROW_TAG_ADDRESS_26_to_11 = 3U, /**< Mask for row tag addresses 26 to 11 */
+ 427:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_ROW_TAG_ADDRESS_26_to_12 = 4U, /**< Mask for row tag addresses 26 to 12 */
+ 428:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_MASK_FOR_ROW_TAG_ADDRESS_26_to_13 = 5U  /**< Mask for row tag addresses 26 to 13 */
+ 429:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_MASK_FOR_ROW_TAG_t;
+ 430:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 431:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 432:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Number of address bits from bit 0 to be used for column address
+ 433:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 434:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_SDRAM_WIDTH_OF_COLUMN_ADDRESS
+ 435:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 436:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_WIDTH_OF_COLUMN_ADDRESS_8_to_0  = 1U, /**< Address [8:0] */
+ 437:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_WIDTH_OF_COLUMN_ADDRESS_9_to_0  = 2U, /**< Address [9:0] */
+ 438:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_WIDTH_OF_COLUMN_ADDRESS_10_to_0 = 3U  /**< Address [10:0] */
+ 439:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_WIDTH_OF_COLUMN_ADDRESS_t;
+ 440:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 441:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 442:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Number of clocks between a READ command and the availability of data
+ 443:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 444:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_SDRAM_CAS_LATENCY
+ 445:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 446:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_CAS_LATENCY_2_CLKS = 2U, /**< 2 clocks between a READ command and the availability 
+ 447:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_CAS_LATENCY_3_CLKS = 3U  /**< 3 clocks between a READ command and the availability 
+ 448:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_CAS_LATENCY_t;
+ 449:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 450:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 451:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Number of locations can be accessed with a single command
+ 452:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 453:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_SDRAM_BURST_LENGTH
+ 454:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 455:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_BURST_LENGTH_1_LOCATION  = 0U, /**< One location accessed with a single command */
+ 456:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_BURST_LENGTH_2_LOCATION  = 1U, /**< Two location accessed with a single command */
+ 457:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_BURST_LENGTH_4_LOCATION  = 2U, /**< Four location accessed with a single command */
+ 458:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_BURST_LENGTH_8_LOCATION  = 3U, /**< Eight location accessed with a single command *
+ 459:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_BURST_LENGTH_16_LOCATION = 4U  /**< Sixteen location accessed with a single command
+ 460:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_BURST_LENGTH_t;
+ 461:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 462:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 463:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU SDRAM status
+ 464:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 465:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_SDRAM_STATUS
+ 466:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 467:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_STATUS_RX_ERROR = EBU_SDRSTAT_SDERR_Msk, /**< Detected an error when returning read
+ 468:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_STATUS_BUSY = EBU_SDRSTAT_SDRMBUSY_Msk, /**< The status of power-up initialization 
+ 469:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_STATUS_REFRESH_ERROR = EBU_SDRSTAT_REFERR_Msk /**< Failed previous refresh req coll
+ 470:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_STATUS_t;
+ 471:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 472:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 473:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * SDRAM refresh status
+ 474:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 475:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef enum XMC_EBU_SDRAM_RFRSH_STATUS
+ 476:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 477:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_RFRSH_STATUS_SELF_REFRESH_ENTRY_STATUS = EBU_SDRMREF_SELFRENST_Msk, /**< Self refre
+ 478:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_SDRAM_RFRSH_STATUS_SELF_REFRESH_EXIT_STATUS = EBU_SDRMREF_SELFREXST_Msk   /**< Self refre
+ 479:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_RFRSH_STATUS_t;
+ 480:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 481:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 482:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**************************************************************************************************
+ 483:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * DATA STRUCTURES
+ 484:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  **************************************************************************************************
+ 485:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  
+ 486:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /* Anonymous structure/union guard start */
+ 487:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #if defined(__CC_ARM)
+ 488:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   #pragma push
+ 489:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   #pragma anon_unions
+ 490:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #elif defined (__TASKING__)
+ 491:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   #pragma warning 586
+ 492:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #endif
+ 493:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 494:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 495:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Clock configuration values of EBU  <br>
+ 496:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+ 497:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The structure presents a convenient way to set/obtain the clock configuration
+ 498:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * values for clock mode, div2 clock mode and clock divide ratio of EBU.
+ 499:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The XMC_EBU_Init() can be used to populate the structure with the clock
+ 500:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * configuration values of the EBU module.
+ 501:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */ 
+ 502:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct XMC_EBU_CLK_CONFIG
+ 503:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 504:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   union
+ 505:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   { 
+ 506:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     uint32_t raw0;
+ 507:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     struct
+ 508:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 509:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                        : 16;
+ 510:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_clk_mode           : 1; /**< Clocking mode (::XMC_EBU_CLK_MODE_t) */
+ 511:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_div2_clk_mode      : 1; /**< DIV2 clocking mode (::XMC_EBU_DIV2_CLK_MODE_t) */
+ 512:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_clock_divide_ratio : 2; /**< Clock divide ratio (::XMC_EBU_CLOCK_DIVIDE_RATIO_t)
+ 513:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                        : 12;
+ 514:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     };
+ 515:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   };
+ 516:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_CLK_CONFIG_t;
+ 517:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 518:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 519:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Mode configuration values for EBU <br>
+ 520:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+ 521:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The structure presents a convenient way to set/obtain the mode configuration,
+ 522:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * SDRAM tristate, external clock, arbitration, timeout control and ALE mode for
+ 523:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU. The XMC_EBU_Init() can be used to populate the structure with the
+ 524:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * clock configuration values of the EBU module.
+ 525:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */ 
+ 526:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct XMC_EBU_MODE_CONFIG
+ 527:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** { 
+ 528:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   union
+ 529:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   {
+ 530:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     uint32_t raw0;
+ 531:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     struct
+ 532:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 533:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                      : 2;
+ 534:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_tristate   : 1; /**< 0 - SDRAM cannot be shared; 1 - SDRAM can be shared *
+ 535:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                      : 1;
+ 536:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_extlock          : 1; /**< 0 - ext bus is not locked after the EBU gains ownersh
+ 537:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_arbsync          : 1; /**< 0 - arbitration inputs are sync; 1 - arbitration inpu
+ 538:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_arbitration_mode : 2; /**< Arbitration mode selection (::XMC_EBU_ARB_MODE_t) */
+ 539:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t bus_timeout_control  : 8; /**< Determines num of inactive cycles leading to a bus ti
+ 540:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****                                               00H: Timeout is disabled <br>
+ 541:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****                                               01H: Timeout is generated after 1 x 8 clock cycles <b
+ 542:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****                                               FFH: Timeout is generated after 255 x 8 clock cycles 
+ 543:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                      : 15;
+ 544:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_ale_mode         : 1; /**< ALE mode. Switch the ADV output to be an active high 
+ 545:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     };
+ 546:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   };
+ 547:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_MODE_CONFIG_t;
+ 548:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 549:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 550:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * GPIO mode configuration for the allocated EBU ports <br>
+ 551:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Configuring this structure frees the allocated EBU ports for GPIO
+ 552:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * functionality. The XMC_EBU_Init() is used to populate the structure
+ 553:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * with the GPIO mode for the allocated EBU ports.
+ 554:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */ 
+ 555:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct XMC_EBU_FREE_PINS_TO_GPIO
+ 556:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 557:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   union
+ 558:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   {
+ 559:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     uint32_t raw0;
+ 560:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     struct
+ 561:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 562:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                   : 16;
+ 563:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t address_pins_gpio : 9; /**< 0 - Address bit required for addressing memory; 1 - Addr
+ 564:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t adv_pin_gpio      : 1; /**< Adv pin to GPIO mode */
+ 565:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                   : 6;
+ 566:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     };
+ 567:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   };
+ 568:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_FREE_PINS_TO_GPIO_t;
+ 569:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 570:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 571:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Read configuration for a region of EBU <br>
+ 572:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+ 573:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The structure presents a convenient way to set/obtain the read and read timing
+ 574:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * configuration for a region for EBU. The XMC_EBU_ConfigureRegion() can be
+ 575:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * used to populate the structure with the read configuration values for EBU.
+ 576:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */ 
+ 577:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct XMC_EBU_BUS_READ_CONFIG
+ 578:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 579:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   /* EBU read configuration parameters */
+ 580:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   union
+ 581:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   {
+ 582:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     uint32_t raw0;
+ 583:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     struct
+ 584:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 585:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_burst_length_sync                         : 3; /**< Burst length for synchronous
+ 586:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_burst_buffer_sync_mode                    : 1; /**< Burst buffer mode (::XMC_EBU
+ 587:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_read_stages_synch                         : 1; /**< Read single stage synchroniz
+ 588:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_burst_flash_clock_feedback                : 1; /**< Burst flash clock feedback e
+ 589:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_burst_flash_clock_mode                    : 1; /**< Burst flash clock mode selec
+ 590:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_flash_non_array_access                    : 1; /**< flash non-array access (::XM
+ 591:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                                               : 8;
+ 592:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_early_chip_select_sync_burst              : 1; /**< Early chip select for sync b
+ 593:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_burst_signal_sync                         : 1; /**< Early burst signal enable fo
+ 594:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_burst_address_wrapping                    : 1; /**< Burst address wrapping (::XM
+ 595:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_wait_signal_polarity                      : 1; /**< Reversed polarity at WAIT (:
+ 596:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_byte_control                              : 2; /**< Byte control signal control 
+ 597:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_device_addressing_mode                    : 2; /**< Device addressing mode (::XM
+ 598:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_wait_control                              : 2; /**< External wait control (::XMC
+ 599:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_asynchronous_address_phase                : 1; /**< Asynchronous address phase (
+ 600:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                                               : 1;
+ 601:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_device_type                               : 4; /**< Device type for region (::XM
+ 602:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     };
+ 603:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   };  
+ 604:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   /* EBU read access parameters */
+ 605:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   union
+ 606:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   {
+ 607:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     uint32_t raw1;
+ 608:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     struct
+ 609:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 610:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 611:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Recovery Cycles between Different Regions:     <br>
+ 612:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * This bit field determines the number of clock cycles of the Recovery Phase between consecu
+ 613:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0000B: No recovery phase clock cycles available <br>
+ 614:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0001B: 1 clock cycle selected                   <br>
+ 615:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                                            <br>
+ 616:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1110B: 14 clock cycles selected                <br>
+ 617:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1111B: 15 clock cycles selected                <br>
+ 618:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 619:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_recovery_cycles_between_different_regions : 4;
+ 620:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 621:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Recovery cycles after read accesses:           <br>
+ 622:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * This bit field determines the basic number of clock cycles of the Recovery Phase at the en
+ 623:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 000B: No recovery phase clock cycles available <br>
+ 624:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 001B: 1 clock cycle selected                   <br>
+ 625:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                                            <br>
+ 626:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 110B: 6 clock cycles selected                  <br>
+ 627:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 111B: 7 clock cycles selected                  <br>
+ 628:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 629:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_recovery_cycles_after_read_accesses       : 3;
+ 630:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 631:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Programmed wait states for read accesses: <br>
+ 632:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Number of programmed wait states for read accesses. For synchronous accesses, this will al
+ 633:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 00000B:  1 wait state                     <br>
+ 634:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 00001B:  1 wait state                     <br>
+ 635:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 00010B:  2 wait state                     <br>
+ 636:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                                       <br>
+ 637:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 11110B:  30 wait states                   <br>
+ 638:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 11111B:  31 wait states                   <br>
+ 639:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 640:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_programmed_wait_states_for_read_accesses  : 5;
+ 641:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 642:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Data Hold Cycles for Read Accesses <br>
+ 643:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * This bit field determines the basic number of Data Hold phase clock cycles during read acc
+ 644:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 645:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_data_hold_cycles_for_read_accesses: 4;
+ 646:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 647:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Frequency of external clock at pin BFCLKO (::XMC_EBU_FREQ_EXT_CLK_PIN_t)
+ 648:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 649:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_freq_ext_clk_pin                          : 2;
+ 650:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 651:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * EBU Extended data (::XMC_EBU_EXT_DATA_t)
+ 652:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 653:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_ext_data                                  : 2;
+ 654:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 655:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Command delay cycles:            <br>
+ 656:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * This bit field determines the basic number of Command Delay phase clock cycles.<br>
+ 657:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0000B: 0 clock cycle selected    <br>
+ 658:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0001B: 1 clock cycle selected    <br>
+ 659:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                              <br>
+ 660:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1110B: 14 clock cycles selected  <br>
+ 661:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1111B: 15 clock cycles selected  <br>
+ 662:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 663:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        uint32_t command_delay_lines                          : 4;
+ 664:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        /**
+ 665:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****         * Address hold cycles:            <br>
+ 666:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****         * This bit field determines the number of clock cycles of the address hold phase.<br>
+ 667:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****         * 0000B: 0 clock cycle selected   <br>
+ 668:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****         * 0001B: 1 clock cycle selected   <br>
+ 669:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****         * ...                             <br>
+ 670:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****         * 1110B: 14 clock cycles selected <br>
+ 671:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****         * 1111B: 15 clock cycles selected <br>
+ 672:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****         */
+ 673:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        uint32_t address_hold_cycles                          : 4;
+ 674:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****         /**
+ 675:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****          * Address Cycles:
+ 676:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****          * This bit field determines the number of clock cycles of the address phase.<br>
+ 677:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****          * 0000B: 1 clock cycle selected   <br>
+ 678:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****          * 0001B: 1 clock cycle selected   <br>
+ 679:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****          * ...                             <br>
+ 680:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****          * 1110B: 14 clock cycles selected <br>
+ 681:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****          * 1111B: 15 clock cycles selected <br>
+ 682:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****          */
+ 683:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        uint32_t address_cycles                               : 4;
+ 684:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     };
+ 685:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   };
+ 686:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_BUS_READ_CONFIG_t;
+ 687:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 688:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 689:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Write configuration for a region of EBU <br>
+ 690:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+ 691:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The structure presents a convenient way to set/obtain the write and write timing
+ 692:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * configurations for a region of EBU. The XMC_EBU_ConfigureRegion() can be used
+ 693:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * to populate the structure with the write configuration values of EBU.
+ 694:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */ 
+ 695:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct XMC_EBU_BUS_WRITE_CONFIG
+ 696:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 697:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   /* EBU write configuration parameters */
+ 698:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   union
+ 699:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   {
+ 700:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     uint32_t raw0;
+ 701:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     struct
+ 702:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 703:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_burst_length_sync                         : 3;  /**< Burst length for synchronou
+ 704:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_burst_buffer_sync_mode                    : 1;  /**< Burst buffer mode (::XMC_EB
+ 705:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                                               : 12;
+ 706:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_early_chip_select_sync_burst              : 1;  /**< Early chip select for sync 
+ 707:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_burst_signal_sync                         : 1;  /**< Early burst signal enable f
+ 708:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                                               : 1;
+ 709:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_wait_signal_polarity                      : 1;  /**< Reversed polarity at WAIT (
+ 710:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_byte_control                              : 2;  /**< Byte control signal control
+ 711:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_device_addressing_mode                    : 2;  /**< Device addressing mode (::X
+ 712:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_wait_control                              : 2;  /**< External wait control (::XM
+ 713:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_asynchronous_address_phase                : 1;  /**< Asynchronous address phase 
+ 714:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_lock_chip_select                          : 1;  /**< Lock chip select (::XMC_EBU
+ 715:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_device_type                               : 4;  /**< Device type for region (::X
+ 716:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     };
+ 717:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   };
+ 718:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   /* EBU write access parameters */
+ 719:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   union
+ 720:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   {
+ 721:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     uint32_t raw1;
+ 722:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     struct
+ 723:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 724:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 725:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Recovery cycles between different regions:       <br>
+ 726:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * This bit field determines the number of clock cycles of the Recovery Phase between consecu
+ 727:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0000B: No recovery phase clock cycles available  <br>
+ 728:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0001B: 1 clock cycle selected                    <br>
+ 729:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                                              <br>
+ 730:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1110B: 14 clock cycles selected                  <br>
+ 731:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1111B: 15 clock cycles selected                  <br>
+ 732:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 733:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_recovery_cycles_between_different_regions : 4;
+ 734:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 735:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 736:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Recovery cycles after write accesses:          <br>
+ 737:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * This bit field determines the basic number of clock cycles of the Recovery Phase at the en
+ 738:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 000B: No recovery phase clock cycles available <br>
+ 739:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 001B: 1 clock cycle selected                   <br> 
+ 740:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                                            <br>
+ 741:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 110B: 6 clock cycles selected                  <br>
+ 742:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 111B: 7 clock cycles selected                  <br>
+ 743:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 744:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_recovery_cycles_after_write_accesses      : 3;
+ 745:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 746:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 747:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Programmed wait states for write accesses: <br>
+ 748:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Number of programmed wait states for write accesses. For synchronous accesses, this will a
+ 749:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 00000B:  1 wait state                      <br>
+ 750:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 00001B:  1 wait state                      <br>
+ 751:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 00010B:  2 wait state                      <br>
+ 752:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                                        <br>
+ 753:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 11110B:  30 wait states                    <br>
+ 754:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 11111B:  31 wait states                    <br>
+ 755:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       */
+ 756:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_programmed_wait_states_for_write_accesses : 5;
+ 757:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 758:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 759:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Data Hold Cycles for Write Accesses
+ 760:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * This bit field determines the basic number of Data Hold phase clock cycles during write ac
+ 761:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0000B: No recovery phase clock cycles available  <br>
+ 762:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0001B: 1 clock cycle selected                    <br>
+ 763:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                                              <br>
+ 764:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1110B: 14 clock cycles selected                  <br>
+ 765:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1111B: 15 clock cycles selected                  <br>
+ 766:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 767:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_data_hold_cycles_for_write_accesses : 4;
+ 768:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**<
+ 769:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Frequency of external clock at pin BFCLKO (::XMC_EBU_FREQ_EXT_CLK_PIN_t)
+ 770:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 771:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_freq_ext_clk_pin                          : 2;
+ 772:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 773:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * EBU extended data (::XMC_EBU_EXT_DATA_t)
+ 774:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 775:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_ext_data                                  : 2;
+ 776:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 777:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Command delay cycles:           <br>
+ 778:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * This bit field determines the basic number of Command Delay phase clock cycles.<br>
+ 779:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0000B: 0 clock cycle selected   <br>
+ 780:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0001B: 1 clock cycle selected   <br>
+ 781:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                             <br>
+ 782:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1110B: 14 clock cycles selected <br>
+ 783:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1111B: 15 clock cycles selected <br>
+ 784:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 785:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t command_delay_lines                           : 4;
+ 786:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /** Address hold cycles:           <br>
+ 787:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * This bit field determines the number of clock cycles of the address hold phase.<br>
+ 788:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0000B: 0 clock cycle selected   <br>
+ 789:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0001B: 1 clock cycle selected   <br>
+ 790:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                             <br>
+ 791:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1110B: 14 clock cycles selected <br>
+ 792:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1111B: 15 clock cycles selected <br>
+ 793:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 794:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t address_hold_cycles                           : 4;
+ 795:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 796:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Address cycles:                 <br>
+ 797:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * This bit field determines the number of clock cycles of the address phase.<br>
+ 798:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0000B: 1 clock cycle selected   <br>
+ 799:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 0001B: 1 clock cycle selected   <br>
+ 800:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * ...                             <br>
+ 801:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1110B: 14 clock cycles selected <br>
+ 802:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * 1111B: 15 clock cycles selected <br>
+ 803:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 804:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****      uint32_t address_cycles                                 : 4;
+ 805:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     };
+ 806:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   };
+ 807:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** }XMC_EBU_BUS_WRITE_CONFIG_t;
+ 808:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 809:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 810:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * SDRAM configuration structure <br>
+ 811:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+ 812:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The structure is a placeholder for setting (and obtaining) the SDRAM configuration,
+ 813:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * operation mode configuration and the right refresh parameters. The XMC_EBU_ConfigureSdram()
+ 814:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * can be used to populate the structure with the SDRAM operation mode and
+ 815:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * refresh parameters configuration.
+ 816:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+ 817:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct XMC_EBU_SDRAM_CONFIG
+ 818:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 819:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   /* EBU SDRAM control parameters */
+ 820:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   union
+ 821:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   {
+ 822:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     uint32_t raw0;
+ 823:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     struct
+ 824:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 825:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 826:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Number of clock cycles between row activate command and a precharge
+ 827:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * command 
+ 828:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 829:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_row_precharge_delay_counter            : 4;
+ 830:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /** 
+ 831:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * (CRFSH) Number of refresh commands issued during powerup init sequence:
+ 832:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Perform CRFSH + 1 refresh cycles
+ 833:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 834:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_init_refresh_commands_counter          : 4;
+ 835:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 836:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * (CRSC) Number of NOP cycles after a mode register set command:
+ 837:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Insert CRSC + 1 NOP cycles 
+ 838:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 839:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_mode_register_set_up_time              : 2;
+ 840:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 841:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * (CRP) Number of NOP cycles inserted after a precharge command:
+ 842:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Insert CRP + 1 NOP cycles 
+ 843:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 844:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_row_precharge_time_counter             : 2;
+ 845:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 846:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Number of address bits from bit 0 to be used for column address
+ 847:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 848:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_width_of_column_address          : 2;
+ 849:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 850:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * (CRCD) Number of NOP cycles between a row address and a column
+ 851:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * address: Insert CRCD + 1 NOP cycles
+ 852:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 853:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_row_to_column_delay_counter      : 2;
+ 854:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 855:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Row cycle time counter: Insert (CRCE * 8) + CRC + 1 NOP cycles
+ 856:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 857:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_row_cycle_time_counter           : 3;
+ 858:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 859:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Mask for row tag
+ 860:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 861:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_mask_for_row_tag                 : 3;
+ 862:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 863:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Mask for bank tag
+ 864:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 865:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_mask_for_bank_tag                : 3;
+ 866:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 867:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Extension to the Row cycle time counter (CRCE)
+ 868:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 869:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_row_cycle_time_counter_extension : 3;
+ 870:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 871:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Disable SDRAM clock output
+ 872:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 873:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_clk_output                       : 1;
+ 874:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 875:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Power Save Mode used for gated clock mode
+ 876:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 877:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_pwr_mode                         : 2;
+ 878:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 879:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * SDRAM clock mode select
+ 880:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 881:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_clk_mode                         : 1;
+ 882:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     };
+ 883:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   };
+ 884:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   /* EBU SDRAM mode parameters */
+ 885:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   union
+ 886:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   {
+ 887:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     uint32_t raw1;
+ 888:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     struct
+ 889:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 890:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 891:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Number of locations can be accessed with a single command
+ 892:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 893:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_burst_length                     : 3;
+ 894:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                                            : 1;
+ 895:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 896:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Number of clocks between a READ command and the availability
+ 897:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * of data
+ 898:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 899:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_casclk_mode                      : 3;
+ 900:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                                            : 8;
+ 901:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 902:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Cold start
+ 903:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 904:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_cold_start: 1;
+ 905:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 906:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Value to be written to the extended mode register of a mobile
+ 907:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * SDRAM device
+ 908:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 909:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_extended_operation_mode          : 12;
+ 910:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 911:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Value to be written to the bank select pins of a mobile SDRAM
+ 912:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * device during an extended mode register write operation
+ 913:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 914:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_extended_operation_bank_select   : 4;
+ 915:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     };
+ 916:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   };
+ 917:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   /* EBU SDRAM refresh parameters */
+ 918:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   union
+ 919:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 920:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     uint32_t raw2;
+ 921:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     struct
+ 922:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     {
+ 923:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 924:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Number of refresh counter period:
+ 925:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Refresh period is 'num_refresh_counter_period' x 64 clock cycles
+ 926:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 927:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_num_refresh_counter_period       : 6;
+ 928:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 929:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Number of refresh commands
+ 930:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 931:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_num_refresh_cmnds                : 3;
+ 932:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                                            : 1;
+ 933:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 934:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * If 1, the self refresh exit command is issued to all SDRAM devices
+ 935:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * regardless of their attachment to type 0 or type 1
+ 936:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 937:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_self_refresh_exit                : 1;
+ 938:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t                                            : 1;
+ 939:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 940:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * If "1", the self refresh entry command is issued to all SDRAM devices,
+ 941:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * regardless regardless of their attachment to type 0 or type 1
+ 942:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 943:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_self_refresh_entry               : 1;
+ 944:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 945:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * If 1, memory controller will automatically issue the "self refresh
+ 946:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * entry" command to all SDRAM devices when it gives up control of the
+ 947:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * external bus. It will also automatically issue "self refresh exit"
+ 948:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * when it regains control of the bus
+ 949:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 950:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_auto_self_refresh                : 1;
+ 951:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 952:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Extended number of refresh counter period
+ 953:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 954:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_extended_refresh_counter_period  : 2;
+ 955:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 956:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Number of NOP cycles inserted after a self refresh exit before a
+ 957:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * command is permitted to the SDRAM/DDRAM
+ 958:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 959:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_self_refresh_exit_delay          : 8;
+ 960:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 961:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * If 1, an auto refresh cycle will be performed; If 0, no refresh will
+ 962:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * be performed
+ 963:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 964:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_auto_refresh                     : 1;
+ 965:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       /**
+ 966:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * Number of NOPs after the SDRAM controller exits power down before an
+ 967:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        * active command is permitted
+ 968:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****        */
+ 969:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t ebu_sdram_delay_on_power_down_exit         : 3;
+ 970:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****       uint32_t : 4;
+ 971:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     };
+ 972:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   };
+ 973:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_SDRAM_CONFIG_t;
+ 974:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 975:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /* Anonymous structure/union guard end */
+ 976:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #if defined (__CC_ARM)
+ 977:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   #pragma pop
+ 978:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #elif defined (__TASKING__)
+ 979:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   #pragma warning restore
+ 980:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #endif
+ 981:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 982:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 983:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU region initialization with read configurations <br>
+ 984:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+ 985:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The structure presents a convenient way to set/obtain the read and read timing
+ 986:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * configurations for a region of EBU. The XMC_EBU_ConfigureRegion() can be
+ 987:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * used to populate the structure with the read configuration values of EBU  
+ 988:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */  
+ 989:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct XMC_EBU_REGION_READ_CONFIG
+ 990:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+ 991:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   const uint32_t ebu_region_no;                  /**< Number of region*/
+ 992:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BUS_READ_CONFIG_t ebu_bus_read_config; /**< Read configuration and access parameters stru
+ 993:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_REGION_READ_CONFIG_t;
+ 994:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+ 995:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+ 996:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU region initialization with write configurations <br>
+ 997:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+ 998:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The structure presents a convenient way to set/obtain the write and write
+ 999:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * timing configurations for a region of EBU. The XMC_EBU_ConfigureRegion()
+1000:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * can be used to populate the structure with the write configuration
+1001:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * values of EBU.
+1002:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */  
+1003:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct XMC_EBU_REGION_WRITE_CONFIG
+1004:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+1005:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   const uint32_t ebu_region_no;                    /**< Number of refresh counter period */
+1006:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_BUS_WRITE_CONFIG_t ebu_bus_write_config; /**< Write configuration and access parameters s
+1007:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_REGION_WRITE_CONFIG_t;
+1008:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+1009:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+1010:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU region initialization with read and write configurations <br>
+1011:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1012:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The structure presents a convenient way to set/obtain the read, read timing,
+1013:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * write and write timing configurations for a region of EBU. The
+1014:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * XMC_EBU_ConfigureRegion() can be used to populate the structure with the
+1015:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * region read and write configuration values of EBU.
+1016:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */  
+1017:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct XMC_EBU_REGION
+1018:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+1019:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_REGION_READ_CONFIG_t read_config;
+1020:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_REGION_WRITE_CONFIG_t write_config;
+1021:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_REGION_t;
+1022:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+1023:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+1024:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * EBU global configurations <br>
+1025:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1026:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The structure presents a convenient way to set/obtain the global configurations
+1027:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * of the EBU like clock, mode and GPIO mode. The XMC_EBU_Init() can be
+1028:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * used to populate the structure with the region read and write configuration
+1029:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * values of EBU.
+1030:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */  
+1031:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct XMC_EBU_CONFIG
+1032:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+1033:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_CLK_CONFIG_t ebu_clk_config;               /**< Clock configuration structure */
+1034:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_MODE_CONFIG_t ebu_mode_config;             /**< Mode configuration structure */
+1035:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_EBU_FREE_PINS_TO_GPIO_t ebu_free_pins_to_gpio; /**< Free allocated EBU ports for GPIO */
+1036:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_CONFIG_t;
+1037:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   
+1038:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+1039:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * External Bus Unit (EBU) device structure <br>
+1040:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1041:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The structure represents a collection of all hardware registers
+1042:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * used to configure the EBU peripheral on the XMC4500 microcontroller.
+1043:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The registers can be accessed with ::XMC_EBU.
+1044:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+1045:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** typedef struct
+1046:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+1047:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   __IO uint32_t  CLC;
+1048:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   __IO uint32_t  MODCON;
+1049:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   __I  uint32_t  ID;
+1050:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   __IO uint32_t  USERCON;
+1051:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   __I  uint32_t  RESERVED0[2];
+1052:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   __IO uint32_t  ADDRSEL[4];
+1053:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   struct
+1054:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   {
+1055:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     __IO uint32_t  RDCON;
+1056:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     __IO uint32_t  RDAPR;
+1057:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     __IO uint32_t  WRCON;
+1058:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****     __IO uint32_t  WRAPR;
+1059:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   } BUS[4];
+1060:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   __IO uint32_t  SDRMCON;
+1061:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   __IO uint32_t  SDRMOD;
+1062:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   __IO uint32_t  SDRMREF;
+1063:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   __I  uint32_t  SDRSTAT;
+1064:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** } XMC_EBU_t;
+1065:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+1066:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**************************************************************************************************
+1067:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * API PROTOTYPES
+1068:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** ***************************************************************************************************
+1069:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  
+1070:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #ifdef __cplusplus
+1071:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** extern "C" {
+1072:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** #endif
+1073:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+1074:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+1075:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @param ebu Constant pointer to ::XMC_EBU_t, pointing to the EBU base address
+1076:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @param config Constant pointer to a constant ::XMC_EBU_CONFIG_t structure containing the
+1077:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *               clock mode and clock configuration.
+1078:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @return XMC_EBU_STATUS_t Always returns XMC_EBU_STATUS_OK (Only register assignment statements)
+1079:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1080:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * \par<b>Description: </b><br>
+1081:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Initialize the EBU peripheral <br>
+1082:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1083:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * \par
+1084:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The function enables the EBU peripheral, configures time values for clock mode, div2
+1085:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * clock mode, mode configuration, SDRAM tristate, external clock, arbitration, timeout
+1086:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * control, ALE mode and configuration to free up the allocated EBU ports for GPIO
+1087:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * functionality (if required).
+1088:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+1089:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** XMC_EBU_STATUS_t XMC_EBU_Init(XMC_EBU_t *const ebu, const XMC_EBU_CONFIG_t *const config);
+1090:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+1091:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+1092:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @param ebu Constant pointer to ::XMC_EBU_t, pointing to the EBU base address
+1093:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @param config Constant pointer to a constant ::XMC_EBU_SDRAM_CONFIG_t structure containing
+1094:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *               the SDRAM configuration, operation mode configuration and right refresh
+1095:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *               parameters
+1096:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @return None
+1097:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1098:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * \par<b>Description: </b><br>
+1099:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Configures the SDRAM <br>
+1100:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1101:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * \par
+1102:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The function enables the SDRAM, sets SDRAM configuration parameters such as operation
+1103:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * mode and refresh parameters. Please see  ::XMC_EBU_SDRAM_CONFIG_t for more information.
+1104:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+1105:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** void XMC_EBU_ConfigureSdram(XMC_EBU_t *const ebu, const XMC_EBU_SDRAM_CONFIG_t *const config);
+1106:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+1107:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+1108:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @param ebu Constant pointer to ::XMC_EBU_t, pointing to the EBU base address
+1109:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @param region Constant pointer to a constant ::XMC_EBU_REGION_t structure containing the
+1110:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *               read, read timing, write and write timing configurations for a region of
+1111:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *               EBU
+1112:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @return None
+1113:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1114:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * \par<b>Description: </b><br>
+1115:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Configures the SDRAM <br>
+1116:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1117:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * \par
+1118:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The function configures the EBU region read, read timing, write and write timing parameter
+1119:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * configuration. It also configures the region registers for read and write accesses. Please
+1120:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * see ::XMC_EBU_REGION_t for more information.
+1121:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1122:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+1123:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** void XMC_EBU_ConfigureRegion(XMC_EBU_t *const ebu, const XMC_EBU_REGION_t *const region);
+1124:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** 
+1125:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** /**
+1126:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @param ebu Constant pointer to ::XMC_EBU_t, pointing to the EBU base address
+1127:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * @return None
+1128:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1129:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * \par<b>Description: </b><br>
+1130:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * Enable EBU peripheral <br>
+1131:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1132:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * \par
+1133:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * The function de-asserts the peripheral reset. The peripheral needs to be initialized.
+1134:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * It also enables the control of the EBU.
+1135:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  *
+1136:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * \par<b>Related APIs:</b><br>
+1137:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  * XMC_EBU_Disable(), XMC_SCU_RESET_AssertPeripheralReset()
+1138:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****  */
+1139:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** __STATIC_INLINE void XMC_EBU_Enable(XMC_EBU_t *const ebu)
+1140:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h **** {
+1141:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_ASSERT("XMC_EBU_Enable: Invalid module pointer", XMC_EBU_CHECK_MODULE_PTR(ebu));
+1142:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   XMC_SCU_RESET_DeassertPeripheralReset(XMC_SCU_PERIPHERAL_RESET_EBU);
+  46              	 .loc 2 1142 0
+  47 0006 0C48     	 ldr r0,.L5
+  48              	.LVL2:
+  49 0008 FFF7FEFF 	 bl XMC_SCU_RESET_DeassertPeripheralReset
+  50              	.LVL3:
+1143:C:/Files/Projects/Git/XMCLib/inc\xmc_ebu.h ****   ebu->CLC &= ~EBU_CLC_DISR_Msk;
+  51              	 .loc 2 1143 0
+  52 000c 2368     	 ldr r3,[r4]
+  53 000e 23F00103 	 bic r3,r3,#1
+  54 0012 2360     	 str r3,[r4]
+  55              	.LBE5:
+  56              	.LBE4:
+  69:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   XMC_ASSERT("XMC_EBU_Init: Invalid module pointer", XMC_EBU_CHECK_MODULE_PTR(ebu));
+  70:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   XMC_ASSERT("XMC_EBU_Init:Null Pointer", (config != (XMC_EBU_CONFIG_t *)NULL));
+  71:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   
+  72:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /* Enable EBU */
+  73:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   XMC_EBU_Enable(ebu);
+  74:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+  75:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /* Clock configuration */
+  76:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   ebu->CLC  =  config->ebu_clk_config.raw0;
+  57              	 .loc 1 76 0
+  58 0014 2B68     	 ldr r3,[r5]
+  59 0016 2360     	 str r3,[r4]
+  77:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   while (((ebu->CLC & (EBU_CLC_SYNCACK_Msk | EBU_CLC_DIV2ACK_Msk | EBU_CLC_EBUDIVACK_Msk)) >> 4) !=
+  78:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****          (config->ebu_clk_config.raw0 & (EBU_CLC_SYNC_Msk | EBU_CLC_DIV2_Msk | EBU_CLC_EBUDIV_Msk))
+  60              	 .loc 1 78 0
+  61 0018 2A68     	 ldr r2,[r5]
+  62 001a 02F47022 	 and r2,r2,#983040
+  63              	.L2:
+  77:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   while (((ebu->CLC & (EBU_CLC_SYNCACK_Msk | EBU_CLC_DIV2ACK_Msk | EBU_CLC_EBUDIVACK_Msk)) >> 4) !=
+  64              	 .loc 1 77 0 discriminator 1
+  65 001e 2368     	 ldr r3,[r4]
+  66 0020 03F47003 	 and r3,r3,#15728640
+  67 0024 B2EB131F 	 cmp r2,r3,lsr#4
+  68 0028 F9D1     	 bne .L2
+  79:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+  80:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /*EBU Mode Configuration */
+  81:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   ebu->MODCON = config->ebu_mode_config.raw0;
+  69              	 .loc 1 81 0
+  70 002a 6B68     	 ldr r3,[r5,#4]
+  71 002c 6360     	 str r3,[r4,#4]
+  82:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  
+  83:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /* Address Bits available for GPIO function */
+  84:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   ebu->USERCON = config->ebu_free_pins_to_gpio.raw0;
+  72              	 .loc 1 84 0
+  73 002e AB68     	 ldr r3,[r5,#8]
+  74 0030 E360     	 str r3,[r4,#12]
+  85:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+  86:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   return XMC_EBU_STATUS_OK;
+  87:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** }
+  75              	 .loc 1 87 0
+  76 0032 0020     	 movs r0,#0
+  77 0034 38BD     	 pop {r3,r4,r5,pc}
+  78              	.LVL4:
+  79              	.L6:
+  80 0036 00BF     	 .align 2
+  81              	.L5:
+  82 0038 04000030 	 .word 805306372
+  83              	 .cfi_endproc
+  84              	.LFE193:
+  86              	 .section .text.XMC_EBU_ConfigureSdram,"ax",%progbits
+  87              	 .align 2
+  88              	 .global XMC_EBU_ConfigureSdram
+  89              	 .thumb
+  90              	 .thumb_func
+  92              	XMC_EBU_ConfigureSdram:
+  93              	.LFB194:
+  88:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+  89:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** /*
+  90:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * Configures the SDRAM with operating modes and refresh parameters
+  91:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  */
+  92:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** void XMC_EBU_ConfigureSdram(XMC_EBU_t *const ebu,const XMC_EBU_SDRAM_CONFIG_t *const config)
+  93:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** {
+  94              	 .loc 1 93 0
+  95              	 .cfi_startproc
+  96              	 
+  97              	 
+  98              	 
+  99              	.LVL5:
+  94:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   XMC_ASSERT("XMC_EBU_Init: Invalid module pointer", XMC_EBU_CHECK_MODULE_PTR(ebu));
+  95:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   XMC_ASSERT("XMC_EBU_Init:Null Pointer", (config != (XMC_EBU_SDRAM_CONFIG_t *)NULL));
+  96:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   
+  97:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /* EBU SDRAM Refresh Configuration Parameters */
+  98:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   ebu->SDRMREF = config->raw2;
+ 100              	 .loc 1 98 0
+ 101 0000 8B68     	 ldr r3,[r1,#8]
+ 102 0002 0367     	 str r3,[r0,#112]
+  99:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /* EBU SDRAM General Configuration Parameters */
+ 100:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   ebu->SDRMCON = config->raw0;
+ 103              	 .loc 1 100 0
+ 104 0004 0B68     	 ldr r3,[r1]
+ 105 0006 8366     	 str r3,[r0,#104]
+ 101:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /* EBU SDRAM Operation Mode Configuration Parameters */
+ 102:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   ebu->SDRMOD = config->raw1;
+ 106              	 .loc 1 102 0
+ 107 0008 4B68     	 ldr r3,[r1,#4]
+ 108 000a C366     	 str r3,[r0,#108]
+ 109 000c 7047     	 bx lr
+ 110              	 .cfi_endproc
+ 111              	.LFE194:
+ 113 000e 00BF     	 .section .text.XMC_EBU_ConfigureRegion,"ax",%progbits
+ 114              	 .align 2
+ 115              	 .global XMC_EBU_ConfigureRegion
+ 116              	 .thumb
+ 117              	 .thumb_func
+ 119              	XMC_EBU_ConfigureRegion:
+ 120              	.LFB195:
+ 103:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** }
+ 104:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+ 105:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** /*
+ 106:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  * Configures the SDRAM region for read and write operation
+ 107:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****  */
+ 108:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** void XMC_EBU_ConfigureRegion(XMC_EBU_t *const ebu,const XMC_EBU_REGION_t *const region)
+ 109:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** {
+ 121              	 .loc 1 109 0
+ 122              	 .cfi_startproc
+ 123              	 
+ 124              	 
+ 125              	 
+ 126              	.LVL6:
+ 110:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   
+ 111:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   XMC_ASSERT("XMC_EBU_Init: Invalid module pointer", XMC_EBU_CHECK_MODULE_PTR(ebu));
+ 112:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   XMC_ASSERT("XMC_EBU_Init:Null Pointer", (region != (XMC_EBU_REGION_t *)NULL));
+ 113:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   
+ 114:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /* Read configuration of the region*/
+ 115:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   ebu->BUS[region->read_config.ebu_region_no].RDCON = region->read_config.ebu_bus_read_config.raw0;
+ 127              	 .loc 1 115 0
+ 128 0000 0B68     	 ldr r3,[r1]
+ 129 0002 4A68     	 ldr r2,[r1,#4]
+ 130 0004 00EB0313 	 add r3,r0,r3,lsl#4
+ 131 0008 9A62     	 str r2,[r3,#40]
+ 116:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+ 117:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /* Read parameters of the region*/
+ 118:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   ebu->BUS[region->read_config.ebu_region_no].RDAPR = region->read_config.ebu_bus_read_config.raw1;
+ 132              	 .loc 1 118 0
+ 133 000a 0B68     	 ldr r3,[r1]
+ 134 000c 8A68     	 ldr r2,[r1,#8]
+ 135 000e 00EB0313 	 add r3,r0,r3,lsl#4
+ 136 0012 DA62     	 str r2,[r3,#44]
+ 119:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+ 120:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /* Write configuration of the region*/
+ 121:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   ebu->BUS[region->write_config.ebu_region_no].WRCON = region->write_config.ebu_bus_write_config.ra
+ 137              	 .loc 1 121 0
+ 138 0014 CB68     	 ldr r3,[r1,#12]
+ 139 0016 0A69     	 ldr r2,[r1,#16]
+ 140 0018 0333     	 adds r3,r3,#3
+ 141 001a 1B01     	 lsls r3,r3,#4
+ 142 001c C250     	 str r2,[r0,r3]
+ 122:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c **** 
+ 123:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   /* Write parameters of the region*/
+ 124:C:/Files/Projects/Git/XMCLib/src\xmc_ebu.c ****   ebu->BUS[region->write_config.ebu_region_no].WRAPR = region->write_config.ebu_bus_write_config.ra
+ 143              	 .loc 1 124 0
+ 144 001e CB68     	 ldr r3,[r1,#12]
+ 145 0020 4A69     	 ldr r2,[r1,#20]
+ 146 0022 0333     	 adds r3,r3,#3
+ 147 0024 00EB0310 	 add r0,r0,r3,lsl#4
+ 148              	.LVL7:
+ 149 0028 4260     	 str r2,[r0,#4]
+ 150 002a 7047     	 bx lr
+ 151              	 .cfi_endproc
+ 152              	.LFE195:
+ 154              	 .text
+ 155              	.Letext0:
+ 156              	 .file 3 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 157              	 .file 4 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 158              	 .file 5 "C:/Files/Projects/Git/XMCLib/inc/xmc4_scu.h"
+ 159              	 .file 6 "C:/Files/Projects/Git/CMSIS/Include/cmsis_gcc.h"
+ 160              	 .file 7 "C:/Files/Projects/Git/CMSIS/Include/core_cm4.h"
+ 161              	 .file 8 "C:/Files/Projects/Git/CMSIS/Infineon/XMC4500_series/Include/system_XMC4500.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc_ebu.c
+    {standard input}:20     .text.XMC_EBU_Init:00000000 $t
+    {standard input}:25     .text.XMC_EBU_Init:00000000 XMC_EBU_Init
+    {standard input}:82     .text.XMC_EBU_Init:00000038 $d
+    {standard input}:87     .text.XMC_EBU_ConfigureSdram:00000000 $t
+    {standard input}:92     .text.XMC_EBU_ConfigureSdram:00000000 XMC_EBU_ConfigureSdram
+    {standard input}:114    .text.XMC_EBU_ConfigureRegion:00000000 $t
+    {standard input}:119    .text.XMC_EBU_ConfigureRegion:00000000 XMC_EBU_ConfigureRegion
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+XMC_SCU_RESET_DeassertPeripheralReset

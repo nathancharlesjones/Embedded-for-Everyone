@@ -1,0 +1,105 @@
+[Version]
+Signature="$Windows NT$"
+Class=USBDevice
+ClassGuid={88BAE032-5A81-49f0-BC3D-A4FF138216D6}
+Provider=%ManufacturerName%
+DriverVer=08/23/2013,1.0.1
+CatalogFile.NTx86 = %CatalogFilename%x86.cat
+CatalogFile.NTamd64 = %CatalogFilename%x64.cat
+
+; Vendor und Device List
+[Manufacturer]
+%ManufacturerName% = IFX_USB,NTx86,NTamd64
+
+[IFX_USB.NTx86]
+%DeviceName%=USB_Install, USB\VID_058b&PID_0050
+
+[IFX_USB.NTamd64]
+%DeviceName%=USB_Install, USB\VID_058b&PID_0050
+
+; WinUSB Device Class
+[ClassInstall32]
+AddReg = ClassInstall_AddReg
+
+[ClassInstall_AddReg]
+HKR,,,,%ClassName%
+HKR,,NoInstallClass,,1
+HKR,,IconPath,%REG_MULTI_SZ%,"%systemroot%\system32\setupapi.dll,-20"
+HKR,,LowerLogoVersion,,5.2
+
+; WinUSB Install
+[USB_Install]
+Include = winusb.inf
+Needs   = WINUSB.NT
+
+; Install Service
+[USB_Install.Services]
+Include = winusb.inf
+Needs   = WINUSB.NT.Services
+AddService=WinUSB,0x00000002,WinUSB_ServiceInstall
+
+; WinUSB Service
+[WinUSB_ServiceInstall]
+DisplayName     = %WinUSB_SvcDesc%
+ServiceType     = 1
+StartType       = 3
+ErrorControl    = 1
+ServiceBinary   = %12%\WinUSB.sys
+
+; WinUSB Co-Installer
+[USB_Install.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+[WinUSB_Install]
+KmdfLibraryVersion=1.9
+
+[USB_Install.NTx86.CoInstallers]
+AddReg=CoInstallers_AddReg
+CopyFiles=CoInstallers_CopyFiles
+
+[USB_Install.NTamd64.CoInstallers]
+AddReg=CoInstallers_AddReg
+CopyFiles=CoInstallers_CopyFiles
+
+[CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"WinUSBCoInstaller2.dll","WdfCoInstaller01009.dll,WdfCoInstaller"
+
+[CoInstallers_CopyFiles]
+WinUSBCoInstaller2.dll
+WdfCoInstaller01009.dll
+
+; WinUSB HW
+[USB_Install.HW]
+AddReg=Dev_AddReg
+
+[Dev_AddReg]
+HKR,,DeviceInterfaceGUIDs,0x10000,%DeviceGUID%
+
+; Files and Directories
+[DestinationDirs]
+CoInstallers_CopyFiles=11
+
+[SourceDisksNames.x86]
+1 = %DiskName%,,,\x86
+
+[SourceDisksNames.amd64]
+2 = %DiskName%,,,\x64
+
+[SourceDisksFiles.x86]
+WinUSBCoInstaller2.dll=1
+WdfCoInstaller01009.dll=1
+
+[SourceDisksFiles.amd64]
+WinUSBCoInstaller2.dll=2
+WdfCoInstaller01009.dll=2
+
+; Strings
+[Strings]
+ManufacturerName="Infineon Technologies"
+ClassName="Universal Serial Bus devices"
+DeviceName="Infineon WinUSB Device"
+DeviceGUID="{40EEA1EB-EF67-4D6A-AB0B-8BB588598704}"
+REG_MULTI_SZ = 0x00010000
+DiskName="WinUSB Device Install Disk"
+WinUSB_SvcDesc="WinUSBService"
+CatalogFilename="WinUSB"

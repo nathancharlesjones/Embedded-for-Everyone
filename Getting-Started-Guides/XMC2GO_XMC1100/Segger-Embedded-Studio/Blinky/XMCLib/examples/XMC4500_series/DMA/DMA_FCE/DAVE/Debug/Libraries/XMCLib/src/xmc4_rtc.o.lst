@@ -1,0 +1,1842 @@
+   1              	 .syntax unified
+   2              	 .cpu cortex-m4
+   3              	 .eabi_attribute 27,3
+   4              	 .fpu fpv4-sp-d16
+   5              	 .eabi_attribute 20,1
+   6              	 .eabi_attribute 21,1
+   7              	 .eabi_attribute 23,3
+   8              	 .eabi_attribute 24,1
+   9              	 .eabi_attribute 25,1
+  10              	 .eabi_attribute 26,1
+  11              	 .eabi_attribute 30,1
+  12              	 .eabi_attribute 34,1
+  13              	 .eabi_attribute 18,4
+  14              	 .thumb
+  15              	 .file "xmc4_rtc.c"
+  16              	 .text
+  17              	.Ltext0:
+  18              	 .cfi_sections .debug_frame
+  19              	 .section .text.XMC_RTC_Enable,"ax",%progbits
+  20              	 .align 2
+  21              	 .global XMC_RTC_Enable
+  22              	 .thumb
+  23              	 .thumb_func
+  25              	XMC_RTC_Enable:
+  26              	.LFB177:
+  27              	 .file 1 "C:/Files/Projects/Git/XMCLib/src/xmc4_rtc.c"
+   1:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /**
+   2:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * @file xmc4_rtc.c
+   3:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * @date 2017-08-04
+   4:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *
+   5:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * @cond
+   6:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  **************************************************************************************************
+   7:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *
+   9:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * All rights reserved.                        
+  11:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *                                             
+  12:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * following conditions are met:   
+  14:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *                                                                              
+  15:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * disclaimer.                        
+  17:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * 
+  18:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * 
+  21:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * products derived from this software without specific prior written permission.                  
+  23:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *                                                                              
+  24:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *                                                                              
+  32:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  **************************************************************************************************
+  35:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *
+  36:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Change History
+  37:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * --------------
+  38:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *
+  39:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * 2015-02-20:
+  40:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *     - Initial <br>
+  41:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *      
+  42:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * 2016-03-09:
+  43:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *     - Optimize write only registers
+  44:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *      
+  45:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * 2017-08-04:
+  46:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *     - Changed XMC_RTC_EnableHibernationWakeUp() and XMC_RTC_DisableHibernationWakeUpcheck() 
+  47:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *       Check SCU_MIRRSTS to ensure that no transfer over serial interface is pending to the RTC_C
+  48:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *
+  49:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * @endcond 
+  50:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *
+  51:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  */
+  52:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+  53:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /**
+  54:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * @brief RTC driver for XMC microcontroller family.
+  55:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  *
+  56:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  */
+  57:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+  58:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /**************************************************************************************************
+  59:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * HEADER FILES
+  60:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  **************************************************************************************************
+  61:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** #include <xmc_rtc.h>
+  62:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+  63:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** #if UC_FAMILY == XMC4
+  64:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** #include <xmc_scu.h>
+  65:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+  66:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /**************************************************************************************************
+  67:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * API IMPLEMENTATION
+  68:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  **************************************************************************************************
+  69:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+  70:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /*
+  71:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Enables RTC peripheral for programming its registers
+  72:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  */
+  73:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** void XMC_RTC_Enable(void)
+  74:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** {
+  28              	 .loc 1 74 0
+  29              	 .cfi_startproc
+  30              	 
+  31              	 
+  32 0000 08B5     	 push {r3,lr}
+  33              	.LCFI0:
+  34              	 .cfi_def_cfa_offset 8
+  35              	 .cfi_offset 3,-8
+  36              	 .cfi_offset 14,-4
+  75:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   XMC_SCU_HIB_EnableHibernateDomain();
+  37              	 .loc 1 75 0
+  38 0002 FFF7FEFF 	 bl XMC_SCU_HIB_EnableHibernateDomain
+  39              	.LVL0:
+  40 0006 08BD     	 pop {r3,pc}
+  41              	 .cfi_endproc
+  42              	.LFE177:
+  44              	 .section .text.XMC_RTC_Disable,"ax",%progbits
+  45              	 .align 2
+  46              	 .global XMC_RTC_Disable
+  47              	 .thumb
+  48              	 .thumb_func
+  50              	XMC_RTC_Disable:
+  51              	.LFB178:
+  76:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** }
+  77:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+  78:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /*
+  79:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Disables RTC peripheral for programming its registers
+  80:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  */
+  81:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** void XMC_RTC_Disable(void)
+  82:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** {
+  52              	 .loc 1 82 0
+  53              	 .cfi_startproc
+  54              	 
+  55              	 
+  56              	 
+  57 0000 7047     	 bx lr
+  58              	 .cfi_endproc
+  59              	.LFE178:
+  61 0002 00BF     	 .section .text.XMC_RTC_IsEnabled,"ax",%progbits
+  62              	 .align 2
+  63              	 .global XMC_RTC_IsEnabled
+  64              	 .thumb
+  65              	 .thumb_func
+  67              	XMC_RTC_IsEnabled:
+  68              	.LFB179:
+  83:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   /*
+  84:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****    * Empty because disabling the hibernate
+  85:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****    * domain is not done intentionally.
+  86:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****    */
+  87:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** }
+  88:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+  89:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /*
+  90:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Checks RTC peripheral is enabled for programming to its registers
+  91:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  */
+  92:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** bool XMC_RTC_IsEnabled(void)
+  93:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** {
+  69              	 .loc 1 93 0
+  70              	 .cfi_startproc
+  71              	 
+  72              	 
+  73              	 .loc 1 93 0
+  74 0000 08B5     	 push {r3,lr}
+  75              	.LCFI1:
+  76              	 .cfi_def_cfa_offset 8
+  77              	 .cfi_offset 3,-8
+  78              	 .cfi_offset 14,-4
+  94:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   return XMC_SCU_HIB_IsHibernateDomainEnabled();
+  79              	 .loc 1 94 0
+  80 0002 FFF7FEFF 	 bl XMC_SCU_HIB_IsHibernateDomainEnabled
+  81              	.LVL1:
+  95:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** }
+  82              	 .loc 1 95 0
+  83 0006 08BD     	 pop {r3,pc}
+  84              	 .cfi_endproc
+  85              	.LFE179:
+  87              	 .section .text.XMC_RTC_Init,"ax",%progbits
+  88              	 .align 2
+  89              	 .global XMC_RTC_Init
+  90              	 .thumb
+  91              	 .thumb_func
+  93              	XMC_RTC_Init:
+  94              	.LFB180:
+  96:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+  97:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /*
+  98:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Initialize the RTC peripheral
+  99:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  */
+ 100:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** XMC_RTC_STATUS_t XMC_RTC_Init(const XMC_RTC_CONFIG_t *const config)
+ 101:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** {
+  95              	 .loc 1 101 0
+  96              	 .cfi_startproc
+  97              	 
+  98              	 
+  99              	.LVL2:
+ 100              	.LBB22:
+ 101              	.LBB23:
+ 102              	 .file 2 "C:/Files/Projects/Git/XMCLib/inc/xmc_rtc.h"
+   1:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+   2:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @file xmc_rtc.h
+   3:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @date 2016-05-19
+   4:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+   5:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @cond
+   6:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+   7:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+   9:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * All rights reserved.                        
+  11:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                                             
+  12:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * following conditions are met:   
+  14:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                                                                              
+  15:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * disclaimer.                        
+  17:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * 
+  18:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * 
+  21:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * products derived from this software without specific prior written permission.                  
+  23:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                                                                              
+  24:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                                                                              
+  32:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+  35:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+  36:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Change History
+  37:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * --------------
+  38:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+  39:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * 2015-02-20:
+  40:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *     - Initial
+  41:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *      
+  42:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * 2015-05-20:
+  43:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *     - Documentation updates <br>
+  44:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *     - In xmc1_rtc file XMC_RTC_Init function
+  45:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *       is modified by adding the RTC running condition check
+  46:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *   
+  47:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * 2015-06-20:
+  48:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *     - Removed version macros and declaration of GetDriverVersion API
+  49:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+  50:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * 2016-05-19:
+  51:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *     - Added XMC_RTC_SetTimeStdFormat() and XMC_RTC_SetAlarmStdFormat()
+  52:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+  53:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @endcond 
+  54:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+  55:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+  56:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+  57:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #ifndef XMC_RTC_H
+  58:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #define XMC_RTC_H
+  59:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+  60:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**************************************************************************************************
+  61:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * HEADER FILES
+  62:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+  63:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+  64:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #include <xmc_common.h>
+  65:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #include <time.h>
+  66:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+  67:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+  68:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+  69:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @addtogroup XMClib XMC Peripheral Library
+  70:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @{
+  71:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+  72:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+  73:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+  74:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @addtogroup RTC
+  75:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @brief RTC driver for XMC microcontroller family.
+  76:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+  77:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Real-time clock (RTC) is a clock that keeps track of the current time. Precise
+  78:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * real time keeping is with a 32.768 KHz external crystal clock or a 32.768 KHz
+  79:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * high precision internal clock. It provides a periodic time based interrupt and
+  80:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * a programmable alarm interrupt on time match. It also supports wakeup from
+  81:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * hibernate.
+  82:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+  83:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The RTC low level driver provides functions to configure and initialize the RTC
+  84:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * hardware peripheral. 
+  85:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * 
+  86:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @{
+  87:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+  88:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+  89:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**************************************************************************************************
+  90:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * MACROS
+  91:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+  92:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+  93:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**************************************************************************************************
+  94:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * ENUMS
+  95:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+  96:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+  97:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+  98:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *  Status return values for RTC low level driver
+  99:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+ 100:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** typedef enum XMC_RTC_STATUS
+ 101:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** {
+ 102:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_STATUS_OK    = 0U, /**< Operation successful */
+ 103:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_STATUS_ERROR = 1U, /**< Operation unsuccessful */
+ 104:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_STATUS_BUSY  = 2U  /**< Busy with a previous request */
+ 105:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_STATUS_t;
+ 106:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 107:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 108:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Events which enables interrupt request generation
+ 109:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+ 110:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** typedef enum XMC_RTC_EVENT
+ 111:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** {
+ 112:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_SECONDS = RTC_MSKSR_MPSE_Msk, /**< Mask value to enable an event on period
+ 113:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_MINUTES = RTC_MSKSR_MPMI_Msk, /**< Mask value to enable an event on period
+ 114:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_HOURS   = RTC_MSKSR_MPHO_Msk, /**< Mask value to enable an event on period
+ 115:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_DAYS    = RTC_MSKSR_MPDA_Msk, /**< Mask value to enable an event on period
+ 116:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_MONTHS  = RTC_MSKSR_MPMO_Msk, /**< Mask value to enable an event on period
+ 117:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_PERIODIC_YEARS   = RTC_MSKSR_MPYE_Msk, /**< Mask value to enable an event on period
+ 118:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_EVENT_ALARM            = RTC_MSKSR_MAI_Msk   /**< Mask value to enable an event on period
+ 119:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_EVENT_t;
+ 120:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 121:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 122:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *  Months used to program the date  
+ 123:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+ 124:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** typedef enum XMC_RTC_MONTH
+ 125:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** {
+ 126:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_JANUARY   = 0U, 
+ 127:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_FEBRUARY  = 1U,     
+ 128:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_MARCH     = 2U,         
+ 129:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_APRIL     = 3U,       
+ 130:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_MAY       = 4U,         
+ 131:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_JUNE      = 5U,         
+ 132:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_JULY      = 6U,           
+ 133:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_AUGUST    = 7U,         
+ 134:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_SEPTEMBER = 8U,    
+ 135:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_OCTOBER   = 9U,      
+ 136:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_NOVEMBER  = 10U,     
+ 137:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_MONTH_DECEMBER  = 11U     
+ 138:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_MONTH_t;
+ 139:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 140:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 141:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *  Week days used program the date 
+ 142:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+ 143:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** typedef enum XMC_RTC_WEEKDAY
+ 144:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** {
+ 145:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_SUNDAY    = 0U, 
+ 146:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_MONDAY    = 1U,      
+ 147:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_TUESDAY   = 2U,      
+ 148:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_WEDNESDAY = 3U,    
+ 149:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_THURSDAY  = 4U,     
+ 150:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_FRIDAY    = 5U,       
+ 151:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_WEEKDAY_SATURDAY  = 6U      
+ 152:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_WEEKDAY_t;
+ 153:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 154:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**************************************************************************************************
+ 155:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * DATA STRUCTURES
+ 156:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+ 157:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /*Anonymous structure/union guard start*/
+ 158:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #if defined(__CC_ARM)
+ 159:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   #pragma push
+ 160:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   #pragma anon_unions
+ 161:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #elif defined(__TASKING__)
+ 162:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   #pragma warning 586
+ 163:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #endif
+ 164:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 165:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 166:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 167:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Alarm time values of RTC  <br>
+ 168:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 169:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The structure presents a convenient way to set/obtain the 
+ 170:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * alarm time values for seconds, minutes, hours, days, month and year of RTC. 
+ 171:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The XMC_RTC_SetAlarm() and XMC_RTC_GetAlarm() can be
+ 172:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * used to populate the structure with the alarm time value of
+ 173:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * RTC 
+ 174:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */ 
+ 175:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** typedef struct XMC_RTC_ALARM
+ 176:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** {
+ 177:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   union
+ 178:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   {
+ 179:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  uint32_t raw0;
+ 180:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  struct
+ 181:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  {
+ 182:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t seconds  : 6; /**< Alarm seconds compare value (0-59: Above this causes this bitfield
+ 183:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 2; 
+ 184:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t minutes  : 6; /**< Alarm minutes compare value (0-59: Above this causes this bitfield
+ 185:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 2;
+ 186:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t hours    : 5; /**< Alarm hours compare value   (0-23: Above this causes this bitfield
+ 187:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 3;
+ 188:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t days     : 5; /**< Alarm days compare value (0-Actual days of month: Above this cause
+ 189:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 3;
+ 190:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  };
+ 191:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   };
+ 192:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 193:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   union
+ 194:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   {
+ 195:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****     uint32_t raw1;
+ 196:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  struct
+ 197:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  {
+ 198:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 8;
+ 199:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t month    : 4; /**< Alarm month compare value (0-11: Above this causes this bitfield t
+ 200:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 4;
+ 201:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t year     : 16; /**< Alarm year compare value */ 
+ 202:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  };
+ 203:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   };
+ 204:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_ALARM_t;
+ 205:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 206:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 207:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Time values of RTC  <br>
+ 208:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 209:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The structure presents a convenient way to set/obtain the 
+ 210:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * time values for seconds, minutes, hours, days, month and year of RTC. 
+ 211:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The XMC_RTC_SetTime() and XMC_RTC_GetTime() can be
+ 212:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * used to populate the structure with the time value of
+ 213:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * RTC 
+ 214:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */ 
+ 215:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** typedef struct XMC_RTC_TIME
+ 216:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** {
+ 217:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   union
+ 218:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   {
+ 219:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****     uint32_t raw0;
+ 220:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  struct
+ 221:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  {
+ 222:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t seconds  : 6; /**< Seconds time value (0-59: Above this causes this bitfield to be se
+ 223:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 2; 
+ 224:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t minutes  : 6; /**< Minutes time value (0-59: Above this causes this bitfield to be se
+ 225:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 2;
+ 226:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t hours    : 5; /**< Hours time value   (0-23: Above this causes this bitfield to be se
+ 227:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 3;
+ 228:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t days     : 5; /**< Days time value (0-Actual days of month: Above this causes this bi
+ 229:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t          : 3;
+ 230:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  };
+ 231:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   };
+ 232:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 233:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   union
+ 234:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   {
+ 235:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****     uint32_t raw1;
+ 236:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  struct
+ 237:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	  {
+ 238:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t daysofweek  : 3; /**< Days of week time value (0-6: Above this causes this bitfield t
+ 239:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t             : 5;
+ 240:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t month       : 4; /**< Month time value       (0-11: Above this causes this bitfield t
+ 241:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t             : 4;
+ 242:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	    uint32_t year        : 16; /**< Year time value */
+ 243:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 	 };
+ 244:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   };
+ 245:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_TIME_t;
+ 246:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /*Anonymous structure/union guard end*/
+ 247:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #if defined(__CC_ARM)
+ 248:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   #pragma pop
+ 249:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #elif defined(__TASKING__)
+ 250:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   #pragma warning restore
+ 251:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #endif
+ 252:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 253:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 254:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * RTC initialization with time, alarm and clock divider(prescaler) configurations <br>
+ 255:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 256:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The structure presents a convenient way to set/obtain the time and alarm configurations  
+ 257:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * for RTC. The XMC_RTC_Init() can be used to populate the structure with the time and alarm
+ 258:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * values of RTC.
+ 259:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */  
+ 260:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** typedef struct XMC_RTC_CONFIG
+ 261:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** {
+ 262:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_TIME_t    time;
+ 263:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   XMC_RTC_ALARM_t   alarm;
+ 264:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   uint16_t          prescaler;
+ 265:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** } XMC_RTC_CONFIG_t;
+ 266:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 267:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /*******************************************************************************
+ 268:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * EXTENSIONS
+ 269:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *******************************************************************************/
+ 270:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 271:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #if UC_FAMILY == XMC1
+ 272:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #include "xmc1_rtc.h"
+ 273:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #endif
+ 274:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 275:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #if UC_FAMILY == XMC4
+ 276:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #include "xmc4_rtc.h"
+ 277:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #endif
+ 278:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 279:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /*******************************************************************************
+ 280:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * API PROTOTYPES
+ 281:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  **************************************************************************************************
+ 282:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 283:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #ifdef __cplusplus
+ 284:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** extern "C" {
+ 285:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** #endif
+ 286:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 287:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 288:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param config Constant pointer to a constant ::XMC_RTC_CONFIG_t structure containing the
+ 289:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *               time, alarm time and clock divider(prescaler) configuration. 
+ 290:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return XMC_RTC_STATUS_t Always returns XMC_RTC_STATUS_OK (It contains only register assignment 
+ 291:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 292:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 293:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Initialize the RTC peripheral <br>
+ 294:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 295:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par \if XMC4
+ 296:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function enables the hibernate domain for accessing RTC peripheral registers, configures 
+ 297:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * internal clock divider, time and alarm values by writing to the CTR.DIV, TIM0, TIM1, ATIM0 and
+ 298:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * ATIM1 registers.
+ 299:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 300:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 301:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \if XMC1
+ 302:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function ungates the peripheral clock for RTC, configures 
+ 303:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * internal clock divider, time and alarm values by writing to the CTR.DIV, TIM0, TIM1, ATIM0 and
+ 304:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * ATIM1 registers.
+ 305:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 306:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+ 307:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** XMC_RTC_STATUS_t XMC_RTC_Init(const XMC_RTC_CONFIG_t *const config);
+ 308:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 309:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /** 
+ 310:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 311:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 312:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description</b><br>
+ 313:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Enables RTC peripheral for programming its registers <br>
+ 314:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 315:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par \if XMC4
+ 316:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Enables the hibernate domain for accessing RTC peripheral registers.
+ 317:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 318:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 319:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \if XMC1
+ 320:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Ungates the peripheral clock.
+ 321:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 322:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 323:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 324:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Disable(), XMC_SCU_RESET_DeassertPeripheralReset()
+ 325:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */ 
+ 326:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_Enable(void);
+ 327:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 328:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /** 
+ 329:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 330:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 331:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description</b><br>
+ 332:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Disables RTC peripheral for programming its registers <br>
+ 333:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 334:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par \if XMC4
+ 335:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Empty function (Hibernate domain is not disabled).
+ 336:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 337:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 338:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \if XMC1
+ 339:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Gates the peripheral clock.
+ 340:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 341:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 342:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 343:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Enable(), XMC_SCU_RESET_AssertPeripheralReset()
+ 344:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */ 
+ 345:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_Disable(void);
+ 346:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 347:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /** 
+ 348:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 349:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 350:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description</b><br>
+ 351:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Checks RTC peripheral is enabled for programming its registers <br>
+ 352:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 353:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par \if XMC4
+ 354:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Checks the hibernate domain is enabled or not.
+ 355:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 356:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 357:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \if XMC1
+ 358:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Checks peripheral clock is ungated or not.
+ 359:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \endif
+ 360:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 361:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 362:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Enable(), XMC_RTC_Disable(), XMC_SCU_RESET_DeassertPeripheralReset(),
+ 363:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_SCU_RESET_AssertPeripheralReset()
+ 364:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */ 
+ 365:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** bool XMC_RTC_IsEnabled(void);
+ 366:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  
+ 367:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 368:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 369:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 370:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description</b><br>
+ 371:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Enables RTC peripheral to start counting time <br>
+ 372:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 373:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 374:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function starts the RTC for counting time by setting 
+ 375:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * CTR.ENB bit. Before starting the RTC, it should not be in
+ 376:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * running mode and also hibernate domain should be enabled.
+ 377:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 378:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 379:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Enable(), XMC_RTC_Stop(), XMC_SCU_RESET_DeassertPeripheralReset()
+ 380:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */  
+ 381:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_Start(void);
+ 382:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 383:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 384:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 385:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 386:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description</b><br>
+ 387:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Disables RTC peripheral to start counting time <br>
+ 388:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 389:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 390:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function stops the RTC for counting time by resetting 
+ 391:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * CTR.ENB. Before stopping the RTC, hibernate domain should be enabled.
+ 392:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 393:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 394:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Enable(), XMC_RTC_Start(), XMC_SCU_RESET_AssertPeripheralReset()
+ 395:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */  
+ 396:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_Stop(void);
+ 397:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   
+ 398:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 399:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param prescaler Prescaler value to be set                 
+ 400:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 401:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 402:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 403:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Sets the RTC module prescaler value <br>
+ 404:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 405:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 406:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function sets the CTR.DIV bitfield to configure the prescalar value. 
+ 407:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The default value for the prescalar with the 32.768kHz crystal (or the internal clock) 
+ 408:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * is 7FFFH for a time interval of 1 sec. Before setting the prescaler value RTC should be
+ 409:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * in stop mode and hibernate domain should be enabled.
+ 410:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 411:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 412:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Stop(), XMC_RTC_Enable(), XMC_RTC_GetPrescaler()
+ 413:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */   
+ 414:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_SetPrescaler(uint16_t prescaler);
+ 415:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 416:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 417:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 418:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 419:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 420:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC module prescaler value <br>
+ 421:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 422:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 423:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function reads the CTR.DIV bitfield to get the prescalar value. The default value 
+ 424:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * for the prescalar with the 32.768kHz crystal (or the internal clock) is 7FFFH for a 
+ 425:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * time interval of 1 sec.
+ 426:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 427:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 428:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetPrescaler()
+ 429:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */   
+ 430:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** __STATIC_INLINE uint32_t XMC_RTC_GetPrescaler(void)
+ 431:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** {
+ 432:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   return (uint32_t)(((uint32_t)RTC->CTR & (uint32_t)RTC_CTR_DIV_Msk) >> (uint32_t)RTC_CTR_DIV_Pos);
+ 433:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** }
+ 434:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 435:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 436:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param timeval Contstant pointer to a constant ::XMC_RTC_TIME_t structure containing the
+ 437:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                time parameters seconds, minutes, hours, days, daysofweek, month and year.     
+ 438:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 439:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 440:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 441:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Sets the RTC module time values <br>
+ 442:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 443:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 444:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function sets the TIM0, TIM1 registers with time values.
+ 445:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The values can only be written when RTC is disabled.
+ 446:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_TIME_t for the valid range of time value parameters. <br>
+ 447:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 448:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 449:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_GetTime(), XMC_RTC_Stop() 
+ 450:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */    
+ 451:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_SetTime(const XMC_RTC_TIME_t *const timeval);
+ 452:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 453:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 454:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param time Pointer to a constant ::XMC_RTC_TIME_t structure containing the time parameters
+ 455:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *             seconds, minutes, hours, days, daysofweek, month and year. 
+ 456:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 457:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 458:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 459:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC module time value <br>
+ 460:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 461:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 462:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function gets the time values from TIM0, TIM1 registers. 
+ 463:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_TIME_t for the valid range of time value parameters. <br>
+ 464:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 465:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 466:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetTime()
+ 467:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */    
+ 468:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_GetTime(XMC_RTC_TIME_t *const time);
+ 469:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 470:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 471:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param stdtime Pointer to a ::tm structure containing the time parameters seconds,
+ 472:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                minutes, hours, days, daysofweek, month, year(since 1900) and days in a   
+ 473:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                year in standard format.           
+ 474:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 475:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 476:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 477:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Sets the RTC module time value in standard format <br>
+ 478:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 479:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 480:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function sets the time values from TIM0, TIM1 registers. 
+ 481:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 482:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 483:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetTime(), XMC_RTC_GetTime()
+ 484:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */     
+ 485:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_SetTimeStdFormat(const struct tm *const stdtime);
+ 486:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 487:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 488:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param stdtime Pointer to a constant ::tm structure containing the time parameters seconds,
+ 489:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                minutes, hours, days, daysofweek, month, year(since 1900) and days in a   
+ 490:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                year in standard format.           
+ 491:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 492:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 493:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 494:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC module time value in standard format <br>
+ 495:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 496:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 497:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function gets the time values from TIM0, TIM1 registers. 
+ 498:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_TIME_t for the valid range of time value parameters. <br>
+ 499:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * For days the valid range is (1 - Actual days of month), year (since 1900) and 
+ 500:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * daysinyear (0 -365).
+ 501:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 502:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 503:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetTime(), XMC_RTC_GetTime()
+ 504:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */     
+ 505:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_GetTimeStdFormat(struct tm *const stdtime);
+ 506:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 507:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 508:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param alarm Constant pointer to a constant ::XMC_RTC_ALARM_t structure containing the
+ 509:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                alarm time parameters alarm seconds, alarm minutes, alarm hours, alarm days, 
+ 510:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                alarm daysofweek, alarm month and alarm year.           
+ 511:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 512:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 513:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 514:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Sets the RTC module alarm time value <br>
+ 515:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 516:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 517:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function sets the ATIM0, ATIM1 registers with alarm time values. 
+ 518:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_ALARM_t for the valid range of alarm time value parameters. <br>
+ 519:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 520:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 521:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_GetAlarm()
+ 522:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */     
+ 523:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_SetAlarm(const XMC_RTC_ALARM_t *const alarm);
+ 524:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 525:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 526:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param alarm Pointer to a constant ::XMC_RTC_ALARM_t structure containing the
+ 527:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *             time parameters alarm seconds, alarm minutes, alarm hours, alarm days, 
+ 528:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *             alarm daysofweek, alarm month and alarm year.           
+ 529:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 530:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 531:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 532:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC module alarm time value <br>
+ 533:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 534:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 535:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function gets the alarm time values from ATIM0, ATIM1 registers. 
+ 536:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_ALARM_t for the valid range of alarm time value parameters. <br>
+ 537:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 538:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 539:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetAlarm()
+ 540:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */    
+ 541:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_GetAlarm(XMC_RTC_ALARM_t *const alarm);
+ 542:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 543:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 544:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param stdtime Pointer to a ::tm structure containing the time parameters alarm seconds,
+ 545:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                alarm minutes, alarm hours, alarm days, alarm daysofweek, alarm month,  
+ 546:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                alarm year(since 1900) and alarm days in a year in standard format.           
+ 547:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 548:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 549:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 550:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Sets the RTC module alarm time value in standard format <br>
+ 551:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 552:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 553:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function sets the alarm time values from ATIM0, ATIM1 registers. 
+ 554:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 555:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 556:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetAlarm(), XMC_RTC_GetAlarm()
+ 557:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */     
+ 558:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_SetAlarmStdFormat(const struct tm *const stdtime);
+ 559:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 560:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 561:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param stdtime Pointer to a constant ::tm structure containing the time parameters alarm seconds
+ 562:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                alarm minutes, alarm hours, alarm days, alarm daysofweek, alarm month,  
+ 563:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *                alarm year(since 1900) and alarm days in a year in standard format.           
+ 564:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 565:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 566:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 567:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC module alarm time value in standard format <br>
+ 568:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 569:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 570:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function gets the alarm time values from ATIM0, ATIM1 registers. 
+ 571:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * See the structure ::XMC_RTC_ALARM_t for the valid range of alarm time value parameters. <br>
+ 572:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * For days the valid range is (1 - Actual days of month), year (since 1900) and 
+ 573:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * daysinyear (0 -365).
+ 574:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 575:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 576:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_SetAlarm(), XMC_RTC_GetAlarm()
+ 577:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */     
+ 578:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_GetAlarmStdFormat(struct tm *const stdtime);
+ 579:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 580:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 581:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param event A valid RTC event (::XMC_RTC_EVENT_t) or a valid combination of
+ 582:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *              logically OR'd events
+ 583:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 584:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 585:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 586:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Enable RTC periodic and alarm event(s) <br>
+ 587:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 588:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 589:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function sets the bitfields of MSKSR register to enable interrupt generation 
+ 590:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * for requested RTC event(s). 
+ 591:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Setting the masking value for the event(s) containing in the ::XMC_RTC_EVENT_t leads 
+ 592:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * to a generation of the interrupt.
+ 593:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 594:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 595:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_DisableEvent()
+ 596:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+ 597:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_EnableEvent(const uint32_t event);
+ 598:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 599:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 600:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param event A valid RTC event (::XMC_RTC_EVENT_t) or a valid combination of
+ 601:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *              logically OR'd events
+ 602:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 603:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 604:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 605:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Disable RTC periodic and alarm event(s) <br>
+ 606:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 607:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 608:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function resets the bitfields of MSKSR register to disable interrupt generation 
+ 609:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * for requested RTC event(s). 
+ 610:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Resetting the masking value for the the event(s) containing in the ::XMC_RTC_EVENT_t blocks 
+ 611:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * the generation of the interrupt.
+ 612:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * 
+ 613:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 614:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_EnableEvent()
+ 615:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+ 616:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_DisableEvent(const uint32_t event);
+ 617:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 618:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 619:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @param event A valid RTC event (::XMC_RTC_EVENT_t) or a valid combination of
+ 620:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *              logically OR'd events
+ 621:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 622:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 623:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 624:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Clears periodic and alarm event(s) status <br>
+ 625:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 626:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 627:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function sets the bitfields of CLRSR register to clear status bits in RAWSTAT and STSSR regi
+ 628:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Setting the value for the the RTC event(s) containing in the ::XMC_RTC_EVENT_t clears the 
+ 629:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * corresponding status bits in RAWSTAT and STSSR registers.
+ 630:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * 
+ 631:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 632:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_GetEventStatus()
+ 633:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */ 
+ 634:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** void XMC_RTC_ClearEvent(const uint32_t event);
+ 635:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 636:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 637:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return None
+ 638:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 639:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 640:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Gets the RTC periodic and alarm event(s) status <br>
+ 641:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 642:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 643:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function reads the bitfields of STSSR register 
+ 644:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * to get the status of RTC events. 
+ 645:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Reading the value of the register STSSR gives the status of the event(s) containing in the ::XMC
+ 646:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * 
+ 647:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 648:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_ClearEvent()
+ 649:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */
+ 650:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** uint32_t XMC_RTC_GetEventStatus(void);
+ 651:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** 
+ 652:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** /**
+ 653:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * @return bool true if RTC is running
+ 654:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *              false if RTC is not running
+ 655:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 656:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Description: </b><br>
+ 657:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * Checks the running status of the RTC <br>
+ 658:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 659:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par
+ 660:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * The function reads the bitfield ENB of CTR register 
+ 661:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * to get the running status of RTC. 
+ 662:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  *
+ 663:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * \par<b>Related APIs:</b><br>
+ 664:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  * XMC_RTC_Start(), XMC_RTC_Stop()
+ 665:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****  */ 
+ 666:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** __STATIC_INLINE bool XMC_RTC_IsRunning(void)
+ 667:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h **** {
+ 668:C:/Files/Projects/Git/XMCLib/inc\xmc_rtc.h ****   return (bool)(RTC->CTR & RTC_CTR_ENB_Msk);
+ 103              	 .loc 2 668 0
+ 104 0000 1B4B     	 ldr r3,.L19
+ 105 0002 5B68     	 ldr r3,[r3,#4]
+ 106              	.LBE23:
+ 107              	.LBE22:
+ 102:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   if (XMC_RTC_IsRunning() == false)
+ 108              	 .loc 1 102 0
+ 109 0004 13F0010F 	 tst r3,#1
+ 110 0008 2FD1     	 bne .L18
+ 101:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   if (XMC_RTC_IsRunning() == false)
+ 111              	 .loc 1 101 0
+ 112 000a 10B5     	 push {r4,lr}
+ 113              	.LCFI2:
+ 114              	 .cfi_def_cfa_offset 8
+ 115              	 .cfi_offset 4,-8
+ 116              	 .cfi_offset 14,-4
+ 117 000c 0446     	 mov r4,r0
+ 103:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   {
+ 104:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     if (XMC_SCU_HIB_IsHibernateDomainEnabled() == false)
+ 118              	 .loc 1 104 0
+ 119 000e FFF7FEFF 	 bl XMC_SCU_HIB_IsHibernateDomainEnabled
+ 120              	.LVL3:
+ 121 0012 08B9     	 cbnz r0,.L8
+ 105:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     {
+ 106:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****       XMC_SCU_HIB_EnableHibernateDomain();
+ 122              	 .loc 1 106 0
+ 123 0014 FFF7FEFF 	 bl XMC_SCU_HIB_EnableHibernateDomain
+ 124              	.LVL4:
+ 125              	.L8:
+ 107:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     }
+ 108:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     
+ 109:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     XMC_RTC_SetPrescaler(config->prescaler);
+ 126              	 .loc 1 109 0
+ 127 0018 208A     	 ldrh r0,[r4,#16]
+ 128 001a FFF7FEFF 	 bl XMC_RTC_SetPrescaler
+ 129              	.LVL5:
+ 130              	.LBB24:
+ 131              	.LBB25:
+ 132              	 .file 3 "C:/Files/Projects/Git/XMCLib/inc/xmc_scu.h"
+   1:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+   2:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @file xmc_scu.h
+   3:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @date 2016-03-09
+   4:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+   5:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @cond
+   6:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+   7:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+   9:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * All rights reserved.                        
+  11:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                                             
+  12:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * following conditions are met:   
+  14:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                                                                              
+  15:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * disclaimer.                        
+  17:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * 
+  18:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * 
+  21:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * products derived from this software without specific prior written permission.                  
+  23:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                                                                              
+  24:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                                                                              
+  32:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+  35:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+  36:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Change History
+  37:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * --------------
+  38:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+  39:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * 2015-02-20:
+  40:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *     - Initial <br>
+  41:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+  42:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * 2015-05-20:
+  43:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *     - Documentation improved <br>
+  44:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *     - XMC_ASSERT() hanging issues have fixed for XMC4 devices. <br>
+  45:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+  46:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * 2015-06-20:
+  47:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *     - Removed version macros and declaration of GetDriverVersion API
+  48:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *     - Removed STATIC_INLINE property for the below APIs and declared as void
+  49:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *       XMC_SCU_INTERRUPT_EnableEvent, XMC_SCU_INTERRUPT_DisableEvent,
+  50:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *       XMC_SCU_INTERRUPT_TriggerEvent, XMC_SCU_INTERUPT_GetEventStatus,
+  51:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *       XMC_SCU_INTERUPT_ClearEventStatus
+  52:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+  53:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * 2015-11-30:
+  54:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *     - Documentation improved <br>
+  55:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *      
+  56:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * 2016-03-09:
+  57:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *     - Optimization of write only registers
+  58:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *      
+  59:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @endcond 
+  60:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+  61:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+  62:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #ifndef XMC_SCU_H
+  63:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #define XMC_SCU_H
+  64:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  
+  65:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+  66:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * HEADER FILES
+  67:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+  68:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #include <xmc_common.h>
+  69:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+  70:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+  71:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @addtogroup XMClib XMC Peripheral Library
+  72:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @{
+  73:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+  74:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  
+  75:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+  76:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @addtogroup SCU
+  77:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @brief System Control Unit(SCU) driver for XMC microcontroller family.
+  78:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+  79:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * System control unit is the SoC power, reset and a clock manager with additional responsibility o
+  80:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * providing system stability protection and other auxiliary functions.<br>
+  81:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * SCU provides the following features,
+  82:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Power control
+  83:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \if XMC4 
+  84:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Hibernate control 
+  85:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \endif
+  86:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Reset control
+  87:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Clock control
+  88:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Miscellaneous control(boot mode, system interrupts etc.)<br><br>
+  89:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+  90:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The SCU driver is divided in to clock control logic, reset control logic, system interrupt contr
+  91:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \if XMC4
+  92:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * , hibernate control logic, trap control logic, parity control logic 
+  93:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \endif
+  94:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * and miscellaneous control logic.<br>
+  95:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+  96:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Clock driver features:
+  97:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows clock configuration using the structure XMC_SCU_CLOCK_CONFIG_t and API XMC_SCU_CLOCK_I
+  98:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \if XMC4
+  99:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Provides structure XMC_SCU_CLOCK_SYSPLL_CONFIG_t for configuring the system PLL
+ 100:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows selection of clock source for system PLL, XMC_SCU_CLOCK_GetSystemPllClockSource()
+ 101:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Provides APIs for configuring different module clock frequencies XMC_SCU_CLOCK_SetWdtClockDiv
+ 102:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows selection of clock source for external output, XMC_SCU_CLOCK_SetExternalOutputClockSou
+ 103:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Provides APIs for enabling external high power oscillator and ultra low power oscillator, XMC
+ 104:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Provides APIs for getting various clock frequencies XMC_SCU_CLOCK_GetPeripheralClockFrequency
+ 105:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  XMC_SCU_CLOCK_GetCpuClockFrequency(), XMC_SCU_CLOCK_GetSystemClockFrequency()<br>
+ 106:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \endif
+ 107:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \if XMC1
+ 108:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows selection of peripheral clock frequency, XMC_SCU_CLOCK_SetFastPeripheralClockSource()
+ 109:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Provides API to get the peripheral clock frequency, XMC_SCU_CLOCK_GetFastPeripheralClockFrequ
+ 110:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \endif
+ 111:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 112:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Reset driver features:
+ 113:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \if XMC4
+ 114:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows to handle peripheral reset XMC_SCU_RESET_AssertPeripheralReset(), XMC_SCU_RESET_Deasse
+ 115:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows configuration of NMI generation for selected events, XMC_SCU_INTERRUPT_EnableNmiReques
+ 116:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \endif
+ 117:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \if XMC1
+ 118:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows to trigger device reset XMC_SCU_RESET_AssertMasterReset()
+ 119:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows to configure multiple sources for reset, XMC_SCU_RESET_EnableResetRequest()
+ 120:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \endif <br>
+ 121:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 122:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Interrupt driver features:
+ 123:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Provides APIs for enabling/ disabling interrupt event generation XMC_SCU_INTERRUPT_EnableEven
+ 124:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  XMC_SCU_INTERRUPT_DisableEvent()
+ 125:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Provides API for registering callback function for events XMC_SCU_INTERRUPT_SetEventHandler()
+ 126:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 127:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \if XMC4
+ 128:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Hibernate driver features:
+ 129:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows configuration of hibernate domain XMC_SCU_HIB_EnableHibernateDomain(), XMC_SCU_HIB_Dis
+ 130:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows selection of standby clock source, XMC_SCU_HIB_SetStandbyClockSource()
+ 131:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows selection of RTC clock source, XMC_SCU_HIB_SetRtcClockSource()
+ 132:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Provides API for enabling slow internal clock used for backup clock, XMC_SCU_HIB_EnableIntern
+ 133:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 134:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Trap driver features:
+ 135:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows handling of trap XMC_SCU_TRAP_Enable(), XMC_SCU_TRAP_GetStatus(), XMC_SCU_TRAP_Trigger
+ 136:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 137:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Parity driver features:
+ 138:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Parity error generated by on-chip RAM can be monitored, XMC_SCU_PARITY_Enable(), XMC_SCU_PARI
+ 139:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows configuration of trap generation on detection of parity error, XMC_SCU_PARITY_EnableTr
+ 140:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 141:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Power driver features:
+ 142:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows to power the USB module XMC_SCU_POWER_EnableUsb(), XMC_SCU_POWER_DisableUsb()
+ 143:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \endif
+ 144:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 145:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Miscellaneous features:
+ 146:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows to trigger multiple capture compare unit(CCU) channels to be started together XMC_SCU_
+ 147:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \if XMC4
+ 148:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Enables configuration of out of range comparator (ORC) XMC_SCU_EnableOutOfRangeComparator()
+ 149:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Enables configuration of die temperature sensor XMC_SCU_EnableTemperatureSensor(), XMC_SCU_Ca
+ 150:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Enables configuration of device boot mode XMC_SCU_SetBootMode()<br>
+ 151:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \endif
+ 152:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \if XMC1
+ 153:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Enables configuration of die temperature sensor XMC_SCU_StartTempMeasurement(), XMC_SCU_SetRa
+ 154:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows configuring supply monitor unit using the structure XMC_SCU_SUPPLYMONITOR_t and API XM
+ 155:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * -# Allows handling of protected bits XMC_SCU_LockProtectedBits(), XMC_SCU_UnlockProtectedBits()<
+ 156:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  \endif
+ 157:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @{
+ 158:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 159:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  
+ 160:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+ 161:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * MACROS
+ 162:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+ 163:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 164:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+ 165:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * ENUMS
+ 166:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+ 167:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 168:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *  Defines the status of SCU API execution, used to verify the SCU related API calls.
+ 169:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 170:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** typedef enum XMC_SCU_STATUS 
+ 171:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** {
+ 172:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****   XMC_SCU_STATUS_OK   = 0UL, /**< SCU related operation successfully completed.*/
+ 173:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****   XMC_SCU_STATUS_ERROR,      /**< SCU related operation failed. When API cannot fulfill request, th
+ 174:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****   XMC_SCU_STATUS_BUSY,       /**< Cannot execute the SCU related operation request because
+ 175:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****                                   another operation is in progress. \a XMC_SCU_STATUS_BUSY is retur
+ 176:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****                                   processing another request. */
+ 177:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** } XMC_SCU_STATUS_t;
+ 178:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 179:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 180:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+ 181:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * DATA TYPES
+ 182:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+ 183:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 184:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 185:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Function pointer type used for registering callback functions on SCU event occurrence.
+ 186:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 187:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** typedef void (*XMC_SCU_INTERRUPT_EVENT_HANDLER_t)(void);
+ 188:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 189:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+ 190:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * DEVICE EXTENSIONS
+ 191:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+ 192:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 193:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #if (UC_FAMILY == XMC1)
+ 194:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #include <xmc1_scu.h>
+ 195:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #elif (UC_FAMILY == XMC4)
+ 196:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #include <xmc4_scu.h>
+ 197:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #else
+ 198:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #error "Unspecified chipset"
+ 199:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #endif
+ 200:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 201:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**************************************************************************************************
+ 202:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * API Prototypes
+ 203:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  **************************************************************************************************
+ 204:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 205:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #ifdef __cplusplus
+ 206:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** extern "C" {
+ 207:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #endif
+ 208:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 209:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 210:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 211:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 212:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @param trigger    CCU slices to be triggered synchronously via software. The value is a bitmask 
+ 213:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    in the register CCUCON. <br>
+ 214:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    \b Range: Use type @ref XMC_SCU_CCU_TRIGGER_t for bitmask of individual CCU s
+ 215:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    combined using \a OR operation.
+ 216:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 217:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return None
+ 218:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 219:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 220:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Generates active edge(low to high) trigger for multiple CCU units at the same time.\n\n
+ 221:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Before executing this API, all the required CCU timers should configure external start.
+ 222:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The edge of the start signal should be selected as active edge.
+ 223:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The input signal for the CCU slice should be selected as SCU input.
+ 224:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The above mentioned configurations can be made using the CCU LLD API XMC_CCU4_SLICE_StartConfig(
+ 225:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * CCU timer slice should be started using XMC_CCU4_SLICE_StartTimer() before triggering 
+ 226:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * the timer using this API.<BR>
+ 227:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 228:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_CCU4_SLICE_StartConfig(), XMC_CCU4_SLICE_SetInput(), XMC_SCU_SetCcuTriggerLow()\n\n\n
+ 229:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 230:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE void XMC_SCU_SetCcuTriggerHigh(const uint32_t trigger)
+ 231:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** {
+ 232:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****   SCU_GENERAL->CCUCON |= (uint32_t)trigger;
+ 233:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** }
+ 234:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 235:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 236:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 237:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @param trigger  CCU slices to be triggered synchronously via software. The value is a bitmask of
+ 238:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    in the register CCUCON. <br>
+ 239:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    \b Range: Use type @ref XMC_SCU_CCU_TRIGGER_t for bitmask of individual CCU s
+ 240:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    combined using \a OR operation.
+ 241:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 242:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return None
+ 243:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 244:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 245:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Generates passive edge(high to low) trigger for multiple CCU units at the same time.\n\n
+ 246:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Before executing this API, all the required CCU timers should configure external start.
+ 247:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The edge of the start signal should be selected as passive edge.
+ 248:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The input signal for the CCU slice should be selected as SCU input.
+ 249:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The above mentioned configurations can be made using the CCU LLD API XMC_CCU4_SLICE_StartConfig(
+ 250:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * CCU timer slice should be started using XMC_CCU4_SLICE_StartTimer() before triggering 
+ 251:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * the timer using this API.<BR>
+ 252:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 253:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_CCU4_SLICE_StartConfig(), XMC_CCU4_SLICE_SetInput(), XMC_SCU_SetCcuTriggerHigh()\n\n\n
+ 254:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 255:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE void XMC_SCU_SetCcuTriggerLow(const uint32_t trigger)
+ 256:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** {
+ 257:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****   SCU_GENERAL->CCUCON &= (uint32_t)~trigger;
+ 258:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** }
+ 259:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 260:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 261:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 262:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @param config Pointer to structure holding the clock prescaler values and divider values for 
+ 263:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                configuring clock generators and clock tree.\n
+ 264:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                \b Range: Configure the members of structure @ref XMC_SCU_CLOCK_CONFIG_t for vari
+ 265:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                parameters of clock setup.
+ 266:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 267:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return None
+ 268:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 269:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 270:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Initializes clock generators and clock tree.\n\n
+ 271:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \if XMC1
+ 272:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Peripheral clock and system clock are configured based on the input configuration \a config.
+ 273:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The system clock frequency is tuned by configuring the FDIV and IDIV values of CLKCR register.
+ 274:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The values of FDIV and IDIV can be provided as part of input configuration.
+ 275:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The PCLK divider determines the ratio of peripheral clock to the system clock. 
+ 276:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The source of RTC clock is set based on the input configuration. 
+ 277:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \a SystemCoreClock variable will be updated with the value of
+ 278:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * system clock frequency. Access to protected bit fields are handled internally.
+ 279:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \endif
+ 280:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \if XMC4
+ 281:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Enables the high precision oscillator(fOHP) input and configures the system and peripheral clock
+ 282:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Based on the system clock source selected in \a config, either fPLL or fOFI will be chosen as sy
+ 283:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Based on PLL mode(normal or prescaler mode) used, PLL ramps up in steps to achieve target freque
+ 284:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The clock dividers for CPU, CCU and peripheral clocks will be set based on the input configurati
+ 285:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The \a SystemCoreClock variable is set with the value of system clock frequency.
+ 286:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \endif
+ 287:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 288:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_GetPeripheralClockFrequency(), XMC_SCU_CLOCK_GetCpuClockFrequency() \n\n\n
+ 289:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 290:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** void XMC_SCU_CLOCK_Init(const XMC_SCU_CLOCK_CONFIG_t *const config);
+ 291:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 292:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 293:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 294:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @param event  Bit mask of the event to enable. \b Range: Use type @ref XMC_SCU_INTERRUPT_EVENT_t
+ 295:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                for providing the input value. Multiple events can be combined using the \a OR op
+ 296:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 297:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return None
+ 298:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 299:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 300:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Enables the generation of interrupt for the input events.\n\n
+ 301:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The events are enabled by setting the respective bit fields in the SRMSK register. \n
+ 302:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Note: User should separately enable the NVIC node responsible for handling the SCU interrupt.
+ 303:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The interrupt will be generated when the respective event occurs.
+ 304:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 305:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * NVIC_EnableIRQ(), XMC_SCU_INTERRUPT_DisableEvent()\n\n\n
+ 306:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 307:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** void XMC_SCU_INTERRUPT_EnableEvent(const XMC_SCU_INTERRUPT_EVENT_t event);
+ 308:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 309:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 310:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 311:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 312:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @param event  Bit mask of the event to disable. \b Range: Use type @ref XMC_SCU_INTERRUPT_EVENT_
+ 313:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                for providing the input value. Multiple events can be combined using the \a OR op
+ 314:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 315:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return None
+ 316:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 317:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 318:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Disables generation of interrupt on occurrence of the input event.\n\n
+ 319:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The events are disabled by resetting the respective bit fields in the SRMSK register. \n
+ 320:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 321:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * NVIC_DisableIRQ(), XMC_SCU_INTERRUPT_EnableEvent()\n\n\n
+ 322:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 323:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** void XMC_SCU_INTERRUPT_DisableEvent(const XMC_SCU_INTERRUPT_EVENT_t event);
+ 324:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 325:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 326:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 327:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @param event Bit mask of the event to be triggered. \b Range: Use type @ref XMC_SCU_INTERRUPT_EV
+ 328:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                for providing the input value. Multiple events can be combined using the \a OR op
+ 329:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 330:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return None
+ 331:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 332:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 333:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Triggers the event as if the hardware raised it.\n\n
+ 334:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Event will be triggered by setting the respective bitfield in the SRSET register.\n
+ 335:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Note: User should enable the NVIC node that handles the respective event for interrupt generatio
+ 336:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 337:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * NVIC_EnableIRQ(), XMC_SCU_INTERUPT_GetEventStatus(), XMC_SCU_INTERRUPT_ClearEventStatus() \n\n\n
+ 338:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 339:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** void XMC_SCU_INTERRUPT_TriggerEvent(const XMC_SCU_INTERRUPT_EVENT_t  event);
+ 340:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 341:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 342:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return uint32_t  Status of the SCU events.
+ 343:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 344:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 345:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Provides the status of all SCU events.\n\n
+ 346:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The status is read from the SRRAW register. To check the status of a particular 
+ 347:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * event, the returned value should be masked with the bit mask of the event. The bitmask
+ 348:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * of events can be obtained using the type @ref XMC_SCU_INTERRUPT_EVENT_t. Multiple events'
+ 349:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * status can be checked by combining the bit masks using \a OR operation. 
+ 350:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * After detecting the event, the event status should be cleared using software to detect the event
+ 351:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 352:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_INTERRUPT_ClearEventStatus(), XMC_SCU_INTERRUPT_TriggerEvent(), XMC_SCU_INTERRUPT_SetEve
+ 353:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 354:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** XMC_SCU_INTERRUPT_EVENT_t XMC_SCU_INTERUPT_GetEventStatus(void);
+ 355:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 356:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 357:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 358:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @param event  Bit mask of the events to clear. \b Range: Use type @ref XMC_SCU_INTERRUPT_EVENT_t
+ 359:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                for providing the input value. Multiple events can be combined using the \a OR op
+ 360:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 361:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return None
+ 362:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 363:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 364:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Clears the event status bit in SRRAW register.\n\n
+ 365:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The events are cleared by writing value 1 to their bit positions in the SRCLR register.
+ 366:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The API can be used when polling method is used. After detecting the event, the event status
+ 367:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * should be cleared using software to detect the event again.
+ 368:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 369:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 370:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_INTERUPT_GetEventStatus(), XMC_SCU_INTERRUPT_TriggerEvent() \n\n\n
+ 371:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 372:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** void XMC_SCU_INTERRUPT_ClearEventStatus(const XMC_SCU_INTERRUPT_EVENT_t event);
+ 373:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 374:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 375:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 376:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return uint32_t  Status representing the reason for device reset.
+ 377:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 378:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 379:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Provides the value representing the reason for device reset.\n\n
+ 380:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The return value is an encoded word, which can indicate multiple reasons for the last reset. Eac
+ 381:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * returned word is representative of a last reset cause. The returned value should be appropriatel
+ 382:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * the cause of reset. 
+ 383:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The cause of the last reset gets automatically stored in 
+ 384:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * the \a SCU_RSTSTAT register. The reset status shall be reset after each
+ 385:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * startup in order to ensure consistent source indication after the next reset.
+ 386:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \b Range: The type @ref XMC_SCU_RESET_REASON_t can be used to get the bit masks of the reset cau
+ 387:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 388:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 389:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_RESET_ClearDeviceResetReason() \n\n\n
+ 390:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 391:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE uint32_t XMC_SCU_RESET_GetDeviceResetReason(void)
+ 392:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** {
+ 393:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****   return ((SCU_RESET->RSTSTAT) & SCU_RESET_RSTSTAT_RSTSTAT_Msk);
+ 394:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** }
+ 395:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 396:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return None 
+ 397:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 398:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 399:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Clears the reset reason bits in the reset status register. \n\n
+ 400:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Clearing of the reset status information in the \a SCU_RSTSTAT register via register bit \a RSTC
+ 401:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * recommended to ensure a clear indication of the cause of next reset.
+ 402:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 403:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 404:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_RESET_GetDeviceResetReason() \n\n\n
+ 405:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 406:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE void XMC_SCU_RESET_ClearDeviceResetReason(void)
+ 407:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** {
+ 408:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****   /* Clear RSTSTAT.RSTSTAT bitfield */
+ 409:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****   SCU_RESET->RSTCLR = (uint32_t)SCU_RESET_RSTCLR_RSCLR_Msk;
+ 410:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** }
+ 411:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  
+ 412:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 413:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return uint32_t  Value of CPU clock frequency.
+ 414:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 415:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 416:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Provides the vlaue of CPU clock frequency.\n\n
+ 417:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The value is stored in a global variable \a \b SystemCoreClock.
+ 418:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * It is updated when the clock configuration is done using the SCU LLD APIs.
+ 419:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The value represents the frequency of clock used for CPU operation.
+ 420:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \b Range: Value is of type uint32_t, and gives the value of frequency in Hertz.
+ 421:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 422:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 423:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_GetPeripheralClockFrequency(), XMC_SCU_CLOCK_GatePeripheralClock() \n\n\n
+ 424:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 425:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE uint32_t XMC_SCU_CLOCK_GetCpuClockFrequency(void)
+ 426:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** {
+ 427:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****   return SystemCoreClock;
+ 428:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** }
+ 429:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 430:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 431:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return uint32_t  Value of peripheral clock frequency in Hertz.
+ 432:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 433:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 434:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Provides the vlaue of clock frequency at which the peripherals are working.\n\n
+ 435:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The value is derived from the CPU frequency. \b Range: Value is of type uint32_t. It is represen
+ 436:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 437:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_GetCpuClockFrequency(),XMC_SCU_CLOCK_GatePeripheralClock() \n\n\n
+ 438:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 439:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** uint32_t XMC_SCU_CLOCK_GetPeripheralClockFrequency(void); 
+ 440:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 441:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #if(UC_SERIES != XMC45)
+ 442:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  
+ 443:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 444:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 445:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @param  peripheral The peripheral for which the clock has to be gated. \b Range: Use type @ref X
+ 446:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    to identify the peripheral clock to be gated.
+ 447:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 448:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return None
+ 449:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 450:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 451:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Blocks the supply of clock to the selected peripheral.\n\n
+ 452:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Clock gating helps in reducing the power consumption. User can selectively gate the clocks of un
+ 453:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \if XMC1
+ 454:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * fPCLK is the source of clock to various peripherals. Some peripherals support clock gate. Such a
+ 455:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * the clock supply for the selected peripheral.
+ 456:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Software can request for individual gating of such peripheral clocks by enabling the \a SCU_CGAT
+ 457:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * register bit field. Every bit in \a SCU_CGATSET0 register is protected by the bit protection sch
+ 458:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * bit fields are handled internally.
+ 459:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \endif
+ 460:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \if XMC4
+ 461:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * fPERI is the source of clock to various peripherals. Some peripherals support clock gate. Such a
+ 462:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * the clock supply for the selected peripheral.
+ 463:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Software can request for individual gating of such peripheral clocks by enabling one of the \a
+ 464:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * SCU_CGATSET0, \a SCU_CGATSET1 or \a SCU_CGATSET2 register bitfields.
+ 465:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * 
+ 466:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \endif
+ 467:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Note: Clock gating shall not be activated unless the module is in reset state. So use \a
+ 468:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_IsPeripheralClockGated() API before enabling the gating of any peripheral.
+ 469:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 470:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_IsPeripheralClockGated(), XMC_SCU_CLOCK_UngatePeripheralClock() \n\n\n
+ 471:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 472:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** void XMC_SCU_CLOCK_GatePeripheralClock(const XMC_SCU_PERIPHERAL_CLOCK_t peripheral);
+ 473:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  
+ 474:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 475:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 476:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @param  peripheral  The peripheral for which the clock has to be ungated. \b Range: Use type @re
+ 477:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    to identify the peripheral.
+ 478:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 479:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return None
+ 480:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 481:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 482:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Enables the supply of clock to the selected peripheral.\n\n
+ 483:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * By default when the device powers on, the peripheral clock will be gated for the 
+ 484:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * peripherals that support clock gating.
+ 485:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The peripheral clock should be enabled before using it for any functionality.
+ 486:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \if XMC1
+ 487:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * fPCLK is the source of clock to various peripherals. Some peripherals support clock gate.
+ 488:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Software can request for individual ungating of such peripheral clocks by setting respective bit
+ 489:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * in the \a SCU_CGATCLR0 register.
+ 490:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \endif
+ 491:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \if XMC4
+ 492:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * fPERI is the source of clock to various peripherals. Some peripherals support clock gate.
+ 493:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Software can request for individual ungating of such peripheral clocks by setting the respective
+ 494:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * SCU_CGATCLR0, \a SCU_CGATCLR1 or \a SCU_CGATCLR2 registers.
+ 495:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \endif
+ 496:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 497:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 498:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_IsPeripheralClockGated(), XMC_SCU_CLOCK_GatePeripheralClock() \n\n\n
+ 499:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 500:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** void XMC_SCU_CLOCK_UngatePeripheralClock(const XMC_SCU_PERIPHERAL_CLOCK_t peripheral);
+ 501:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 502:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 503:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 504:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @param  peripheral  The peripheral for which the check for clock gating has to be done. 
+ 505:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    \b Range: Use type @ref XMC_SCU_PERIPHERAL_CLOCK_t to identify the peripheral
+ 506:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 507:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return bool Status of the peripheral clock gating. \b Range: true if the peripheral clock is ga
+ 508:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *              false if the peripheral clock ungated(gate de-asserted).
+ 509:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 510:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 511:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Gives the status of peripheral clock gating.\n\n
+ 512:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \if XMC1
+ 513:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Checks the status of peripheral clock gating using the register CGATSTAT0.
+ 514:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \endif
+ 515:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \if XMC4
+ 516:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Checks the status of peripheral clock gating using one of CGATSTAT0, CGATSTAT1 or CGATSTAT2 regi
+ 517:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \endif
+ 518:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * It is recommended to use this API before
+ 519:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * enabling the gating of any peripherals through \a XMC_SCU_CLOCK_GatePeripheralClock() API.
+ 520:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 521:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Related APIs:</b><BR>
+ 522:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * XMC_SCU_CLOCK_UngatePeripheralClock(), XMC_SCU_CLOCK_GatePeripheralClock() \n\n\n
+ 523:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 524:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** bool XMC_SCU_CLOCK_IsPeripheralClockGated(const XMC_SCU_PERIPHERAL_CLOCK_t peripheral);
+ 525:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** #endif
+ 526:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 527:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** 
+ 528:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** /**
+ 529:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * @return  uint32_t  Status of the register mirror update.\n
+ 530:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    \b Range: Use the bit mask of the SCU_GENERAL_MIRRSTS register for the mirror
+ 531:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    interest. e.g.: SCU_GENERAL_MIRRSTS_RTC_CTR_Msk. Multiple update events can b
+ 532:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *                    using \a OR operation.
+ 533:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  *
+ 534:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * \par<b>Description</b><br>
+ 535:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Provides the status of hibernate domain register update, when the respective mirror registers ar
+ 536:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * The hibernate domain is connected to the core domain via SPI serial communication. MIRRSTS is a 
+ 537:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * representing the communication of changed value of a mirror register to its corresponding regist
+ 538:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * hibernate domain. The bit fields of the register indicate
+ 539:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * that a corresponding register of the hibernate domain is ready to accept a write or that the com
+ 540:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * is busy with executing the previous operation.\n
+ 541:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  * Note: There is no hibernate domain in XMC1x devices. This register is retained for legacy purpos
+ 542:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****  */
+ 543:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** __STATIC_INLINE uint32_t XMC_SCU_GetMirrorStatus(void)
+ 544:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h **** {
+ 545:C:/Files/Projects/Git/XMCLib/inc\xmc_scu.h ****   return(SCU_GENERAL->MIRRSTS);
+ 133              	 .loc 3 545 0
+ 134 001e 154A     	 ldr r2,.L19+4
+ 135              	.L9:
+ 136              	 .loc 3 545 0 is_stmt 0 discriminator 1
+ 137 0020 D2F8C430 	 ldr r3,[r2,#196]
+ 138              	.LBE25:
+ 139              	.LBE24:
+ 110:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     
+ 111:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_TIM0_Msk) != 0U)
+ 140              	 .loc 1 111 0 is_stmt 1 discriminator 1
+ 141 0024 13F4006F 	 tst r3,#2048
+ 142 0028 FAD1     	 bne .L9
+ 112:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     {
+ 113:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****       /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+ 114:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     }
+ 115:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     RTC->TIM0 = config->time.raw0;
+ 143              	 .loc 1 115 0
+ 144 002a 2268     	 ldr r2,[r4]
+ 145 002c 104B     	 ldr r3,.L19
+ 146 002e 1A62     	 str r2,[r3,#32]
+ 147              	.LBB26:
+ 148              	.LBB27:
+ 149              	 .loc 3 545 0
+ 150 0030 104A     	 ldr r2,.L19+4
+ 151              	.L10:
+ 152              	 .loc 3 545 0 is_stmt 0 discriminator 1
+ 153 0032 D2F8C430 	 ldr r3,[r2,#196]
+ 154              	.LBE27:
+ 155              	.LBE26:
+ 116:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     
+ 117:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_TIM1_Msk) != 0U)
+ 156              	 .loc 1 117 0 is_stmt 1 discriminator 1
+ 157 0036 13F4805F 	 tst r3,#4096
+ 158 003a FAD1     	 bne .L10
+ 118:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     {
+ 119:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****       /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+ 120:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     }
+ 121:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     RTC->TIM1 = config->time.raw1;
+ 159              	 .loc 1 121 0
+ 160 003c 6268     	 ldr r2,[r4,#4]
+ 161 003e 0C4B     	 ldr r3,.L19
+ 162 0040 5A62     	 str r2,[r3,#36]
+ 163              	.LBB28:
+ 164              	.LBB29:
+ 165              	 .loc 3 545 0
+ 166 0042 0C4A     	 ldr r2,.L19+4
+ 167              	.L11:
+ 168              	 .loc 3 545 0 is_stmt 0 discriminator 1
+ 169 0044 D2F8C430 	 ldr r3,[r2,#196]
+ 170              	.LBE29:
+ 171              	.LBE28:
+ 122:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     
+ 123:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_ATIM0_Msk) != 0U)
+ 172              	 .loc 1 123 0 is_stmt 1 discriminator 1
+ 173 0048 13F4007F 	 tst r3,#512
+ 174 004c FAD1     	 bne .L11
+ 124:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     {
+ 125:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****       /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+ 126:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     }
+ 127:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     RTC->ATIM0 = config->alarm.raw0;
+ 175              	 .loc 1 127 0
+ 176 004e A268     	 ldr r2,[r4,#8]
+ 177 0050 074B     	 ldr r3,.L19
+ 178 0052 9A61     	 str r2,[r3,#24]
+ 179              	.LBB30:
+ 180              	.LBB31:
+ 181              	 .loc 3 545 0
+ 182 0054 074A     	 ldr r2,.L19+4
+ 183              	.L12:
+ 184              	 .loc 3 545 0 is_stmt 0 discriminator 1
+ 185 0056 D2F8C430 	 ldr r3,[r2,#196]
+ 186              	.LBE31:
+ 187              	.LBE30:
+ 128:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     
+ 129:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_ATIM1_Msk) != 0U)
+ 188              	 .loc 1 129 0 is_stmt 1 discriminator 1
+ 189 005a 13F4806F 	 tst r3,#1024
+ 190 005e FAD1     	 bne .L12
+ 130:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     {
+ 131:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****       /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+ 132:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     }
+ 133:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     RTC->ATIM1 = config->alarm.raw1;    
+ 191              	 .loc 1 133 0
+ 192 0060 E268     	 ldr r2,[r4,#12]
+ 193 0062 034B     	 ldr r3,.L19
+ 194 0064 DA61     	 str r2,[r3,#28]
+ 134:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   }  
+ 135:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   return XMC_RTC_STATUS_OK;
+ 136:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** }
+ 195              	 .loc 1 136 0
+ 196 0066 0020     	 movs r0,#0
+ 197 0068 10BD     	 pop {r4,pc}
+ 198              	.LVL6:
+ 199              	.L18:
+ 200              	.LCFI3:
+ 201              	 .cfi_def_cfa_offset 0
+ 202              	 .cfi_restore 4
+ 203              	 .cfi_restore 14
+ 204 006a 0020     	 movs r0,#0
+ 205              	.LVL7:
+ 206 006c 7047     	 bx lr
+ 207              	.L20:
+ 208 006e 00BF     	 .align 2
+ 209              	.L19:
+ 210 0070 004A0050 	 .word 1342196224
+ 211 0074 00400050 	 .word 1342193664
+ 212              	 .cfi_endproc
+ 213              	.LFE180:
+ 215              	 .section .text.XMC_RTC_EnableEvent,"ax",%progbits
+ 216              	 .align 2
+ 217              	 .global XMC_RTC_EnableEvent
+ 218              	 .thumb
+ 219              	 .thumb_func
+ 221              	XMC_RTC_EnableEvent:
+ 222              	.LFB181:
+ 137:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+ 138:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /*
+ 139:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Enable RTC periodic and alarm event(s)
+ 140:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  */ 
+ 141:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** void XMC_RTC_EnableEvent(const uint32_t event)
+ 142:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** {
+ 223              	 .loc 1 142 0
+ 224              	 .cfi_startproc
+ 225              	 
+ 226              	 
+ 227              	 
+ 228              	.LVL8:
+ 229              	.LBB32:
+ 230              	.LBB33:
+ 231              	 .loc 3 545 0
+ 232 0000 054A     	 ldr r2,.L24
+ 233              	.L22:
+ 234              	 .loc 3 545 0 is_stmt 0 discriminator 1
+ 235 0002 D2F8C430 	 ldr r3,[r2,#196]
+ 236              	.LBE33:
+ 237              	.LBE32:
+ 143:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_MSKSR_Msk) != 0U)
+ 238              	 .loc 1 143 0 is_stmt 1 discriminator 1
+ 239 0006 13F4804F 	 tst r3,#16384
+ 240 000a FAD1     	 bne .L22
+ 144:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   {
+ 145:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+ 146:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   }
+ 147:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   RTC->MSKSR |= event;
+ 241              	 .loc 1 147 0
+ 242 000c 034A     	 ldr r2,.L24+4
+ 243 000e 1369     	 ldr r3,[r2,#16]
+ 244 0010 1843     	 orrs r0,r0,r3
+ 245              	.LVL9:
+ 246 0012 1061     	 str r0,[r2,#16]
+ 247 0014 7047     	 bx lr
+ 248              	.L25:
+ 249 0016 00BF     	 .align 2
+ 250              	.L24:
+ 251 0018 00400050 	 .word 1342193664
+ 252 001c 004A0050 	 .word 1342196224
+ 253              	 .cfi_endproc
+ 254              	.LFE181:
+ 256              	 .section .text.XMC_RTC_DisableEvent,"ax",%progbits
+ 257              	 .align 2
+ 258              	 .global XMC_RTC_DisableEvent
+ 259              	 .thumb
+ 260              	 .thumb_func
+ 262              	XMC_RTC_DisableEvent:
+ 263              	.LFB182:
+ 148:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** }
+ 149:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+ 150:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /*
+ 151:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Disable RTC periodic and alarm event(s)
+ 152:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  */ 
+ 153:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** void XMC_RTC_DisableEvent(const uint32_t event)
+ 154:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** {
+ 264              	 .loc 1 154 0
+ 265              	 .cfi_startproc
+ 266              	 
+ 267              	 
+ 268              	 
+ 269              	.LVL10:
+ 270              	.LBB34:
+ 271              	.LBB35:
+ 272              	 .loc 3 545 0
+ 273 0000 054A     	 ldr r2,.L29
+ 274              	.L27:
+ 275              	 .loc 3 545 0 is_stmt 0 discriminator 1
+ 276 0002 D2F8C430 	 ldr r3,[r2,#196]
+ 277              	.LBE35:
+ 278              	.LBE34:
+ 155:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_MSKSR_Msk) != 0U)
+ 279              	 .loc 1 155 0 is_stmt 1 discriminator 1
+ 280 0006 13F4804F 	 tst r3,#16384
+ 281 000a FAD1     	 bne .L27
+ 156:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   {
+ 157:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+ 158:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   }
+ 159:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   RTC->MSKSR &= ~event;
+ 282              	 .loc 1 159 0
+ 283 000c 034A     	 ldr r2,.L29+4
+ 284 000e 1369     	 ldr r3,[r2,#16]
+ 285 0010 23EA0000 	 bic r0,r3,r0
+ 286              	.LVL11:
+ 287 0014 1061     	 str r0,[r2,#16]
+ 288 0016 7047     	 bx lr
+ 289              	.L30:
+ 290              	 .align 2
+ 291              	.L29:
+ 292 0018 00400050 	 .word 1342193664
+ 293 001c 004A0050 	 .word 1342196224
+ 294              	 .cfi_endproc
+ 295              	.LFE182:
+ 297              	 .section .text.XMC_RTC_ClearEvent,"ax",%progbits
+ 298              	 .align 2
+ 299              	 .global XMC_RTC_ClearEvent
+ 300              	 .thumb
+ 301              	 .thumb_func
+ 303              	XMC_RTC_ClearEvent:
+ 304              	.LFB183:
+ 160:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** }
+ 161:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+ 162:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** /*
+ 163:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  * Clear RTC periodic and alarm event(s)
+ 164:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****  */ 
+ 165:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** void XMC_RTC_ClearEvent(const uint32_t event)
+ 166:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** {
+ 305              	 .loc 1 166 0
+ 306              	 .cfi_startproc
+ 307              	 
+ 308              	 
+ 309              	 
+ 310              	.LVL12:
+ 311              	.LBB36:
+ 312              	.LBB37:
+ 313              	 .loc 3 545 0
+ 314 0000 044A     	 ldr r2,.L34
+ 315              	.L32:
+ 316              	 .loc 3 545 0 is_stmt 0 discriminator 1
+ 317 0002 D2F8C430 	 ldr r3,[r2,#196]
+ 318              	.LBE37:
+ 319              	.LBE36:
+ 167:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_CLRSR_Msk) != 0U)
+ 320              	 .loc 1 167 0 is_stmt 1 discriminator 1
+ 321 0006 13F4004F 	 tst r3,#32768
+ 322 000a FAD1     	 bne .L32
+ 168:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   {
+ 169:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+ 170:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   }
+ 171:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   RTC->CLRSR = event;
+ 323              	 .loc 1 171 0
+ 324 000c 024B     	 ldr r3,.L34+4
+ 325 000e 5861     	 str r0,[r3,#20]
+ 326 0010 7047     	 bx lr
+ 327              	.L35:
+ 328 0012 00BF     	 .align 2
+ 329              	.L34:
+ 330 0014 00400050 	 .word 1342193664
+ 331 0018 004A0050 	 .word 1342196224
+ 332              	 .cfi_endproc
+ 333              	.LFE183:
+ 335              	 .section .text.XMC_RTC_EnableHibernationWakeUp,"ax",%progbits
+ 336              	 .align 2
+ 337              	 .global XMC_RTC_EnableHibernationWakeUp
+ 338              	 .thumb
+ 339              	 .thumb_func
+ 341              	XMC_RTC_EnableHibernationWakeUp:
+ 342              	.LFB184:
+ 172:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** }
+ 173:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+ 174:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** void XMC_RTC_EnableHibernationWakeUp(const uint32_t event)
+ 175:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** {
+ 343              	 .loc 1 175 0
+ 344              	 .cfi_startproc
+ 345              	 
+ 346              	 
+ 347              	 
+ 348              	.LVL13:
+ 349              	.LBB38:
+ 350              	.LBB39:
+ 351              	 .loc 3 545 0
+ 352 0000 054A     	 ldr r2,.L39
+ 353              	.L37:
+ 354              	 .loc 3 545 0 is_stmt 0 discriminator 1
+ 355 0002 D2F8C430 	 ldr r3,[r2,#196]
+ 356              	.LBE39:
+ 357              	.LBE38:
+ 176:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   while((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk) != 0U)
+ 358              	 .loc 1 176 0 is_stmt 1 discriminator 1
+ 359 0006 13F4807F 	 tst r3,#256
+ 360 000a FAD1     	 bne .L37
+ 177:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   {
+ 178:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+ 179:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   }
+ 180:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   RTC->CTR |= event;
+ 361              	 .loc 1 180 0
+ 362 000c 034A     	 ldr r2,.L39+4
+ 363 000e 5368     	 ldr r3,[r2,#4]
+ 364 0010 1843     	 orrs r0,r0,r3
+ 365              	.LVL14:
+ 366 0012 5060     	 str r0,[r2,#4]
+ 367 0014 7047     	 bx lr
+ 368              	.L40:
+ 369 0016 00BF     	 .align 2
+ 370              	.L39:
+ 371 0018 00400050 	 .word 1342193664
+ 372 001c 004A0050 	 .word 1342196224
+ 373              	 .cfi_endproc
+ 374              	.LFE184:
+ 376              	 .section .text.XMC_RTC_DisableHibernationWakeUp,"ax",%progbits
+ 377              	 .align 2
+ 378              	 .global XMC_RTC_DisableHibernationWakeUp
+ 379              	 .thumb
+ 380              	 .thumb_func
+ 382              	XMC_RTC_DisableHibernationWakeUp:
+ 383              	.LFB185:
+ 181:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** }
+ 182:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** 
+ 183:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** void XMC_RTC_DisableHibernationWakeUp(const uint32_t event)
+ 184:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c **** {
+ 384              	 .loc 1 184 0
+ 385              	 .cfi_startproc
+ 386              	 
+ 387              	 
+ 388              	 
+ 389              	.LVL15:
+ 390              	.LBB40:
+ 391              	.LBB41:
+ 392              	 .loc 3 545 0
+ 393 0000 054A     	 ldr r2,.L44
+ 394              	.L42:
+ 395              	 .loc 3 545 0 is_stmt 0 discriminator 1
+ 396 0002 D2F8C430 	 ldr r3,[r2,#196]
+ 397              	.LBE41:
+ 398              	.LBE40:
+ 185:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   while((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk) != 0U)
+ 399              	 .loc 1 185 0 is_stmt 1 discriminator 1
+ 400 0006 13F4807F 	 tst r3,#256
+ 401 000a FAD1     	 bne .L42
+ 186:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   {
+ 187:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
+ 188:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   }
+ 189:C:/Files/Projects/Git/XMCLib/src\xmc4_rtc.c ****   RTC->CTR &= ~event;
+ 402              	 .loc 1 189 0
+ 403 000c 034A     	 ldr r2,.L44+4
+ 404 000e 5368     	 ldr r3,[r2,#4]
+ 405 0010 23EA0000 	 bic r0,r3,r0
+ 406              	.LVL16:
+ 407 0014 5060     	 str r0,[r2,#4]
+ 408 0016 7047     	 bx lr
+ 409              	.L45:
+ 410              	 .align 2
+ 411              	.L44:
+ 412 0018 00400050 	 .word 1342193664
+ 413 001c 004A0050 	 .word 1342196224
+ 414              	 .cfi_endproc
+ 415              	.LFE185:
+ 417              	 .text
+ 418              	.Letext0:
+ 419              	 .file 4 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 420              	 .file 5 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 421              	 .file 6 "C:/Files/Projects/Git/CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 422              	 .file 7 "C:/Files/Projects/Git/CMSIS/Include/cmsis_gcc.h"
+ 423              	 .file 8 "C:/Files/Projects/Git/CMSIS/Include/core_cm4.h"
+ 424              	 .file 9 "C:/Files/Projects/Git/CMSIS/Infineon/XMC4500_series/Include/system_XMC4500.h"
+ 425              	 .file 10 "C:/Files/Projects/Git/XMCLib/inc/xmc4_scu.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc4_rtc.c
+    {standard input}:20     .text.XMC_RTC_Enable:00000000 $t
+    {standard input}:25     .text.XMC_RTC_Enable:00000000 XMC_RTC_Enable
+    {standard input}:45     .text.XMC_RTC_Disable:00000000 $t
+    {standard input}:50     .text.XMC_RTC_Disable:00000000 XMC_RTC_Disable
+    {standard input}:62     .text.XMC_RTC_IsEnabled:00000000 $t
+    {standard input}:67     .text.XMC_RTC_IsEnabled:00000000 XMC_RTC_IsEnabled
+    {standard input}:88     .text.XMC_RTC_Init:00000000 $t
+    {standard input}:93     .text.XMC_RTC_Init:00000000 XMC_RTC_Init
+    {standard input}:210    .text.XMC_RTC_Init:00000070 $d
+    {standard input}:216    .text.XMC_RTC_EnableEvent:00000000 $t
+    {standard input}:221    .text.XMC_RTC_EnableEvent:00000000 XMC_RTC_EnableEvent
+    {standard input}:251    .text.XMC_RTC_EnableEvent:00000018 $d
+    {standard input}:257    .text.XMC_RTC_DisableEvent:00000000 $t
+    {standard input}:262    .text.XMC_RTC_DisableEvent:00000000 XMC_RTC_DisableEvent
+    {standard input}:292    .text.XMC_RTC_DisableEvent:00000018 $d
+    {standard input}:298    .text.XMC_RTC_ClearEvent:00000000 $t
+    {standard input}:303    .text.XMC_RTC_ClearEvent:00000000 XMC_RTC_ClearEvent
+    {standard input}:330    .text.XMC_RTC_ClearEvent:00000014 $d
+    {standard input}:336    .text.XMC_RTC_EnableHibernationWakeUp:00000000 $t
+    {standard input}:341    .text.XMC_RTC_EnableHibernationWakeUp:00000000 XMC_RTC_EnableHibernationWakeUp
+    {standard input}:371    .text.XMC_RTC_EnableHibernationWakeUp:00000018 $d
+    {standard input}:377    .text.XMC_RTC_DisableHibernationWakeUp:00000000 $t
+    {standard input}:382    .text.XMC_RTC_DisableHibernationWakeUp:00000000 XMC_RTC_DisableHibernationWakeUp
+    {standard input}:412    .text.XMC_RTC_DisableHibernationWakeUp:00000018 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+XMC_SCU_HIB_EnableHibernateDomain
+XMC_SCU_HIB_IsHibernateDomainEnabled
+XMC_RTC_SetPrescaler

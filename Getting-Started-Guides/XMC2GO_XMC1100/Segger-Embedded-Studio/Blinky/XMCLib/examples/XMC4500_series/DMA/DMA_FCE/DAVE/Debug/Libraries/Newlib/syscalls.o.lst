@@ -1,0 +1,230 @@
+   1              	 .syntax unified
+   2              	 .cpu cortex-m4
+   3              	 .eabi_attribute 27,3
+   4              	 .fpu fpv4-sp-d16
+   5              	 .eabi_attribute 20,1
+   6              	 .eabi_attribute 21,1
+   7              	 .eabi_attribute 23,3
+   8              	 .eabi_attribute 24,1
+   9              	 .eabi_attribute 25,1
+  10              	 .eabi_attribute 26,1
+  11              	 .eabi_attribute 30,1
+  12              	 .eabi_attribute 34,1
+  13              	 .eabi_attribute 18,4
+  14              	 .thumb
+  15              	 .file "syscalls.c"
+  16              	 .text
+  17              	.Ltext0:
+  18              	 .cfi_sections .debug_frame
+  19              	 .section .text._sbrk,"ax",%progbits
+  20              	 .align 2
+  21              	 .global _sbrk
+  22              	 .thumb
+  23              	 .thumb_func
+  25              	_sbrk:
+  26              	.LFB0:
+  27              	 .file 1 "C:/Files/Projects/Git/ThirdPartyLibraries/Newlib/syscalls.c"
+   1:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** /**************************************************************************************************
+   2:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * @file     syscalls.c
+   3:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * @brief    Newlib stubs
+   4:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * @version  V1.6
+   5:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * @date     20 Apr 2017
+   6:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  *
+   7:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * @cond
+   8:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  **************************************************************************************************
+   9:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * Copyright (c) 2015-2017, Infineon Technologies AG
+  10:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * All rights reserved.
+  11:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  *
+  12:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * following conditions are met:
+  14:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  *
+  15:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * disclaimer.
+  17:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  *
+  18:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * disclaimer in the documentation and/or other materials provided with the distribution.
+  20:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  *
+  21:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * products derived from this software without specific prior written permission.
+  23:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  *
+  24:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  31:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  *
+  32:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * Infineon Technologies AG dave@infineon.com).
+  34:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  **************************************************************************************************
+  35:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  *
+  36:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * *************************** Change history ********************************
+  37:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * V0.1                  : Initial version
+  38:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * V0.2                  : Label updates
+  39:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * V1.0                  : Made _sbrk device agnostic
+  40:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * V1.1                  : C++ support
+  41:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * V1.2                  : Restored compatibility with old project files
+  42:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * V1.3    Jan 2014, PKB : Encapsulating everything in this file for use only with GCC
+  43:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * V1.4 11 Dec 2015, JFT : Fix heap overflow
+  44:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * V1.5 09 Mar 2016, JFT : Add dso_handle to support destructors call at exit 
+  45:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * V1.6 20 Apr 2017, JFT : Foward declaration of __sbrk to fix link time optimization (-flto) compi
+  46:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * @endcond
+  47:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  */
+  48:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** 
+  49:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** /*
+  50:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * This file contains stubs for standard C library functionality that must
+  51:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  * typically be provided for the underlying platform.
+  52:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  *
+  53:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****  */
+  54:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** #if defined ( __GNUC__ )
+  55:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** 
+  56:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** #include <stdint.h>
+  57:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** #include <errno.h>
+  58:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** #include <sys/types.h>
+  59:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** 
+  60:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** /* Forward prototypes.  */
+  61:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** caddr_t _sbrk(int nbytes) __attribute__((externally_visible));
+  62:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** void _init(void) __attribute__((externally_visible));
+  63:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** 
+  64:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** /* c++ destructor dynamic shared object needed if -fuse-cxa-atexit is used*/
+  65:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** void *__dso_handle __attribute__ ((weak));
+  66:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** 
+  67:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** // defined in linker script
+  68:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** extern caddr_t Heap_Bank1_Start;
+  69:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** extern caddr_t Heap_Bank1_End;
+  70:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** caddr_t _sbrk(int nbytes)
+  71:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** {
+  28              	 .loc 1 71 0
+  29              	 .cfi_startproc
+  30              	 
+  31              	 
+  32              	.LVL0:
+  33 0000 08B5     	 push {r3,lr}
+  34              	.LCFI0:
+  35              	 .cfi_def_cfa_offset 8
+  36              	 .cfi_offset 3,-8
+  37              	 .cfi_offset 14,-4
+  72:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   static caddr_t heap_ptr = NULL;
+  73:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   caddr_t base;
+  74:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** 
+  75:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   if (heap_ptr == NULL) {
+  38              	 .loc 1 75 0
+  39 0002 0D4B     	 ldr r3,.L6
+  40 0004 1B68     	 ldr r3,[r3]
+  41 0006 13B9     	 cbnz r3,.L2
+  76:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****     heap_ptr = (caddr_t)&Heap_Bank1_Start;
+  42              	 .loc 1 76 0
+  43 0008 0C4A     	 ldr r2,.L6+4
+  44 000a 0B4B     	 ldr r3,.L6
+  45 000c 1A60     	 str r2,[r3]
+  46              	.L2:
+  77:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   }
+  78:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** 
+  79:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   base = heap_ptr;
+  47              	 .loc 1 79 0
+  48 000e 0A4B     	 ldr r3,.L6
+  49 0010 1A68     	 ldr r2,[r3]
+  50              	.LVL1:
+  80:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** 
+  81:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   /* heap word alignment */
+  82:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   nbytes = (nbytes + 3) & ~0x3U;
+  51              	 .loc 1 82 0
+  52 0012 C31C     	 adds r3,r0,#3
+  53              	.LVL2:
+  54 0014 23F00303 	 bic r3,r3,#3
+  55              	.LVL3:
+  83:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   if ((caddr_t)&Heap_Bank1_End > (heap_ptr + nbytes))
+  56              	 .loc 1 83 0
+  57 0018 1344     	 add r3,r3,r2
+  58              	.LVL4:
+  59 001a 0949     	 ldr r1,.L6+8
+  60 001c 8B42     	 cmp r3,r1
+  61 001e 03D2     	 bcs .L3
+  84:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   {
+  85:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****     heap_ptr += nbytes;
+  62              	 .loc 1 85 0
+  63 0020 0549     	 ldr r1,.L6
+  64 0022 0B60     	 str r3,[r1]
+  86:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****     return (base);
+  65              	 .loc 1 86 0
+  66 0024 1046     	 mov r0,r2
+  67              	.LVL5:
+  68 0026 08BD     	 pop {r3,pc}
+  69              	.LVL6:
+  70              	.L3:
+  87:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   }
+  88:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   else
+  89:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   {
+  90:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****     /* Heap overflow */
+  91:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****     errno = ENOMEM;
+  71              	 .loc 1 91 0
+  72 0028 FFF7FEFF 	 bl __errno
+  73              	.LVL7:
+  74 002c 0C23     	 movs r3,#12
+  75 002e 0360     	 str r3,[r0]
+  92:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****     return ((caddr_t)-1);
+  76              	 .loc 1 92 0
+  77 0030 4FF0FF30 	 mov r0,#-1
+  93:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c ****   }
+  94:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** }
+  78              	 .loc 1 94 0
+  79 0034 08BD     	 pop {r3,pc}
+  80              	.L7:
+  81 0036 00BF     	 .align 2
+  82              	.L6:
+  83 0038 00000000 	 .word .LANCHOR0
+  84 003c 00000000 	 .word Heap_Bank1_Start
+  85 0040 00000000 	 .word Heap_Bank1_End
+  86              	 .cfi_endproc
+  87              	.LFE0:
+  89              	 .section .text._init,"ax",%progbits
+  90              	 .align 2
+  91              	 .global _init
+  92              	 .thumb
+  93              	 .thumb_func
+  95              	_init:
+  96              	.LFB1:
+  95:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** 
+  96:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** /* Init */
+  97:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** void _init(void)
+  98:C:/Files/Projects/Git/ThirdPartyLibraries/Newlib\syscalls.c **** {}
+  97              	 .loc 1 98 0
+  98              	 .cfi_startproc
+  99              	 
+ 100              	 
+ 101              	 
+ 102 0000 7047     	 bx lr
+ 103              	 .cfi_endproc
+ 104              	.LFE1:
+ 106              	 .weak __dso_handle
+ 107 0002 00BF     	 .section .bss.__dso_handle,"aw",%nobits
+ 108              	 .align 2
+ 111              	__dso_handle:
+ 112 0000 00000000 	 .space 4
+ 113              	 .section .bss.heap_ptr.4331,"aw",%nobits
+ 114              	 .align 2
+ 115              	 .set .LANCHOR0,.+0
+ 118              	heap_ptr.4331:
+ 119 0000 00000000 	 .space 4
+ 120              	 .text
+ 121              	.Letext0:
+ 122              	 .file 2 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\sys\\types.h"
+ 123              	 .file 3 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\sys\\errno.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 syscalls.c
+    {standard input}:20     .text._sbrk:00000000 $t
+    {standard input}:25     .text._sbrk:00000000 _sbrk
+    {standard input}:83     .text._sbrk:00000038 $d
+    {standard input}:90     .text._init:00000000 $t
+    {standard input}:95     .text._init:00000000 _init
+    {standard input}:111    .bss.__dso_handle:00000000 __dso_handle
+    {standard input}:108    .bss.__dso_handle:00000000 $d
+    {standard input}:114    .bss.heap_ptr.4331:00000000 $d
+    {standard input}:118    .bss.heap_ptr.4331:00000000 heap_ptr.4331
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+__errno
+Heap_Bank1_Start
+Heap_Bank1_End

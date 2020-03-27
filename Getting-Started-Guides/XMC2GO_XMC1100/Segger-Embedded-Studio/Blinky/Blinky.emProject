@@ -1,0 +1,64 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="Blinky" target="8" version="2">
+  <project Name="Blinky">
+    <configuration
+      Name="Common"
+      arm_architecture="v6M"
+      arm_core_type="Cortex-M0"
+      arm_endian="Little"
+      arm_fpu_type=""
+      arm_linker_heap_size="1024"
+      arm_linker_process_stack_size="0"
+      arm_linker_stack_size="1024"
+      arm_linker_variant="SEGGER"
+      arm_simulator_memory_simulation_parameter="RX 10001000,00004000,FFFFFFFF;RWX 20000000,00004000,CDCDCDCD"
+      arm_target_device_name="XMC1100-0016"
+      arm_target_interface_type="SWD"
+      c_user_include_directories="SEGGER"
+      debug_target_connection="J-Link"
+      link_linker_script_file="Setup/SEGGER_Flash.icf"
+      linker_output_format="hex"
+      linker_section_placements_segments="FLASH1 RX 0x10001000 0x00004000;RAM1 RWX 0x20000000 0x00004000"
+      project_directory=""
+      project_type="Executable" />
+    <folder Name="SEGGER">
+      <file file_name="SEGGER/SEGGER_RTT.c" />
+      <file file_name="SEGGER/SEGGER_RTT.h" />
+      <file file_name="SEGGER/SEGGER_RTT_Conf.h" />
+      <file file_name="SEGGER/SEGGER_RTT_Syscalls_SES.c" />
+    </folder>
+    <folder Name="Setup">
+      <file file_name="Setup/SEGGER_Flash.icf" />
+    </folder>
+    <folder Name="Source">
+      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
+      <file file_name="Source/main.c" />
+      <file file_name="XMCLib/src/xmc_gpio.c" />
+      <file file_name="XMCLib/inc/xmc_common.h" />
+      <file file_name="XMCLib/inc/xmc1_gpio.h" />
+      <file file_name="XMCLib/inc/xmc1_gpio_map.h" />
+      <file file_name="XMCLib/inc/xmc_device.h" />
+      <file file_name="Source/xmc_gpio.h" />
+      <file file_name="Source/XMC1100.h" />
+      <file file_name="Source/core_cm0.h" />
+      <file file_name="Source/system_XMC1100.h" />
+    </folder>
+    <folder Name="System">
+      <file file_name="System/Cortex_M_Startup.s" />
+      <file file_name="System/HardFaultHandler.S" />
+      <file file_name="System/SEGGER_HardFaultHandler.c" />
+      <file file_name="System/SEGGER_THUMB_Startup.s" />
+    </folder>
+  </project>
+  <configuration
+    Name="Debug"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_optimization_level="None" />
+  <configuration
+    Name="Release"
+    c_preprocessor_definitions="NDEBUG"
+    gcc_debugging_level="None"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="Level 1" />
+</solution>

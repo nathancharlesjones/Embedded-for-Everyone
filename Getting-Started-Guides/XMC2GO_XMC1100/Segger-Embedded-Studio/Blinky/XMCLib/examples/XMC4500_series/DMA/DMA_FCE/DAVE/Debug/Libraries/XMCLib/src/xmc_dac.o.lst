@@ -1,0 +1,2157 @@
+   1              	 .syntax unified
+   2              	 .cpu cortex-m4
+   3              	 .eabi_attribute 27,3
+   4              	 .fpu fpv4-sp-d16
+   5              	 .eabi_attribute 20,1
+   6              	 .eabi_attribute 21,1
+   7              	 .eabi_attribute 23,3
+   8              	 .eabi_attribute 24,1
+   9              	 .eabi_attribute 25,1
+  10              	 .eabi_attribute 26,1
+  11              	 .eabi_attribute 30,1
+  12              	 .eabi_attribute 34,1
+  13              	 .eabi_attribute 18,4
+  14              	 .thumb
+  15              	 .file "xmc_dac.c"
+  16              	 .text
+  17              	.Ltext0:
+  18              	 .cfi_sections .debug_frame
+  19              	 .section .text.XMC_DAC_Enable,"ax",%progbits
+  20              	 .align 2
+  21              	 .global XMC_DAC_Enable
+  22              	 .thumb
+  23              	 .thumb_func
+  25              	XMC_DAC_Enable:
+  26              	.LFB203:
+  27              	 .file 1 "C:/Files/Projects/Git/XMCLib/src/xmc_dac.c"
+   1:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /**
+   2:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * @file xmc_dac.c
+   3:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * @date 2015-06-19
+   4:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *
+   5:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * @cond
+   6:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  **********************************************************************************
+   7:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *
+   9:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * All rights reserved.                        
+  11:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *                                             
+  12:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * Redistribution and use in source and binary forms, with or without           
+  13:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * modification,are permitted provided that the following conditions are met:   
+  14:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *                                                                              
+  15:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *   Redistributions of source code must retain the above copyright notice,      
+  16:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *   this list of conditions and the following disclaimer.                        
+  17:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * 
+  18:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *   Redistributions in binary form must reproduce the above copyright notice,   
+  19:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *   this list of conditions and the following disclaimer in the documentation    
+  20:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *   and/or other materials provided with the distribution.                       
+  21:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * 
+  22:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *   Neither the name of the copyright holders nor the names of its contributors 
+  23:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *   may be used to endorse or promote products derived from this software without
+  24:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *   specific prior written permission.                                           
+  25:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *                                                                              
+  26:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  
+  27:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    
+  28:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   
+  29:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   
+  30:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         
+  31:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         
+  32:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    
+  33:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      
+  34:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       
+  35:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   
+  36:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * POSSIBILITY OF SUCH DAMAGE.                                                  
+  37:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *                                                                              
+  38:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * To improve the quality of the software, users are encouraged to share        
+  39:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * modifications, enhancements or bug fixes with Infineon Technologies AG       
+  40:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * dave@infineon.com).                                                          
+  41:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  **********************************************************************************
+  42:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *
+  43:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * Change History
+  44:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * --------------
+  45:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *
+  46:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * 2015-02-18:
+  47:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *     - Initial version
+  48:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *
+  49:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * 2015-06-19:
+  50:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *     - Removed GetDriverVersion API
+  51:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * @endcond 
+  52:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *
+  53:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  */
+  54:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+  55:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /*******************************************************************************
+  56:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * HEADER FILES
+  57:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *******************************************************************************/
+  58:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+  59:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** #include <xmc_dac.h>
+  60:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** #include <xmc_scu.h>
+  61:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+  62:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* DAC peripheral is not available on XMC1X devices. */
+  63:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** #if defined(DAC)
+  64:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+  65:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /*******************************************************************************
+  66:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * MACROS
+  67:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *******************************************************************************/
+  68:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+  69:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** #define XMC_DAC_MIN_FREQ_DIVIDER (16U)
+  70:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** #define XMC_DAC_MAX_FREQ_DIVIDER (1048576U)
+  71:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** #define XMC_DAC_DAC0PATL_PAT_BITSIZE (5U)
+  72:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+  73:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /*******************************************************************************
+  74:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  * API IMPLEMENTATION
+  75:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****  *******************************************************************************/
+  76:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+  77:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to enable the DAC module */
+  78:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** void XMC_DAC_Enable(XMC_DAC_t *const dac)
+  79:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+  28              	 .loc 1 79 0
+  29              	 .cfi_startproc
+  30              	 
+  31              	 
+  32              	.LVL0:
+  33 0000 08B5     	 push {r3,lr}
+  34              	.LCFI0:
+  35              	 .cfi_def_cfa_offset 8
+  36              	 .cfi_offset 3,-8
+  37              	 .cfi_offset 14,-4
+  80:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_UNUSED_ARG(dac);
+  81:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   
+  82:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** #if defined(CLOCK_GATING_SUPPORTED)
+  83:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_SCU_CLOCK_UngatePeripheralClock(XMC_SCU_PERIPHERAL_CLOCK_DAC);
+  84:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** #endif
+  85:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_SCU_RESET_DeassertPeripheralReset(XMC_SCU_PERIPHERAL_RESET_DAC);
+  38              	 .loc 1 85 0
+  39 0002 0248     	 ldr r0,.L3
+  40              	.LVL1:
+  41 0004 FFF7FEFF 	 bl XMC_SCU_RESET_DeassertPeripheralReset
+  42              	.LVL2:
+  43 0008 08BD     	 pop {r3,pc}
+  44              	.L4:
+  45 000a 00BF     	 .align 2
+  46              	.L3:
+  47 000c 20000010 	 .word 268435488
+  48              	 .cfi_endproc
+  49              	.LFE203:
+  51              	 .section .text.XMC_DAC_Disable,"ax",%progbits
+  52              	 .align 2
+  53              	 .global XMC_DAC_Disable
+  54              	 .thumb
+  55              	 .thumb_func
+  57              	XMC_DAC_Disable:
+  58              	.LFB204:
+  86:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+  87:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+  88:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to disable the DAC module */
+  89:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** void XMC_DAC_Disable(XMC_DAC_t *const dac)
+  90:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+  59              	 .loc 1 90 0
+  60              	 .cfi_startproc
+  61              	 
+  62              	 
+  63              	.LVL3:
+  64 0000 08B5     	 push {r3,lr}
+  65              	.LCFI1:
+  66              	 .cfi_def_cfa_offset 8
+  67              	 .cfi_offset 3,-8
+  68              	 .cfi_offset 14,-4
+  91:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_UNUSED_ARG(dac);
+  92:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+  93:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_SCU_RESET_AssertPeripheralReset(XMC_SCU_PERIPHERAL_RESET_DAC);
+  69              	 .loc 1 93 0
+  70 0002 0248     	 ldr r0,.L7
+  71              	.LVL4:
+  72 0004 FFF7FEFF 	 bl XMC_SCU_RESET_AssertPeripheralReset
+  73              	.LVL5:
+  74 0008 08BD     	 pop {r3,pc}
+  75              	.L8:
+  76 000a 00BF     	 .align 2
+  77              	.L7:
+  78 000c 20000010 	 .word 268435488
+  79              	 .cfi_endproc
+  80              	.LFE204:
+  82              	 .section .text.XMC_DAC_IsEnabled,"ax",%progbits
+  83              	 .align 2
+  84              	 .global XMC_DAC_IsEnabled
+  85              	 .thumb
+  86              	 .thumb_func
+  88              	XMC_DAC_IsEnabled:
+  89              	.LFB205:
+  94:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** #if defined(CLOCK_GATING_SUPPORTED)
+  95:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_SCU_CLOCK_GatePeripheralClock(XMC_SCU_PERIPHERAL_CLOCK_DAC);
+  96:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** #endif
+  97:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+  98:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+  99:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to check whether DAC is enabled */
+ 100:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** bool XMC_DAC_IsEnabled(const XMC_DAC_t *const dac)
+ 101:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+  90              	 .loc 1 101 0
+  91              	 .cfi_startproc
+  92              	 
+  93              	 
+  94              	.LVL6:
+  95 0000 08B5     	 push {r3,lr}
+  96              	.LCFI2:
+  97              	 .cfi_def_cfa_offset 8
+  98              	 .cfi_offset 3,-8
+  99              	 .cfi_offset 14,-4
+ 102:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   bool status;
+ 103:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 104:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_UNUSED_ARG(dac);
+ 105:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 106:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   status = XMC_SCU_RESET_IsPeripheralResetAsserted(XMC_SCU_PERIPHERAL_RESET_DAC);
+ 100              	 .loc 1 106 0
+ 101 0002 0348     	 ldr r0,.L11
+ 102              	.LVL7:
+ 103 0004 FFF7FEFF 	 bl XMC_SCU_RESET_IsPeripheralResetAsserted
+ 104              	.LVL8:
+ 107:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if(status == true)
+ 105              	 .loc 1 107 0
+ 106 0008 80F00100 	 eor r0,r0,#1
+ 107              	.LVL9:
+ 108:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 109:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     status = false;
+ 110:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 111:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   else
+ 112:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 113:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     status = true;
+ 114:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 115:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   return (status);
+ 116:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 108              	 .loc 1 116 0
+ 109 000c C0B2     	 uxtb r0,r0
+ 110 000e 08BD     	 pop {r3,pc}
+ 111              	.L12:
+ 112              	 .align 2
+ 113              	.L11:
+ 114 0010 20000010 	 .word 268435488
+ 115              	 .cfi_endproc
+ 116              	.LFE205:
+ 118              	 .section .text.XMC_DAC_CH_Init,"ax",%progbits
+ 119              	 .align 2
+ 120              	 .global XMC_DAC_CH_Init
+ 121              	 .thumb
+ 122              	 .thumb_func
+ 124              	XMC_DAC_CH_Init:
+ 125              	.LFB206:
+ 117:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 118:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to initialize DAC channel configuration */
+ 119:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** void XMC_DAC_CH_Init(XMC_DAC_t *const dac, const uint8_t channel, const XMC_DAC_CH_CONFIG_t *const 
+ 120:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+ 126              	 .loc 1 120 0
+ 127              	 .cfi_startproc
+ 128              	 
+ 129              	 
+ 130              	.LVL10:
+ 131 0000 70B5     	 push {r4,r5,r6,lr}
+ 132              	.LCFI3:
+ 133              	 .cfi_def_cfa_offset 16
+ 134              	 .cfi_offset 4,-16
+ 135              	 .cfi_offset 5,-12
+ 136              	 .cfi_offset 6,-8
+ 137              	 .cfi_offset 14,-4
+ 138 0002 0446     	 mov r4,r0
+ 139 0004 0D46     	 mov r5,r1
+ 140 0006 1646     	 mov r6,r2
+ 141              	.LVL11:
+ 142              	.LBB42:
+ 143              	.LBB43:
+  85:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 144              	 .loc 1 85 0
+ 145 0008 0748     	 ldr r0,.L16
+ 146              	.LVL12:
+ 147 000a FFF7FEFF 	 bl XMC_SCU_RESET_DeassertPeripheralReset
+ 148              	.LVL13:
+ 149              	.LBE43:
+ 150              	.LBE42:
+ 121:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_Enable(dac);
+ 122:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 123:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   dac->DACCFG[channel].low = config->cfg0;
+ 151              	 .loc 1 123 0
+ 152 000e 3368     	 ldr r3,[r6]
+ 153 0010 04EBC500 	 add r0,r4,r5,lsl#3
+ 154 0014 4360     	 str r3,[r0,#4]
+ 124:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   dac->DACCFG[channel].high = config->cfg1;
+ 155              	 .loc 1 124 0
+ 156 0016 7368     	 ldr r3,[r6,#4]
+ 157 0018 8360     	 str r3,[r0,#8]
+ 125:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if (channel < XMC_DAC_NO_CHANNELS)
+ 158              	 .loc 1 125 0
+ 159 001a 012D     	 cmp r5,#1
+ 160 001c 03D8     	 bhi .L13
+ 161              	.LVL14:
+ 162              	.LBB44:
+ 163              	.LBB45:
+ 164              	 .file 2 "C:/Files/Projects/Git/XMCLib/inc/xmc_dac.h"
+   1:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+   2:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @file xmc_dac.h
+   3:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @date 2015-08-31
+   4:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+   5:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @cond
+   6:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  **********************************************************************************
+   7:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+   9:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * All rights reserved.                        
+  11:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *                                             
+  12:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Redistribution and use in source and binary forms, with or without           
+  13:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * modification,are permitted provided that the following conditions are met:   
+  14:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *                                                                              
+  15:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *   Redistributions of source code must retain the above copyright notice,      
+  16:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *   this list of conditions and the following disclaimer.                        
+  17:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 
+  18:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *   Redistributions in binary form must reproduce the above copyright notice,   
+  19:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *   this list of conditions and the following disclaimer in the documentation    
+  20:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *   and/or other materials provided with the distribution.                       
+  21:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 
+  22:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *   Neither the name of the copyright holders nor the names of its contributors 
+  23:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *   may be used to endorse or promote products derived from this software without
+  24:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *   specific prior written permission.                                           
+  25:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *                                                                              
+  26:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  
+  27:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    
+  28:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   
+  29:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   
+  30:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         
+  31:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         
+  32:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    
+  33:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      
+  34:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       
+  35:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   
+  36:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * POSSIBILITY OF SUCH DAMAGE.                                                  
+  37:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *                                                                              
+  38:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * To improve the quality of the software, users are encouraged to share        
+  39:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * modifications, enhancements or bug fixes with Infineon Technologies AG       
+  40:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * dave@infineon.com).                                                          
+  41:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  **********************************************************************************
+  42:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+  43:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Change History
+  44:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * --------------
+  45:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+  46:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 2015-02-18:
+  47:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *     - Initial version
+  48:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *      
+  49:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 2015-02-20:
+  50:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *     - Driver description added
+  51:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+  52:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 2015-06-19:
+  53:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *     - Removed version macros and declaration of GetDriverVersion API
+  54:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+  55:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 2015-08-31:
+  56:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *     - Help document updated
+  57:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @endcond 
+  58:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+  59:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+  60:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+  61:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #ifndef XMC_DAC_H
+  62:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_H
+  63:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+  64:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /*******************************************************************************
+  65:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * HEADER FILES
+  66:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *******************************************************************************/
+  67:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+  68:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #include <xmc_common.h>
+  69:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+  70:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /* DAC peripheral is not available on XMC1X devices. */
+  71:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #if defined(DAC)
+  72:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+  73:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+  74:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @addtogroup XMClib
+  75:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @{
+  76:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+  77:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+  78:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+  79:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @addtogroup DAC
+  80:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @{
+  81:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+  82:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @brief Digital to Analog Converter (DAC) driver for XMC 4000 microcontroller family. <br>
+  83:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+  84:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * DAC driver uses DAC peripheral to convert digital value to analog value. XMC4000 microcontroller
+  85:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * and maximum conversion rate of 2MHz with full accuracy and 5MHz with reduced accuracy.
+  86:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * It consists of inbuilt pattern generator, ramp generator and noise generator modes. Additionally
+  87:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * in single value mode and in data mode.
+  88:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * It has DMA handling capability to generate custom waveforms in data mode without CPU interventio
+  89:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+  90:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * DAC driver features:
+  91:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * -#  Configuration structure XMC_DAC_CH_CONFIG_t and initialization function XMC_DAC_CH_Init() to
+  92:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * -#  Pattern Generator Mode:
+  93:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 	- DAC is configured in pattern generator mode using XMC_DAC_CH_StartPatternMode()
+  94:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 	- XMC_DAC_CH_SetPattern() is used to set the waveform pattern values in pattern register for on
+  95:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 	- Allows to change the trigger frequency using XMC_DAC_CH_SetPatternFrequency()
+  96:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * -#  Single Value Mode:
+  97:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 	- DAC is configured in single value mode using XMC_DAC_CH_StartSingleValueMode()
+  98:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 	- Allows to change the trigger frequency using XMC_DAC_CH_SetFrequency()
+  99:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * -# Data Mode:
+ 100:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 	- DAC is configured in data mode using XMC_DAC_CH_StartDataMode()
+ 101:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 	- Allows to change the trigger frequency using XMC_DAC_CH_SetFrequency()
+ 102:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * -# Ramp Mode:
+ 103:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *  - DAC is configured in ramp generator mode using XMC_DAC_CH_StartRampMode()
+ 104:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *  - Allows to change the trigger frequency using XMC_DAC_CH_SetRampFrequency()
+ 105:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *  - Allows to set the start and stop values of the ramp using XMC_DAC_CH_SetRampStart() and XMC_D
+ 106:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * -# Noise Mode:
+ 107:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 	- DAC is configured in noise mode using XMC_DAC_CH_StartNoiseMode()
+ 108:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * 	- Allows to change the trigger frequency using XMC_DAC_CH_SetFrequency()
+ 109:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * -# Allows to change the scale, offset dynamically using XMC_DAC_CH_SetOutputScale() and XMC_DAC_
+ 110:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * -# Allows to select one of the eight possible trigger sources using XMC_DAC_CH_SetTrigger()
+ 111:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * -# 2 DAC channels can be used in synchronization in single value mode and data mode to generate 
+ 112:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 113:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 114:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /*******************************************************************************
+ 115:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * MACROS
+ 116:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *******************************************************************************/
+ 117:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 118:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC0 ((XMC_DAC_t *)DAC_BASE)         /**< DAC module register base */
+ 119:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 120:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_DACCFG_NEGATE_Msk (0x10000000UL) /*< DAC negation enable mask in XMC44 device */
+ 121:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_NO_CHANNELS (2U)                 /**< DAC maximum channels */
+ 122:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_SAMPLES_PER_PERIOD (32U)         /**< DAC samples per period in pattern mode */
+ 123:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 124:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_PATTERN_TRIANGLE  {0U, 4U, 8U, 12U, 16U, 19U, 23U, 27U, 31U} /**< First quarter Tri
+ 125:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_PATTERN_SINE      {0U, 6U, 12U, 17U, 22U, 26U, 29U, 30U, 31U} /**< First quarter Si
+ 126:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_PATTERN_RECTANGLE {31U, 31U, 31U, 31U, 31U, 31U, 31U, 31U, 31U} /**< First quarter 
+ 127:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 128:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_IS_DAC_VALID(PTR)            ((PTR) == XMC_DAC0)
+ 129:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_IS_CHANNEL_VALID(CH)         (CH < XMC_DAC_NO_CHANNELS)
+ 130:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_IS_TRIGGER_VALID(TRIGGER)    ((TRIGGER == XMC_DAC_CH_TRIGGER_INTERNAL) ||\
+ 131:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (TRIGGER == XMC_DAC_CH_TRIGGER_EXTERNAL_CCU80_SR1) ||
+ 132:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (TRIGGER == XMC_DAC_CH_TRIGGER_EXTERNAL_CCU40_SR1) ||
+ 133:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (TRIGGER == XMC_DAC_CH_TRIGGER_EXTERNAL_CCU41_SR1) ||
+ 134:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (TRIGGER == XMC_DAC_CH_TRIGGER_EXTERNAL_P2_9) ||\
+ 135:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (TRIGGER == XMC_DAC_CH_TRIGGER_EXTERNAL_P2_8) ||\
+ 136:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (TRIGGER == XMC_DAC_CH_TRIGGER_EXTERNAL_U0C0_DX1INS) 
+ 137:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (TRIGGER == XMC_DAC_CH_TRIGGER_EXTERNAL_U1C0_DX1INS) 
+ 138:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (TRIGGER == XMC_DAC_CH_TRIGGER_SOFTWARE))
+ 139:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_IS_MODE_VALID(MODE)          ((MODE == XMC_DAC_CH_MODE_IDLE) ||\
+ 140:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (MODE == XMC_DAC_CH_MODE_SINGLE) ||\
+ 141:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (MODE == XMC_DAC_CH_MODE_DATA) ||\
+ 142:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (MODE == XMC_DAC_CH_MODE_PATTERN) ||\
+ 143:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (MODE == XMC_DAC_CH_MODE_NOISE) ||\
+ 144:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (MODE == XMC_DAC_CH_MODE_RAMP))
+ 145:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #define XMC_DAC_IS_OUTPUT_SCALE_VALID(SCALE) ((SCALE == XMC_DAC_CH_OUTPUT_SCALE_NONE) ||\
+ 146:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_MUL_2) ||\
+ 147:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_MUL_4) ||\
+ 148:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_MUL_8) ||\
+ 149:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_MUL_16) ||\
+ 150:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_MUL_32) ||\
+ 151:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_MUL_64) ||\
+ 152:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_MUL_128) ||\
+ 153:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_DIV_2) ||\
+ 154:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_DIV_4) ||\
+ 155:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_DIV_8) ||\
+ 156:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_DIV_16) ||\
+ 157:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_DIV_32) ||\
+ 158:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_DIV_64) ||\
+ 159:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               (SCALE == XMC_DAC_CH_OUTPUT_SCALE_DIV_128))
+ 160:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                             
+ 161:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 162:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /*******************************************************************************
+ 163:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * ENUMS
+ 164:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *******************************************************************************/
+ 165:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 166:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 167:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Return types of the API's
+ 168:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 169:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** typedef enum XMC_DAC_CH_STATUS
+ 170:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 171:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_STATUS_OK              = 0U, /**< Status is ok, no error detected */
+ 172:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_STATUS_ERROR           = 1U, /**< Error detected */
+ 173:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_STATUS_BUSY            = 2U, /**< DAC is busy */
+ 174:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_STATUS_ERROR_FREQ2LOW  = 3U, /**< Frequency can't be configured. Frequency is to low. 
+ 175:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_STATUS_ERROR_FREQ2HIGH = 4U  /**< Frequency can't be configured. Frequency is to high.
+ 176:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** } XMC_DAC_CH_STATUS_t;
+ 177:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 178:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 179:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Operating modes of DAC
+ 180:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 181:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** typedef enum XMC_DAC_CH_MODE
+ 182:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 183:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_MODE_IDLE    = 0x0U << DAC_DAC0CFG0_MODE_Pos,    /**< DAC is disabled */
+ 184:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_MODE_SINGLE  = 0x1U << DAC_DAC0CFG0_MODE_Pos,    /**< Single value mode - single data 
+ 185:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_MODE_DATA    = 0x2U << DAC_DAC0CFG0_MODE_Pos,    /**< Data mode - continuous data proc
+ 186:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_MODE_PATTERN = 0x3U << DAC_DAC0CFG0_MODE_Pos,    /**< Pattern mode - inbuilt pattern w
+ 187:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                                                    Sine, Triangle, Rectangle */
+ 188:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_MODE_NOISE   = 0x4U << DAC_DAC0CFG0_MODE_Pos,    /**< Noise mode - pseudo-random noise
+ 189:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_MODE_RAMP    = 0x5U << DAC_DAC0CFG0_MODE_Pos     /**< Ramp mode - ramp generation */
+ 190:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** } XMC_DAC_CH_MODE_t;
+ 191:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 192:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 193:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Trigger sources for the data update
+ 194:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 195:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** typedef enum XMC_DAC_CH_TRIGGER
+ 196:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 197:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_TRIGGER_INTERNAL =
+ 198:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x0U << DAC_DAC0CFG1_TRIGMOD_Pos),                                      /**< Internal trigge
+ 199:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_TRIGGER_EXTERNAL_CCU80_SR1 =
+ 200:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_TRIGMOD_Pos) | 0x0U,                               /**< External trigge
+ 201:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_TRIGGER_EXTERNAL_CCU40_SR1 =
+ 202:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_TRIGMOD_Pos) | (0x2U << DAC_DAC0CFG1_TRIGSEL_Pos), /**< External trigge
+ 203:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_TRIGGER_EXTERNAL_CCU41_SR1 =
+ 204:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_TRIGMOD_Pos) | (0x3U << DAC_DAC0CFG1_TRIGSEL_Pos), /**< External trigge
+ 205:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_TRIGGER_EXTERNAL_P2_9 =
+ 206:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_TRIGMOD_Pos) | (0x4U << DAC_DAC0CFG1_TRIGSEL_Pos), /**< External trigge
+ 207:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_TRIGGER_EXTERNAL_P2_8 =
+ 208:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_TRIGMOD_Pos) | (0x5U << DAC_DAC0CFG1_TRIGSEL_Pos), /**< External trigge
+ 209:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_TRIGGER_EXTERNAL_U0C0_DX1INS =
+ 210:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_TRIGMOD_Pos) | (0x6U << DAC_DAC0CFG1_TRIGSEL_Pos), /**< External trigge
+ 211:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_TRIGGER_EXTERNAL_U1C0_DX1INS =
+ 212:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_TRIGMOD_Pos) | (0x7U << DAC_DAC0CFG1_TRIGSEL_Pos), /**< External trigge
+ 213:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_TRIGGER_SOFTWARE =
+ 214:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x2U << DAC_DAC0CFG1_TRIGMOD_Pos)                                       /**< Software trigge
+ 215:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** } XMC_DAC_CH_TRIGGER_t;
+ 216:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 217:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 218:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Data type of the input data
+ 219:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 220:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** typedef enum XMC_DAC_CH_DATA_TYPE
+ 221:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 222:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_DATA_TYPE_UNSIGNED = 0U , /**< input data is unsigned */
+ 223:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_DATA_TYPE_SIGNED = 1U     /**< input data is signed */
+ 224:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** } XMC_DAC_CH_DATA_TYPE_t;
+ 225:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 226:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 227:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Scaling of the input data
+ 228:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 229:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** typedef enum XMC_DAC_CH_OUTPUT_SCALE
+ 230:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 231:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_NONE =
+ 232:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       0x0U,                                                                   /**< No scaling */
+ 233:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_MUL_2 =
+ 234:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_MULDIV_Pos) | (0x1U << DAC_DAC0CFG1_SCALE_Pos),   /**< multiplied by 2 
+ 235:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_MUL_4 =
+ 236:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_MULDIV_Pos) | (0x2U << DAC_DAC0CFG1_SCALE_Pos),   /**< multiplied by 4 
+ 237:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_MUL_8 =
+ 238:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_MULDIV_Pos) | (0x3U << DAC_DAC0CFG1_SCALE_Pos),   /**< multiplied by 8 
+ 239:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_MUL_16 =
+ 240:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_MULDIV_Pos) | (0x4U << DAC_DAC0CFG1_SCALE_Pos),   /**< multiplied by 16
+ 241:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_MUL_32 =
+ 242:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_MULDIV_Pos) | (0x5U << DAC_DAC0CFG1_SCALE_Pos),   /**< multiplied by 32
+ 243:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_MUL_64 =
+ 244:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_MULDIV_Pos) | (0x6U << DAC_DAC0CFG1_SCALE_Pos),   /**< multiplied by 64
+ 245:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_MUL_128 =
+ 246:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       (0x1U << DAC_DAC0CFG1_MULDIV_Pos) | (0x7U << DAC_DAC0CFG1_SCALE_Pos),   /**< multiplied by 12
+ 247:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_DIV_2 =
+ 248:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       0x1U << DAC_DAC0CFG1_SCALE_Pos,                                         /**< divided by 2 */
+ 249:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_DIV_4 =
+ 250:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       0x2U << DAC_DAC0CFG1_SCALE_Pos,                                         /**< divided by 4 */
+ 251:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_DIV_8 =
+ 252:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       0x3U << DAC_DAC0CFG1_SCALE_Pos,                                         /**< divided by 8 */
+ 253:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_DIV_16 =
+ 254:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       0x4U << DAC_DAC0CFG1_SCALE_Pos,                                         /**< divided by 16 */
+ 255:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_DIV_32 =
+ 256:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       0x5U << DAC_DAC0CFG1_SCALE_Pos,                                         /**< divided by 32 */
+ 257:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_DIV_64 =
+ 258:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       0x6U << DAC_DAC0CFG1_SCALE_Pos,                                         /**< divided by 64 */
+ 259:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_SCALE_DIV_128 =
+ 260:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****       0x7U << DAC_DAC0CFG1_SCALE_Pos                                          /**< divided by 128 *
+ 261:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** } XMC_DAC_CH_OUTPUT_SCALE_t;
+ 262:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 263:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 264:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Negation of input data (applicable only for XMC44 device)
+ 265:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 266:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** typedef enum XMC_DAC_CH_OUTPUT_NEGATION
+ 267:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 268:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_NEGATION_DISABLED = 0U,                   /**< XMC_DAC_CH_OUTPUT_NEGATION_DISAB
+ 269:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_OUTPUT_NEGATION_ENABLED = 1U                     /**< XMC_DAC_CH_OUTPUT_NEGATION_ENABL
+ 270:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** } XMC_DAC_CH_OUTPUT_NEGATION_t;
+ 271:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 272:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 273:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Output sign signal for the Pattern Generation Mode
+ 274:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 275:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** typedef enum XMC_DAC_CH_PATTERN_SIGN_OUTPUT
+ 276:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 277:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_PATTERN_SIGN_OUTPUT_DISABLED = 0U,  /**< Sign output signal generation is disabled */
+ 278:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_DAC_CH_PATTERN_SIGN_OUTPUT_ENABLED = 1U    /**< Sign output signal generation is enabled */
+ 279:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** } XMC_DAC_CH_PATTERN_SIGN_OUTPUT_t;
+ 280:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 281:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /*******************************************************************************
+ 282:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * DATA STRUCTURES
+ 283:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *******************************************************************************/
+ 284:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 285:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * DAC peripheral registers configuration.
+ 286:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 287:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** typedef struct
+ 288:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 289:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   __I  uint32_t  ID;
+ 290:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 291:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   struct
+ 292:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   {
+ 293:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****      __IO uint32_t low;
+ 294:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****      __IO uint32_t high;
+ 295:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   } DACCFG[XMC_DAC_NO_CHANNELS];
+ 296:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 297:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   __IO uint32_t DACDATA[XMC_DAC_NO_CHANNELS];
+ 298:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   __IO uint32_t DAC01DATA;
+ 299:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 300:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   struct
+ 301:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   {
+ 302:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****      __IO uint32_t low;
+ 303:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****      __IO uint32_t high;
+ 304:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   } DACPAT[XMC_DAC_NO_CHANNELS];
+ 305:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 306:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** } XMC_DAC_t;
+ 307:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 308:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /*Anonymous structure/union guard start*/
+ 309:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #if defined(__CC_ARM)
+ 310:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   #pragma push
+ 311:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   #pragma anon_unions
+ 312:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #elif defined(__TASKING__)
+ 313:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   #pragma warning 586
+ 314:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #endif
+ 315:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 316:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 317:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Channel related configuration
+ 318:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 319:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** typedef struct XMC_DAC_CH_CONFIG
+ 320:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 321:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   union
+ 322:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   {
+ 323:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   struct
+ 324:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   {
+ 325:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****     uint32_t :23;                /**< Not used bits */
+ 326:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****     uint32_t data_type:1;        /**< input data type - unsigned / signed */
+ 327:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****     uint32_t :4;                 /**< Not used bits */
+ 328:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****     uint32_t output_negation:1;  /**< Negation of the output waveform enabled/disabled */
+ 329:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****     uint32_t :3;
+ 330:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   };
+ 331:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   uint32_t cfg0;
+ 332:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   };
+ 333:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   union
+ 334:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   {
+ 335:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   struct
+ 336:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   {
+ 337:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****     uint32_t output_scale:4;  /**< Scale value of type XMC_DAC_CH_OUTPUT_SCALE_t. It includes scali
+ 338:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****     uint32_t output_offset:8; /**< offset value */
+ 339:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****     uint32_t :20;
+ 340:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   };
+ 341:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   uint32_t cfg1;
+ 342:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   };
+ 343:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** } XMC_DAC_CH_CONFIG_t;
+ 344:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /*Anonymous structure/union guard end*/
+ 345:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #if defined(__CC_ARM)
+ 346:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   #pragma pop
+ 347:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #elif defined(__TASKING__)
+ 348:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   #pragma warning restore
+ 349:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #endif
+ 350:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /*******************************************************************************
+ 351:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * API PROTOTYPES
+ 352:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *******************************************************************************/
+ 353:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 354:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #ifdef __cplusplus
+ 355:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** extern "C" {
+ 356:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** #endif
+ 357:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 358:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 359:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 360:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 361:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 362:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 363:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 364:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Enables DAC clock and releases DAC reset.<br>
+ 365:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 366:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 367:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Enabling DAC is the first step of DAC initialisation. This API is called by XMC_DAC_CH_Init().
+ 368:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * DAC clock is enabled by setting \a DAC bit of \a CGATCLR1 register. DAC reset is released by set
+ 369:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 370:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 371:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 372:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_IsEnabled(), XMC_DAC_Disable(), XMC_DAC_CH_Init()\n\n\n
+ 373:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 374:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 375:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** void XMC_DAC_Enable(XMC_DAC_t *const dac);
+ 376:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 377:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 378:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 379:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 380:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 381:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 382:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 383:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Disables DAC clock and resets DAC.
+ 384:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 385:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 386:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * DAC clock is disabled by setting \a DAC bit of \a CGATSET1 register. DAC is reset by setting \a 
+ 387:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 388:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 389:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_IsEnabled(), XMC_DAC_Enable()\n\n\n
+ 390:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 391:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 392:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** void XMC_DAC_Disable(XMC_DAC_t *const dac);
+ 393:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 394:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 395:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 396:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 397:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return bool<br>
+ 398:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * true  - if DAC is enabled<br>
+ 399:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * false - if DAC is disabled
+ 400:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 401:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 402:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Returns the state of the DAC.
+ 403:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 404:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 405:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * DAC enabled status is determined by referring to \a DACRS bit of \a PRSTAT1 register.
+ 406:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 407:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 408:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_Enable(), XMC_DAC_Disable()\n\n\n
+ 409:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 410:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 411:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** bool XMC_DAC_IsEnabled(const XMC_DAC_t *const dac);
+ 412:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 413:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 414:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 415:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 416:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 417:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 418:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 419:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * DAC switches to Simultaneous data mode from Independent data mode.
+ 420:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 421:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 422:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Independent data mode is the default data mode.
+ 423:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Simultaneous data mode is enabled by setting \a DATMOD bit of \a DAC0CFG1 register.
+ 424:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 425:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 426:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Set channel 0 and channel 1 to Data mode before calling this API.
+ 427:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 428:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 429:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_StartSingleValueMode(), XMC_DAC_CH_StartDataMode(), XMC_DAC_SimultaneousWrite(), XMC_
+ 430:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 431:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 432:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_EnableSimultaneousDataMode(XMC_DAC_t *const dac)
+ 433:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 434:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_EnableSimultaneousDataMode: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(
+ 435:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 436:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DACCFG[0].high |= DAC_DAC0CFG1_DATMOD_Msk;
+ 437:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 438:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 439:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 440:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 441:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 442:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 443:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 444:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 445:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * DAC switches to independent data mode from simultaneous Data mode.
+ 446:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 447:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 448:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Independent data mode is the default data mode.
+ 449:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Simultaneous data mode is disabled by clearing \a DATMOD bit of \a DAC0CFG1 register.
+ 450:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 451:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 452:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_StartDataMode(), XMC_DAC_EnableSimultaneousDataMode()\n\n\n
+ 453:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 454:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 455:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_DisableSimultaneousDataMode(XMC_DAC_t *const dac)
+ 456:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 457:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_DisableSimultaneousDataMode: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID
+ 458:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 459:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DACCFG[0].high &= ~DAC_DAC0CFG1_DATMOD_Msk;
+ 460:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 461:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 462:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 463:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 464:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param data0 Data for DAC channel 0 [0-4095]
+ 465:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param data1 Data for DAC channel 1 [0-4095]
+ 466:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 467:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 468:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 469:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 470:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * The data (\e data0 & \e data1) to be converted by channel 0 & channel 1 are updated to \a DATA1 
+ 471:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * data0 and data1 have the range of [0-4095].
+ 472:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 473:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 474:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Channel 0 and Channel 1 should be set to simultaneous data mode before calling this API.
+ 475:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 476:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 477:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_EnableSimultaneousDataMode()\n\n\n
+ 478:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 479:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 480:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_SimultaneousWrite(XMC_DAC_t *const dac, const uint16_t data0, const ui
+ 481:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 482:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_SimultaneousWrite: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 483:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 484:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DAC01DATA = (data0 << DAC_DAC01DATA_DATA0_Pos) | (data1 << DAC_DAC01DATA_DATA1_Pos);
+ 485:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 486:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 487:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 488:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 489:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 490:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param config Pointer to the DAC channel configuration structure
+ 491:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 492:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 493:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 494:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 495:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Initialises and configures the DAC \e channel with the configuration date pointed by \e config.
+ 496:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 497:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 498:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * DAC channel is initialised by configuring the registers \a DAC0CFG0 and \a DAC0CFG1 registers (f
+ 499:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * It enables the channel output by calling XMC_DAC_CH_EnableOutput().
+ 500:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 501:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 502:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** void XMC_DAC_CH_Init(XMC_DAC_t *const dac, const uint8_t channel, const XMC_DAC_CH_CONFIG_t *const 
+ 503:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 504:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 505:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 506:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 507:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 508:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 509:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 510:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 511:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Channel \a channel output is enabled by setting the \a ANAEN bit of \a DAC0CFG1 register (for ch
+ 512:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 513:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><BR>
+ 514:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \a tSTARTUP time for DAC analog output starts after the \a ANAEN bit is set to one.
+ 515:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * After the expiry of the startup time the default value is driven to DAC output and a new value c
+ 516:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 517:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 518:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_DisableOutput(), XMC_DAC_CH_IsOutputEnabled()\n\n\n
+ 519:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 520:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 521:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_CH_EnableOutput(XMC_DAC_t *const dac, const uint8_t channel)
+ 522:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 523:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_EnableOutput: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 524:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_EnableOutput: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(cha
+ 525:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 526:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DACCFG[channel].high |= DAC_DAC0CFG1_ANAEN_Msk;
+ 165              	 .loc 2 526 0
+ 166 001e 8368     	 ldr r3,[r0,#8]
+ 167 0020 43F08073 	 orr r3,r3,#16777216
+ 168 0024 8360     	 str r3,[r0,#8]
+ 169              	.LVL15:
+ 170              	.L13:
+ 171 0026 70BD     	 pop {r4,r5,r6,pc}
+ 172              	.LVL16:
+ 173              	.L17:
+ 174              	 .align 2
+ 175              	.L16:
+ 176 0028 20000010 	 .word 268435488
+ 177              	.LBE45:
+ 178              	.LBE44:
+ 179              	 .cfi_endproc
+ 180              	.LFE206:
+ 182              	 .section .text.XMC_DAC_CH_SetFrequency,"ax",%progbits
+ 183              	 .align 2
+ 184              	 .global XMC_DAC_CH_SetFrequency
+ 185              	 .thumb
+ 186              	 .thumb_func
+ 188              	XMC_DAC_CH_SetFrequency:
+ 189              	.LFB207:
+ 126:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 127:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     XMC_DAC_CH_EnableOutput(dac, channel);
+ 128:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 129:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 130:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 131:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to set the waveform frequency except in Ramp and Pattern generation mode. */
+ 132:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_SetFrequency(XMC_DAC_t *const dac,
+ 133:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                             const uint8_t channel,
+ 134:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                             const uint32_t frequency)
+ 135:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+ 190              	 .loc 1 135 0
+ 191              	 .cfi_startproc
+ 192              	 
+ 193              	 
+ 194              	.LVL17:
+ 195 0000 70B5     	 push {r4,r5,r6,lr}
+ 196              	.LCFI4:
+ 197              	 .cfi_def_cfa_offset 16
+ 198              	 .cfi_offset 4,-16
+ 199              	 .cfi_offset 5,-12
+ 200              	 .cfi_offset 6,-8
+ 201              	 .cfi_offset 14,-4
+ 202 0002 0546     	 mov r5,r0
+ 203 0004 0E46     	 mov r6,r1
+ 204 0006 1446     	 mov r4,r2
+ 136:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   uint32_t divider;
+ 137:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_STATUS_t status;
+ 138:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 139:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_SetFrequency: frequency must be greater than zero", frequency > 0U);
+ 140:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 141:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   divider = XMC_SCU_CLOCK_GetPeripheralClockFrequency() / frequency;
+ 205              	 .loc 1 141 0
+ 206 0008 FFF7FEFF 	 bl XMC_SCU_CLOCK_GetPeripheralClockFrequency
+ 207              	.LVL18:
+ 208 000c B0FBF4F0 	 udiv r0,r0,r4
+ 209              	.LVL19:
+ 142:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 143:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if (divider < XMC_DAC_MIN_FREQ_DIVIDER)
+ 210              	 .loc 1 143 0
+ 211 0010 0F28     	 cmp r0,#15
+ 212 0012 0BD9     	 bls .L20
+ 144:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 145:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     status = XMC_DAC_CH_STATUS_ERROR_FREQ2HIGH;
+ 146:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 147:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   else if (divider >= XMC_DAC_MAX_FREQ_DIVIDER)
+ 213              	 .loc 1 147 0
+ 214 0014 B0F5801F 	 cmp r0,#1048576
+ 215 0018 0AD2     	 bcs .L21
+ 216 001a 05EBC605 	 add r5,r5,r6,lsl#3
+ 217              	.LVL20:
+ 148:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 149:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     status = XMC_DAC_CH_STATUS_ERROR_FREQ2LOW;
+ 150:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 151:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   else {
+ 152:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     dac->DACCFG[channel].low = (dac->DACCFG[channel].low & (uint32_t)(~DAC_DAC0CFG0_FREQ_Msk)) |
+ 218              	 .loc 1 152 0
+ 219 001e 6B68     	 ldr r3,[r5,#4]
+ 220 0020 1B0D     	 lsrs r3,r3,#20
+ 221 0022 1B05     	 lsls r3,r3,#20
+ 222 0024 1843     	 orrs r0,r0,r3
+ 223              	.LVL21:
+ 224 0026 6860     	 str r0,[r5,#4]
+ 225              	.LVL22:
+ 153:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                (divider << DAC_DAC0CFG0_FREQ_Pos);
+ 154:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     status = XMC_DAC_CH_STATUS_OK;
+ 226              	 .loc 1 154 0
+ 227 0028 0020     	 movs r0,#0
+ 228 002a 70BD     	 pop {r4,r5,r6,pc}
+ 229              	.LVL23:
+ 230              	.L20:
+ 145:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 231              	 .loc 1 145 0
+ 232 002c 0420     	 movs r0,#4
+ 233              	.LVL24:
+ 234 002e 70BD     	 pop {r4,r5,r6,pc}
+ 235              	.LVL25:
+ 236              	.L21:
+ 149:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 237              	 .loc 1 149 0
+ 238 0030 0320     	 movs r0,#3
+ 239              	.LVL26:
+ 155:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 156:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 157:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   return status;
+ 158:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 240              	 .loc 1 158 0
+ 241 0032 70BD     	 pop {r4,r5,r6,pc}
+ 242              	 .cfi_endproc
+ 243              	.LFE207:
+ 245              	 .section .text.XMC_DAC_CH_SetRampFrequency,"ax",%progbits
+ 246              	 .align 2
+ 247              	 .global XMC_DAC_CH_SetRampFrequency
+ 248              	 .thumb
+ 249              	 .thumb_func
+ 251              	XMC_DAC_CH_SetRampFrequency:
+ 252              	.LFB208:
+ 159:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 160:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to set the waveform frequency in Ramp Mode. */
+ 161:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_SetRampFrequency(XMC_DAC_t *const dac,
+ 162:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                                 const uint8_t channel,
+ 163:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                                 const uint32_t frequency)
+ 164:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+ 253              	 .loc 1 164 0
+ 254              	 .cfi_startproc
+ 255              	 
+ 256              	 
+ 257              	.LVL27:
+ 258 0000 70B5     	 push {r4,r5,r6,lr}
+ 259              	.LCFI5:
+ 260              	 .cfi_def_cfa_offset 16
+ 261              	 .cfi_offset 4,-16
+ 262              	 .cfi_offset 5,-12
+ 263              	 .cfi_offset 6,-8
+ 264              	 .cfi_offset 14,-4
+ 165:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   uint32_t stop;
+ 166:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   uint32_t start;
+ 167:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 168:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   start = dac->DACDATA[channel];
+ 265              	 .loc 1 168 0
+ 266 0002 0B1D     	 adds r3,r1,#4
+ 267 0004 00EB8303 	 add r3,r0,r3,lsl#2
+ 268 0008 5E68     	 ldr r6,[r3,#4]
+ 269              	.LVL28:
+ 169:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   stop = (dac->DAC01DATA >> (channel * DAC_DAC01DATA_DATA1_Pos)) & (uint32_t)DAC_DAC01DATA_DATA0_Ms
+ 270              	 .loc 1 169 0
+ 271 000a C369     	 ldr r3,[r0,#28]
+ 272              	.LVL29:
+ 273 000c 0C01     	 lsls r4,r1,#4
+ 274 000e E340     	 lsrs r3,r3,r4
+ 275              	.LVL30:
+ 276 0010 C3F30B03 	 ubfx r3,r3,#0,#12
+ 170:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 171:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   return XMC_DAC_CH_SetFrequency(dac, channel, frequency * ((stop - start) + 1U));
+ 277              	 .loc 1 171 0
+ 278 0014 9B1B     	 subs r3,r3,r6
+ 279 0016 03FB0222 	 mla r2,r3,r2,r2
+ 280              	.LVL31:
+ 281 001a FFF7FEFF 	 bl XMC_DAC_CH_SetFrequency
+ 282              	.LVL32:
+ 172:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 283              	 .loc 1 172 0
+ 284 001e 70BD     	 pop {r4,r5,r6,pc}
+ 285              	 .cfi_endproc
+ 286              	.LFE208:
+ 288              	 .section .text.XMC_DAC_CH_StartSingleValueMode,"ax",%progbits
+ 289              	 .align 2
+ 290              	 .global XMC_DAC_CH_StartSingleValueMode
+ 291              	 .thumb
+ 292              	 .thumb_func
+ 294              	XMC_DAC_CH_StartSingleValueMode:
+ 295              	.LFB209:
+ 173:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 174:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to start the operation in Single Value Mode. */
+ 175:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_StartSingleValueMode(XMC_DAC_t *const dac, const uint8_t channel)
+ 176:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+ 296              	 .loc 1 176 0
+ 297              	 .cfi_startproc
+ 298              	 
+ 299              	 
+ 300              	 
+ 301              	.LVL33:
+ 302 0000 00EBC101 	 add r1,r0,r1,lsl#3
+ 303              	.LVL34:
+ 304              	.LBB46:
+ 305              	.LBB47:
+ 527:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 528:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 529:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 530:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 531:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 532:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 533:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 534:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 535:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 536:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Channel \a channel output is disabled by clearing the \a ANAEN bit of \a DAC0CFG1 register (for 
+ 537:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 538:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 539:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * A call to this API stops driving the converted digital input to its output.
+ 540:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 541:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 542:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_EnableOutput(), XMC_DAC_CH_IsOutputEnabled()\n\n\n
+ 543:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 544:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 545:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_CH_DisableOutput(XMC_DAC_t *const dac, const uint8_t channel)
+ 546:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 547:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_DisableOutput: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 548:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_DisableOutput: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(ch
+ 549:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 550:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DACCFG[channel].high &= ~DAC_DAC0CFG1_ANAEN_Msk;
+ 551:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 552:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 553:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 554:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 555:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 556:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 557:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return bool <BR>
+ 558:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * true  - if analog output is enabled <BR>
+ 559:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * false - if analog output is disabled <BR>
+ 560:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 561:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 562:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Returns the status of DAC analog output.
+ 563:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 564:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 565:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Channel \a channel output enabled or disabled is determined by reading the \a ANAEN bit of \a DA
+ 566:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 567:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 568:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_EnableOutput(), XMC_DAC_CH_DisableOutput()\n\n\n
+ 569:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 570:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 571:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE bool XMC_DAC_CH_IsOutputEnabled(const XMC_DAC_t *const dac, const uint8_t channel)
+ 572:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 573:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_IsOutputEnabled: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 574:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_IsOutputEnabled: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(
+ 575:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 576:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   return (bool)(dac->DACCFG[channel].high & DAC_DAC0CFG1_ANAEN_Msk);
+ 577:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 578:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 579:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 580:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 581:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 582:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param data Data to be written  [0-4095]
+ 583:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 584:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 585:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 586:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 587:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Writes the \e data to the \e channel's DATA register.
+ 588:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 589:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 590:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * The \e data is then converted and driven to the output.
+ 591:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * If the trigger is set, On a trigger event the data in DATA register is converted and driven to \
+ 592:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Data \a data is written to the \a channel by loading \a data to \a DATA0 bit-field of \a DAC0DAT
+ 593:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * data has the range of [0-4095].
+ 594:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 595:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 596:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * The API can be used for Single Value Mode, Data Mode (Individual) & Ramp Mode.
+ 597:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call XMC_DAC_CH_EnableOutput() API to enable analog output.
+ 598:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 599:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 600:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_StartSingleValueMode(), XMC_DAC_CH_StartDataMode(), XMC_DAC_CH_StartRampMode()\n\n\n
+ 601:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 602:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 603:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_CH_Write(XMC_DAC_t *const dac, const uint8_t channel, const uint16_t d
+ 604:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 605:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_Write: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 606:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_Write: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(channel));
+ 607:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 608:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DACDATA[channel] = data;
+ 609:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 610:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 611:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 612:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 613:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 614:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 615:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 616:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 617:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 618:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the \e channel to Single Value Mode by calling XMC_DAC_CH_SetMode().
+ 619:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 620:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 621:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call XMC_DAC_CH_Write() API to write the data.
+ 622:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 623:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 624:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_Write()\n\n\n
+ 625:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 626:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 627:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_StartSingleValueMode(XMC_DAC_t *const dac, const uint8_t channel);
+ 628:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 629:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 630:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 631:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 632:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param trigger Data points update trigger
+ 633:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param frequency Waveform frequency [Hz]
+ 634:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 635:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return XMC_DAC_CH_STATUS_t status
+ 636:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 637:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 638:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the \e channel to Data mode. Trigger and frequency are configured.
+ 639:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 640:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 641:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call XMC_DAC_CH_Write() API to write the data. Call XMC_DAC_EnableSimultaneousDataMode() to swit
+ 642:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 643:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 644:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_Init(), XMC_DAC_CH_Write(), XMC_DAC_EnableSimultaneousDataMode() \n\n\n
+ 645:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 646:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 647:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_StartDataMode(XMC_DAC_t *const dac,
+ 648:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                              const uint8_t channel,
+ 649:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                              const XMC_DAC_CH_TRIGGER_t trigger,
+ 650:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                              const uint32_t frequency);
+ 651:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 652:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 653:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 654:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 655:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param start Start point of the ramp [0-4095]
+ 656:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param stop Stop point of the ramp [0-4095]
+ 657:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param trigger Data points update trigger
+ 658:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param frequency Ramp frequency in [Hz]
+ 659:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 660:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return XMC_DAC_CH_STATUS_t status
+ 661:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 662:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 663:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the \e channel to Ramp mode. Trigger, frequency, start and stop values are configured.
+ 664:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * On a \e trigger ramp values are converted and driven to \e channel output.
+ 665:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Start and stop have the range of [0-4095]. Stop should be equal or greater than start. 
+ 666:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 667:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 668:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * If the ramp counter reaches its \e stop value, it restarts from the \e start value with the next
+ 669:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 670:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 671:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_Init(), XMC_DAC_CH_GetRampStart(), XMC_DAC_CH_GetRampStop() \n\n\n
+ 672:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 673:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 674:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_StartRampMode(XMC_DAC_t *const dac,
+ 675:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                              const uint8_t channel,
+ 676:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                              const uint16_t start,
+ 677:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                              const uint16_t stop,
+ 678:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                              const XMC_DAC_CH_TRIGGER_t trigger,
+ 679:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                              const uint32_t frequency);
+ 680:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 681:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 682:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 683:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 684:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param pattern Data table of a pattern
+ 685:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param sign_output Sign information of the waveform
+ 686:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param trigger Data points update trigger
+ 687:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param frequency Waveform frequency in [Hz]
+ 688:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 689:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return XMC_DAC_CH_STATUS_t status
+ 690:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 691:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 692:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the \e channel to Pattern mode. Trigger, frequency, sign output and data are configured.
+ 693:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * On a \e trigger, the \e pattern values are converted and driven to \e channel output.
+ 694:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 695:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 696:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_Init(), XMC_DAC_CH_DisablePatternSignOutput() \n\n\n
+ 697:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 698:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 699:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_StartPatternMode(XMC_DAC_t *const dac,
+ 700:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                                 const uint8_t channel,
+ 701:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                                 const uint8_t *const pattern,
+ 702:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                                 const XMC_DAC_CH_PATTERN_SIGN_OUTPUT_t sign_output,
+ 703:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                                 const XMC_DAC_CH_TRIGGER_t trigger,
+ 704:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                                 const uint32_t frequency);
+ 705:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 706:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 707:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 708:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 709:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param trigger Data points update trigger
+ 710:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param frequency Waveform frequency in [Hz]
+ 711:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 712:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return XMC_DAC_CH_STATUS_t status
+ 713:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 714:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 715:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the \e channel to Noise mode. Trigger and frequency are configured.
+ 716:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * On a \e trigger the DAC starts converting and drives to \e channel output.
+ 717:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 718:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 719:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_Init()\n\n\n
+ 720:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 721:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 722:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_StartNoiseMode(XMC_DAC_t *const dac,
+ 723:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               const uint8_t channel,
+ 724:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               const XMC_DAC_CH_TRIGGER_t trigger,
+ 725:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                               const uint32_t frequency);
+ 726:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 727:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 728:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 729:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 730:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param pattern Pointer to the data table
+ 731:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 732:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 733:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 734:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 735:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * The data for the Pattern mode is written to the \a DAC0PATL and \a DAC0PATH registers.
+ 736:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * The API is called by XMC_DAC_CH_StartPatternMode().
+ 737:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 738:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 739:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call this API if the \a channel is set to Pattern mode.
+ 740:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 741:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 742:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_EnablePatternSignOutput(), XMC_DAC_CH_DisablePatternSignOutput()\n\n\n
+ 743:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 744:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 745:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** void XMC_DAC_CH_SetPattern(XMC_DAC_t *const dac, const uint8_t channel, const uint8_t *const patter
+ 746:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 747:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 748:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 749:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 750:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 751:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 752:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 753:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 754:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Enables the output sign information for Pattern Mode.
+ 755:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 756:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 757:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sign output is enabled by setting \a SIGNEN bit of \a DAC0CFG0 register (for channel 0) / DAC1CF
+ 758:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 759:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 760:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call this API if the \e channel is set to Pattern mode.
+ 761:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 762:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 763:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_StartPatternMode(), XMC_DAC_CH_DisablePatternSignOutput()\n\n\n
+ 764:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 765:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 766:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_CH_EnablePatternSignOutput(XMC_DAC_t *const dac,
+ 767:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                                      const uint8_t channel)
+ 768:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 769:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_EnablePatternSignOutput: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(
+ 770:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_EnablePatternSignOutput: channel parameter not valid\n", XMC_DAC_IS_CHANNE
+ 771:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 772:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DACCFG[channel].low |= DAC_DAC0CFG0_SIGNEN_Msk;
+ 773:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 774:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 775:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 776:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 777:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 778:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 779:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 780:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 781:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 782:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Disables output sign information for Pattern Mode.
+ 783:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 784:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 785:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sign output is disabled by clearing \a SIGNEN bit of \a DAC0CFG0 register (for channel 0) / DAC1
+ 786:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 787:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 788:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call this API if the \e channel is set to Pattern mode.
+ 789:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 790:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 791:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_StartPatternMode(), XMC_DAC_CH_EnablePatternSignOutput()\n\n\n
+ 792:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 793:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 794:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_CH_DisablePatternSignOutput(XMC_DAC_t *const dac,
+ 795:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                                      const uint8_t channel)
+ 796:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 797:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_DisablePatternSignOutput: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID
+ 798:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_DisablePatternSignOutput: channel parameter not valid\n", XMC_DAC_IS_CHANN
+ 799:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 800:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DACCFG[channel].low &= ~DAC_DAC0CFG0_SIGNEN_Msk;
+ 801:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 802:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 803:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 804:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 805:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 806:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param start Ramp start point [0-4095]
+ 807:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 808:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 809:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 810:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 811:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the ramp start value by writing to the register \a DAC0DATA (for \e channel 0) or \a DAC1DA
+ 812:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * If the ramp counter reaches its stop value, it restarts from the \a start value with the next tr
+ 813:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Ensure \e start value is lower than the stop value.
+ 814:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 815:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 816:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call this API if the \a channel is set to Ramp mode.
+ 817:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Start value is a 12 bit data.
+ 818:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 819:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 820:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_GetRampStart(), XMC_DAC_CH_GetRampStop(), XMC_DAC_CH_SetRampStop()\n\n\n
+ 821:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 822:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 823:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_CH_SetRampStart(XMC_DAC_t *const dac, const uint8_t channel, const uin
+ 824:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 825:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetRampStart: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 826:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetRampStart: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(cha
+ 827:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 828:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DACDATA[channel] = start;
+ 829:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 830:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 831:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 832:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 833:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 834:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 835:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return uint16_t
+ 836:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 837:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 838:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Gets the ramp start value by reading \a DATA0 bit-field of \a DAC0DATA register (for channel 0) 
+ 839:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * If the ramp counter reaches its stop value, it restarts from the start value with the next trigg
+ 840:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 841:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 842:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call this API if the \e channel is set to Ramp mode.
+ 843:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 844:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 845:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_SetRampStart(), XMC_DAC_CH_StartRampMode(), XMC_DAC_CH_GetRampStop(), XMC_DAC_CH_SetR
+ 846:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 847:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 848:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE uint16_t XMC_DAC_CH_GetRampStart(XMC_DAC_t *const dac, const uint8_t channel)
+ 849:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 850:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_GetRampStart: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 851:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_GetRampStart: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(cha
+ 852:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   
+ 853:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   return (uint16_t)(dac->DACDATA[channel]);
+ 854:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 855:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 856:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 857:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 858:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 859:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param stop Ramp stop point [0-4095]
+ 860:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 861:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 862:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 863:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 864:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the ramp stop value by writing to the bit-field \a DATA0 (for \e channel 0) or \a DATA1 (fo
+ 865:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * If the ramp counter reaches its \a stop value, it restarts from the start value with the next tr
+ 866:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Ensure \e stop value is higher than the start value.
+ 867:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 868:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 869:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call this API if the \e channel is set to Ramp mode.
+ 870:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Stop value is a 12 bit data.
+ 871:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 872:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 873:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_GetRampStop(), XMC_DAC_CH_SetRampStart()\n\n\n
+ 874:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 875:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 876:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_CH_SetRampStop(XMC_DAC_t *const dac, const uint8_t channel, const uint
+ 877:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 878:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetRampStop: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 879:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetRampStop: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(chan
+ 880:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****     
+ 881:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DAC01DATA = (dac->DAC01DATA & ~(DAC_DAC01DATA_DATA0_Msk << (channel * DAC_DAC01DATA_DATA1_Po
+ 882:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                (stop << (channel * DAC_DAC01DATA_DATA1_Pos));
+ 883:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 884:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 885:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 886:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 887:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 888:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 889:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return uint16_t
+ 890:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 891:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 892:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Gets the ramp stop value by reading \a DATA0 bit-field of \a DAC01DATA register (for channel 0) 
+ 893:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * If the ramp counter reaches its stop value, it restarts from the start value with the next trigg
+ 894:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 895:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 896:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call this API if the \e channel is set to Ramp mode.
+ 897:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 898:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 899:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_SetRampStop(), XMC_DAC_CH_StartRampMode(), XMC_DAC_CH_GetRampStart()\n\n\n
+ 900:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 901:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 902:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE uint16_t XMC_DAC_CH_GetRampStop(XMC_DAC_t *const dac, const uint8_t channel)
+ 903:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 904:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_GetRampStop: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 905:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_GetRampStop: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(chan
+ 906:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 907:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   return((dac->DAC01DATA >> (channel * DAC_DAC01DATA_DATA1_Pos)) & DAC_DAC01DATA_DATA0_Msk);
+ 908:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 909:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 910:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 911:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 912:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 913:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param trigger Trigger source
+ 914:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 915:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+ 916:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 917:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 918:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Selects the \e trigger source for the \e channel by configuring the bits TRIGSEL & TRIGMOD of CF
+ 919:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 920:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 921:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Channel \a channel trigger source is selected by \a TRIGSEL bit-field of \a DAC0CFG1 register (f
+ 922:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 923:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 924:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_CH_SetTrigger(XMC_DAC_t *const dac, const uint8_t channel, const XMC_D
+ 925:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+ 926:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetTrigger: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 927:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetTrigger: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(chann
+ 928:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetTrigger: trigger parameter not valid\n", XMC_DAC_IS_TRIGGER_VALID(trigg
+ 929:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 930:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DACCFG[channel].high = (dac->DACCFG[channel].high & ~(DAC_DAC0CFG1_TRIGSEL_Msk | DAC_DAC0CFG
+ 931:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                               trigger;
+ 932:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 933:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 934:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 935:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 936:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 937:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param frequency Waveform frequency in [Hz]
+ 938:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 939:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return XMC_DAC_CH_STATUS_t
+ 940:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 941:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 942:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the \e frequency of DAC channel.
+ 943:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 944:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 945:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * The value \e frequency acts as clock divider. The smallest \e frequency divider value is 16.
+ 946:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * A valid \e frequency value should be within the range XMC_DAC_MIN_FREQ_DIVIDER to XMC_DAC_MAX_FR
+ 947:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Frequency \a frequency is configured by setting \a FREQ bit-field of \a DAC0CFG0 register (for c
+ 948:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 949:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 950:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call this API only for Single value mode, Data mode and Noise mode.
+ 951:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call XMC_DAC_CH_SetRampFrequency() in case of Ramp mode and XMC_DAC_CH_SetPatternFrequency() in 
+ 952:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 953:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 954:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_SetRampFrequency(), XMC_DAC_CH_SetPatternFrequency()\n\n\n
+ 955:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 956:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 957:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_SetFrequency(XMC_DAC_t *const dac, const uint8_t channel, const uint
+ 958:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 959:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 960:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 961:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 962:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param frequency [Hz]
+ 963:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 964:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return XMC_DAC_CH_STATUS_t
+ 965:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 966:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 967:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the \e frequency of DAC channel by calling XMC_DAC_CH_SetFrequency().
+ 968:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 969:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 970:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * For the Ramp mode, the \a frequency of operation depends on the total number of sample points (\
+ 971:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Frequency \e frequency is multiplied by the total number of sample points, so that each trigger 
+ 972:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 973:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 974:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call this API only if the \a channel is set to Ramp mode.
+ 975:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 976:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+ 977:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_StartRampMode()\n\n\n
+ 978:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 979:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+ 980:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_SetRampFrequency(XMC_DAC_t *const dac, const uint8_t channel, const 
+ 981:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+ 982:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+ 983:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+ 984:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+ 985:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param frequency in [Hz]
+ 986:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 987:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return XMC_DAC_CH_STATUS_t
+ 988:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 989:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+ 990:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the \e frequency of DAC channel by calling XMC_DAC_CH_SetFrequency().
+ 991:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 992:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par
+ 993:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * For the Pattern mode, the \a frequency of operation depends on the total number of sample points
+ 994:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Frequency \e frequency is multiplied by the total number of sample points, so that each trigger 
+ 995:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 996:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Note:</b><br>
+ 997:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Call this API only if the \a channel is set to Pattern mode.
+ 998:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+ 999:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Related APIs:</b><BR>
+1000:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * XMC_DAC_CH_StartPatternMode()\n\n\n
+1001:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+1002:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+1003:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE XMC_DAC_CH_STATUS_t XMC_DAC_CH_SetPatternFrequency(XMC_DAC_t *const dac,
+1004:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                                                    const uint8_t channel,
+1005:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                                                                    const uint32_t frequency)
+1006:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+1007:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetPatternFrequency: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac)
+1008:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetPatternFrequency: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VA
+1009:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+1010:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   return XMC_DAC_CH_SetFrequency(dac, channel, frequency * XMC_DAC_SAMPLES_PER_PERIOD);
+1011:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+1012:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** 
+1013:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** /**
+1014:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param dac Pointer to an instance of DAC module
+1015:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param channel DAC channel number
+1016:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @param mode DAC operation mode
+1017:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+1018:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * @return None
+1019:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+1020:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * \par<b>Description:</b><br>
+1021:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Sets the operating \e mode for the \e channel by setting the \a MODE bit-field of \a DAC0CFG0 re
+1022:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  * Different modes of DAC operation are defined by enum XMC_DAC_CH_MODE_t.
+1023:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  *
+1024:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****  */
+1025:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** __STATIC_INLINE void XMC_DAC_CH_SetMode(XMC_DAC_t *const dac, const uint8_t channel, const XMC_DAC_
+1026:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** {
+1027:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetMode: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+1028:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetMode: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(channel)
+1029:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   XMC_ASSERT("XMC_DAC_CH_SetMode: trigger parameter not valid\n", XMC_DAC_IS_MODE_VALID(mode));
+1030:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****     
+1031:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****   dac->DACCFG[channel].low = (dac->DACCFG[channel].low & ~DAC_DAC0CFG0_MODE_Msk) |
+ 306              	 .loc 2 1031 0
+ 307 0004 4B68     	 ldr r3,[r1,#4]
+ 308 0006 23F4E003 	 bic r3,r3,#7340032
+ 309 000a 43F48013 	 orr r3,r3,#1048576
+ 310 000e 4B60     	 str r3,[r1,#4]
+ 311              	.LBE47:
+ 312              	.LBE46:
+ 177:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartSingleValueMode: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac
+ 178:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartSingleValueMode: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_V
+ 179:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartSingleValueMode: dac module not enabled\n", XMC_DAC_IsEnabled(dac));
+ 180:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 181:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_SetMode(dac, channel, XMC_DAC_CH_MODE_SINGLE);
+ 182:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 183:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   return XMC_DAC_CH_STATUS_OK;
+ 184:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 313              	 .loc 1 184 0
+ 314 0010 0020     	 movs r0,#0
+ 315              	.LVL35:
+ 316 0012 7047     	 bx lr
+ 317              	 .cfi_endproc
+ 318              	.LFE209:
+ 320              	 .section .text.XMC_DAC_CH_StartDataMode,"ax",%progbits
+ 321              	 .align 2
+ 322              	 .global XMC_DAC_CH_StartDataMode
+ 323              	 .thumb
+ 324              	 .thumb_func
+ 326              	XMC_DAC_CH_StartDataMode:
+ 327              	.LFB210:
+ 185:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 186:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to start the operation in Data Mode. */
+ 187:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_StartDataMode(XMC_DAC_t *const dac,
+ 188:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                              const uint8_t channel,
+ 189:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                              const XMC_DAC_CH_TRIGGER_t trigger,
+ 190:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                              const uint32_t frequency)
+ 191:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+ 328              	 .loc 1 191 0
+ 329              	 .cfi_startproc
+ 330              	 
+ 331              	 
+ 332              	.LVL36:
+ 333 0000 38B5     	 push {r3,r4,r5,lr}
+ 334              	.LCFI6:
+ 335              	 .cfi_def_cfa_offset 16
+ 336              	 .cfi_offset 3,-16
+ 337              	 .cfi_offset 4,-12
+ 338              	 .cfi_offset 5,-8
+ 339              	 .cfi_offset 14,-4
+ 340              	.LVL37:
+ 341 0002 00EBC104 	 add r4,r0,r1,lsl#3
+ 342              	.LBB48:
+ 343              	.LBB49:
+ 344              	 .loc 2 1031 0
+ 345 0006 6568     	 ldr r5,[r4,#4]
+ 346 0008 25F4E005 	 bic r5,r5,#7340032
+ 347 000c 6560     	 str r5,[r4,#4]
+ 348              	.LBE49:
+ 349              	.LBE48:
+ 192:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_STATUS_t status = XMC_DAC_CH_STATUS_OK;
+ 193:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 194:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartDataMode: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 195:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartDataMode: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(ch
+ 196:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartDataMode: dac module not enabled\n", XMC_DAC_IsEnabled(dac));
+ 197:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 198:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_SetMode(dac, channel, XMC_DAC_CH_MODE_IDLE);
+ 199:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 200:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if (trigger == XMC_DAC_CH_TRIGGER_INTERNAL)
+ 350              	 .loc 1 200 0
+ 351 000e 1546     	 mov r5,r2
+ 352 0010 22B9     	 cbnz r2,.L27
+ 201:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 202:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     status = XMC_DAC_CH_SetFrequency(dac, channel, frequency);
+ 353              	 .loc 1 202 0
+ 354 0012 1A46     	 mov r2,r3
+ 355              	.LVL38:
+ 356 0014 FFF7FEFF 	 bl XMC_DAC_CH_SetFrequency
+ 357              	.LVL39:
+ 203:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 204:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 205:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if (status == XMC_DAC_CH_STATUS_OK)
+ 358              	 .loc 1 205 0
+ 359 0018 0346     	 mov r3,r0
+ 360 001a 58B9     	 cbnz r0,.L28
+ 361              	.LVL40:
+ 362              	.L27:
+ 363              	.LBB50:
+ 364              	.LBB51:
+ 930:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                               trigger;
+ 365              	 .loc 2 930 0
+ 366 001c A268     	 ldr r2,[r4,#8]
+ 367 001e 22F4CE22 	 bic r2,r2,#421888
+ 368 0022 2A43     	 orrs r2,r2,r5
+ 369 0024 A260     	 str r2,[r4,#8]
+ 370              	.LVL41:
+ 371              	.LBE51:
+ 372              	.LBE50:
+ 373              	.LBB52:
+ 374              	.LBB53:
+ 375              	 .loc 2 1031 0
+ 376 0026 6368     	 ldr r3,[r4,#4]
+ 377 0028 23F4E003 	 bic r3,r3,#7340032
+ 378 002c 43F40013 	 orr r3,r3,#2097152
+ 379 0030 6360     	 str r3,[r4,#4]
+ 380 0032 0023     	 movs r3,#0
+ 381              	.LVL42:
+ 382              	.L28:
+ 383              	.LBE53:
+ 384              	.LBE52:
+ 206:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 207:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     XMC_DAC_CH_SetTrigger(dac, channel, trigger);
+ 208:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     XMC_DAC_CH_SetMode(dac, channel, XMC_DAC_CH_MODE_DATA);
+ 209:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 210:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 211:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   return status;
+ 212:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 385              	 .loc 1 212 0
+ 386 0034 1846     	 mov r0,r3
+ 387 0036 38BD     	 pop {r3,r4,r5,pc}
+ 388              	 .cfi_endproc
+ 389              	.LFE210:
+ 391              	 .section .text.XMC_DAC_CH_StartRampMode,"ax",%progbits
+ 392              	 .align 2
+ 393              	 .global XMC_DAC_CH_StartRampMode
+ 394              	 .thumb
+ 395              	 .thumb_func
+ 397              	XMC_DAC_CH_StartRampMode:
+ 398              	.LFB211:
+ 213:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 214:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to start the operation in Ramp Mode. */
+ 215:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_StartRampMode(XMC_DAC_t *const dac,
+ 216:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                              const uint8_t channel,
+ 217:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                              const uint16_t start,
+ 218:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                              const uint16_t stop,
+ 219:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                              const XMC_DAC_CH_TRIGGER_t trigger,
+ 220:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                              const uint32_t frequency)
+ 221:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+ 399              	 .loc 1 221 0
+ 400              	 .cfi_startproc
+ 401              	 
+ 402              	 
+ 403              	.LVL43:
+ 404 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 405              	.LCFI7:
+ 406              	 .cfi_def_cfa_offset 24
+ 407              	 .cfi_offset 3,-24
+ 408              	 .cfi_offset 4,-20
+ 409              	 .cfi_offset 5,-16
+ 410              	 .cfi_offset 6,-12
+ 411              	 .cfi_offset 7,-8
+ 412              	 .cfi_offset 14,-4
+ 413 0002 069E     	 ldr r6,[sp,#24]
+ 414              	.LVL44:
+ 415 0004 00EBC104 	 add r4,r0,r1,lsl#3
+ 416              	.LBB54:
+ 417              	.LBB55:
+ 418              	 .loc 2 1031 0
+ 419 0008 6568     	 ldr r5,[r4,#4]
+ 420 000a 25F4E005 	 bic r5,r5,#7340032
+ 421 000e 6560     	 str r5,[r4,#4]
+ 422              	.LVL45:
+ 423              	.LBE55:
+ 424              	.LBE54:
+ 425              	.LBB56:
+ 426              	.LBB57:
+ 828:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 427              	 .loc 2 828 0
+ 428 0010 0D1D     	 adds r5,r1,#4
+ 429 0012 00EB8505 	 add r5,r0,r5,lsl#2
+ 430 0016 6A60     	 str r2,[r5,#4]
+ 431              	.LVL46:
+ 432              	.LBE57:
+ 433              	.LBE56:
+ 434              	.LBB58:
+ 435              	.LBB59:
+ 881:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                (stop << (channel * DAC_DAC01DATA_DATA1_Pos));
+ 436              	 .loc 2 881 0
+ 437 0018 C569     	 ldr r5,[r0,#28]
+ 438 001a 0F01     	 lsls r7,r1,#4
+ 439 001c 40F6FF72 	 movw r2,#4095
+ 440              	.LVL47:
+ 441 0020 BA40     	 lsls r2,r2,r7
+ 442 0022 25EA0202 	 bic r2,r5,r2
+ 882:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 443              	 .loc 2 882 0
+ 444 0026 BB40     	 lsls r3,r3,r7
+ 445              	.LVL48:
+ 881:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                (stop << (channel * DAC_DAC01DATA_DATA1_Pos));
+ 446              	 .loc 2 881 0
+ 447 0028 1343     	 orrs r3,r3,r2
+ 448 002a C361     	 str r3,[r0,#28]
+ 449              	.LVL49:
+ 450              	.LBE59:
+ 451              	.LBE58:
+ 452              	.LBB60:
+ 453              	.LBB61:
+ 930:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                               trigger;
+ 454              	 .loc 2 930 0
+ 455 002c A368     	 ldr r3,[r4,#8]
+ 456 002e 23F4CE23 	 bic r3,r3,#421888
+ 457 0032 3343     	 orrs r3,r3,r6
+ 458 0034 A360     	 str r3,[r4,#8]
+ 459              	.LBE61:
+ 460              	.LBE60:
+ 222:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_STATUS_t status = XMC_DAC_CH_STATUS_OK;
+ 223:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 224:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartRampMode: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 225:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartRampMode: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(ch
+ 226:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartRampMode: dac module not enabled\n", XMC_DAC_IsEnabled(dac));
+ 227:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 228:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_SetMode(dac, channel, XMC_DAC_CH_MODE_IDLE);
+ 229:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 230:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_SetRampStart(dac, channel, start);
+ 231:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_SetRampStop(dac, channel, stop);
+ 232:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_SetTrigger(dac, channel, trigger);
+ 233:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 234:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if (trigger == XMC_DAC_CH_TRIGGER_INTERNAL)
+ 461              	 .loc 1 234 0
+ 462 0036 26B9     	 cbnz r6,.L31
+ 235:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 236:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     status = XMC_DAC_CH_SetRampFrequency(dac, channel, frequency);
+ 463              	 .loc 1 236 0
+ 464 0038 079A     	 ldr r2,[sp,#28]
+ 465 003a FFF7FEFF 	 bl XMC_DAC_CH_SetRampFrequency
+ 466              	.LVL50:
+ 237:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 238:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 239:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if (status == XMC_DAC_CH_STATUS_OK)
+ 467              	 .loc 1 239 0
+ 468 003e 0346     	 mov r3,r0
+ 469 0040 30B9     	 cbnz r0,.L32
+ 470              	.LVL51:
+ 471              	.L31:
+ 472              	.LBB62:
+ 473              	.LBB63:
+ 474              	 .loc 2 1031 0
+ 475 0042 6368     	 ldr r3,[r4,#4]
+ 476 0044 23F4E003 	 bic r3,r3,#7340032
+ 477 0048 43F4A003 	 orr r3,r3,#5242880
+ 478 004c 6360     	 str r3,[r4,#4]
+ 479 004e 0023     	 movs r3,#0
+ 480              	.LVL52:
+ 481              	.L32:
+ 482              	.LBE63:
+ 483              	.LBE62:
+ 240:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 241:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     XMC_DAC_CH_SetMode(dac, channel, XMC_DAC_CH_MODE_RAMP);
+ 242:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 243:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 244:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   return status;
+ 245:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 484              	 .loc 1 245 0
+ 485 0050 1846     	 mov r0,r3
+ 486 0052 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 487              	 .cfi_endproc
+ 488              	.LFE211:
+ 490              	 .section .text.XMC_DAC_CH_StartNoiseMode,"ax",%progbits
+ 491              	 .align 2
+ 492              	 .global XMC_DAC_CH_StartNoiseMode
+ 493              	 .thumb
+ 494              	 .thumb_func
+ 496              	XMC_DAC_CH_StartNoiseMode:
+ 497              	.LFB213:
+ 246:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 247:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to start the operation in Pattern Mode. */
+ 248:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_StartPatternMode(XMC_DAC_t *const dac,
+ 249:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                                 const uint8_t channel,
+ 250:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                                 const uint8_t *const pattern,
+ 251:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                                 const XMC_DAC_CH_PATTERN_SIGN_OUTPUT_t sign_output,
+ 252:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                                 const XMC_DAC_CH_TRIGGER_t trigger,
+ 253:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                                 const uint32_t frequency)
+ 254:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+ 255:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_STATUS_t status = XMC_DAC_CH_STATUS_OK;
+ 256:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 257:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartPatternMode: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 258:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartPatternMode: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID
+ 259:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartPatternMode: dac module not enabled\n", XMC_DAC_IsEnabled(dac));
+ 260:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 261:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_SetMode(dac, channel, XMC_DAC_CH_MODE_IDLE);
+ 262:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 263:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if (trigger == XMC_DAC_CH_TRIGGER_INTERNAL)
+ 264:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 265:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     status = XMC_DAC_CH_SetFrequency(dac, channel, frequency * XMC_DAC_SAMPLES_PER_PERIOD);
+ 266:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 267:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 268:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if (status == XMC_DAC_CH_STATUS_OK)
+ 269:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 270:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     XMC_DAC_CH_SetPattern(dac, channel, pattern);
+ 271:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     if (XMC_DAC_CH_PATTERN_SIGN_OUTPUT_ENABLED == sign_output)
+ 272:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     {
+ 273:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****       XMC_DAC_CH_EnablePatternSignOutput(dac, channel);
+ 274:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     }
+ 275:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     else
+ 276:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     {
+ 277:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****       XMC_DAC_CH_DisablePatternSignOutput(dac, channel);
+ 278:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     }
+ 279:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     XMC_DAC_CH_SetTrigger(dac, channel, trigger);
+ 280:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     XMC_DAC_CH_SetMode(dac, channel, XMC_DAC_CH_MODE_PATTERN);
+ 281:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 282:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 283:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   return status;
+ 284:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 285:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 286:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to start the operation in Noise Mode. */
+ 287:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** XMC_DAC_CH_STATUS_t XMC_DAC_CH_StartNoiseMode(XMC_DAC_t *const dac,
+ 288:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                               const uint8_t channel,
+ 289:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                               const XMC_DAC_CH_TRIGGER_t trigger,
+ 290:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****                                               const uint32_t frequency)
+ 291:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+ 498              	 .loc 1 291 0
+ 499              	 .cfi_startproc
+ 500              	 
+ 501              	 
+ 502              	.LVL53:
+ 503 0000 38B5     	 push {r3,r4,r5,lr}
+ 504              	.LCFI8:
+ 505              	 .cfi_def_cfa_offset 16
+ 506              	 .cfi_offset 3,-16
+ 507              	 .cfi_offset 4,-12
+ 508              	 .cfi_offset 5,-8
+ 509              	 .cfi_offset 14,-4
+ 510              	.LVL54:
+ 511 0002 00EBC104 	 add r4,r0,r1,lsl#3
+ 512              	.LBB64:
+ 513              	.LBB65:
+ 514              	 .loc 2 1031 0
+ 515 0006 6568     	 ldr r5,[r4,#4]
+ 516 0008 25F4E005 	 bic r5,r5,#7340032
+ 517 000c 6560     	 str r5,[r4,#4]
+ 518              	.LBE65:
+ 519              	.LBE64:
+ 292:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_STATUS_t status = XMC_DAC_CH_STATUS_OK;
+ 293:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 294:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartNoiseMode: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 295:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartNoiseMode: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(c
+ 296:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_StartNoiseMode: dac module not enabled\n", XMC_DAC_IsEnabled(dac));
+ 297:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 298:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_SetMode(dac, channel, XMC_DAC_CH_MODE_IDLE);
+ 299:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 300:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if (trigger == XMC_DAC_CH_TRIGGER_INTERNAL)
+ 520              	 .loc 1 300 0
+ 521 000e 1546     	 mov r5,r2
+ 522 0010 22B9     	 cbnz r2,.L35
+ 301:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 302:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     status = XMC_DAC_CH_SetFrequency(dac, channel, frequency);
+ 523              	 .loc 1 302 0
+ 524 0012 1A46     	 mov r2,r3
+ 525              	.LVL55:
+ 526 0014 FFF7FEFF 	 bl XMC_DAC_CH_SetFrequency
+ 527              	.LVL56:
+ 303:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 304:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 305:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   if (status == XMC_DAC_CH_STATUS_OK)
+ 528              	 .loc 1 305 0
+ 529 0018 0346     	 mov r3,r0
+ 530 001a 58B9     	 cbnz r0,.L36
+ 531              	.LVL57:
+ 532              	.L35:
+ 533              	.LBB66:
+ 534              	.LBB67:
+ 930:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                               trigger;
+ 535              	 .loc 2 930 0
+ 536 001c A268     	 ldr r2,[r4,#8]
+ 537 001e 22F4CE22 	 bic r2,r2,#421888
+ 538 0022 2A43     	 orrs r2,r2,r5
+ 539 0024 A260     	 str r2,[r4,#8]
+ 540              	.LVL58:
+ 541              	.LBE67:
+ 542              	.LBE66:
+ 543              	.LBB68:
+ 544              	.LBB69:
+ 545              	 .loc 2 1031 0
+ 546 0026 6368     	 ldr r3,[r4,#4]
+ 547 0028 23F4E003 	 bic r3,r3,#7340032
+ 548 002c 43F48003 	 orr r3,r3,#4194304
+ 549 0030 6360     	 str r3,[r4,#4]
+ 550 0032 0023     	 movs r3,#0
+ 551              	.LVL59:
+ 552              	.L36:
+ 553              	.LBE69:
+ 554              	.LBE68:
+ 306:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 307:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     XMC_DAC_CH_SetTrigger(dac, channel, trigger);
+ 308:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     XMC_DAC_CH_SetMode(dac, channel, XMC_DAC_CH_MODE_NOISE);
+ 309:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 310:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 311:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   return status;
+ 312:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 555              	 .loc 1 312 0
+ 556 0034 1846     	 mov r0,r3
+ 557 0036 38BD     	 pop {r3,r4,r5,pc}
+ 558              	 .cfi_endproc
+ 559              	.LFE213:
+ 561              	 .section .text.XMC_DAC_CH_SetPattern,"ax",%progbits
+ 562              	 .align 2
+ 563              	 .global XMC_DAC_CH_SetPattern
+ 564              	 .thumb
+ 565              	 .thumb_func
+ 567              	XMC_DAC_CH_SetPattern:
+ 568              	.LFB214:
+ 313:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 314:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** /* API to write the pattern data table. */
+ 315:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** void XMC_DAC_CH_SetPattern(XMC_DAC_t *const dac, uint8_t channel, const uint8_t *const data)
+ 316:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** {
+ 569              	 .loc 1 316 0
+ 570              	 .cfi_startproc
+ 571              	 
+ 572              	 
+ 573              	 
+ 574              	.LVL60:
+ 575 0000 F0B4     	 push {r4,r5,r6,r7}
+ 576              	.LCFI9:
+ 577              	 .cfi_def_cfa_offset 16
+ 578              	 .cfi_offset 4,-16
+ 579              	 .cfi_offset 5,-12
+ 580              	 .cfi_offset 6,-8
+ 581              	 .cfi_offset 7,-4
+ 317:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   uint32_t index;
+ 318:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   uint32_t temp;
+ 319:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 320:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_SetPattern: dac parameter not valid\n", XMC_DAC_IS_DAC_VALID(dac));
+ 321:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_SetPattern: channel parameter not valid\n", XMC_DAC_IS_CHANNEL_VALID(chann
+ 322:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_ASSERT("XMC_DAC_CH_SetPattern: dac module not enabled\n", XMC_DAC_IsEnabled(dac));
+ 323:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 324:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   temp = data[0U];
+ 582              	 .loc 1 324 0
+ 583 0002 1678     	 ldrb r6,[r2]
+ 584              	.LVL61:
+ 585 0004 1546     	 mov r5,r2
+ 586 0006 571D     	 adds r7,r2,#5
+ 587 0008 0524     	 movs r4,#5
+ 588              	.LVL62:
+ 589              	.L39:
+ 325:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   for(index = 1U; index < 6U; ++index)
+ 326:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 327:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     temp |= (uint32_t)data[index] << (index * XMC_DAC_DAC0PATL_PAT_BITSIZE);
+ 590              	 .loc 1 327 0 discriminator 3
+ 591 000a 15F8013F 	 ldrb r3,[r5,#1]!
+ 592              	.LVL63:
+ 593 000e A340     	 lsls r3,r3,r4
+ 594 0010 1E43     	 orrs r6,r6,r3
+ 595              	.LVL64:
+ 596 0012 0534     	 adds r4,r4,#5
+ 325:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   for(index = 1U; index < 6U; ++index)
+ 597              	 .loc 1 325 0 discriminator 3
+ 598 0014 BD42     	 cmp r5,r7
+ 599 0016 F8D1     	 bne .L39
+ 600 0018 00EBC101 	 add r1,r0,r1,lsl#3
+ 601              	.LVL65:
+ 328:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 329:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   dac->DACPAT[channel].low = temp;
+ 602              	 .loc 1 329 0
+ 603 001c 0E62     	 str r6,[r1,#32]
+ 330:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 331:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   temp = data[6U];
+ 604              	 .loc 1 331 0
+ 605 001e 1446     	 mov r4,r2
+ 606 0020 14F8066F 	 ldrb r6,[r4,#6]!
+ 607              	.LVL66:
+ 608 0024 0B32     	 adds r2,r2,#11
+ 609              	.LVL67:
+ 610 0026 0525     	 movs r5,#5
+ 611              	.LVL68:
+ 612              	.L40:
+ 332:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   for(index = 1U; index < 6U; ++index)
+ 333:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 334:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     temp |= (uint32_t)data[index + 6U] << (index * XMC_DAC_DAC0PATL_PAT_BITSIZE);
+ 613              	 .loc 1 334 0 discriminator 3
+ 614 0028 14F8013F 	 ldrb r3,[r4,#1]!
+ 615              	.LVL69:
+ 616 002c AB40     	 lsls r3,r3,r5
+ 617 002e 1E43     	 orrs r6,r6,r3
+ 618              	.LVL70:
+ 619 0030 0535     	 adds r5,r5,#5
+ 332:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   for(index = 1U; index < 6U; ++index)
+ 620              	 .loc 1 332 0 discriminator 3
+ 621 0032 9442     	 cmp r4,r2
+ 622 0034 F8D1     	 bne .L40
+ 335:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 336:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   dac->DACPAT[channel].high = temp;
+ 623              	 .loc 1 336 0
+ 624 0036 4E62     	 str r6,[r1,#36]
+ 337:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** }
+ 625              	 .loc 1 337 0
+ 626 0038 F0BC     	 pop {r4,r5,r6,r7}
+ 627              	.LCFI10:
+ 628              	 .cfi_restore 7
+ 629              	 .cfi_restore 6
+ 630              	 .cfi_restore 5
+ 631              	 .cfi_restore 4
+ 632              	 .cfi_def_cfa_offset 0
+ 633              	.LVL71:
+ 634 003a 7047     	 bx lr
+ 635              	 .cfi_endproc
+ 636              	.LFE214:
+ 638              	 .section .text.XMC_DAC_CH_StartPatternMode,"ax",%progbits
+ 639              	 .align 2
+ 640              	 .global XMC_DAC_CH_StartPatternMode
+ 641              	 .thumb
+ 642              	 .thumb_func
+ 644              	XMC_DAC_CH_StartPatternMode:
+ 645              	.LFB212:
+ 254:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   XMC_DAC_CH_STATUS_t status = XMC_DAC_CH_STATUS_OK;
+ 646              	 .loc 1 254 0
+ 647              	 .cfi_startproc
+ 648              	 
+ 649              	 
+ 650              	.LVL72:
+ 651 0000 2DE9F843 	 push {r3,r4,r5,r6,r7,r8,r9,lr}
+ 652              	.LCFI11:
+ 653              	 .cfi_def_cfa_offset 32
+ 654              	 .cfi_offset 3,-32
+ 655              	 .cfi_offset 4,-28
+ 656              	 .cfi_offset 5,-24
+ 657              	 .cfi_offset 6,-20
+ 658              	 .cfi_offset 7,-16
+ 659              	 .cfi_offset 8,-12
+ 660              	 .cfi_offset 9,-8
+ 661              	 .cfi_offset 14,-4
+ 662 0004 0746     	 mov r7,r0
+ 663 0006 0E46     	 mov r6,r1
+ 664 0008 9146     	 mov r9,r2
+ 665 000a 9846     	 mov r8,r3
+ 666 000c 089D     	 ldr r5,[sp,#32]
+ 667              	.LVL73:
+ 668 000e 00EBC104 	 add r4,r0,r1,lsl#3
+ 669              	.LBB70:
+ 670              	.LBB71:
+ 671              	 .loc 2 1031 0
+ 672 0012 6368     	 ldr r3,[r4,#4]
+ 673              	.LVL74:
+ 674 0014 23F4E003 	 bic r3,r3,#7340032
+ 675 0018 6360     	 str r3,[r4,#4]
+ 676              	.LBE71:
+ 677              	.LBE70:
+ 263:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 678              	 .loc 1 263 0
+ 679 001a 2DB9     	 cbnz r5,.L45
+ 265:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   }
+ 680              	 .loc 1 265 0
+ 681 001c 099A     	 ldr r2,[sp,#36]
+ 682              	.LVL75:
+ 683 001e 5201     	 lsls r2,r2,#5
+ 684 0020 FFF7FEFF 	 bl XMC_DAC_CH_SetFrequency
+ 685              	.LVL76:
+ 268:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****   {
+ 686              	 .loc 1 268 0
+ 687 0024 0346     	 mov r3,r0
+ 688 0026 C8B9     	 cbnz r0,.L46
+ 689              	.LVL77:
+ 690              	.L45:
+ 270:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     if (XMC_DAC_CH_PATTERN_SIGN_OUTPUT_ENABLED == sign_output)
+ 691              	 .loc 1 270 0
+ 692 0028 3846     	 mov r0,r7
+ 693 002a 3146     	 mov r1,r6
+ 694 002c 4A46     	 mov r2,r9
+ 695 002e FFF7FEFF 	 bl XMC_DAC_CH_SetPattern
+ 696              	.LVL78:
+ 271:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c ****     {
+ 697              	 .loc 1 271 0
+ 698 0032 B8F1010F 	 cmp r8,#1
+ 699              	.LVL79:
+ 700              	.LBB72:
+ 701              	.LBB73:
+ 772:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 702              	 .loc 2 772 0
+ 703 0036 6368     	 ldr r3,[r4,#4]
+ 704 0038 0CBF     	 ite eq
+ 705 003a 43F00053 	 orreq r3,r3,#536870912
+ 706              	.LVL80:
+ 707              	.LBE73:
+ 708              	.LBE72:
+ 709              	.LBB74:
+ 710              	.LBB75:
+ 800:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h **** }
+ 711              	 .loc 2 800 0
+ 712 003e 23F00053 	 bicne r3,r3,#536870912
+ 713 0042 6360     	 str r3,[r4,#4]
+ 714              	.LVL81:
+ 715              	.LBE75:
+ 716              	.LBE74:
+ 717              	.LBB76:
+ 718              	.LBB77:
+ 930:C:/Files/Projects/Git/XMCLib/inc\xmc_dac.h ****                               trigger;
+ 719              	 .loc 2 930 0
+ 720 0044 A368     	 ldr r3,[r4,#8]
+ 721 0046 23F4CE23 	 bic r3,r3,#421888
+ 722 004a 1D43     	 orrs r5,r5,r3
+ 723              	.LVL82:
+ 724 004c A560     	 str r5,[r4,#8]
+ 725              	.LVL83:
+ 726              	.LBE77:
+ 727              	.LBE76:
+ 728              	.LBB78:
+ 729              	.LBB79:
+ 730              	 .loc 2 1031 0
+ 731 004e 6368     	 ldr r3,[r4,#4]
+ 732 0050 23F4E003 	 bic r3,r3,#7340032
+ 733 0054 43F44013 	 orr r3,r3,#3145728
+ 734 0058 6360     	 str r3,[r4,#4]
+ 735 005a 0023     	 movs r3,#0
+ 736              	.LVL84:
+ 737              	.L46:
+ 738              	.LBE79:
+ 739              	.LBE78:
+ 284:C:/Files/Projects/Git/XMCLib/src\xmc_dac.c **** 
+ 740              	 .loc 1 284 0
+ 741 005c 1846     	 mov r0,r3
+ 742 005e BDE8F883 	 pop {r3,r4,r5,r6,r7,r8,r9,pc}
+ 743              	 .cfi_endproc
+ 744              	.LFE212:
+ 746 0062 00BF     	 .text
+ 747              	.Letext0:
+ 748              	 .file 3 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 749              	 .file 4 "c:\\dave\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 750              	 .file 5 "C:/Files/Projects/Git/XMCLib/inc/xmc4_scu.h"
+ 751              	 .file 6 "C:/Files/Projects/Git/CMSIS/Include/cmsis_gcc.h"
+ 752              	 .file 7 "C:/Files/Projects/Git/CMSIS/Include/core_cm4.h"
+ 753              	 .file 8 "C:/Files/Projects/Git/CMSIS/Infineon/XMC4500_series/Include/system_XMC4500.h"
+ 754              	 .file 9 "C:/Files/Projects/Git/XMCLib/inc/xmc_scu.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc_dac.c
+    {standard input}:20     .text.XMC_DAC_Enable:00000000 $t
+    {standard input}:25     .text.XMC_DAC_Enable:00000000 XMC_DAC_Enable
+    {standard input}:47     .text.XMC_DAC_Enable:0000000c $d
+    {standard input}:52     .text.XMC_DAC_Disable:00000000 $t
+    {standard input}:57     .text.XMC_DAC_Disable:00000000 XMC_DAC_Disable
+    {standard input}:78     .text.XMC_DAC_Disable:0000000c $d
+    {standard input}:83     .text.XMC_DAC_IsEnabled:00000000 $t
+    {standard input}:88     .text.XMC_DAC_IsEnabled:00000000 XMC_DAC_IsEnabled
+    {standard input}:114    .text.XMC_DAC_IsEnabled:00000010 $d
+    {standard input}:119    .text.XMC_DAC_CH_Init:00000000 $t
+    {standard input}:124    .text.XMC_DAC_CH_Init:00000000 XMC_DAC_CH_Init
+    {standard input}:176    .text.XMC_DAC_CH_Init:00000028 $d
+    {standard input}:183    .text.XMC_DAC_CH_SetFrequency:00000000 $t
+    {standard input}:188    .text.XMC_DAC_CH_SetFrequency:00000000 XMC_DAC_CH_SetFrequency
+    {standard input}:246    .text.XMC_DAC_CH_SetRampFrequency:00000000 $t
+    {standard input}:251    .text.XMC_DAC_CH_SetRampFrequency:00000000 XMC_DAC_CH_SetRampFrequency
+    {standard input}:289    .text.XMC_DAC_CH_StartSingleValueMode:00000000 $t
+    {standard input}:294    .text.XMC_DAC_CH_StartSingleValueMode:00000000 XMC_DAC_CH_StartSingleValueMode
+    {standard input}:321    .text.XMC_DAC_CH_StartDataMode:00000000 $t
+    {standard input}:326    .text.XMC_DAC_CH_StartDataMode:00000000 XMC_DAC_CH_StartDataMode
+    {standard input}:392    .text.XMC_DAC_CH_StartRampMode:00000000 $t
+    {standard input}:397    .text.XMC_DAC_CH_StartRampMode:00000000 XMC_DAC_CH_StartRampMode
+    {standard input}:491    .text.XMC_DAC_CH_StartNoiseMode:00000000 $t
+    {standard input}:496    .text.XMC_DAC_CH_StartNoiseMode:00000000 XMC_DAC_CH_StartNoiseMode
+    {standard input}:562    .text.XMC_DAC_CH_SetPattern:00000000 $t
+    {standard input}:567    .text.XMC_DAC_CH_SetPattern:00000000 XMC_DAC_CH_SetPattern
+    {standard input}:639    .text.XMC_DAC_CH_StartPatternMode:00000000 $t
+    {standard input}:644    .text.XMC_DAC_CH_StartPatternMode:00000000 XMC_DAC_CH_StartPatternMode
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+XMC_SCU_RESET_DeassertPeripheralReset
+XMC_SCU_RESET_AssertPeripheralReset
+XMC_SCU_RESET_IsPeripheralResetAsserted
+XMC_SCU_CLOCK_GetPeripheralClockFrequency

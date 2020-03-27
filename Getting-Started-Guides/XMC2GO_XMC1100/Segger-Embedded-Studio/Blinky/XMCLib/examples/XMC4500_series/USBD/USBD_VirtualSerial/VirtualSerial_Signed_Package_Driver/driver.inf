@@ -1,0 +1,68 @@
+;************************************************************
+; Windows USB CDC ACM Setup File
+; Copyright (c) 2000 Microsoft Corporation
+;-----------------------------------------------------------
+; Information Section
+;-----------------------------------------------------------
+[Version]
+Signature="$Windows NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%ManufacturerName%
+LayoutFile=layout.inf
+CatalogFile=%CatalogFilename%.cat
+DriverVer=08/23/2013,1.0.0
+
+[Manufacturer]
+%ManufacturerName%=DeviceList, NTamd64, NTx86, NTia64
+
+;-----------------------------------------------------------
+; Device List
+;-----------------------------------------------------------
+[DeviceList]
+%DeviceName%=DriverInstall, USB\VID_058B&PID_0058
+
+[DeviceList.NTamd64]
+%DeviceName%=DriverInstall, USB\VID_058B&PID_0058
+
+[DeviceList.NTx86]
+%DeviceName%=DriverInstall, USB\VID_058B&PID_0058
+
+[DeviceList.NTia64]
+%DeviceName%=DriverInstall, USB\VID_058B&PID_0058
+
+;-----------------------------------------------------------
+; File Section
+;-----------------------------------------------------------
+[SourceDisksFiles]
+
+[SourceDisksNames]
+
+[DestinationDirs]
+DefaultDestDir=12
+
+;-----------------------------------------------------------
+; Driver Section
+;-----------------------------------------------------------
+[DriverInstall]
+include=mdmcpq.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=DriverInstall.AddReg
+
+[DriverInstall.Services]
+Include=mdmcpq.inf
+AddService=usbser, 0x00000002, LowerFilter_Service_Inst
+
+[DriverInstall.AddReg]
+HKR,,EnumPropPages32,,"msports.dll,SerialPortPropPageProvider"
+
+;-----------------------------------------------------------
+; String Section
+;-----------------------------------------------------------
+[Strings]
+CatalogFilename="vcom"
+DriverFilename ="usbser"
+ManufacturerName="Infineon Technologies"
+DiskName="CDC Driver Installer"
+DeviceName="Communications Port"
+ServiceName="USB RS-232 Emulation Driver"

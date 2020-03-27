@@ -1,0 +1,340 @@
+
+Discarded input sections
+
+ .comment       0x0000000000000000       0x32 main.o
+ .comment       0x0000000000000000       0x32 xmc_gpio.o
+ .comment       0x0000000000000000       0x32 system_XMC1100.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000010001000 0x0000000000010000 xr
+SRAM             0x0000000020000000 0x0000000000004000 !xr
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000000000400                stack_size = DEFINED (stack_size)?stack_size:0x400
+                0x0000000000000004                no_init_size = 0x4
+
+.text           0x0000000010001000      0x16c
+                0x0000000010001000                sText = .
+ *(.reset)
+ .reset         0x0000000010001000       0x92 startup_XMC1100.o
+                0x0000000010001000                __Vectors
+                0x0000000010001018                Reset_Handler
+                0x0000000010001090                VADC0_C0_0_IRQHandler
+                0x0000000010001090                USIC0_5_IRQHandler
+                0x0000000010001090                HardFault_Handler
+                0x0000000010001090                SysTick_Handler
+                0x0000000010001090                PendSV_Handler
+                0x0000000010001090                CCU40_2_IRQHandler
+                0x0000000010001090                SCU_0_IRQHandler
+                0x0000000010001090                ERU0_0_IRQHandler
+                0x0000000010001090                USIC0_0_IRQHandler
+                0x0000000010001090                ERU0_2_IRQHandler
+                0x0000000010001090                ERU0_3_IRQHandler
+                0x0000000010001090                CCU40_0_IRQHandler
+                0x0000000010001090                VADC0_C0_1_IRQHandler
+                0x0000000010001090                SVC_Handler
+                0x0000000010001090                USIC0_3_IRQHandler
+                0x0000000010001090                CCU40_1_IRQHandler
+                0x0000000010001090                SCU_2_IRQHandler
+                0x0000000010001090                USIC0_1_IRQHandler
+                0x0000000010001090                CCU40_3_IRQHandler
+                0x0000000010001090                USIC0_4_IRQHandler
+                0x0000000010001090                SCU_1_IRQHandler
+                0x0000000010001090                ERU0_1_IRQHandler
+                0x0000000010001090                USIC0_2_IRQHandler
+                0x0000000010001090                Default_handler
+ *(.text .text.* .gnu.linkonce.t.*)
+ .text          0x0000000010001092        0x0 main.o
+ *fill*         0x0000000010001092        0x2 
+ .text.startup  0x0000000010001094       0x28 main.o
+                0x0000000010001094                main
+ .text          0x00000000100010bc       0x3a xmc_gpio.o
+                0x00000000100010bc                XMC_GPIO_SetMode
+                0x00000000100010de                XMC_GPIO_SetHardwareControl
+ *fill*         0x00000000100010f6        0x2 
+ .text          0x00000000100010f8       0x74 system_XMC1100.o
+                0x00000000100010f8                SystemCoreSetup
+                0x0000000010001118                SystemCoreClockUpdate
+                0x0000000010001130                SystemCoreClockSetup
+                0x0000000010001160                SystemInit
+ .text          0x000000001000116c        0x0 startup_XMC1100.o
+ *(.init)
+ *(.fini)
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+ *(.rodata .rodata.*)
+ *(.gnu.linkonce.r*)
+ *(vtable)
+                0x000000001000116c                . = ALIGN (0x4)
+
+.glue_7         0x000000001000116c        0x0
+ .glue_7        0x000000001000116c        0x0 linker stubs
+
+.glue_7t        0x000000001000116c        0x0
+ .glue_7t       0x000000001000116c        0x0 linker stubs
+
+.vfp11_veneer   0x000000001000116c        0x0
+ .vfp11_veneer  0x000000001000116c        0x0 linker stubs
+
+.v4_bx          0x000000001000116c        0x0
+ .v4_bx         0x000000001000116c        0x0 linker stubs
+
+.iplt           0x000000001000116c        0x0
+ .iplt          0x000000001000116c        0x0 main.o
+
+.eh_frame_hdr
+ *(.eh_frame_hdr)
+
+.eh_frame
+ *(.eh_frame)
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x000000001000116c                . = ALIGN (0x4)
+                0x000000001000116c                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x000000001000116c                __exidx_end = .
+                0x000000001000116c                . = ALIGN (0x4)
+
+.VENEER_Code    0x000000002000000c      0x110 load address 0x000000001000116c
+                0x000000002000000c                . = ALIGN (0x4)
+                0x000000002000000c                VeneerStart = .
+ *(.XmcVeneerCode)
+ .XmcVeneerCode
+                0x000000002000000c      0x110 startup_XMC1100.o
+                0x000000002000000c                HardFault_Veneer
+                0x000000002000002c                SVC_Veneer
+                0x0000000020000038                PendSV_Veneer
+                0x000000002000003c                SysTick_Veneer
+                0x0000000020000040                SCU_0_Veneer
+                0x0000000020000044                SCU_1_Veneer
+                0x0000000020000048                SCU_2_Veneer
+                0x000000002000004c                SCU_3_Veneer
+                0x0000000020000050                SCU_4_Veneer
+                0x0000000020000054                SCU_5_Veneer
+                0x0000000020000058                SCU_6_Veneer
+                0x0000000020000064                USIC0_0_Veneer
+                0x0000000020000068                USIC0_1_Veneer
+                0x000000002000006c                USIC0_2_Veneer
+                0x0000000020000070                USIC0_3_Veneer
+                0x0000000020000074                USIC0_4_Veneer
+                0x0000000020000078                USIC0_5_Veneer
+                0x000000002000007c                VADC0_C0_0_Veneer
+                0x0000000020000080                VADC0_C0_1_Veneer
+                0x0000000020000094                CCU40_0_Veneer
+                0x0000000020000098                CCU40_1_Veneer
+                0x000000002000009c                CCU40_2_Veneer
+                0x00000000200000a0                CCU40_3_Veneer
+                0x000000002000011c                . = ALIGN (0x4)
+                0x000000002000011c                VeneerEnd = .
+                0x000000001000116c                eROData = LOADADDR (.VENEER_Code)
+                0x0000000000000110                VeneerSize = (ABSOLUTE (VeneerEnd) - ABSOLUTE (VeneerStart))
+
+.rel.dyn        0x000000002000011c        0x0 load address 0x000000001000127c
+ .rel.iplt      0x000000002000011c        0x0 main.o
+
+Stack           0x000000002000011c      0x404 load address 0x0000000000000000
+                0x0000000020000120                . = ALIGN (0x8)
+ *fill*         0x000000002000011c        0x4 
+                0x0000000020000520                . = (. + stack_size)
+ *fill*         0x0000000020000120      0x400 
+                0x0000000020000520                __initial_sp = .
+
+.data           0x0000000020000520        0x0 load address 0x000000001000127c
+                0x0000000020000520                . = ALIGN (0x4)
+                0x0000000020000520                __data_start = .
+ *(.data)
+ .data          0x0000000020000520        0x0 main.o
+ .data          0x0000000020000520        0x0 xmc_gpio.o
+ .data          0x0000000020000520        0x0 system_XMC1100.o
+ .data          0x0000000020000520        0x0 startup_XMC1100.o
+ *(.data*)
+ *(*.data)
+ *(.gnu.linkonce.d*)
+                0x0000000020000520                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                [!provide]                        PROVIDE (__preinit_array_end, .)
+                0x0000000020000520                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array)
+                [!provide]                        PROVIDE (__init_array_end, .)
+                0x0000000020000520                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*))
+ *(.fini_array)
+                [!provide]                        PROVIDE (__fini_array_end, .)
+                0x0000000020000520                . = ALIGN (0x4)
+                0x0000000020000520                __data_end = .
+                0x000000001000127c                DataLoadAddr = LOADADDR (.data)
+                0x0000000000000000                __data_size = (__data_end - __data_start)
+
+.igot.plt       0x0000000020000520        0x0 load address 0x000000001000127c
+ .igot.plt      0x0000000020000520        0x0 main.o
+
+.ram_code       0x0000000020000520        0x0 load address 0x000000001000127c
+                0x0000000020000520                . = ALIGN (0x4)
+                0x0000000020000520                __ram_code_start = .
+ *(.ram_code)
+                0x0000000020000520                . = ALIGN (0x4)
+                0x0000000020000520                __ram_code_end = .
+                0x000000001000127c                __ram_code_load = LOADADDR (.ram_code)
+                0x0000000000000000                __ram_code_size = (__ram_code_end - __ram_code_start)
+                0x000000000000027c                __text_size = ((((__exidx_end - sText) + VeneerSize) + __data_size) + __ram_code_size)
+                0x000000001000127c                eText = (sText + __text_size)
+
+.bss            0x0000000020000520        0x0 load address 0x000000001000127c
+                0x0000000020000520                . = ALIGN (0x4)
+                0x0000000020000520                __bss_start = .
+ *(.bss)
+ .bss           0x0000000020000520        0x0 main.o
+ .bss           0x0000000020000520        0x0 xmc_gpio.o
+ .bss           0x0000000020000520        0x0 system_XMC1100.o
+ .bss           0x0000000020000520        0x0 startup_XMC1100.o
+ *(.bss*)
+ *(COMMON)
+ *(.gnu.linkonce.b*)
+                0x0000000020000520                . = ALIGN (0x4)
+                0x0000000020000520                __bss_end = .
+                0x0000000020000520                . = ALIGN (0x8)
+                0x0000000020000520                Heap_Bank1_Start = .
+                0x0000000000000000                __bss_size = (__bss_end - __bss_start)
+
+.no_init        0x0000000020003ffc        0x4 load address 0x0000000000003ee0
+                0x0000000020003ffc                Heap_Bank1_End = .
+ *(.no_init)
+ .no_init       0x0000000020003ffc        0x4 system_XMC1100.o
+                0x0000000020003ffc                SystemCoreClock
+                0x0000000000003adc                Heap_Bank1_Size = (Heap_Bank1_End - Heap_Bank1_Start)
+                0x0000000000000001                ASSERT ((Heap_Bank1_Start <= Heap_Bank1_End), region SRAM overflowed no_init section)
+
+/DISCARD/
+ *(.comment)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x0000000000000000       0x88
+ *(.debug_aranges)
+ .debug_aranges
+                0x0000000000000000       0x20 main.o
+ .debug_aranges
+                0x0000000000000020       0x20 xmc_gpio.o
+ .debug_aranges
+                0x0000000000000040       0x20 system_XMC1100.o
+ .debug_aranges
+                0x0000000000000060       0x28 startup_XMC1100.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_info     0x0000000000000000     0x1b2f
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000      0xb91 main.o
+ .debug_info    0x0000000000000b91      0xb95 xmc_gpio.o
+ .debug_info    0x0000000000001726      0x350 system_XMC1100.o
+ .debug_info    0x0000000000001a76       0xb9 startup_XMC1100.o
+
+.debug_abbrev   0x0000000000000000      0x580
+ *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000      0x259 main.o
+ .debug_abbrev  0x0000000000000259      0x206 xmc_gpio.o
+ .debug_abbrev  0x000000000000045f      0x10f system_XMC1100.o
+ .debug_abbrev  0x000000000000056e       0x12 startup_XMC1100.o
+
+.debug_line     0x0000000000000000      0x4ab
+ *(.debug_line)
+ .debug_line    0x0000000000000000      0x146 main.o
+ .debug_line    0x0000000000000146      0x128 xmc_gpio.o
+ .debug_line    0x000000000000026e      0x137 system_XMC1100.o
+ .debug_line    0x00000000000003a5      0x106 startup_XMC1100.o
+
+.debug_frame    0x0000000000000000       0xc8
+ *(.debug_frame)
+ .debug_frame   0x0000000000000000       0x28 main.o
+ .debug_frame   0x0000000000000028       0x40 xmc_gpio.o
+ .debug_frame   0x0000000000000068       0x60 system_XMC1100.o
+
+.debug_str      0x0000000000000000      0xb8c
+ *(.debug_str)
+ .debug_str     0x0000000000000000      0x98b main.o
+                                        0x9ee (size before relaxing)
+ .debug_str     0x000000000000098b       0xb6 xmc_gpio.o
+                                        0xa78 (size before relaxing)
+ .debug_str     0x0000000000000a41      0x14b system_XMC1100.o
+                                        0x2bc (size before relaxing)
+
+.debug_loc      0x0000000000000000       0xf1
+ *(.debug_loc)
+ .debug_loc     0x0000000000000000       0x4c main.o
+ .debug_loc     0x000000000000004c       0xa5 xmc_gpio.o
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_ranges   0x0000000000000000       0x30
+ *(.debug_ranges)
+ .debug_ranges  0x0000000000000000       0x10 main.o
+ .debug_ranges  0x0000000000000010       0x20 startup_XMC1100.o
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.build_attributes
+                0x0000000000000000       0xb4
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x0000000000000000       0x31 main.o
+ .ARM.attributes
+                0x0000000000000031       0x31 xmc_gpio.o
+ .ARM.attributes
+                0x0000000000000062       0x31 system_XMC1100.o
+ .ARM.attributes
+                0x0000000000000093       0x21 startup_XMC1100.o
+LOAD main.o
+LOAD xmc_gpio.o
+LOAD system_XMC1100.o
+LOAD startup_XMC1100.o
+OUTPUT(main.elf elf32-littlearm)
