@@ -2,17 +2,12 @@ MCU family,MCU part number,Board,Debug adapter,IDE/Code editor,Middleware,Compil
 dsPIC33,dsPIC33EV32GM002,Breadboard,MPLAB SNAP,MPLAB X IDE,Code Configurator,XC16,MPLAB X IDE,MPLAB X IDE,Yes,Ubuntu 18.04.03,
 dsPIC33,dsPIC33EV32GM002,Breadboard,MPLAB SNAP,Text editor,Code Configurator,XC16,MDB,MDB,Yes,Ubuntu 18.04.03,MCC used to configure target. Copied commands from output window of MPLAB X IDE.
 LPC84x,LPC845M301JBD48,LPC845-BRK,CMSIS-DAP,MCUXpresso,SDK/Config tools,MCUXpresso,MCUXpresso,MCUXpresso,Yes,Ubuntu 18.04.03,MCUXpresso feels like the definition of button overload. Compiled code to blink an LED (and possibly initialize UART/SWO?) was 12kB!
-LPC84x,LPC845M301JBD48,LPC845-BRK,CMSIS-DAP,Keil MDK-Arm,Config Tools/Keil Pack,Keil MDK-Arm,Keil MDK-Arm,Keil MDK-Arm,Yes,Windows 10 VM (VirtualBox) on Ubuntu 18.04.03,"Not too painful, though I did really need to know how to set up the GPIO and dig into the source files for the correct function calls."
 LPC84x,LPC845M301JBD48,LPC845-BRK,J-Link EDU Mini,MCUXpresso,SDK/Config tools,MCUXpresso,MCUXpresso,MCUXpresso,Yes,Ubuntu 18.04.03,"Had to select ""Run"" > ""Debug as..."" > ""J-Link"""
 LPC84x,LPC845M301JBD48,LPC845-BRK,J-Link EDU Mini,Embedded Studio,SDK,Embedded Studio,Embedded Studio,Embedded Studio,Yes,Ubuntu 18.04.03,Used all NXP SDK files and no Segger files.
 LPC84x,LPC845M301JBD48,LPC845-BRK,J-Link EDU Mini,Text editor,SDK,GCC,J-Flash,Ozone,Yes,Ubuntu 18.04.03,
 LPC84x,LPC845M301JBD48,LPC845-BRK,J-Link EDU Mini,Text editor,SDK,GCC,J-Link GDB Server,GDB,Yes,Ubuntu 18.04.03,
 LPC84x,LPC845M301JBD48,LPC845-BRK,J-Link EDU Mini,Text editor,SDK,GCC,OpenOCD,GDB,Yes,Ubuntu 18.04.03,"Requires issuing ""mon reset halt"" command in GDB after loading elf."
-LPC84x,LPC845M301JBD48,LPC845-BRK,Black Magic Probe,Text editor,Config tools?,GCC,BMP GDB server,GDB,,,
-LPC84x,LPC845M301JBD48,LPC845-BRK,Black Magic Probe,VS Code,Config tools?,VS Code,VS Code,VS Code,,,
-LPC84x,LPC845M301JBD48,LPC845-BRK,Black Magic Probe,Eclipse,Config tools?,Eclipse,Eclipse,Eclipse,,,
 LPC84x,LPC845M301JBD48,LPC845-BRK,CMSIS-DAP,Text editor,SDK,GCC,OpenOCD,GDB,Yes,Ubuntu 18.04.03,"Requires issuing ""mon reset halt"" command in GDB after loading elf."
-LPC84x,LPC845M301JBD48,LPC845-BRK,CMSIS-DAP,Eclipse/IAR,,,Eclipse/IAR? OpenOCD?,,,,
 MSP430,MSP430G2553,MSP-EXP430G2ET,ez-FET,CCStudio,msp430.h,TI-CGT,CCStudio,CCStudio,Yes,Windows 10,"Used CCS in ""Simple mode"". Process was relatively painless."
 MSP430,MSP430G2553,MSP-EXP430G2ET,ez-FET,CCS Cloud,msp430.h,TI-CGT,CCS Cloud,CCS Cloud,Yes,Ubuntu 18.04.03,Requires TI Cloud Agent and a Firefox/Chrome extension (is not compatible with other browsers).
 MSP430,MSP430G2553,MSP-EXP430G2ET,ez-FET,Text editor,msp430.h,MSP430-GCC,GDB Agent,MSP430-GDB,Yes,Ubuntu 18.04.03,GDB GUI available in Windows.
@@ -31,8 +26,6 @@ STM32,STM32G031J6M6,Self-built,ST-Link,Keil MDK-Arm,STM32CubeMX,Keil MDK-Arm,Kei
 STM32,STM32G031J6M6,Self-built,J-Link EDU mini,Keil MDK-Arm,STM32CubeMX,Keil MDK-Arm,Keil MDK-Arm,Keil MDK-Arm,Yes,Windows 10 VM (VirtualBox) on Ubuntu 18.04.03,"Needed to explicitly add programming algorithm. ST-Link would download and debug just fine, but could not reset target after download."
 STM32,STM32G031J6M6,Self-built,ST-Link,Text editor,STM32CubeMX,gcc,ST-LINK_gdbserver & STM32CubeProgrammer,gdb,Yes,Ubuntu 18.04.03,
 STM8,STM8S903F3M6,Self-built,ST-Link/V2,Text editor,stm8flash header file,SDCC,OpenOCD,STM8-GDB,Yes,Ubuntu 18.04.03,Documentation (for SDCC and STM8-GDB) mediocre. Couldn't use SDCDB because it only works with a simulator!
-STM8,STM8S903F3M6,Self-built,ST-Link/V2,STVD,SPL,Cosmic,STVP,STVD,No,,
-STM8,STM8S903F3M6,STM8 dev board,ST-Link/V2,Eclipse,???,SDCC,OpenOCD,STM8-GDB,,,
 XMC1100,XMC1100Q024X0064ABXUMA1,XMC2GO,J-Link Lite OB,Embedded Studio,XMCLib,Embedded Studio,Embedded Studio,Embedded Studio,Yes,Ubuntu 18.04.03,Felt like I used XMCLib only clumsily. I had to manually add each source and header file I wanted to use (and each of their dependencies) and fix any broken references.
 XMC1100,XMC1100Q024X0064ABXUMA1,XMC2GO,J-Link Lite OB,DAVE,DAVE Apps,DAVE,DAVE,DAVE,Yes,Windows 10,Had to install DAVE to C:\DAVE since filepaths were so long. DAVE apps were a touch confusing to figure out.
 XMC1100,XMC1100Q024X0064ABXUMA1,XMC2GO,J-Link Lite OB,Text editor,XMCLib,GCC,J-Link GDB Server,GDB,Yes,Ubuntu 18.04.03,All necessary files found inside XMCLib download.
