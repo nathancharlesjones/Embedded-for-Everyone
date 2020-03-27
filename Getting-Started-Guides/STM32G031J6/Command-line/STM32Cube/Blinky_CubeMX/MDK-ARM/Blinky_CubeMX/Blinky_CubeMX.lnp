@@ -1,0 +1,25 @@
+--cpu Cortex-M0+
+"blinky_cubemx\startup_stm32g031xx.o"
+"blinky_cubemx\main.o"
+"blinky_cubemx\stm32g0xx_it.o"
+"blinky_cubemx\stm32g0xx_hal_msp.o"
+"blinky_cubemx\stm32g0xx_hal_gpio.o"
+"blinky_cubemx\stm32g0xx_hal_tim.o"
+"blinky_cubemx\stm32g0xx_hal_tim_ex.o"
+"blinky_cubemx\stm32g0xx_hal_rcc.o"
+"blinky_cubemx\stm32g0xx_hal_rcc_ex.o"
+"blinky_cubemx\stm32g0xx_ll_rcc.o"
+"blinky_cubemx\stm32g0xx_hal_flash.o"
+"blinky_cubemx\stm32g0xx_hal_flash_ex.o"
+"blinky_cubemx\stm32g0xx_hal_dma.o"
+"blinky_cubemx\stm32g0xx_hal_dma_ex.o"
+"blinky_cubemx\stm32g0xx_hal_pwr.o"
+"blinky_cubemx\stm32g0xx_hal_pwr_ex.o"
+"blinky_cubemx\stm32g0xx_hal_cortex.o"
+"blinky_cubemx\stm32g0xx_hal.o"
+"blinky_cubemx\stm32g0xx_hal_exti.o"
+"blinky_cubemx\system_stm32g0xx.o"
+--library_type=microlib --strict --scatter "Blinky_CubeMX\Blinky_CubeMX.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Blinky_CubeMX.map" -o Blinky_CubeMX\Blinky_CubeMX.axf
