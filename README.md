@@ -5,11 +5,8 @@ See the [wiki for this repository](https://github.com/nathancharlesjones/Embedde
 
 ## File structure
 ./
-
 ├── Getting-Started-Guides
-
 │   ├── LPC845-BRK
-
 │   │   ├── Command-line
 │   │   │   ├── Blinky_v2
 │   │   │   ├── Blinky_v3
