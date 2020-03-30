@@ -4,9 +4,9 @@ A collection of resources for the hobbyists, students, teachers, and makers who 
 See the [wiki for this repository](https://github.com/nathancharlesjones/Embedded-for-Everyone/wiki) for additional information and an explanation of the files contained herein.
 
 ## File structure
-./
-├── Getting-Started-Guides
-│   ├── LPC845-BRK
+./\
+├── Getting-Started-Guides\
+│   ├── LPC845-BRK\
 │   │   ├── Command-line
 │   │   │   ├── Blinky_v2
 │   │   │   ├── Blinky_v3
