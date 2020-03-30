@@ -16,3 +16,18 @@
 [submodule "Printed-Circuit-Boards/Prototyping-PCBs/Stripboard-Panelized"]
 	path = Printed-Circuit-Boards/Prototyping-PCBs/Stripboard-Panelized
 	url = https://github.com/nathancharlesjones/Stripboard-panelized.git
+[submodule "Getting-Started-Guides/MSP430"]
+	path = Getting-Started-Guides/MSP430
+	url = https://github.com/nathancharlesjones/Getting-Started-with-the-MSP430.git
+[submodule "Getting-Started-Guides/PIC16-PIC18-dsPIC33"]
+	path = Getting-Started-Guides/PIC16-PIC18-dsPIC33
+	url = https://github.com/nathancharlesjones/Getting-Started-with-the-PIC16-PIC18-dsPIC33.git
+[submodule "Getting-Started-Guides/LPC845-BRK"]
+	path = Getting-Started-Guides/LPC845-BRK
+	url = https://github.com/nathancharlesjones/Getting-Started-with-the-LPC845-BRK.git
+[submodule "Getting-Started-Guides/STM32G031J6"]
+	path = Getting-Started-Guides/STM32G031J6
+	url = https://github.com/nathancharlesjones/Getting-Started-with-the-STM32G031J6.git
+[submodule "Getting-Started-Guides/XMC2GO_XMC1100"]
+	path = Getting-Started-Guides/XMC2GO_XMC1100
+	url = https://github.com/nathancharlesjones/Getting-Started-with-the-XMC2GO-XMC1100.git
