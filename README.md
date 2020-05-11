@@ -62,6 +62,7 @@ See the [wiki for this repository](https://github.com/nathancharlesjones/Embedde
 │       ├── Stripboard-Single
 │       └── README.md
 ├── Supporting-documents
+├── Embedded-for-Everyone.pdf
 ├── LICENSE
 └── README.md
 ```
